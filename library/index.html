@@ -7,14 +7,15 @@
 <title>Library · Football Analytics Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a matchday analysis programme. Live passing-network hero, three "start here" picks,
+/* Layout: a matchday analysis programme. Night hero (shared with the lab home page) with floodlit shelves, three "start here" picks,
    then sections of cards, each fronted by an original pitch-data illustration drawn from its topic. */
 :root{
   --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
   --turf:#1c6948; --turf-soft:#e0ede5; --amber:#d47f17; --amber-soft:#fbebd4;
   --pitch:#e4eee6; --pline:#a3bfaf;
+  --night:#07110c; --night-2:#0d1d15; --chalk:#e9f2ec; --chalk-dim:#9fb6a8; --flood:#f2a541; --grass:#5bc391; --nline:#2c4a3b;
   --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
@@ -35,21 +36,46 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 a{color:var(--turf)}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
-/* Hero */
-.hero{border-bottom:3px solid var(--fg)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:center;padding-block:44px 36px}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,9vw,104px);line-height:.86;margin:12px 0 18px;text-transform:uppercase;letter-spacing:.005em}
-h1 span{color:var(--turf);display:block}
-.lede{max-width:52ch;color:var(--muted);margin:0;font-size:17px}
-.stats{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:4px 28px;margin-top:26px}
-.stat b{display:block;font-family:var(--display);font-weight:800;font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
-.stat span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.stat.alert b{color:var(--amber)}
-.hero-fig{margin:0;min-width:0}
-.hero-fig canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:12px;background:var(--pitch);border:1px solid var(--line)}
-.hero-fig figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 16px}
-.hero-fig figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:6px;vertical-align:middle}
+/* ---------- Night hero (same as the lab home page) ---------- */
+html{scroll-behavior:smooth}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
+    radial-gradient(55% 50% at 100% -5%, rgba(233,242,236,.14), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(91,195,145,.035) 0 70px, transparent 70px 140px);}
+nav.top{position:relative;z-index:2}
+nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk);text-decoration:none}
+.brand i{width:26px;height:26px;border-radius:50%;border:2px solid var(--chalk);position:relative;display:inline-block}
+.brand i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flood)}
+nav.top .sp{flex:1}
+nav.top a.lnk{font-family:var(--mono);font-size:12px;color:var(--chalk-dim);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
+nav.top a.lnk:hover,nav.top a.lnk[aria-current]{color:var(--chalk)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:44px;align-items:center;padding-block:40px 64px}
+.hero .eyebrow{color:var(--flood)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
+h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
+h1 .l3{display:block;color:var(--grass)}
+.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px;line-height:1.55}
+.lede b{color:var(--chalk);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.cta a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
+.cta .go{background:var(--flood);color:#1a1205}
+.cta .go:hover{filter:brightness(1.08)}
+.cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
+.cta .gh:hover{border-color:var(--chalk)}
+.scoreboard{display:grid;grid-template-columns:repeat(4,auto);gap:1px;margin-top:34px;background:var(--nline);border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
+.scoreboard div{padding:10px 18px;background:#0a1510}
+.scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
+.scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
+figure.net{margin:0;min-width:0;position:relative}
+figure.net canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
+figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px}
+figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--flood);margin-right:6px;vertical-align:middle}
+.touchline{height:6px;background:repeating-linear-gradient(90deg,var(--chalk) 0 22px,transparent 22px 34px);opacity:.25}
+#list{scroll-margin-top:72px}
 
 /* Filter bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
@@ -126,26 +152,40 @@ section{margin-top:44px}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 footer .wrap{padding-block:22px 44px}
 
-@media (max-width:820px){.hero-grid{grid-template-columns:1fr;gap:24px;padding-block:32px 28px}}
-@media (max-width:520px){.stats{grid-template-columns:repeat(2,auto)}.sec-icon{width:64px;height:36px}.sec-head .count{font-size:28px}}
-@media (prefers-reduced-motion:reduce){.card,.thumb svg{transition:none}.card:hover{transform:none}.card:hover .thumb svg{transform:none}}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}}
+@media (max-width:520px){.scoreboard{grid-template-columns:repeat(2,auto)}.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}.sec-icon{width:64px;height:36px}.sec-head .count{font-size:28px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.thumb svg{transition:none}.card:hover{transform:none}.card:hover .thumb svg{transform:none}}
 </style>
 <style>html,body{margin:0}body{font-size:14px;padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
 <body>
 
-<header class="hero"><div class="wrap hero-grid">
-  <div class="hero-copy">
-    <div class="eyebrow"><a href="../" style="color:inherit">← Football Analytics Lab</a> · curated by Mark Busani</div>
-    <h1>Football <span>Analytics</span> Library</h1>
-    <p class="lede">The articles, reports, tools, repos and papers I'm learning from, in one place. Every card names its author or publisher and links straight to the original.</p>
-    <div class="stats" id="stats"></div>
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="../#repos">Repos</a>
+    <a class="lnk" href="./" aria-current="page">Library</a>
+    <a class="lnk" href="../#credits">Credits</a>
+    <a class="lnk" href="https://github.com/mbusani/football-analytics-lab">Source</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Curated by Mark Busani · Perth, Western Australia</div>
+      <h1>Football<span class="l2">Analytics</span><span class="l3">Library</span></h1>
+      <p class="lede">The articles, reports, tools, repos and papers I'm learning from, in one place. <b>Every card names its author or publisher and links straight to the original.</b></p>
+      <div class="cta">
+        <a class="go" href="#list">Browse the shelves ↓</a>
+        <a class="gh" href="../">← Back to the lab</a>
+      </div>
+      <div class="scoreboard" id="stats" aria-label="Library at a glance"></div>
+    </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Animated illustration of floodlit library shelves, one book per resource, with a ball passed from book to book"></canvas>
+      <figcaption><span>Illustration: the library shelves at night</span><span>one book per resource · colour = section</span><span><i></i>ball passed to the next read</span></figcaption>
+    </figure>
   </div>
-  <figure class="hero-fig">
-    <canvas id="hero" role="img" aria-label="Animated illustration of a passing network on a football pitch"></canvas>
-    <figcaption><span>Illustration: a passing network building live</span><span>Node size = touches · line weight = passes</span><span><i></i>Shot with its xG</span></figcaption>
-  </figure>
-</div></header>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
 
 <div class="bar"><div class="wrap">
   <label for="q" style="position:absolute;left:-9999px">Search resources</label>
@@ -314,11 +354,10 @@ const allItems = () => R.concat(COURSES);
 
 function counts(){
   const items=allItems(), subs=items.reduce((n,r)=>n+(r.sub?r.sub.length:0),0);
-  document.getElementById("stats").innerHTML=
-    `<div class="stat"><b>${items.length}</b><span>resources</span></div>`+
-    `<div class="stat"><b>${subs}</b><span>linked reads</span></div>`+
-    `<div class="stat"><b>${items.filter(r=>r.s==="repos").length}</b><span>repos</span></div>`+
-    `<div class="stat alert"><b>${new Set(items.map(r=>r.src.split(" · ")[0])).size}</b><span>sources</span></div>`;
+  document.getElementById("stats").innerHTML=[
+    [items.length,"resources"],[subs,"linked reads"],[items.filter(r=>r.s==="repos").length,"repos"],
+    [new Set(items.map(r=>r.src.split(" · ")[0])).size,"sources"]
+  ].map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join("");
 }
 function chips(){
   const items=allItems();
@@ -371,42 +410,57 @@ document.getElementById("q").addEventListener("input",render);
 function refresh(){counts();chips();render()}
 refresh();
 
-/* ---------- Hero: a passing network that builds itself ---------- */
+/* ---------- Hero: the library shelves at night, with a ball passed from book to book ---------- */
 (function hero(){
   const cv=document.getElementById("hero");if(!cv||!cv.getContext)return;const ctx=cv.getContext("2d");
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const NUM=[1,2,5,4,3,6,8,10,7,9,11];
-  const nodes=F433.map(([u,v])=>({u,v,ph:Math.random()*6.28,touch:1}));
-  const E=new Map();const key=(a,b)=>a<b?a+"-"+b:b+"-"+a;
-  const nbr=nodes.map((n,i)=>nodes.map((m,j)=>j).filter(j=>j!==i&&Math.hypot(nodes[i].u-nodes[j].u,(nodes[i].v-nodes[j].v)*.66)<.32));
-  let W=0,H=0,col={},frame=0,from=0,to=6,t=0,shot=null,popup=null;const trail=[];
-  function readCols(){const cs=getComputedStyle(document.documentElement);["pitch","pline","turf","amber","surface","fg","muted"].forEach(k=>col[k]=cs.getPropertyValue("--"+k).trim())}
-  function size(){const dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;if(!W||!H)return;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
-  const M=()=>Math.max(10,W*.04);
-  function pos(i,time){const n=nodes[i],m=M(),j=reduce?0:1;return[m+n.u*(W-2*m)+Math.sin(time*.0011+n.ph)*2.5*j,m+n.v*(H-2*m)+Math.cos(time*.0009+n.ph)*2.5*j]}
-  function nextPass(){from=to;const opts=nbr[from];const fwd=opts.filter(j=>nodes[j].u>=nodes[from].u-.05);const pool=(Math.random()<.7&&fwd.length?fwd:opts);to=pool[Math.floor(Math.random()*pool.length)];t=0}
-  function arrive(){nodes[to].touch=Math.min(9,nodes[to].touch+1);const k=key(from,to);E.set(k,Math.min(10,(E.get(k)||0)+1))}
-  function pitch(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle=col.pitch;ctx.fillRect(0,0,W,H);ctx.strokeStyle=col.pline;ctx.lineWidth=1.2;ctx.strokeRect(m,m,w,h);ctx.beginPath();ctx.moveTo(W/2,m);ctx.lineTo(W/2,H-m);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H/2,h*.13,0,7);ctx.stroke();
-    const bd=w*.157,bh=h*.593,sd=w*.052,sh=h*.27;[[m,1],[W-m,-1]].forEach(([x,d])=>{ctx.strokeRect(d>0?x:x-bd,H/2-bh/2,bd,bh);ctx.strokeRect(d>0?x:x-sd,H/2-sh/2,sd,sh)})}
-  function draw(time){
-    if(frame++%30===0)readCols();
-    pitch();
-    E.forEach((c,k)=>{const [a,b]=k.split("-").map(Number);const p=pos(a,time),q=pos(b,time);ctx.strokeStyle=col.turf;ctx.globalAlpha=.25+c*.05;ctx.lineWidth=.8+c*.55;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke()});ctx.globalAlpha=1;
-    trail.forEach((p,i)=>{ctx.fillStyle=col.amber;ctx.globalAlpha=(i+1)/trail.length*.5;ctx.beginPath();ctx.arc(p[0],p[1],2,0,7);ctx.fill()});ctx.globalAlpha=1;
-    nodes.forEach((n,i)=>{const [x,y]=pos(i,time);const r=Math.max(7,Math.min(W,H)*.022)+n.touch*1.1;ctx.fillStyle=col.surface;ctx.strokeStyle=col.turf;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=col.fg;ctx.font=`500 ${Math.round(r*.9)}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(NUM[i],x,y+.5)});
-    let bx,by;
-    if(shot){const p=pos(shot.from,time);const e=Math.min(1,shot.t);bx=p[0]+(shot.gx-p[0])*e;by=p[1]+(shot.gy-p[1])*e}
-    else{const p=pos(from,time),q=pos(to,time);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;bx=p[0]+(q[0]-p[0])*e;by=p[1]+(q[1]-p[1])*e}
-    ctx.fillStyle=col.amber;ctx.beginPath();ctx.arc(bx,by,4.5,0,7);ctx.fill();
-    if(popup){ctx.globalAlpha=Math.min(1,popup.life);ctx.fillStyle=col.amber;ctx.font=`800 ${Math.round(H*.07)}px "Big Shoulders Display",Impact,sans-serif`;ctx.textAlign="right";ctx.fillText(popup.text,W-M()-8,M()+H*.07);ctx.globalAlpha=1}
+  const SECCOL={articles:"#5bc391",reports:"#f2a541",tools:"#e9f2ec",repos:"#2f8f63",code:"#f6d29a"};
+  const SECNAME=Object.fromEntries(SECTIONS.map(s=>[s.id,s.name]));
+  const order=SECTIONS.map(s=>s.id);
+  const R0=rng("shelves");
+  const books=R.slice().sort((a,b)=>order.indexOf(a.s)-order.indexOf(b.s)).map(r=>({r,w:1+(r.sub?.6:0)+R0()*.4,h:.72+R0()*.26,band:R0()<.5,lift:0}));
+  const per=Math.ceil(books.length/3);const rows=[books.slice(0,per),books.slice(per,2*per),books.slice(2*per)];
+  let W=0,H=0,from=0,to=0,t=1,hold=0,popup=null;const trail=[];let geo=[];
+  function size(){const dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;if(!W||!H)return;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);layout()}
+  const M=()=>Math.max(12,W*.045);
+  function layout(){geo=[];const m=M(),top=m+H*.2,rowH=(H-m-top)/3,usable=(W-2*m)*.66,gap=Math.max(1.5,W*.004);
+    rows.forEach((row,ri)=>{const tot=row.reduce((n,b)=>n+b.w,0);const unit=(usable-gap*(row.length-1))/tot;let x=m+(W-2*m-usable)*[.12,.88,.4][ri];const base=top+rowH*(ri+1);
+      row.forEach(b=>{const w=b.w*unit,h=b.h*(rowH-6);geo.push({b,x,y:base-h,w,h,base});x+=w+gap})})}
+  function pitchBack(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle="#0d1d15";ctx.fillRect(0,0,W,H);
+    for(let s=0;s<10;s++){if(s%2){ctx.fillStyle="rgba(91,195,145,.035)";ctx.fillRect(m+s*w/10,m,w/10,h)}}
+    const g=ctx.createRadialGradient(W*.15,-H*.2,0,W*.15,-H*.2,W*.9);g.addColorStop(0,"rgba(242,165,65,.12)");g.addColorStop(1,"rgba(242,165,65,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle="rgba(44,74,59,.55)";ctx.lineWidth=1.2;ctx.strokeRect(m,m,w,h);ctx.beginPath();ctx.moveTo(W/2,m);ctx.lineTo(W/2,H-m);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H/2,h*.13,0,7);ctx.stroke()}
+  function top(i){const g=geo[i];return[g.x+g.w/2,g.y-g.b.lift*g.h*.28]}
+  function pick(){from=to;let n;do{n=Math.floor(Math.random()*geo.length)}while(n===from&&geo.length>1);to=n;t=0}
+  function draw(time){pitchBack();if(!geo.length)return[0,0];
+    const shelf=new Set();geo.forEach(g=>shelf.add(g.base));
+    shelf.forEach(y=>{ctx.fillStyle="#2c4a3b";ctx.fillRect(M()*.7,y,W-M()*1.4,3);ctx.fillStyle="rgba(0,0,0,.35)";ctx.fillRect(M()*.7,y+3,W-M()*1.4,4)});
+    rows.forEach((row,ri)=>{const gs=geo.filter(g=>row.includes(g.b));if(!gs.length)return;const a=gs[0],z=gs[gs.length-1],bh=a.base-a.y;const ht=(a.base-Math.min(...gs.map(g=>g.y)))*.55;ctx.fillStyle="#2c4a3b";
+      [[a.x-6,-1],[z.x+z.w+3,1]].forEach(([x])=>{ctx.fillRect(x,a.base-ht,3,ht);});
+      const bx=ri===1?gs[0].x-W*.09:z.x+z.w+W*.07,r=Math.min(W,H)*.035;ctx.strokeStyle="#e9f2ec";ctx.lineWidth=1.4;ctx.globalAlpha=.8;ctx.beginPath();ctx.arc(bx,a.base-r,r,0,7);ctx.stroke();ctx.fillStyle="#e9f2ec";ctx.beginPath();for(let k=0;k<5;k++){const an=-Math.PI/2+k*2*Math.PI/5;ctx.lineTo(bx+Math.cos(an)*r*.38,a.base-r+Math.sin(an)*r*.38)}ctx.fill();ctx.globalAlpha=1});
+    geo.forEach((g,i)=>{const b=g.b,y=g.y-b.lift*g.h*.28;const c=SECCOL[b.r.s]||"#e9f2ec";
+      if(b.lift>.01){ctx.shadowColor="#f2a541";ctx.shadowBlur=18*b.lift}
+      ctx.fillStyle=c;ctx.globalAlpha=.78+.22*b.lift;ctx.fillRect(g.x,y,g.w,g.h);ctx.shadowBlur=0;ctx.globalAlpha=1;
+      ctx.fillStyle="rgba(7,17,12,.55)";ctx.fillRect(g.x,y+g.h*.12,g.w,Math.max(1.5,g.h*.035));ctx.fillRect(g.x,y+g.h*.84,g.w,Math.max(1.5,g.h*.035));
+      if(b.band){ctx.fillRect(g.x+g.w*.25,y+g.h*.3,g.w*.5,g.h*.32)}
+      if(b.r.sub){ctx.fillStyle="rgba(7,17,12,.35)";for(let k=1;k<=Math.min(4,b.r.sub.length);k++)ctx.fillRect(g.x+g.w*.2,y+g.h*(.32+k*.1),g.w*.6,1)}});
+    trail.forEach((p,i)=>{ctx.fillStyle="#f2a541";ctx.globalAlpha=(i+1)/trail.length*.55;ctx.beginPath();ctx.arc(p[0],p[1],2.2,0,7);ctx.fill()});ctx.globalAlpha=1;
+    const p=top(from),q=top(to);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;const arc=Math.max(H*.12,Math.abs(q[0]-p[0])*.25);
+    const bx=p[0]+(q[0]-p[0])*e,by=p[1]+(q[1]-p[1])*e-Math.sin(Math.PI*Math.min(1,t))*arc-6;
+    ctx.shadowColor="#f2a541";ctx.shadowBlur=12;ctx.fillStyle="#f2a541";ctx.beginPath();ctx.arc(bx,by,5,0,7);ctx.fill();ctx.shadowBlur=0;
+    if(popup){const m=M();ctx.globalAlpha=Math.min(1,popup.life);ctx.textAlign="right";ctx.textBaseline="alphabetic";
+      ctx.fillStyle="#f2a541";ctx.font=`900 ${Math.round(H*.075)}px "Big Shoulders Display",Impact,sans-serif`;ctx.fillText(popup.sec.toUpperCase(),W-m-6,m+H*.075);
+      ctx.fillStyle="#9fb6a8";ctx.font=`500 ${Math.max(9,Math.round(H*.032))}px "JetBrains Mono",monospace`;let s=popup.title;const max=W*.62;while(s.length>8&&ctx.measureText(s).width>max)s=s.slice(0,-2);if(s!==popup.title)s=s.replace(/\s*\S*$/,"")+"…";ctx.fillText(s,W-m-6,m+H*.125);ctx.globalAlpha=1}
     return[bx,by]}
-  if(reduce){const run=()=>{size();if(!W)return;readCols();for(let k=0;k<45;k++){nextPass();arrive()}draw(0)};run();new ResizeObserver(run).observe(cv);return}
+  function land(){const b=geo[to].b;popup={sec:SECNAME[b.r.s]||"",title:b.r.t,life:1.8};hold=1.9}
+  if(reduce){const run=()=>{size();if(!W)return;to=Math.min(geo.length-1,5);from=to;t=1;geo[to].b.lift=1;land();draw(0)};run();new ResizeObserver(run).observe(cv);return}
   let last=performance.now();
-  function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!W){size();requestAnimationFrame(step);return}
-    if(shot){shot.t+=dt*1.6;if(shot.t>=1&&!popup){popup={text:`xG ${shot.xg.toFixed(2)}`,life:1.6};}if(popup){popup.life-=dt*.8;if(popup.life<=0){popup=null;shot=null;from=6;to=6;nextPass()}}}
-    else{t+=dt/0.75;if(t>=1){arrive();if(to>=8&&Math.random()<.35){const m=M();const gy=H/2+(Math.random()-.5)*(H-2*m)*.16;const d=1-nodes[to].u;shot={from:to,t:0,gx:W-m,gy,xg:Math.max(.03,Math.min(.6,.7*Math.exp(-d*6)+Math.random()*.08))}}else nextPass()}}
-    const b=draw(now);trail.push(b);if(trail.length>12)trail.shift();requestAnimationFrame(step)}
-  size();readCols();new ResizeObserver(size).observe(cv);requestAnimationFrame(step);
+  function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!W||!geo.length){size();requestAnimationFrame(step);return}
+    geo.forEach((g,i)=>{const target=(i===to&&t>=1&&hold>0)?1:0;g.b.lift+=(target-g.b.lift)*Math.min(1,dt*7)});
+    if(t<1){t=Math.min(1,t+dt/0.9);if(t>=1)land()}
+    else if(hold>0){hold-=dt;if(popup)popup.life=Math.min(1,hold*1.2);if(hold<=0){popup=null;pick()}}
+    const b=draw(now);trail.push(b);if(trail.length>14)trail.shift();requestAnimationFrame(step)}
+  size();new ResizeObserver(size).observe(cv);if(geo.length){to=Math.floor(Math.random()*geo.length);pick()}requestAnimationFrame(step);
 })();
 </script>
 

@@ -17,7 +17,7 @@ The repos, notebooks and people I'm learning from, collected in one place and cr
 
 ## Library
 
-📚 **[Browse the library](https://mbusani.github.io/football-analytics-lab/library/)**: 33 football analytics resources (articles and newsletters, reports and webinars, tools including the fitzRoy AFL package, GitHub repos, Kaggle datasets and notebooks, and papers), each credited to its author or publisher and linked to the original. The library links to other people's work and claims none of it.
+📚 **[Browse the library](https://mbusani.github.io/football-analytics-lab/library/)**: 34 football analytics resources (articles and newsletters, reports and webinars, tools including the fitzRoy AFL package, GitHub repos, Kaggle datasets and notebooks, and papers), each credited to its author or publisher and linked to the original. The library links to other people's work and claims none of it.
 
 ## Credits and how I use these repos
 

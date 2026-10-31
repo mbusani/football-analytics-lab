@@ -4,18 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Football Analytics Lab</title>
-<meta name="description" content="A football analytics learning hub by Mark Busani: the repos, notebooks and people I'm learning from, credited to their authors.">
+<meta name="description" content="Mark Busani's football analytics lab: the repos, notebooks and people I'm learning from, forked into my lab and credited to their authors.">
+<meta property="og:title" content="Football Analytics Lab">
+<meta property="og:description" content="The repos, notebooks and people I'm learning from on the way into football analytics, credited to their authors.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a matchday programme cover. Live passing-network hero, then one wide card per repo
-   with the author credited as prominently as the work itself. */
+/* Layout: a night match. A floodlit hero band holds the live passing network; below it,
+   the match programme: a quick-link "dugout" bar to my forks, then one feature spread per repo
+   with the creator credited beside two equal doors (original / my fork), live GitHub numbers on each. */
 :root{
   --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
   --turf:#1c6948; --turf-soft:#e0ede5; --amber:#c4740f; --amber-soft:#fbebd4;
   --pitch:#e4eee6; --pline:#a3bfaf;
-  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  /* hero band is always a night match, in both themes */
+  --night:#07110c; --night-2:#0d1d15; --chalk:#e9f2ec; --chalk-dim:#9fb6a8; --flood:#f2a541; --grass:#5bc391; --nline:#2c4a3b;
+  --display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
   --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
   color-scheme:light;
@@ -26,192 +31,270 @@
   --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;padding-top:env(safe-area-inset-top,0px)}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
 a{color:var(--turf)}
-:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 
-nav.top{border-bottom:1px solid var(--line)}
-nav.top .wrap{display:flex;align-items:center;gap:16px;padding-block:12px;font-family:var(--mono);font-size:12px}
-nav.top .brand{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.04em;text-transform:uppercase;color:var(--fg);text-decoration:none}
+/* ---------- Night hero ---------- */
+.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
+    radial-gradient(55% 50% at 100% -5%, rgba(233,242,236,.14), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(91,195,145,.035) 0 70px, transparent 70px 140px);}
+nav.top{position:relative;z-index:2}
+nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk);text-decoration:none}
+.brand i{width:26px;height:26px;border-radius:50%;border:2px solid var(--chalk);position:relative;display:inline-block}
+.brand i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flood)}
 nav.top .sp{flex:1}
-nav.top a.lnk{color:var(--muted);text-decoration:none}
-nav.top a.lnk:hover{color:var(--turf)}
+nav.top a.lnk{font-family:var(--mono);font-size:12px;color:var(--chalk-dim);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
+nav.top a.lnk:hover{color:var(--chalk)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:44px;align-items:center;padding-block:40px 64px}
+.hero .eyebrow{color:var(--flood)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
+h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
+h1 .l3{display:block;color:var(--grass)}
+.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
+.lede b{color:var(--chalk);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.cta a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
+.cta .go{background:var(--flood);color:#1a1205}
+.cta .go:hover{filter:brightness(1.08)}
+.cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
+.cta .gh:hover{border-color:var(--chalk)}
+.scoreboard{display:flex;gap:0;margin-top:34px;border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
+.scoreboard div{padding:10px 18px;border-right:1px solid var(--nline);background:rgba(7,17,12,.6)}
+.scoreboard div:last-child{border-right:0}
+.scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
+.scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
+figure.net{margin:0;min-width:0;position:relative}
+figure.net canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
+figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px}
+figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--flood);margin-right:6px;vertical-align:middle}
+.touchline{height:6px;background:repeating-linear-gradient(90deg,var(--chalk) 0 22px,transparent 22px 34px);opacity:.25}
 
-.hero{border-bottom:3px solid var(--fg)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:52px 44px}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,8vw,104px);overflow-wrap:anywhere;line-height:.84;margin:14px 0 20px;text-transform:uppercase}
-h1 span{display:block;color:var(--turf)}
-.lede{max-width:50ch;color:var(--muted);margin:0;font-size:18px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.chip{font-family:var(--mono);font-size:12px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;background:var(--surface)}
-.chip:hover{border-color:var(--turf)}
-.chip b{color:var(--amber);font-weight:500}
-figure.net{margin:0;min-width:0}
-figure.net canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:14px;background:var(--pitch);border:1px solid var(--line)}
-figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:8px}
+/* ---------- Dugout: quick links to my forks ---------- */
+.dugout{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.dugout .wrap{display:flex;align-items:center;gap:10px;padding-block:12px;overflow-x:auto;scrollbar-width:thin}
+.dugout .lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);flex:none;margin-right:4px}
+.dugout a{flex:none;display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);text-decoration:none;font-weight:600;font-size:14px}
+.dugout a:hover{border-color:var(--turf)}
+.dugout a svg{width:14px;height:14px;fill:currentColor;opacity:.7}
 
-main .wrap{padding-block:16px 72px}
-section{margin-top:48px}
-.sec-head{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--fg)}
-.sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.5vw,44px);line-height:1;text-transform:uppercase;margin:0}
-.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:800;font-size:44px;line-height:1;color:var(--line)}
-.sec-note{color:var(--muted);margin:12px 0 0;max-width:72ch}
+/* ---------- Sections ---------- */
+main .wrap{padding-block:12px 80px}
+section{margin-top:56px}
+.sec-head{display:flex;align-items:flex-end;gap:16px;padding-bottom:12px;border-bottom:3px solid var(--fg)}
+.sec-head h2{font-family:var(--display);font-weight:900;font-size:clamp(36px,5vw,56px);line-height:.9;text-transform:uppercase;margin:0}
+.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:900;font-size:56px;line-height:.85;color:var(--line)}
+.sec-note{color:var(--muted);margin:14px 0 0;max-width:74ch;font-size:16.5px}
 
-.repo{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.repo .art{position:relative;background:var(--pitch);border-right:1px solid var(--line);min-height:260px}
-.repo .art svg{position:absolute;inset:36px 12px 12px;width:calc(100% - 24px);height:calc(100% - 48px)}
-.repo .art .badge{position:absolute;left:12px;top:12px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;background:var(--surface);border:1px solid var(--line);padding:3px 8px;border-radius:4px}
-.repo .body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:12px;min-width:0}
-.repo h3{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,40px);line-height:1;text-transform:uppercase;margin:0;overflow-wrap:anywhere}
-.by{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.by img{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--pitch)}
-.by .who{display:flex;flex-direction:column;line-height:1.25}
-.by .who b{font-size:17px}
-.by .who span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-.repo p{margin:0;max-width:62ch}
-.facts{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:4px;background:var(--turf-soft);color:var(--turf)}
+/* ---------- Repo spreads ---------- */
+.spread{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .3s ease, box-shadow .3s ease}
+.spread:hover{transform:translateY(-3px);box-shadow:0 24px 50px -30px rgba(20,32,26,.45)}
+.spread.flip .art{order:2;border-right:0;border-left:1px solid var(--line)}
+.art{position:relative;background:var(--pitch);border-right:1px solid var(--line);min-height:380px;overflow:hidden}
+.art svg{position:absolute;left:0;right:0;top:44px;bottom:52px;width:100%;height:calc(100% - 96px)}
+.art .kicker{position:absolute;left:16px;top:16px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+.art .live{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:6px}
+.art .live span{font-family:var(--mono);font-size:11.5px;background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-variant-numeric:tabular-nums}
+.art .live b{color:var(--amber);font-weight:500}
+.copy{padding:28px 30px 28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.copy h3{font-family:var(--display);font-weight:900;font-size:clamp(34px,4.4vw,52px);line-height:.92;text-transform:uppercase;margin:0;overflow-wrap:anywhere}
+.credit{display:flex;align-items:center;gap:12px}
+.credit img{width:46px;height:46px;border-radius:50%;border:2px solid var(--turf);background:var(--pitch);flex:none}
+.credit .who{line-height:1.25;min-width:0}
+.credit .who small{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.credit .who b{font-size:18px}
+.credit .who a{color:var(--fg);text-decoration:none;border-bottom:1.5px solid var(--turf)}
+.copy p{margin:0;max-width:60ch;font-size:16.5px}
+.inside{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px 18px;font-size:15px;color:var(--muted)}
+.inside li{padding-left:16px;position:relative}
+.inside li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--turf)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:5px;background:var(--turf-soft);color:var(--turf)}
 .tag.lic{background:var(--amber-soft);color:var(--amber)}
-.inside{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 18px;font-size:14.5px;color:var(--muted)}
-.inside li::before{content:"→ ";color:var(--turf)}
-.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
-.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14.5px;padding:8px 14px;border-radius:8px;border:1px solid var(--line);text-decoration:none;color:var(--fg);background:var(--bg)}
-.btn:hover{border-color:var(--turf)}
-.btn.primary{background:var(--turf);border-color:var(--turf);color:var(--surface)}
-.credit-note{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin:0}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.door{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);text-decoration:none;color:var(--fg);background:var(--bg);min-width:0}
+.door small{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.door b{font-size:15px;overflow-wrap:anywhere}
+.door:hover{border-color:var(--turf)}
+.door.mine{background:var(--turf);border-color:var(--turf);color:var(--surface)}
+.door.mine small{color:var(--surface);opacity:.8}
+.door.mine:hover{filter:brightness(1.07)}
+.more{display:flex;flex-wrap:wrap;gap:14px;font-size:14.5px;font-weight:600}
+.more a{text-decoration:none;border-bottom:1.5px solid currentColor}
+.fine{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px;margin:0}
 
-.next{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
-.next div{border:1px dashed var(--line);border-radius:12px;padding:16px 18px}
-.next b{font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;display:block;margin-bottom:4px}
-.next span{color:var(--muted);font-size:15px}
+/* ---------- Credits + next ---------- */
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
+.person{display:flex;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.person img{width:52px;height:52px;border-radius:50%;background:var(--pitch);flex:none}
+.person b{display:block;font-size:17px}
+.person span{font-size:14px;color:var(--muted)}
+.next{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:22px}
+.next div{border:1.5px dashed var(--line);border-radius:14px;padding:18px 20px}
+.next b{font-family:var(--display);font-weight:900;font-size:26px;text-transform:uppercase;display:block;margin-bottom:4px}
+.next span{color:var(--muted);font-size:15.5px}
+footer{background:var(--night);color:var(--chalk-dim);font-size:14px}
+footer .wrap{padding-block:28px calc(44px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}
+footer a{color:var(--chalk)}
 
-footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px}
-footer .wrap{padding-block:24px 48px;display:flex;flex-direction:column;gap:8px}
-
-/* illustration classes */
+/* ---------- illustration classes ---------- */
 .pf{fill:var(--pitch)} .pl{fill:none;stroke:var(--pline);stroke-width:1}
-.mk{fill:var(--turf)} .hi{fill:var(--amber)} .sf{fill:var(--surface)} .cm{fill:var(--muted);fill-opacity:.4}
+.mk{fill:var(--turf)} .hi{fill:var(--amber)} .sf{fill:var(--surface)} .ln{fill:none;stroke:var(--line)}
 .ed{fill:none;stroke:var(--turf);stroke-linecap:round} .eh{fill:none;stroke:var(--amber);stroke-linecap:round}
-.nd{fill:var(--surface);stroke:var(--turf);stroke-width:1.3} .tx{fill:var(--muted);font-family:var(--mono);font-size:6px}
+.nd{fill:var(--surface);stroke:var(--turf);stroke-width:1.4} .tx{fill:var(--muted);font-family:var(--mono);font-size:5.5px}
 
-@media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:26px;padding-block:34px 30px}.repo{grid-template-columns:1fr}.repo .art{min-height:200px;border-right:0;border-bottom:1px solid var(--line)}}
-@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}
+  .spread,.spread.flip{grid-template-columns:1fr}
+  .spread.flip .art{order:0;border-left:0}
+  .art{min-height:250px;border-right:0;border-bottom:1px solid var(--line)}
+  .spread.flip .art{border-bottom:1px solid var(--line)}
+}
+@media (max-width:480px){.doors{grid-template-columns:1fr}.copy{padding:22px 18px}.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.spread{transition:none}.spread:hover{transform:none}}
 </style>
 </head>
 <body>
-<nav class="top"><div class="wrap">
-  <a class="brand" href="./">Football Analytics Lab</a><span class="sp"></span>
-  <a class="lnk" href="#repos">Repos</a>
-  <a class="lnk" href="#credits">Credits</a>
-  <a class="lnk" href="https://github.com/mbusani/football-analytics-lab">GitHub</a>
-</div></nav>
 
-<header class="hero"><div class="wrap hero-grid">
-  <div>
-    <div class="eyebrow">A football analytics learning hub · by Mark Busani</div>
-    <h1>Football Analytics <span>Lab</span></h1>
-    <p class="lede">The repos, notebooks and people I'm learning from on the way into football analytics, collected in one place and credited to the people who built them.</p>
-    <div class="chips">
-      <a class="chip" href="#repos"><b>3</b> repositories</a>
-      <a class="chip" href="#credits"><b>3</b> creators credited</a>
-      <a class="chip" href="https://github.com/mbusani">github.com/mbusani</a>
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="./"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="#repos">Repos</a>
+    <a class="lnk" href="#credits">Credits</a>
+    <a class="lnk" href="https://github.com/mbusani/football-analytics-lab">Source</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Mark Busani · Perth, Western Australia</div>
+      <h1>Football<span class="l2">Analytics</span><span class="l3">Lab</span></h1>
+      <p class="lede">The repos, notebooks and people I'm learning from on the way into football analytics. <b>Forked into my lab, and credited to the people who built them.</b></p>
+      <div class="cta">
+        <a class="go" href="#repos">Explore the repos ↓</a>
+        <a class="gh" href="https://github.com/mbusani">github.com/mbusani</a>
+      </div>
+      <div class="scoreboard" aria-label="Lab at a glance">
+        <div><b>3</b><span>repos forked</span></div>
+        <div><b>3</b><span>creators credited</span></div>
+        <div><b id="stars-total">146</b><span>stars on originals</span></div>
+      </div>
     </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Animated illustration of a passing network building on a football pitch at night"></canvas>
+      <figcaption><span>Illustration: a passing network building live</span><span>node size = touches · line weight = passes</span><span><i></i>shot, with its xG</span></figcaption>
+    </figure>
   </div>
-  <figure class="net">
-    <canvas id="hero" role="img" aria-label="Animated illustration of a passing network building on a football pitch"></canvas>
-    <figcaption>Illustration: a passing network building live. Node size = touches · line weight = passes · amber = shot with its xG</figcaption>
-  </figure>
-</div></header>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
+
+<nav class="dugout" aria-label="My forks"><div class="wrap">
+  <span class="lbl">My lab</span>
+  <a href="https://github.com/mbusani/Football-analytics"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>Football-analytics</a>
+  <a href="https://github.com/mbusani/gunners-analysis"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>gunners-analysis</a>
+  <a href="https://github.com/mbusani/human-agentic-data-analysis"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>human-agentic-data-analysis</a>
+  <a href="https://github.com/mbusani/football-analytics-lab">football-analytics-lab</a>
+</div></nav>
 
 <main><div class="wrap">
   <section id="repos">
     <div class="sec-head"><h2>Repositories</h2><span class="count">03</span></div>
-    <p class="sec-note">Each card links to the author's original first. My forks are kept for study and experiments; all the work belongs to the people named here.</p>
+    <p class="sec-note">Each spread has two doors: the creator's original, and my fork where I study and experiment. Live numbers come from GitHub when the page loads.</p>
 
-    <article class="repo">
-      <div class="art"><svg id="art-vf" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of a passing network"></svg><span class="badge">Jupyter notebooks</span></div>
-      <div class="body">
+    <article class="spread" data-orig="vickyfriss/Football-analytics" data-fork="mbusani/Football-analytics">
+      <div class="art"><svg id="art-vf" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a passing network with clustered passes"></svg>
+        <span class="kicker">Jupyter notebooks</span>
+        <div class="live"><span>★ <b data-k="stars">47</b> stars</span><span>⑂ <b data-k="forks">5</b> forks</span><span>updated <b data-k="updated">Oct 2026</b></span></div>
+      </div>
+      <div class="copy">
         <h3>Football-analytics</h3>
-        <div class="by"><img src="https://avatars.githubusercontent.com/vickyfriss?size=80" alt="" loading="lazy" onerror="this.style.display='none'"><div class="who"><b>Victoria Friss de Kereki</b><span>@vickyfriss · Football data analyst</span></div></div>
-        <p>A growing collection of notebooks that explore football, and sometimes rugby, through data, using pandas, scikit-learn and matplotlib.</p>
+        <div class="credit"><img src="https://avatars.githubusercontent.com/vickyfriss?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/vickyfriss">Victoria Friss de Kereki</a></b></div></div>
+        <p>A growing collection of notebooks that explore football, and sometimes rugby, through data, built with pandas, scikit-learn and matplotlib.</p>
         <ul class="inside">
           <li>xG and expected-pass models for women's football</li>
           <li>Wage vs performance in English football</li>
-          <li>Pass clustering and passing networks (FC Barcelona)</li>
-          <li>League-position simulations from betting odds</li>
-          <li>Pizza charts and StatsBomb formation plots</li>
+          <li>Pass clustering and passing networks</li>
+          <li>League simulations from betting odds</li>
+          <li>Pizza charts and formation plots</li>
           <li>Rugby Premiership forecasting</li>
         </ul>
-        <div class="facts"><span class="tag">expected-goals</span><span class="tag">football-analytics</span><span class="tag">web-scraping</span><span class="tag lic">No licence file · all rights reserved</span></div>
-        <div class="links">
-          <a class="btn primary" href="https://github.com/vickyfriss/Football-analytics">Original repo</a>
-          <a class="btn" href="https://github.com/mbusani/Football-analytics">My fork</a>
-          <a class="btn" href="https://medium.com/@vickyfrissdekereki">Medium</a>
-          <a class="btn" href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a>
-          <a class="btn" href="https://football-league-simulator.streamlit.app/">Live app</a>
+        <div class="tags"><span class="tag">expected-goals</span><span class="tag">football-analytics</span><span class="tag">web-scraping</span><span class="tag lic">No licence · all rights reserved</span></div>
+        <div class="doors">
+          <a class="door" href="https://github.com/vickyfriss/Football-analytics"><small>Original</small><b>vickyfriss/Football-analytics</b></a>
+          <a class="door mine" href="https://github.com/mbusani/Football-analytics"><small>My fork</small><b>mbusani/Football-analytics</b></a>
         </div>
-        <p class="credit-note">All rights belong to Victoria Friss de Kereki. The repo has no licence file, so my fork is for personal learning only and nothing from it is reused here.</p>
+        <div class="more"><a href="https://medium.com/@vickyfrissdekereki">Victoria on Medium</a><a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a><a href="https://football-league-simulator.streamlit.app/">Live app</a></div>
+        <p class="fine">All rights belong to Victoria Friss de Kereki. The repo has no licence file, so my fork is for personal learning only and nothing from it is reused here.</p>
       </div>
     </article>
 
-    <article class="repo">
-      <div class="art"><svg id="art-ga" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of a data pipeline feeding a shot map"></svg><span class="badge">Python pipeline</span></div>
-      <div class="body">
+    <article class="spread flip" data-orig="Muhammadatef/gunners-analysis" data-fork="mbusani/gunners-analysis">
+      <div class="art"><svg id="art-ga" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of a pipeline feeding an 18-panel dashboard"></svg>
+        <span class="kicker">Python pipeline</span>
+        <div class="live"><span>★ <b data-k="stars">10</b> stars</span><span>⑂ <b data-k="forks">2</b> forks</span><span>updated <b data-k="updated">Oct 2026</b></span></div>
+      </div>
+      <div class="copy">
         <h3>gunners-analysis</h3>
-        <div class="by"><img src="https://avatars.githubusercontent.com/Muhammadatef?size=80" alt="" loading="lazy" onerror="this.style.display='none'"><div class="who"><b>Muhammad Atef</b><span>@Muhammadatef</span></div></div>
-        <p>Automated football analytics for Arsenal: data is scraped, transformed and stored without manual steps, then turned into tactical dashboards and an AI analyst that answers only from the stored data.</p>
+        <div class="credit"><img src="https://avatars.githubusercontent.com/Muhammadatef?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/Muhammadatef">Muhammad Atef</a></b></div></div>
+        <p>Automated football analytics for Arsenal: data is scraped, transformed and stored with no manual steps, then turned into tactical dashboards and an AI analyst that answers only from the stored data.</p>
         <ul class="inside">
           <li>Apache Airflow orchestration</li>
           <li>PostgreSQL warehouse with pgvector</li>
           <li>18-panel tactical dashboards (mplsoccer)</li>
           <li>LLM analyst built with DSPy</li>
-          <li>Scrapers, data-quality checks and tests</li>
+          <li>Scrapers, quality checks and tests</li>
           <li>Docker setup and deployment notes</li>
         </ul>
-        <div class="facts"><span class="tag">apache-airflow</span><span class="tag">mplsoccer</span><span class="tag">postgresql</span><span class="tag">llm</span><span class="tag lic">MIT licence · © 2026 Muhammad Atef</span></div>
-        <div class="links">
-          <a class="btn primary" href="https://github.com/Muhammadatef/gunners-analysis">Original repo</a>
-          <a class="btn" href="https://github.com/mbusani/gunners-analysis">My fork</a>
-          <a class="btn" href="https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f">Write-up on Medium</a>
+        <div class="tags"><span class="tag">apache-airflow</span><span class="tag">mplsoccer</span><span class="tag">postgresql</span><span class="tag">llm</span><span class="tag lic">MIT · © 2026 Muhammad Atef</span></div>
+        <div class="doors">
+          <a class="door" href="https://github.com/Muhammadatef/gunners-analysis"><small>Original</small><b>Muhammadatef/gunners-analysis</b></a>
+          <a class="door mine" href="https://github.com/mbusani/gunners-analysis"><small>My fork</small><b>mbusani/gunners-analysis</b></a>
         </div>
-        <p class="credit-note">Built by Muhammad Atef and shared under the MIT licence. Anything I reuse from it keeps his copyright notice and licence text.</p>
+        <div class="more"><a href="https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f">Write-up on Medium</a><a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a></div>
+        <p class="fine">Built by Muhammad Atef and shared under the MIT licence. Anything I reuse from it keeps his copyright notice and licence text.</p>
       </div>
     </article>
-    <article class="repo">
-      <div class="art"><svg id="art-ha" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of an eight-step analysis path"></svg><span class="badge">Claude Code template</span></div>
-      <div class="body">
+
+    <article class="spread" data-orig="Vivid-Insights/human-agentic-data-analysis" data-fork="mbusani/human-agentic-data-analysis">
+      <div class="art"><svg id="art-ha" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of an eight-step analysis path"></svg>
+        <span class="kicker">Claude Code template</span>
+        <div class="live"><span>★ <b data-k="stars">89</b> stars</span><span>⑂ <b data-k="forks">14</b> forks</span><span>updated <b data-k="updated">Oct 2026</b></span></div>
+      </div>
+      <div class="copy">
         <h3>human-agentic-data-analysis</h3>
-        <div class="by"><img src="https://avatars.githubusercontent.com/soccermatics?size=80" alt="" loading="lazy" onerror="this.style.display='none'"><div class="who"><b>David Sumpter · Vivid Insights</b><span>@soccermatics · Vivid-Insights</span></div></div>
+        <div class="credit"><img src="https://avatars.githubusercontent.com/soccermatics?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/soccermatics">David Sumpter</a> · <a href="https://github.com/Vivid-Insights">Vivid Insights</a></b></div></div>
         <p>A template workspace for doing a data analysis with an AI agent one step at a time, so the judgement calls stay with the analyst and the report can be defended.</p>
         <ul class="inside">
-          <li>Obsidian vault with a working contract for the agent</li>
-          <li>Eight steps, from data import to export</li>
-          <li>Report and appendix templates that fill as you go</li>
-          <li>A sample report on World Happiness data</li>
+          <li>Obsidian vault with a working contract</li>
+          <li>Eight steps, from import to export</li>
+          <li>Report and appendix that fill as you go</li>
+          <li>Sample report on World Happiness data</li>
           <li>Python environment and figure style</li>
           <li>Standing disclaimer on AI assistance</li>
         </ul>
-        <div class="facts"><span class="tag">claude-code</span><span class="tag">obsidian</span><span class="tag">python</span><span class="tag">reproducible-analysis</span><span class="tag lic">CC BY 4.0</span></div>
-        <div class="links">
-          <a class="btn primary" href="https://github.com/Vivid-Insights/human-agentic-data-analysis">Original repo</a>
-          <a class="btn" href="https://github.com/mbusani/human-agentic-data-analysis">My fork</a>
-          <a class="btn" href="https://github.com/soccermatics">David's GitHub</a>
-          <a class="btn" href="https://creativecommons.org/licenses/by/4.0/">Licence</a>
+        <div class="tags"><span class="tag">claude-code</span><span class="tag">obsidian</span><span class="tag">python</span><span class="tag">reproducible-analysis</span><span class="tag lic">CC BY 4.0</span></div>
+        <div class="doors">
+          <a class="door" href="https://github.com/Vivid-Insights/human-agentic-data-analysis"><small>Original</small><b>Vivid-Insights/human-agentic-data-analysis</b></a>
+          <a class="door mine" href="https://github.com/mbusani/human-agentic-data-analysis"><small>My fork</small><b>mbusani/human-agentic-data-analysis</b></a>
         </div>
-        <p class="credit-note">Created by Vivid Insights, with commits by David Sumpter (@soccermatics), and shared under Creative Commons Attribution 4.0. Anything I reuse from it will name the creators, link the original and the licence, and say what I changed.</p>
+        <div class="more"><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 licence</a></div>
+        <p class="fine">Created by Vivid Insights, with commits by David Sumpter (@soccermatics), and shared under Creative Commons Attribution 4.0. Anything I reuse from it will name the creators, link the original and the licence, and say what I changed.</p>
       </div>
     </article>
   </section>
 
   <section id="credits">
     <div class="sec-head"><h2>Credits</h2></div>
-    <p class="sec-note">Football Analytics Lab curates and links to other people's work; it doesn't claim any of it. Forks keep their original commit history, author attribution and licence files. If you're one of the authors and want anything changed or removed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a> and I'll sort it out quickly.</p>
-    <div class="next">
-      <div><b>Victoria Friss de Kereki</b><span><a href="https://github.com/vickyfriss">GitHub</a> · <a href="https://medium.com/@vickyfrissdekereki">Medium</a> · <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a></span></div>
-      <div><b>Muhammad Atef</b><span><a href="https://github.com/Muhammadatef">GitHub</a> · <a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a></span></div>
-      <div><b>David Sumpter · Vivid Insights</b><span><a href="https://github.com/soccermatics">GitHub</a> · <a href="https://github.com/Vivid-Insights">Vivid Insights</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span></div>
+    <p class="sec-note">This lab curates and links to other people's work; it doesn't claim any of it. Forks keep their original commit history, author attribution and licence files. If you're one of the creators and want anything changed or removed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a> and I'll sort it out quickly.</p>
+    <div class="people">
+      <div class="person"><img src="https://avatars.githubusercontent.com/vickyfriss?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Victoria Friss de Kereki</b><span><a href="https://github.com/vickyfriss">GitHub</a> · <a href="https://medium.com/@vickyfrissdekereki">Medium</a> · <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a></span></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/Muhammadatef?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Muhammad Atef</b><span><a href="https://github.com/Muhammadatef">GitHub</a> · <a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a></span></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/soccermatics?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>David Sumpter · Vivid Insights</b><span><a href="https://github.com/soccermatics">GitHub</a> · <a href="https://github.com/Vivid-Insights">Vivid Insights</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span></div></div>
     </div>
   </section>
 
@@ -226,38 +309,67 @@ footer .wrap{padding-block:24px 48px;display:flex;flex-direction:column;gap:8px}
 </div></main>
 
 <footer><div class="wrap">
-  <span>Football Analytics Lab by <a href="https://github.com/mbusani">Mark Busani</a>. The home page and README are MIT-licensed; the repositories listed belong to their authors and keep their own licences.</span>
-  <span>Illustrations are original and drawn in the page; they don't show data from any of the repositories.</span>
+  <span>Football Analytics Lab by <a href="https://github.com/mbusani">Mark Busani</a>. The home page and README are MIT-licensed; the repositories featured belong to their creators and keep their own licences.</span>
+  <span>Illustrations are original and drawn in the page; they don't show data from any of the repositories. Live star and fork counts come from the GitHub API.</span>
 </div></footer>
 
 <script>
-/* ---------- card illustrations (original, schematic) ---------- */
+/* ---------- live GitHub numbers (falls back to the values in the page) ---------- */
+(async function live(){
+  const fmt=d=>new Date(d).toLocaleDateString("en-AU",{month:"short",year:"numeric"});
+  let total=0, ok=0;
+  for(const el of document.querySelectorAll(".spread")){
+    try{
+      const r=await fetch("https://api.github.com/repos/"+el.dataset.orig,{headers:{Accept:"application/vnd.github+json"}});
+      if(!r.ok) continue;
+      const j=await r.json();
+      el.querySelector('[data-k="stars"]').textContent=j.stargazers_count;
+      el.querySelector('[data-k="forks"]').textContent=j.forks_count;
+      el.querySelector('[data-k="updated"]').textContent=fmt(j.pushed_at);
+      total+=j.stargazers_count; ok++;
+    }catch(e){}
+  }
+  if(ok===3) document.getElementById("stars-total").textContent=total;
+})();
+
+/* ---------- spread illustrations (original, schematic) ---------- */
 const r1=n=>Math.round(n*10)/10;
 function rng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 const F433=[[.06,.5],[.22,.15],[.2,.38],[.2,.62],[.22,.85],[.44,.27],[.4,.5],[.44,.73],[.68,.18],[.72,.5],[.68,.82]];
-function pitch(W,H,m){const cx=W/2,cy=H/2,w=W-2*m,h=H-2*m,bd=w*.157,bh=h*.593;
-  return `<rect class="pf" width="${W}" height="${H}"/><g class="pl"><rect x="${m}" y="${m}" width="${w}" height="${h}"/><line x1="${cx}" y1="${m}" x2="${cx}" y2="${H-m}"/><circle cx="${cx}" cy="${cy}" r="${r1(h*.13)}"/><rect x="${m}" y="${r1(cy-bh/2)}" width="${r1(bd)}" height="${r1(bh)}"/><rect x="${r1(W-m-bd)}" y="${r1(cy-bh/2)}" width="${r1(bd)}" height="${r1(bh)}"/></g>`}
-(function vf(){const W=160,H=110,m=8,R=rng(7);const P=F433.map(([u,v])=>[r1(m+u*(W-2*m)),r1(m+v*(H-2*m))]);let s=pitch(W,H,m);
-  for(let i=0;i<11;i++)for(let j=i+1;j<11;j++){const d=Math.hypot(F433[i][0]-F433[j][0],(F433[i][1]-F433[j][1])*.66);if(d<.3&&R()<.8){const w=r1(.6+R()*2.8);s+=`<line class="${w>2.9?"eh":"ed"}" stroke-width="${w}" stroke-opacity="${w>2.9?1:.5}" x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`}}
-  s+=P.map(([x,y],i)=>`<circle class="${i===6?"mk":"nd"}" cx="${x}" cy="${y}" r="${r1(3+R()*3)}"/>`).join("");
+function pitch(W,H,m){const cx=W/2,cy=H/2,w=W-2*m,h=H-2*m,bd=w*.157,bh=h*.593,sd=w*.052,sh=h*.27;
+  return `<rect class="pf" width="${W}" height="${H}"/><g class="pl"><rect x="${m}" y="${m}" width="${w}" height="${h}"/><line x1="${cx}" y1="${m}" x2="${cx}" y2="${H-m}"/><circle cx="${cx}" cy="${cy}" r="${r1(h*.13)}"/><rect x="${m}" y="${r1(cy-bh/2)}" width="${r1(bd)}" height="${r1(bh)}"/><rect x="${r1(W-m-bd)}" y="${r1(cy-bh/2)}" width="${r1(bd)}" height="${r1(bh)}"/><rect x="${m}" y="${r1(cy-sh/2)}" width="${r1(sd)}" height="${r1(sh)}"/><rect x="${r1(W-m-sd)}" y="${r1(cy-sh/2)}" width="${r1(sd)}" height="${r1(sh)}"/></g>`}
+function arrow(x1,y1,qx,qy,x2,y2,cls,w){const a=Math.atan2(y2-qy,x2-qx),s=3.6;const p1=[x2-s*Math.cos(a-.5),y2-s*Math.sin(a-.5)],p2=[x2-s*Math.cos(a+.5),y2-s*Math.sin(a+.5)];
+  return `<path class="${cls}" stroke-width="${w}" d="M${r1(x1)} ${r1(y1)} Q${r1(qx)} ${r1(qy)} ${r1(x2)} ${r1(y2)}"/><polygon class="${cls==="eh"?"hi":"mk"}" points="${r1(x2)},${r1(y2)} ${r1(p1[0])},${r1(p1[1])} ${r1(p2[0])},${r1(p2[1])}"/>`}
+(function vf(){const W=200,H=150,m=12,R=rng(7);const P=F433.map(([u,v])=>[r1(m+u*(W-2*m)),r1(m+v*(H-2*m))]);let s=pitch(W,H,m);
+  // pass clusters as fanned arrows
+  [[6,9,"eh"],[5,8,"ed"],[7,10,"ed"],[2,6,"ed"],[3,6,"ed"]].forEach(([a,b,c],i)=>{for(let k=0;k<3;k++){const ox=(R()-.5)*8,oy=(R()-.5)*8;const [x1,y1]=P[a],[x2,y2]=P[b];s+=arrow(x1+ox,y1+oy,(x1+x2)/2+ox*2,(y1+y2)/2-10+oy,x2+ox*.5,y2+oy*.5,c,c==="eh"?1.6:.9)}});
+  for(let i=0;i<11;i++)for(let j=i+1;j<11;j++){const d=Math.hypot(F433[i][0]-F433[j][0],(F433[i][1]-F433[j][1])*.66);if(d<.3&&R()<.7){const w=r1(.6+R()*2.4);s+=`<line class="ed" stroke-width="${w}" stroke-opacity=".35" x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`}}
+  s+=P.map(([x,y],i)=>`<circle class="${i===6?"mk":"nd"}" cx="${x}" cy="${y}" r="${r1(3.6+R()*3.4)}"/>`).join("");
   document.getElementById("art-vf").innerHTML=s})();
-(function ga(){const W=160,H=110;let s=`<rect class="pf" width="${W}" height="${H}"/>`;
-  const boxes=[["scrape",14],["transform",46],["warehouse",78]];
-  boxes.forEach(([t,y],i)=>{s+=`<rect class="sf" x="10" y="${y}" width="52" height="20" rx="4" stroke="var(--line)"/><circle class="${i===2?"hi":"mk"}" cx="20" cy="${y+10}" r="3"/><text class="tx" x="27" y="${y+12}">${t}</text>`;if(i<2)s+=`<line class="ed" stroke-width="1.2" x1="36" y1="${y+20}" x2="36" y2="${y+32}"/>`});
-  s+=`<path class="eh" stroke-width="1.4" d="M62 88 C 80 88, 78 55, 92 55"/>`;
-  const gx=92,gy=14,gw=60,gh=82;s+=`<g class="pl"><rect x="${gx}" y="${gy}" width="${gw}" height="${gh}"/><rect x="${gx+12}" y="${gy}" width="${gw-24}" height="20"/><rect x="${gx+22}" y="${gy}" width="${gw-44}" height="7"/></g><rect class="mk" x="${gx+25}" y="${gy-2}" width="${gw-50}" height="2"/>`;
-  const R=rng(11);for(let i=0;i<16;i++){const x=gx+gw/2+(R()-.5)*40,y=gy+6+R()*40,goal=R()<.2,r=1.5+R()*4;s+=`<circle class="${goal?"hi":"mk"}" fill-opacity="${goal?1:.3}" cx="${r1(x)}" cy="${r1(y)}" r="${r1(r)}"/>`}
+(function ga(){const W=200,H=150;let s=`<rect class="pf" width="${W}" height="${H}"/>`;const R=rng(11);
+  const stages=[["scrape",22],["transform",52],["warehouse",82],["analyst",112]];
+  stages.forEach(([t,y],i)=>{s+=`<rect class="sf" x="12" y="${y}" width="52" height="20" rx="5" stroke="var(--pline)"/><circle class="${i===3?"hi":"mk"}" cx="22" cy="${y+10}" r="3.2"/><text class="tx" x="29" y="${y+12}">${t}</text>`;if(i<3)s+=`<line class="ed" stroke-width="1.4" x1="38" y1="${y+20}" x2="38" y2="${y+30}"/>`});
+  s+=`<path class="eh" stroke-width="1.6" d="M64 92 C 74 92, 72 75, 80 75"/>`;
+  // 18-panel dashboard: 6 x 3 mini panels
+  const gx=80,gy=18,cw=18.5,ch=37,gap=1.6;
+  for(let r=0;r<3;r++)for(let c=0;c<6;c++){const x=gx+c*(cw+gap),y=gy+r*(ch+gap);s+=`<rect class="sf" x="${r1(x)}" y="${r1(y)}" width="${cw}" height="${ch}" rx="2" stroke="var(--pline)" stroke-width=".6"/>`;
+    const k=(r*6+c)%4;
+    if(k===0){for(let b=0;b<4;b++){const h=4+R()*20;s+=`<rect class="${b===2?"hi":"mk"}" fill-opacity=".8" x="${r1(x+2.5+b*3.6)}" y="${r1(y+ch-3-h)}" width="2.6" height="${r1(h)}"/>`}}
+    else if(k===1){let d=`M${r1(x+2)} ${r1(y+ch*.7)}`;for(let p=1;p<=6;p++)d+=` L${r1(x+2+p*2.4)} ${r1(y+6+R()*(ch-12))}`;s+=`<path class="ed" stroke-width=".9" d="${d}"/>`}
+    else if(k===2){s+=`<rect class="ln" x="${r1(x+2)}" y="${r1(y+4)}" width="${cw-4}" height="${ch-8}" stroke-width=".5"/>`;for(let p=0;p<5;p++)s+=`<circle class="${R()<.25?"hi":"mk"}" fill-opacity=".7" cx="${r1(x+4+R()*(cw-8))}" cy="${r1(y+6+R()*(ch-12))}" r="${r1(.8+R()*1.6)}"/>`}
+    else{const cx=x+cw/2,cy=y+ch/2,rr=6;s+=`<circle class="ln" cx="${r1(cx)}" cy="${r1(cy)}" r="${rr}" stroke-width=".5"/>`;let pts=[];for(let p=0;p<6;p++){const a=p/6*6.283-1.57,v=.35+R()*.65;pts.push(`${r1(cx+Math.cos(a)*rr*v)},${r1(cy+Math.sin(a)*rr*v)}`)}s+=`<polygon class="mk" fill-opacity=".35" stroke="var(--turf)" stroke-width=".6" points="${pts.join(" ")}"/>`}}
+  s+=`<text class="tx" x="${gx}" y="140">18-panel tactical dashboard</text>`;
   document.getElementById("art-ga").innerHTML=s})();
-
-(function ha(){const W=160,H=110;let s=`<rect class="pf" width="${W}" height="${H}"/>`;
-  const pts=[[22,24],[58,18],[94,26],[132,22],[128,62],[92,70],[56,62],[24,86]];
-  let d=`M${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<pts.length;i++){const [x0,y0]=pts[i-1],[x,y]=pts[i];d+=` Q${(x0+x)/2} ${(y0+y)/2+(i%2?-10:10)} ${x} ${y}`}
-  s+=`<path class="ed" stroke-width="1.6" stroke-dasharray="3 3" d="${d}"/>`;
-  pts.forEach(([x,y],i)=>{const done=i<5;s+=`<circle class="${i===4?"hi":done?"mk":"nd"}" cx="${x}" cy="${y}" r="7"/><text class="tx" x="${x}" y="${y+2}" text-anchor="middle" style="fill:${done||i===4?"var(--surface)":"var(--muted)"};font-size:7px">${i+1}</text>`});
-  s+=`<text class="tx" x="8" y="104">import → question → charts → tests → conclusions → background → read-through → export</text>`;
+(function ha(){const W=200,H=150;let s=`<rect class="pf" width="${W}" height="${H}"/>`;
+  const labels=["import","question","charts","tests","conclude","background","read","export"];
+  const pts=[[28,34],[72,26],[118,36],[164,28],[160,82],[114,92],[68,84],[30,116]];
+  let d=`M${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<pts.length;i++){const [x0,y0]=pts[i-1],[x,y]=pts[i];d+=` Q${(x0+x)/2} ${(y0+y)/2+(i%2?-14:14)} ${x} ${y}`}
+  s+=`<path class="ed" stroke-width="2" stroke-dasharray="4 4" d="${d}"/>`;
+  pts.forEach(([x,y],i)=>{const done=i<4,cur=i===4;s+=`<circle class="${cur?"hi":done?"mk":"nd"}" cx="${x}" cy="${y}" r="9"/><text x="${x}" y="${y+3}" text-anchor="middle" style="font-family:var(--mono);font-size:8px;fill:${done||cur?"var(--surface)":"var(--muted)"}">${i+1}</text><text class="tx" x="${x}" y="${y+18}" text-anchor="middle">${labels[i]}</text>`});
+  s+=`<text class="tx" x="12" y="142">one step per request · judgement stays with the analyst</text>`;
   document.getElementById("art-ha").innerHTML=s})();
 
-/* ---------- hero: passing network that builds itself ---------- */
+/* ---------- hero: passing network that builds itself, at night ---------- */
 (function hero(){
   const cv=document.getElementById("hero");if(!cv||!cv.getContext)return;const ctx=cv.getContext("2d");
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -266,31 +378,34 @@ function pitch(W,H,m){const cx=W/2,cy=H/2,w=W-2*m,h=H-2*m,bd=w*.157,bh=h*.593;
   const E=new Map();const key=(a,b)=>a<b?a+"-"+b:b+"-"+a;
   const nbr=nodes.map((n,i)=>nodes.map((m,j)=>j).filter(j=>j!==i&&Math.hypot(nodes[i].u-nodes[j].u,(nodes[i].v-nodes[j].v)*.66)<.32));
   let W=0,H=0,col={},frame=0,from=0,to=6,t=0,shot=null,popup=null;const trail=[];
-  function readCols(){const cs=getComputedStyle(document.documentElement);["pitch","pline","turf","amber","surface","fg"].forEach(k=>col[k]=cs.getPropertyValue("--"+k).trim())}
+  function readCols(){const cs=getComputedStyle(document.documentElement);col={bg:cs.getPropertyValue("--night-2").trim(),line:cs.getPropertyValue("--nline").trim(),grass:cs.getPropertyValue("--grass").trim(),flood:cs.getPropertyValue("--flood").trim(),chalk:cs.getPropertyValue("--chalk").trim(),night:cs.getPropertyValue("--night").trim()}}
   function size(){const dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;if(!W||!H)return;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
-  const M=()=>Math.max(10,W*.04);
+  const M=()=>Math.max(12,W*.045);
   function pos(i,time){const n=nodes[i],m=M(),j=reduce?0:1;return[m+n.u*(W-2*m)+Math.sin(time*.0011+n.ph)*2.5*j,m+n.v*(H-2*m)+Math.cos(time*.0009+n.ph)*2.5*j]}
   function nextPass(){from=to;const opts=nbr[from];const fwd=opts.filter(j=>nodes[j].u>=nodes[from].u-.05);const pool=(Math.random()<.7&&fwd.length?fwd:opts);to=pool[Math.floor(Math.random()*pool.length)];t=0}
   function arrive(){nodes[to].touch=Math.min(9,nodes[to].touch+1);const k=key(from,to);E.set(k,Math.min(10,(E.get(k)||0)+1))}
-  function drawPitch(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle=col.pitch;ctx.fillRect(0,0,W,H);ctx.strokeStyle=col.pline;ctx.lineWidth=1.2;ctx.strokeRect(m,m,w,h);ctx.beginPath();ctx.moveTo(W/2,m);ctx.lineTo(W/2,H-m);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H/2,h*.13,0,7);ctx.stroke();
+  function drawPitch(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle=col.bg;ctx.fillRect(0,0,W,H);
+    for(let s=0;s<10;s++){if(s%2){ctx.fillStyle="rgba(91,195,145,.035)";ctx.fillRect(m+s*w/10,m,w/10,h)}}
+    const g=ctx.createRadialGradient(W*.15,-H*.2,0,W*.15,-H*.2,W*.9);g.addColorStop(0,"rgba(242,165,65,.10)");g.addColorStop(1,"rgba(242,165,65,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle=col.line;ctx.lineWidth=1.4;ctx.strokeRect(m,m,w,h);ctx.beginPath();ctx.moveTo(W/2,m);ctx.lineTo(W/2,H-m);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H/2,h*.13,0,7);ctx.stroke();
     const bd=w*.157,bh=h*.593,sd=w*.052,sh=h*.27;[[m,1],[W-m,-1]].forEach(([x,d])=>{ctx.strokeRect(d>0?x:x-bd,H/2-bh/2,bd,bh);ctx.strokeRect(d>0?x:x-sd,H/2-sh/2,sd,sh)})}
   function draw(time){
-    if(frame++%30===0)readCols();drawPitch();
-    E.forEach((c,k)=>{const [a,b]=k.split("-").map(Number);const p=pos(a,time),q=pos(b,time);ctx.strokeStyle=col.turf;ctx.globalAlpha=.25+c*.05;ctx.lineWidth=.8+c*.55;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke()});ctx.globalAlpha=1;
-    trail.forEach((p,i)=>{ctx.fillStyle=col.amber;ctx.globalAlpha=(i+1)/trail.length*.5;ctx.beginPath();ctx.arc(p[0],p[1],2,0,7);ctx.fill()});ctx.globalAlpha=1;
-    nodes.forEach((n,i)=>{const [x,y]=pos(i,time);const r=Math.max(7,Math.min(W,H)*.022)+n.touch*1.1;ctx.fillStyle=col.surface;ctx.strokeStyle=col.turf;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=col.fg;ctx.font=`500 ${Math.round(r*.9)}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(NUM[i],x,y+.5)});
+    if(frame++%60===0)readCols();drawPitch();
+    E.forEach((c,k)=>{const [a,b]=k.split("-").map(Number);const p=pos(a,time),q=pos(b,time);ctx.strokeStyle=col.grass;ctx.globalAlpha=.18+c*.06;ctx.lineWidth=.8+c*.6;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke()});ctx.globalAlpha=1;
+    trail.forEach((p,i)=>{ctx.fillStyle=col.flood;ctx.globalAlpha=(i+1)/trail.length*.55;ctx.beginPath();ctx.arc(p[0],p[1],2.2,0,7);ctx.fill()});ctx.globalAlpha=1;
+    nodes.forEach((n,i)=>{const [x,y]=pos(i,time);const r=Math.max(8,Math.min(W,H)*.024)+n.touch*1.15;ctx.fillStyle=col.night;ctx.strokeStyle=col.grass;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=col.chalk;ctx.font=`500 ${Math.round(r*.9)}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(NUM[i],x,y+.5)});
     let bx,by;
     if(shot){const p=pos(shot.from,time);const e=Math.min(1,shot.t);bx=p[0]+(shot.gx-p[0])*e;by=p[1]+(shot.gy-p[1])*e}
     else{const p=pos(from,time),q=pos(to,time);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;bx=p[0]+(q[0]-p[0])*e;by=p[1]+(q[1]-p[1])*e}
-    ctx.fillStyle=col.amber;ctx.beginPath();ctx.arc(bx,by,4.5,0,7);ctx.fill();
-    if(popup){ctx.globalAlpha=Math.min(1,popup.life);ctx.fillStyle=col.amber;ctx.font=`800 ${Math.round(H*.07)}px "Big Shoulders Display",Impact,sans-serif`;ctx.textAlign="right";ctx.fillText(popup.text,W-M()-8,M()+H*.07);ctx.globalAlpha=1}
+    ctx.shadowColor=col.flood;ctx.shadowBlur=12;ctx.fillStyle=col.flood;ctx.beginPath();ctx.arc(bx,by,5,0,7);ctx.fill();ctx.shadowBlur=0;
+    if(popup){ctx.globalAlpha=Math.min(1,popup.life);ctx.fillStyle=col.flood;ctx.font=`900 ${Math.round(H*.085)}px "Big Shoulders Display",Impact,sans-serif`;ctx.textAlign="right";ctx.fillText(popup.text,W-M()-8,M()+H*.08);ctx.globalAlpha=1}
     return[bx,by]}
   if(reduce){const run=()=>{size();if(!W)return;readCols();for(let k=0;k<45;k++){nextPass();arrive()}draw(0)};run();new ResizeObserver(run).observe(cv);return}
   let last=performance.now();
   function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!W){size();requestAnimationFrame(step);return}
     if(shot){shot.t+=dt*1.6;if(shot.t>=1&&!popup){popup={text:`xG ${shot.xg.toFixed(2)}`,life:1.6}}if(popup){popup.life-=dt*.8;if(popup.life<=0){popup=null;shot=null;from=6;to=6;nextPass()}}}
     else{t+=dt/0.75;if(t>=1){arrive();if(to>=8&&Math.random()<.35){const m=M();const gy=H/2+(Math.random()-.5)*(H-2*m)*.16;const d=1-nodes[to].u;shot={from:to,t:0,gx:W-m,gy,xg:Math.max(.03,Math.min(.6,.7*Math.exp(-d*6)+Math.random()*.08))}}else nextPass()}}
-    const b=draw(now);trail.push(b);if(trail.length>12)trail.shift();requestAnimationFrame(step)}
+    const b=draw(now);trail.push(b);if(trail.length>14)trail.shift();requestAnimationFrame(step)}
   size();readCols();new ResizeObserver(size).observe(cv);requestAnimationFrame(step);
 })();
 </script>

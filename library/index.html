@@ -30,16 +30,15 @@
   --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}
 
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
 a{color:var(--turf)}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 
 /* ---------- Night hero (same as the lab home page) ---------- */
 html{scroll-behavior:smooth}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden}
+.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
 .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
@@ -58,16 +57,19 @@ nav.top a.lnk:hover,nav.top a.lnk[aria-current]{color:var(--chalk)}
 h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
 h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
 h1 .l3{display:block;color:var(--grass)}
-.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px;line-height:1.55}
+.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
 .lede b{color:var(--chalk);font-weight:600}
+.lede{display:grid}.lede>span{grid-area:1/1}.lede .sizer{visibility:hidden}
+.cta a{width:214px;justify-content:center}
 .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 .cta a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
 .cta .go{background:var(--flood);color:#1a1205}
 .cta .go:hover{filter:brightness(1.08)}
 .cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
 .cta .gh:hover{border-color:var(--chalk)}
-.scoreboard{display:grid;grid-template-columns:repeat(4,auto);gap:1px;margin-top:34px;background:var(--nline);border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
-.scoreboard div{padding:10px 18px;background:#0a1510}
+.scoreboard{display:flex;gap:0;margin-top:34px;border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
+.scoreboard div{padding:10px 18px;border-right:1px solid var(--nline);background:rgba(7,17,12,.6)}
+.scoreboard div:last-child{border-right:0}
 .scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
 .scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
 figure.net{margin:0;min-width:0;position:relative}
@@ -78,7 +80,7 @@ figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:
 #list{scroll-margin-top:72px}
 
 /* Filter bar */
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 .bar .wrap{padding-block:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .bar input{flex:1 1 260px;min-width:0;font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -153,10 +155,11 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 footer .wrap{padding-block:22px 44px}
 
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}}
-@media (max-width:520px){.scoreboard{grid-template-columns:repeat(2,auto)}.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}.sec-icon{width:64px;height:36px}.sec-head .count{font-size:28px}}
+@media (max-width:520px){.sec-icon{width:64px;height:36px}.sec-head .count{font-size:28px}}
+@media (max-width:480px){.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.thumb svg{transition:none}.card:hover{transform:none}.card:hover .thumb svg{transform:none}}
 </style>
-<style>html,body{margin:0}body{font-size:14px;padding-top:env(safe-area-inset-top,0px)}</style>
+<style>html,body{margin:0}</style>
 </head>
 <body>
 
@@ -169,9 +172,9 @@ footer .wrap{padding-block:22px 44px}
   </div></nav>
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">Curated by Mark Busani · Perth, Western Australia</div>
+      <div class="eyebrow">Mark Busani · Perth, Western Australia</div>
       <h1>Football<span class="l2">Analytics</span><span class="l3">Library</span></h1>
-      <p class="lede">The articles, reports, tools, repos and papers I'm learning from, in one place. <b>Every card names its author or publisher and links straight to the original.</b></p>
+      <p class="lede"><span>The reports, papers and tools I'm learning from on the way into football analytics. <b>Shelved in one place, and credited to the people who made them.</b></span><span class="sizer" aria-hidden="true">The repos, notebooks and people I'm learning from on the way into football analytics. <b>Forked into my lab, and credited to the people who built them.</b></span></p>
       <div class="cta">
         <a class="go" href="#list">Browse the shelves ↓</a>
         <a class="gh" href="../">← Back to the lab</a>
@@ -180,7 +183,7 @@ footer .wrap{padding-block:22px 44px}
     </div>
     <figure class="net">
       <canvas id="hero" role="img" aria-label="Animated illustration of floodlit library shelves, one book per resource, with a ball passed from book to book"></canvas>
-      <figcaption><span>Illustration: the library shelves at night</span><span>one book per resource · colour = section</span><span><i></i>ball passed to the next read</span></figcaption>
+      <figcaption><span>Illustration: the library shelves under light</span><span>each book is a resource · colour = section</span><span><i></i>pass to next read</span></figcaption>
     </figure>
   </div>
   <div class="touchline" aria-hidden="true"></div>
@@ -188,7 +191,7 @@ footer .wrap{padding-block:22px 44px}
 
 <div class="bar"><div class="wrap">
   <label for="q" style="position:absolute;left:-9999px">Search resources</label>
-  <input id="q" type="search" placeholder="Search titles, authors and tags: xG, passing, SQL…">
+  <input id="q" type="search" placeholder="Search titles, authors and tags: xG, passing, AFL…">
   <div class="chips" id="chips" role="group" aria-label="Filter by section"></div>
 </div></div>
 
@@ -201,8 +204,9 @@ const G = id => "";
 const SECTIONS = [
   {id:"articles", name:"Articles & newsletters", icon:"shotmap"},
   {id:"reports",  name:"Reports & webinars",    icon:"heatmap"},
-  {id:"tools",    name:"Tools & practice",      icon:"radar"},
-  {id:"repos",    name:"GitHub repos",          icon:"code", note:"Forked into the lab with full credit. See the lab home page for licences and my forks."},
+  {id:"tools",    name:"Tools & practice",      icon:"radar", menu:false},
+  {id:"repos",    name:"GitHub repos",          icon:"code", menu:false, note:"Forked into the lab with full credit. See the lab home page for licences and my forks."},
+  {id:"kaggle",   name:"Kaggle datasets & notebooks", icon:"heatmap", note:"Hosted on Kaggle and linked, not copied. Each card names the Kaggle user who shared it and, where different, who made the underlying data."},
   {id:"code",     name:"Papers",                icon:"curve"}
 ];
 const R = [
@@ -249,12 +253,27 @@ const R = [
   {s:"tools", d:"2026-10-26", t:"Vision AI", src:"visionaifootballintellige.tech", note:"A decision-intelligence platform that evaluates every on-ball action.", tags:["AI","tool"], url:"https://www.visionaifootballintellige.tech/"},
   {s:"tools", d:"2026-10-20", t:"SQL Sports Analytics", src:"sqlsportsanalytics.com", note:"SQL challenges on real sports data, with XP, ranks and certificates.", tags:["SQL","practice"], url:"https://sqlsportsanalytics.com",
     sub:[{t:"SQL Sports Analytics on YouTube", d:"", url:"https://www.youtube.com/@SQLSportsAnalytics"}]},
+  {s:"tools", d:"2026-10-31", t:"fitzRoy", src:"R package · James Day, Robert Nguyen, Oscar Lane and contributors", note:"The go-to R package for AFL data: it scrapes and cleans match, player and fixture data from AFL Tables, Footywire and Squiggle. MIT licence.", tags:["AFL","R","practice"], url:"https://jimmyday12.github.io/fitzRoy/",
+    sub:[{t:"Source code on GitHub (jimmyday12/fitzRoy)", d:"", url:"https://github.com/jimmyday12/fitzRoy"},{t:"fitzRoy on CRAN", d:"v1.7.0", url:"https://cran.r-project.org/package=fitzRoy"}]},
   {s:"tools", d:"2026-10-19", t:"MyGamePlan (MGPT)", src:"mygameplan.ai", note:"Ask questions about a team, opponent or player and get answers with video clips; templates build opponent reports.", tags:["video","AI","scouting"], url:"https://www.mygameplan.ai/"},
 
   // GitHub repos (forked into the lab)
   {s:"repos", d:"2026-10-31", t:"Football-analytics", src:"GitHub · Victoria Friss de Kereki (@vickyfriss)", note:"Notebooks on xG and expected-pass models, wage vs performance, pass clustering, passing networks and league simulations. No licence file: all rights reserved by the author.", tags:["GitHub","Python","xG"], url:"https://github.com/vickyfriss/Football-analytics"},
   {s:"repos", d:"2026-10-30", t:"gunners-analysis", src:"GitHub · Muhammad Atef (@Muhammadatef)", note:"An automated Arsenal analytics pipeline: Airflow, a PostgreSQL warehouse, 18-panel dashboards and an AI analyst. MIT licence.", tags:["GitHub","Python","pipeline"], url:"https://github.com/Muhammadatef/gunners-analysis"},
   {s:"repos", d:"2026-10-29", t:"human-agentic-data-analysis", src:"GitHub · Vivid Insights · David Sumpter (@soccermatics)", note:"A template workspace for doing a data analysis with Claude Code one step at a time. CC BY 4.0.", tags:["GitHub","Python","AI"], url:"https://github.com/Vivid-Insights/human-agentic-data-analysis"},
+
+  // Kaggle datasets & notebooks
+  {s:"kaggle", d:"2026-10-31", t:"Soccer match event dataset (Wyscout)", src:"Kaggle · shared by aleespinosa · data by Pappalardo et al.", note:"About 1,941 matches and 3.25 million events: Europe's five big leagues in 2017/18, the 2018 World Cup and Euro 2016. The authors released it under CC BY 4.0, so credit them when you use it.", tags:["dataset","passing","xG"], url:"https://www.kaggle.com/datasets/aleespinosa/soccer-match-event-dataset",
+    sub:[{t:"The original paper: A public data set of spatio-temporal match events in soccer competitions", d:"2019", url:"https://pmc.ncbi.nlm.nih.gov/articles/PMC6817871"}]},
+  {s:"kaggle", d:"2026-10-31", t:"Soccermatics for Python – 1", src:"Kaggle notebook · aleespinosa", note:"A Python notebook named after David Sumpter's Soccermatics course, working through football event data step by step.", tags:["notebook","Python","passing"], url:"https://www.kaggle.com/code/aleespinosa/soccermatics-for-python-1"},
+  {s:"kaggle", d:"2026-10-31", t:"StatsBomb: FIFA World Cup 2018 event data", src:"Kaggle · shared by ekrembayar · data by StatsBomb", note:"StatsBomb's free event data for the 2018 World Cup, with an introductory notebook to get started.", tags:["dataset","World Cup","StatsBomb"], url:"https://www.kaggle.com/datasets/ekrembayar/statsbomb-football-event-data",
+    sub:[{t:"FIFA World Cup: StatsBomb event data introduction (notebook)", d:"", url:"https://www.kaggle.com/code/ekrembayar/fifa-world-cup-statsbomb-event-data-introduction"}]},
+  {s:"kaggle", d:"2026-10-31", t:"StatsBomb with Kloppy", src:"Kaggle notebook · ollibolli", note:"Loading StatsBomb data with kloppy, the standard Python library for reading match data from different providers.", tags:["notebook","Python","StatsBomb"], url:"https://www.kaggle.com/code/ollibolli/statsbomb-with-kloppy"},
+  {s:"kaggle", d:"2026-10-31", t:"Metrica Sports tracking data", src:"Kaggle · shared by ekrembayar · data by Metrica Sports", note:"Player and ball positions for Metrica's sample matches: the step up from event data to tracking data. Pairs with the pitch control notebook below.", tags:["dataset","tracking data"], url:"https://www.kaggle.com/datasets/ekrembayar/metrica-sports-football-tracking-data",
+    sub:[{t:"Pitch Control Model (notebook by andrewyyip)", d:"", url:"https://www.kaggle.com/code/andrewyyip/pitch-control-model"}]},
+  {s:"kaggle", d:"2026-10-31", t:"xG model notebooks", src:"Kaggle notebooks · uzdavinys · usamawaheed", note:"Two hands-on builds of an expected goals model. Read them alongside the xG biases paper under Papers.", tags:["notebook","xG","Python"], url:"https://www.kaggle.com/code/uzdavinys/xg-expected-goals-with-simple-sklearn-models",
+    sub:[{t:"xG (expected goals) with simple sklearn models · uzdavinys", d:"", url:"https://www.kaggle.com/code/uzdavinys/xg-expected-goals-with-simple-sklearn-models"},{t:"Expected Goals (xG) Model · usamawaheed", d:"", url:"https://www.kaggle.com/code/usamawaheed/expected-goals-xg-model"}]},
+  {s:"kaggle", d:"2026-10-31", t:"Football Data: Expected Goals and Other Metrics", src:"Kaggle · slehkyi", note:"Team xG and related metrics for the top European leagues, small enough to practise SQL and pandas on.", tags:["dataset","xG","SQL"], url:"https://www.kaggle.com/datasets/slehkyi/extended-football-stats-for-european-leagues-xg"},
 
   // Papers
   {s:"code", d:"2026-10-27", t:"Biases in Expected Goals Models Confound Finishing Ability", src:"Jesse Davis & Pieter Robberechts (2024) · arXiv 2401.09940", note:"xG can absorb elite finishers' skill when they dominate the training data; the paper proposes multi-calibrated baselines.", tags:["paper","xG"], url:"https://arxiv.org/abs/2401.09940"}
@@ -340,7 +359,7 @@ function kindFor(r){if(r.art&&DRAW[r.art])return r.art;const T=(r.tags||[]).map(
 function svg(kind,seed,label){return `<svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(label)}">${DRAW[kind](rng(seed))}</svg>`}
 const KLABEL={shotmap:"Shot map illustration",passnet:"Passing network illustration",heatmap:"Heatmap illustration",radar:"Radar chart illustration",bars:"Bar chart illustration",neural:"Neural network illustration",oval:"AFL oval illustration",formation:"Formation and runs illustration",code:"Code editor illustration",broadcast:"Video illustration",curve:"xG curve illustration"};
 function badgeFor(r){if(r.cat)return r.cat;const T=(r.tags||[]).map(t=>t.toLowerCase());
-  if(T.includes("webinar"))return"Webinar"; if(T.includes("video"))return"Video"; if(T.includes("paper"))return"Paper"; if(T.includes("github"))return"Repo"; if(T.includes("notebook"))return"Notebook"; if(T.includes("newsletter"))return"Newsletter"; if(T.includes("hackathon"))return"Event";
+  if(T.includes("webinar"))return"Webinar"; if(T.includes("video"))return"Video"; if(T.includes("paper"))return"Paper"; if(T.includes("github"))return"Repo"; if(T.includes("notebook"))return"Notebook"; if(T.includes("dataset"))return"Dataset"; if(T.includes("newsletter"))return"Newsletter"; if(T.includes("hackathon"))return"Event";
   return {training:"Practice",articles:"Article",reports:"Report",courses:"Course",tools:"Tool",repos:"Repo",code:"Code"}[r.s]||"Link"}
 
 /* ---------- Rendering ---------- */
@@ -348,19 +367,18 @@ const fmt = iso => iso ? new Date(iso+"T00:00:00").toLocaleDateString("en-AU",{d
 const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let active="all", COURSES=[], META=null, dbState="ready";
 try{ active = localStorage.getItem("fal-lib-filter") || "all"; }catch(e){}
-if(active!=="all"&&!SECTIONS.some(s=>s.id===active)) active="all";
+if(active!=="all"&&!SECTIONS.some(s=>s.id===active&&s.menu!==false)) active="all";
 const allItems = () => R.concat(COURSES);
 
 function counts(){
   const items=allItems(), subs=items.reduce((n,r)=>n+(r.sub?r.sub.length:0),0);
   document.getElementById("stats").innerHTML=[
-    [items.length,"resources"],[subs,"linked reads"],[items.filter(r=>r.s==="repos").length,"repos"],
-    [new Set(items.map(r=>r.src.split(" · ")[0])).size,"sources"]
+    [items.length,"on the shelf"],[new Set(items.map(r=>r.src.split(" · ")[0])).size,"creators credited"],[SECTIONS.length,"sections to browse"]
   ].map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join("");
 }
 function chips(){
   const items=allItems();
-  const all=[{id:"all",name:"All",n:items.length},...SECTIONS.map(s=>({id:s.id,name:s.name,n:items.filter(r=>r.s===s.id).length}))];
+  const all=[{id:"all",name:"All",n:items.length},...SECTIONS.filter(s=>s.menu!==false).map(s=>({id:s.id,name:s.name,n:items.filter(r=>r.s===s.id).length}))];
   const el=document.getElementById("chips");
   el.innerHTML=all.map(s=>`<button class="chip" data-id="${s.id}" aria-pressed="${active===s.id}">${esc(s.name)}<span class="n">${s.n}</span></button>`).join("");
 }
@@ -413,7 +431,7 @@ refresh();
 (function hero(){
   const cv=document.getElementById("hero");if(!cv||!cv.getContext)return;const ctx=cv.getContext("2d");
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const SECCOL={articles:"#5bc391",reports:"#f2a541",tools:"#e9f2ec",repos:"#2f8f63",code:"#f6d29a"};
+  const SECCOL={articles:"#5bc391",reports:"#f2a541",tools:"#e9f2ec",repos:"#2f8f63",kaggle:"#8fc7e0",code:"#f6d29a"};
   const SECNAME=Object.fromEntries(SECTIONS.map(s=>[s.id,s.name]));
   const order=SECTIONS.map(s=>s.id);
   const R0=rng("shelves");

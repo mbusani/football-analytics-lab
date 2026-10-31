@@ -60,6 +60,8 @@ h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
 h1 .l3{display:block;color:var(--grass)}
 .lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
 .lede b{color:var(--chalk);font-weight:600}
+.lede{display:grid}.lede>span{grid-area:1/1}.lede .sizer{visibility:hidden}
+.cta a{width:214px;justify-content:center}
 .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
 .cta a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
 .cta .go{background:var(--flood);color:#1a1205}
@@ -174,7 +176,7 @@ footer a{color:var(--chalk)}
     <div>
       <div class="eyebrow">Mark Busani · Perth, Western Australia</div>
       <h1>Football<span class="l2">Analytics</span><span class="l3">Lab</span></h1>
-      <p class="lede">The repos, notebooks and people I'm learning from on the way into football analytics. <b>Forked into my lab, and credited to the people who built them.</b></p>
+      <p class="lede"><span>The repos, notebooks and people I'm learning from on the way into football analytics. <b>Forked into my lab, and credited to the people who built them.</b></span><span class="sizer" aria-hidden="true">The reports, papers and tools I'm learning from on the way into football analytics. <b>Shelved in one place, and credited to the people who made them.</b></span></p>
       <div class="cta">
         <a class="go" href="#repos">Explore the repos ↓</a>
         <a class="gh" href="library/">Browse the library →</a>

@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A curated football analytics library: articles, reports, tools, repos and papers, each credited to its author.">
+<title>Library · Football Analytics Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a matchday analysis programme. Live passing-network hero, three "start here" picks,
+   then sections of cards, each fronted by an original pitch-data illustration drawn from its topic. */
+:root{
+  --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
+  --turf:#1c6948; --turf-soft:#e0ede5; --amber:#d47f17; --amber-soft:#fbebd4;
+  --pitch:#e4eee6; --pline:#a3bfaf;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--turf)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* Hero */
+.hero{border-bottom:3px solid var(--fg)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:center;padding-block:44px 36px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,9vw,104px);line-height:.86;margin:12px 0 18px;text-transform:uppercase;letter-spacing:.005em}
+h1 span{color:var(--turf);display:block}
+.lede{max-width:52ch;color:var(--muted);margin:0;font-size:17px}
+.stats{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:4px 28px;margin-top:26px}
+.stat b{display:block;font-family:var(--display);font-weight:800;font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.stat.alert b{color:var(--amber)}
+.hero-fig{margin:0;min-width:0}
+.hero-fig canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:12px;background:var(--pitch);border:1px solid var(--line)}
+.hero-fig figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 16px}
+.hero-fig figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:6px;vertical-align:middle}
+
+/* Filter bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .wrap{padding-block:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar input{flex:1 1 260px;min-width:0;font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.04em;text-transform:uppercase;padding:5px 13px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--fg);cursor:pointer}
+.chip:hover{border-color:var(--turf)}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip .n{font-family:var(--mono);font-size:11px;opacity:.7;margin-left:5px}
+
+main .wrap{padding-block:12px 72px}
+section{margin-top:44px}
+.sec-head{display:flex;align-items:center;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--fg)}
+.sec-icon{width:88px;height:50px;flex:none;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--pitch)}
+.sec-icon svg{display:block;width:100%;height:100%}
+.sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,38px);line-height:1;text-transform:uppercase;margin:0;letter-spacing:.01em}
+.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:800;font-size:38px;line-height:1;color:var(--line)}
+.sec-note{color:var(--muted);font-size:15px;margin:10px 0 0;max-width:70ch}
+
+/* Featured */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:18px}
+.feat .ctitle{font-family:var(--display);font-weight:800;font-size:28px;line-height:1;text-transform:uppercase;letter-spacing:.01em}
+.feat .why{font-family:var(--mono);font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:.06em}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:18px;margin-top:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:border-color .2s,transform .25s}
+.card:hover{border-color:var(--turf);transform:translateY(-2px)}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--pitch);border-bottom:1px solid var(--line);overflow:hidden}
+.thumb svg{display:block;width:100%;height:100%;transition:transform .5s ease}
+.card:hover .thumb svg{transform:scale(1.05)}
+.badge{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;background:var(--surface);color:var(--fg);padding:3px 8px;border-radius:4px;border:1px solid var(--line)}
+.flag{position:absolute;right:10px;top:10px;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;background:var(--amber);color:var(--bg);padding:3px 8px;border-radius:4px;font-weight:500}
+.cbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.cmeta{font-family:var(--mono);font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+.ctitle{font-weight:600;font-size:17px;line-height:1.3;margin:0;overflow-wrap:anywhere;text-wrap:balance}
+.ctitle a{color:var(--fg);text-decoration:none}
+.ctitle a:hover{color:var(--turf)}
+.note{margin:0;font-size:15px;color:var(--fg);opacity:.86}
+.sub{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:2px}
+.sub li{display:flex;gap:10px;align-items:baseline;padding:5px 0;border-top:1px dashed var(--line);font-size:14.5px}
+.sub li a{color:var(--fg);text-decoration:none;flex:1;min-width:0}
+.sub li a:hover{color:var(--turf);text-decoration:underline}
+.sub .d{font-family:var(--mono);font-size:10.5px;color:var(--muted);flex:none}
+.cfoot{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:4px;background:var(--turf-soft);color:var(--turf);border:0;cursor:pointer}
+.tag:hover{background:var(--turf);color:var(--surface)}
+.links{display:flex;gap:12px;font-size:14px;font-weight:600}
+.links a{text-decoration:none;border-bottom:1.5px solid currentColor}
+.links a.email{color:var(--muted)}
+@media (min-width:760px){
+  .card.wide{grid-column:span 2;flex-direction:row}
+  .card.wide .thumb{flex:0 0 40%;aspect-ratio:auto;border-bottom:0;border-right:1px solid var(--line)}
+}
+.empty{padding:40px 0;color:var(--muted);font-size:17px}
+
+/* SVG illustration classes (every shape gets an explicit fill) */
+.pf{fill:var(--pitch)} .pl{fill:none;stroke:var(--pline);stroke-width:1}
+.mk{fill:var(--turf)} .hi{fill:var(--amber)} .sf{fill:var(--surface)}
+.mo{fill:var(--turf);fill-opacity:.16;stroke:var(--turf);stroke-width:.9}
+.ed{fill:none;stroke:var(--turf);stroke-linecap:round}
+.eh{fill:none;stroke:var(--amber);stroke-linecap:round}
+.nd{fill:var(--surface);stroke:var(--turf);stroke-width:1.3}
+.op{fill:none;stroke:var(--muted);stroke-width:1}
+.tx{fill:var(--muted);font-family:var(--mono);font-size:6px}
+.cm{fill:var(--muted);fill-opacity:.4}
+.rf{fill:var(--turf);fill-opacity:.22;stroke:var(--turf);stroke-width:1.4;stroke-linejoin:round}
+.rg{fill:none;stroke:var(--pline);stroke-width:.8}
+.ra{fill:none;stroke:var(--amber);stroke-width:1.2;stroke-dasharray:3 2}
+.ax{fill:none;stroke:var(--muted);stroke-width:.8}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer .wrap{padding-block:22px 44px}
+
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr;gap:24px;padding-block:32px 28px}}
+@media (max-width:520px){.stats{grid-template-columns:repeat(2,auto)}.sec-icon{width:64px;height:36px}.sec-head .count{font-size:28px}}
+@media (prefers-reduced-motion:reduce){.card,.thumb svg{transition:none}.card:hover{transform:none}.card:hover .thumb svg{transform:none}}
+</style>
+<style>html,body{margin:0}body{font-size:14px;padding-top:env(safe-area-inset-top,0px)}</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap hero-grid">
+  <div class="hero-copy">
+    <div class="eyebrow"><a href="../" style="color:inherit">← Football Analytics Lab</a> · curated by Mark Busani</div>
+    <h1>Football <span>Analytics</span> Library</h1>
+    <p class="lede">The articles, reports, tools, repos and papers I'm learning from, in one place. Every card names its author or publisher and links straight to the original.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+  <figure class="hero-fig">
+    <canvas id="hero" role="img" aria-label="Animated illustration of a passing network on a football pitch"></canvas>
+    <figcaption><span>Illustration: a passing network building live</span><span>Node size = touches · line weight = passes</span><span><i></i>Shot with its xG</span></figcaption>
+  </figure>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <label for="q" style="position:absolute;left:-9999px">Search resources</label>
+  <input id="q" type="search" placeholder="Search titles, authors and tags: xG, passing, SQL…">
+  <div class="chips" id="chips" role="group" aria-label="Filter by section"></div>
+</div></div>
+
+<main><div class="wrap" id="list"></div></main>
+
+<footer><div class="wrap">Part of <a href="../">Football Analytics Lab</a> by <a href="https://github.com/mbusani">Mark Busani</a>. This page curates and links to other people's work and claims none of it: every resource belongs to the author or organisation named on its card. Illustrations are original and drawn in the page from each resource's topic. If you're a creator and want anything changed or removed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a>.</div></footer>
+
+<script>
+const G = id => "";
+const SECTIONS = [
+  {id:"articles", name:"Articles & newsletters", icon:"shotmap"},
+  {id:"reports",  name:"Reports & webinars",    icon:"heatmap"},
+  {id:"tools",    name:"Tools & practice",      icon:"radar"},
+  {id:"repos",    name:"GitHub repos",          icon:"code", note:"Forked into the lab with full credit. See the lab home page for licences and my forks."},
+  {id:"code",     name:"Papers",                icon:"curve"}
+];
+const R = [
+  // Articles & newsletters
+  {s:"articles", d:"2026-10-29", t:"How I built a football analytics platform that runs itself, and an AI analyst that cannot make up stats", src:"Medium · Muhamed Fahmy", note:"An automated analytics pipeline with an AI analyst held to its own data. Companion write-up to the gunners-analysis repo.", tags:["AI","pipeline"], url:"https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f"},
+  {s:"articles", d:"2026-10-29", t:"The xG Football Club", src:"Substack · Alex Marin Felices", note:"Plain-language posts on xG, tactics and the maths of the game.", tags:["xG","newsletter"], url:"https://thexgfootballclub.substack.com",
+    sub:[
+      {t:"TI #043: Goals Are Not Random, The Clock Changes the Game", d:"29 Oct 2026"},
+      {t:"Before You Trust xG, You Should Understand Its Biases", d:"27 Oct 2026", url:"https://thexgfootballclub.substack.com/p/before-you-trust-xg-you-should-understand"},
+      {t:"TI #042: Can a Crowd Predict Football Better Than You?", d:"24 Oct 2026"},
+      {t:"What Defines a Player's Tactical Identity?", d:"21 Oct 2026"},
+      {t:"TI #041: The Champions League Table Is Not as Objective as It Looks", d:"17 Oct 2026"}
+    ]},
+  {s:"articles", d:"2026-10-30", t:"Victoria Friss de Kereki", src:"Medium", note:"Data-led pieces using SkillCorner tracking data and passing analysis in Python. Her notebooks are in the lab as the Football-analytics repo.", tags:["passing","tracking data","Python"], url:"https://medium.com/@vickyfrissdekereki",
+    sub:[
+      {t:"What Do Passing Numbers Say About Football Styles Around the World?", d:"30 Oct 2026"},
+      {t:"30 Minutes to 90 Seconds: 4 Fixes to Optimise a Data Processing Pipeline", d:"29 Oct 2026"},
+      {t:"FC Barcelona Tactical Evolution, Part 1: Pass Clustering Analysis", d:"24 Oct 2026"},
+      {t:"FC Barcelona Tactical Evolution, Part 2: Passing Networks", d:"24 Oct 2026"},
+      {t:"Building Passing Networks in Python: A Step-by-Step Guide", d:"24 Oct 2026"},
+      {t:"Men's Ballon d'Or 2026: What Does the Football Data Say?", d:"23 Oct 2026", url:"https://medium.com/p/db9a0f057bfd"},
+      {t:"Women's Ballon d'Or 2026: What Does the Football Data Say?", d:"", url:"https://medium.com/@vickyfrissdekereki/womens-ballon-d-or-2026-what-does-the-football-data-say-c811b90e364e"}
+    ]},
+  {s:"articles", d:"2026-10-24", t:"The geometry of control: short passes in Eredivisie 2025–2026", src:"Medium · Marc Lamberts", note:"A long read on short-passing patterns in the Dutch league.", tags:["passing"], url:"https://medium.com/@marclamberts"},
+  {s:"articles", d:"2026-10-23", t:"Football Data Science newsletter", src:"Bryan McGuire", note:"A weekly email on Fridays when something new is published.", tags:["newsletter","Python"], url:"https://www.footballdatascience.co.uk"},
+  {s:"articles", d:"2026-10-29", t:"FIFA Training Centre newsletter", src:"FIFA", note:"Weekly on Thursdays: coaching sessions plus Technical Study Group analysis. The analytics pieces are under Reports & webinars.", tags:["tactics","newsletter"], url:"https://www.fifatrainingcentre.com/en/"},
+
+  // Reports & webinars
+  {s:"reports", d:"2026-10-26", t:"Starting or Advancing Your Career in Football Analytics", src:"Twelve · webinar recording", note:"Breaking into, or moving up in, football data roles.", tags:["webinar","careers"], url:"https://twelve.football/webinar/starting-or-advancing-your-career-in-football-data"},
+  {s:"reports", d:"2026-10-26", t:"The Most Important Skill for AI Engineers: Evals Explained", src:"YouTube", note:"General AI engineering, not football-specific. Useful if you build an AI analyst.", tags:["video","AI","evals"], url:"https://www.youtube.com/watch?v=MltkRz94SWA"},
+  {s:"reports", d:"2026-10-08", t:"FIFA World Cup 2026 post-tournament report", src:"FIFA Training Centre", note:"A 540-page flipbook covering all 104 matches: build-up, wide rotations, pressing and defensive blocks, with stats and video.", tags:["World Cup","tracking data"], url:"https://www.fifatrainingcentre.com/en/fifa-world-cup-2026/tournament-page--fifa-world-cup-2026.php"},
+  {s:"reports", d:"2026-10-08", t:"Webinar: How teams disrupted defensive blocks", src:"FIFA · Otto Addo & Gilberto Silva", note:"On-demand recording on tactical trends from the 2026 World Cup.", tags:["webinar","World Cup"], url:"https://www.fifatrainingcentre.com/en/fwc26-silva-addo-webinar.php"},
+  {s:"reports", d:"2026-10-08", t:"Webinar: Defending as a platform to attack", src:"FIFA · Pablo Zabaleta & Aron Winter", note:"On-demand recording on turning defensive organisation into attacks.", tags:["webinar","World Cup"], url:"https://www.fifatrainingcentre.com/en/fwc26-zabaleta-winter-webinar.php"},
+  {s:"reports", d:"2026-10-29", t:"The development paths of players at the FIFA World Cup 2026", src:"FIFA TDS × CIES Football Observatory", note:"Profiles, development environments and pathways of every player, including relative-age and debut-age data.", tags:["talent ID","World Cup"], url:"https://www.fifatrainingcentre.com/en/environment/resources/high-performance/the-development-paths-of-players-at-the-fifa-world-cup-2026.php"},
+  {s:"reports", d:"2026-10-29", t:"Offering to receive the ball", src:"FIFA Training Centre", note:"An archive study of off-ball movement and how to analyse it.", tags:["off-ball","tracking data"], url:"https://www.fifatrainingcentre.com/en/game/performance-analysis/football-language-analysis/offering-to-receive.php"},
+  {s:"reports", d:"2026-10-29", t:"The power of 1v1 attacking situations", src:"FIFA TSG · U-17 Women's World Cup 2026", note:"How teams used wide 1v1s to break down defences.", tags:["tactics"], url:"https://www.fifatrainingcentre.com/en/game/tournaments/fu17wwcfu17wwc/2026/the-power-of-1v1-attacking-situations.php"},
+  {s:"reports", d:"2026-10-29", t:"Set plays: Cameroon near-post corners", src:"FIFA Training Centre", note:"Game analysis of attacking set plays, plus a companion piece on Chelsea's short corners.", tags:["set pieces","tactics"], url:"https://www.fifatrainingcentre.com/en/game/game-analysis/set-plays/corners/attacking-corners-cameroon.php",
+    sub:[{t:"Chelsea: short-corner overloads and decision-making", d:"", url:"https://www.fifatrainingcentre.com/en/game/game-analysis/set-plays/set-play-routines/short-corners-structure-and-decision-making-in-chelseas-set-plays.php"}]},
+  {s:"reports", d:"2026-10-17", t:"Build AI-powered soccer insights apps with AKS and ACA", src:"Microsoft Reactor", note:"A session recording on building AI soccer insight apps on Azure.", tags:["webinar","AI"], url:"https://www.youtube.com/watch?v=EQ187ohgCbo"},
+
+  // Tools & practice
+  {s:"tools", d:"2026-10-30", t:"Axon Perform", src:"axonperform.com", note:"A performance analytics platform built for elite sport.", tags:["tool","performance"], url:"https://www.axonperform.com/"},
+  {s:"tools", d:"2026-10-26", t:"Interactive Models", src:"Football Data Science · Bryan McGuire", note:"Football models to explore in the browser.", tags:["models","interactive"], url:"https://www.footballdatascience.co.uk/models"},
+  {s:"tools", d:"2026-10-26", t:"Vision AI", src:"visionaifootballintellige.tech", note:"A decision-intelligence platform that evaluates every on-ball action.", tags:["AI","tool"], url:"https://www.visionaifootballintellige.tech/"},
+  {s:"tools", d:"2026-10-20", t:"SQL Sports Analytics", src:"sqlsportsanalytics.com", note:"SQL challenges on real sports data, with XP, ranks and certificates.", tags:["SQL","practice"], url:"https://sqlsportsanalytics.com",
+    sub:[{t:"SQL Sports Analytics on YouTube", d:"", url:"https://www.youtube.com/@SQLSportsAnalytics"}]},
+  {s:"tools", d:"2026-10-19", t:"MyGamePlan (MGPT)", src:"mygameplan.ai", note:"Ask questions about a team, opponent or player and get answers with video clips; templates build opponent reports.", tags:["video","AI","scouting"], url:"https://www.mygameplan.ai/"},
+
+  // GitHub repos (forked into the lab)
+  {s:"repos", d:"2026-10-31", t:"Football-analytics", src:"GitHub · Victoria Friss de Kereki (@vickyfriss)", note:"Notebooks on xG and expected-pass models, wage vs performance, pass clustering, passing networks and league simulations. No licence file: all rights reserved by the author.", tags:["GitHub","Python","xG"], url:"https://github.com/vickyfriss/Football-analytics"},
+  {s:"repos", d:"2026-10-30", t:"gunners-analysis", src:"GitHub · Muhammad Atef (@Muhammadatef)", note:"An automated Arsenal analytics pipeline: Airflow, a PostgreSQL warehouse, 18-panel dashboards and an AI analyst. MIT licence.", tags:["GitHub","Python","pipeline"], url:"https://github.com/Muhammadatef/gunners-analysis"},
+  {s:"repos", d:"2026-10-29", t:"human-agentic-data-analysis", src:"GitHub · Vivid Insights · David Sumpter (@soccermatics)", note:"A template workspace for doing a data analysis with Claude Code one step at a time. CC BY 4.0.", tags:["GitHub","Python","AI"], url:"https://github.com/Vivid-Insights/human-agentic-data-analysis"},
+
+  // Papers
+  {s:"code", d:"2026-10-27", t:"Biases in Expected Goals Models Confound Finishing Ability", src:"Jesse Davis & Pieter Robberechts (2024) · arXiv 2401.09940", note:"xG can absorb elite finishers' skill when they dominate the training data; the paper proposes multi-calibrated baselines.", tags:["paper","xG"], url:"https://arxiv.org/abs/2401.09940"}
+];
+const FEATURED = [
+  {t:"FIFA World Cup 2026 post-tournament report", why:"The big read"},
+  {t:"Biases in Expected Goals Models Confound Finishing Ability", why:"Sharpest xG thinking"},
+  {t:"The xG Football Club", why:"Best weekly habit"}
+];
+
+/* ---------- Illustrations: original SVG drawn from each topic ---------- */
+function rng(str){let h=1779033703^str.length;for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=h<<13|h>>>19}let a=h>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const r1 = n => Math.round(n*10)/10;
+const PX=12,PY=6,PW=136,PH=78;
+const map = (u,v) => [r1(PX+u*PW), r1(PY+v*PH)];
+const bgRect = '<rect class="pf" x="0" y="0" width="160" height="90"/>';
+function pitchLines(){const cx=PX+PW/2,cy=PY+PH/2,bd=21,bh=44,sd=7,sh=20;
+  return `<g class="pl"><rect x="${PX}" y="${PY}" width="${PW}" height="${PH}"/><line x1="${cx}" y1="${PY}" x2="${cx}" y2="${PY+PH}"/><circle cx="${cx}" cy="${cy}" r="9"/><rect x="${PX}" y="${cy-bh/2}" width="${bd}" height="${bh}"/><rect x="${PX+PW-bd}" y="${cy-bh/2}" width="${bd}" height="${bh}"/><rect x="${PX}" y="${cy-sh/2}" width="${sd}" height="${sh}"/><rect x="${PX+PW-sd}" y="${cy-sh/2}" width="${sd}" height="${sh}"/></g>`}
+function gauss(R){return Math.sqrt(-2*Math.log(R()||1e-6))*Math.cos(6.283*R())}
+const F433=[[.06,.5],[.22,.15],[.2,.38],[.2,.62],[.22,.85],[.44,.27],[.4,.5],[.44,.73],[.68,.18],[.72,.5],[.68,.82]];
+function arrow(x1,y1,qx,qy,x2,y2,cls){const a=Math.atan2(y2-qy,x2-qx),s=3.4;
+  const p1=[x2-s*Math.cos(a-.5),y2-s*Math.sin(a-.5)],p2=[x2-s*Math.cos(a+.5),y2-s*Math.sin(a+.5)];
+  return `<path class="${cls}" stroke-width="1.4" d="M${r1(x1)} ${r1(y1)} Q${r1(qx)} ${r1(qy)} ${r1(x2)} ${r1(y2)}"/><polygon class="hi" points="${r1(x2)},${r1(y2)} ${r1(p1[0])},${r1(p1[1])} ${r1(p2[0])},${r1(p2[1])}"/>`}
+
+const DRAW = {
+  shotmap(R){const cx=80,top=6;let s=bgRect+`<g class="pl"><rect x="18" y="${top}" width="124" height="84"/><rect x="${cx-37}" y="${top}" width="74" height="24"/><rect x="${cx-16}" y="${top}" width="32" height="8"/><path d="M${cx-10.2} ${top+24} A13 13 0 0 0 ${cx+10.2} ${top+24}"/><path d="M${cx-15} 90 A15 15 0 0 1 ${cx+15} 90"/></g><rect class="mk" x="${cx-8}" y="${top-3}" width="16" height="3"/>`;
+    const n=12+Math.floor(R()*7);
+    for(let i=0;i<n;i++){const x=cx+gauss(R)*17, y=top+6+Math.abs(gauss(R))*20+R()*8;const d=Math.hypot(x-cx,y-top);const xg=Math.min(.78,1.15*Math.exp(-d/15));const goal=R()<xg;const rad=1.3+Math.sqrt(xg)*6.2;
+      s+=`<circle class="${goal?"hi":"mo"}" cx="${r1(x)}" cy="${r1(y)}" r="${r1(rad)}"/>`}
+    return s+`<text class="tx" x="22" y="86">shots · size = xG</text>`},
+  passnet(R){const P=F433.map(([u,v])=>map(u+(R()-.5)*.05,v+(R()-.5)*.06));let e="",best=null,bw=0;
+    for(let i=0;i<11;i++)for(let j=i+1;j<11;j++){const du=F433[i][0]-F433[j][0],dv=F433[i][1]-F433[j][1];if(Math.hypot(du,dv*0.66)<.3&&R()<.75){const w=r1(.5+R()*2.6);if(w>bw){bw=w;best=[i,j]}e+=`<line class="ed" stroke-width="${w}" stroke-opacity=".55" x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`}}
+    if(best)e+=`<line class="eh" stroke-width="${bw+.6}" x1="${P[best[0]][0]}" y1="${P[best[0]][1]}" x2="${P[best[1]][0]}" y2="${P[best[1]][1]}"/>`;
+    const n=P.map(([x,y],i)=>`<circle class="${i===6||i===9?"mk":"nd"}" cx="${x}" cy="${y}" r="${r1(2.6+R()*2.4)}"/>`).join("");
+    return bgRect+pitchLines()+e+n},
+  heatmap(R){const C=17,Rw=11,cw=PW/C,ch=PH/Rw;const blobs=[0,1,2].map(()=>[.2+R()*.7,.15+R()*.7,.12+R()*.16]);let s=bgRect;
+    for(let i=0;i<C;i++)for(let j=0;j<Rw;j++){const u=(i+.5)/C,v=(j+.5)/Rw;let val=0;blobs.forEach(([bu,bv,sg])=>{val+=Math.exp(-((u-bu)**2+(v-bv)**2*.6)/(2*sg*sg))});val=Math.min(1,val*.85);
+      if(val>.08)s+=`<rect class="${val>.82?"hi":"mk"}" fill-opacity="${val>.82?.9:r1(val*.75)}" x="${r1(PX+i*cw)}" y="${r1(PY+j*ch)}" width="${r1(cw+.2)}" height="${r1(ch+.2)}"/>`}
+    return s+pitchLines()},
+  radar(R){const cx=80,cy=46,Rr=34,k=8;let s=bgRect;
+    for(let ring=1;ring<=3;ring++){const pts=[];for(let i=0;i<k;i++){const a=-Math.PI/2+i*2*Math.PI/k;pts.push(`${r1(cx+Math.cos(a)*Rr*ring/3)},${r1(cy+Math.sin(a)*Rr*ring/3)}`)}s+=`<polygon class="rg" points="${pts.join(" ")}"/>`}
+    for(let i=0;i<k;i++){const a=-Math.PI/2+i*2*Math.PI/k;s+=`<line class="rg" x1="${cx}" y1="${cy}" x2="${r1(cx+Math.cos(a)*Rr)}" y2="${r1(cy+Math.sin(a)*Rr)}"/>`}
+    const poly=(cls)=>{const pts=[];for(let i=0;i<k;i++){const a=-Math.PI/2+i*2*Math.PI/k,v=.3+R()*.7;pts.push([cx+Math.cos(a)*Rr*v,cy+Math.sin(a)*Rr*v])}return pts};
+    const A=poly(),B=poly();
+    s+=`<polygon class="ra" points="${B.map(p=>p.map(r1).join(",")).join(" ")}"/><polygon class="rf" points="${A.map(p=>p.map(r1).join(",")).join(" ")}"/>`+A.map(p=>`<circle class="mk" cx="${r1(p[0])}" cy="${r1(p[1])}" r="1.6"/>`).join("");
+    return s+`<text class="tx" x="8" y="12">player profile</text><text class="tx" x="8" y="84">percentile vs position</text>`},
+  bars(R){let s=bgRect+`<text class="tx" x="12" y="14">SELECT team, SUM(xg) FROM shots</text><line class="ax" x1="14" y1="80" x2="150" y2="80"/>`;const n=8,hi=Math.floor(R()*n);
+    for(let i=0;i<n;i++){const h=12+R()*46;s+=`<rect class="${i===hi?"hi":"mk"}" ${i===hi?"":'fill-opacity=".75"'} x="${18+i*16.5}" y="${r1(80-h)}" width="11" height="${r1(h)}" rx="1.5"/>`}
+    return s},
+  neural(R){const L=[4,6,6,3],xs=[26,62,98,134];let s=bgRect+`<g opacity=".5">${pitchLines()}</g>`;const P=L.map((n,li)=>Array.from({length:n},(_,i)=>[xs[li],r1(45+(i-(n-1)/2)*(70/Math.max(n,4)))]));
+    for(let li=0;li<3;li++)P[li].forEach(a=>P[li+1].forEach(b=>{if(R()<.7)s+=`<line class="ed" stroke-width=".6" stroke-opacity=".45" x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/>`}));
+    const out=Math.floor(R()*3);P.forEach((layer,li)=>layer.forEach((p,i)=>{s+=`<circle class="${li===3&&i===out?"hi":li===0?"mk":"nd"}" cx="${p[0]}" cy="${p[1]}" r="3.6"/>`}));
+    return s},
+  oval(R){const cx=80,cy=45,rx=68,ry=38;let s=`${bgRect}<g class="pl"><ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/><rect x="${cx-12}" y="${cy-12}" width="24" height="24"/><circle cx="${cx}" cy="${cy}" r="5"/><line x1="${cx-4}" y1="${cy}" x2="${cx+4}" y2="${cy}"/>`;
+    [[cx-rx,1],[cx+rx,-1]].forEach(([gx,dir])=>{const pts=[];for(let a=-90;a<=90;a+=4){const t=a*Math.PI/180,x=gx+dir*30*Math.cos(t),y=cy+30*Math.sin(t);if(((x-cx)/rx)**2+((y-cy)/ry)**2<=1)pts.push(`${r1(x)},${r1(y)}`)}s+=`<polyline points="${pts.join(" ")}"/><rect x="${dir>0?gx:gx-5}" y="${cy-4}" width="5" height="8"/>`});
+    s+="</g>";for(let i=0;i<16;i++){const a=R()*6.283,rr=Math.sqrt(R());const x=cx+Math.cos(a)*rx*.85*rr,y=cy+Math.sin(a)*ry*.85*rr;s+=`<circle class="${R()<.35?"hi":"mk"}" fill-opacity=".85" cx="${r1(x)}" cy="${r1(y)}" r="1.8"/>`}
+    s+=arrow(cx-40,cy+18,cx-5,cy-28,cx+44,cy-6,"eh");
+    return s+`<text class="tx" x="8" y="12">AFL · kick chains</text>`},
+  formation(R){let s=bgRect+pitchLines();const P=F433.map(([u,v])=>map(u+(R()-.5)*.04,v+(R()-.5)*.05));
+    for(let i=0;i<5;i++){const [x,y]=map(.55+R()*.35,.15+R()*.7);s+=`<circle class="op" cx="${x}" cy="${y}" r="2.6"/>`}
+    for(let k=0;k<3;k++){const i=5+Math.floor(R()*6);const [x,y]=P[i];const x2=Math.min(PX+PW-6,x+18+R()*22),y2=Math.max(PY+6,Math.min(PY+PH-6,y+(R()-.5)*30));s+=arrow(x,y,(x+x2)/2,(y+y2)/2-10*(R()-.5)*2,x2,y2,"eh")}
+    s+=P.map(([x,y])=>`<circle class="mk" cx="${x}" cy="${y}" r="3"/>`).join("");
+    return s+`<text class="tx" x="${PX+3}" y="${PY+PH-3}">4-3-3</text>`},
+  code(R){let s=bgRect+`<rect class="sf" x="14" y="10" width="132" height="72" rx="5"/><circle class="hi" cx="22" cy="17" r="2"/><circle class="mk" cx="29" cy="17" r="2"/><circle class="cm" cx="36" cy="17" r="2"/><text class="tx" x="46" y="19">pitch.py</text>`;
+    for(let i=0;i<7;i++){let x=22+(R()<.4?8:0);const y=28+i*7.4;const segs=1+Math.floor(R()*3);for(let k=0;k<segs;k++){const w=8+R()*32;if(x+w>140)break;const c=R();s+=`<rect class="${c<.2?"hi":c<.6?"mk":"cm"}" ${c>=.2&&c<.6?'fill-opacity=".7"':""} x="${r1(x)}" y="${r1(y)}" width="${r1(w)}" height="3.2" rx="1.6"/>`;x+=w+4}}
+    return s},
+  broadcast(R){let s=bgRect+`<polygon class="mk" fill-opacity=".12" points="42,26 118,26 152,84 8,84"/><g class="pl"><polygon points="42,26 118,26 152,84 8,84"/><line x1="80" y1="26" x2="80" y2="84"/><ellipse cx="80" cy="52" rx="14" ry="7"/></g>`;
+    s+=`<circle class="hi" cx="80" cy="52" r="12"/><polygon class="sf" points="76,46 76,58 86,52"/>`;const m=Math.floor(R()*90),sec=Math.floor(R()*60);
+    return s+`<rect class="sf" x="8" y="8" width="36" height="11" rx="2"/><text class="tx" x="12" y="16">${String(m).padStart(2,"0")}:${String(sec).padStart(2,"0")}</text><text class="tx" x="114" y="16">ON DEMAND</text>`},
+  curve(R){let s=bgRect+`<line class="ax" x1="20" y1="78" x2="150" y2="78"/><line class="ax" x1="20" y1="10" x2="20" y2="78"/><text class="tx" x="8" y="14">xG</text><text class="tx" x="104" y="87">distance (m)</text>`;
+    let pts=[];for(let x=0;x<=35;x+=1){const xg=.85*Math.exp(-x/7.5)+.02;pts.push(`${r1(20+x/35*128)},${r1(78-xg*66)}`)}
+    for(let i=0;i<34;i++){const x=R()*35,xg=.85*Math.exp(-x/7.5)+.02;const goal=R()<xg;const y=goal?xg+(R()*.2):Math.max(0,xg-(R()*.25));s+=`<circle class="${goal?"hi":"mo"}" cx="${r1(20+x/35*128)}" cy="${r1(78-Math.min(1,y)*66)}" r="${goal?2.2:1.8}"/>`}
+    return s+`<polyline class="ed" stroke-width="1.8" points="${pts.join(" ")}"/>`}
+};
+function kindFor(r){if(r.art&&DRAW[r.art])return r.art;const T=(r.tags||[]).map(t=>t.toLowerCase());const has=(...k)=>k.some(x=>T.includes(x));
+  if(T.includes("practice")) return has("r")?"oval":has("python")?"shotmap":"bars";
+  if(has("afl"))return"oval"; if(has("paper"))return"curve"; if(has("xg","shooting"))return"shotmap";
+  if(has("passing","clustering","postgrad"))return"passnet"; if(has("sql"))return"bars"; if(has("models"))return"curve";
+  if(has("webinar","video"))return"broadcast"; if(has("ai","agents","deep learning","evals"))return"neural";
+  if(has("scouting","talent id","tool"))return"radar"; if(has("tracking data","world cup","off-ball","hackathon"))return"heatmap";
+  if(has("match analysis","tactics","set pieces"))return"formation"; if(has("github","python","notebook","pipeline"))return"code";
+  return"formation"}
+function svg(kind,seed,label){return `<svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(label)}">${DRAW[kind](rng(seed))}</svg>`}
+const KLABEL={shotmap:"Shot map illustration",passnet:"Passing network illustration",heatmap:"Heatmap illustration",radar:"Radar chart illustration",bars:"Bar chart illustration",neural:"Neural network illustration",oval:"AFL oval illustration",formation:"Formation and runs illustration",code:"Code editor illustration",broadcast:"Video illustration",curve:"xG curve illustration"};
+function badgeFor(r){if(r.cat)return r.cat;const T=(r.tags||[]).map(t=>t.toLowerCase());
+  if(T.includes("webinar"))return"Webinar"; if(T.includes("video"))return"Video"; if(T.includes("paper"))return"Paper"; if(T.includes("github"))return"Repo"; if(T.includes("notebook"))return"Notebook"; if(T.includes("newsletter"))return"Newsletter"; if(T.includes("hackathon"))return"Event";
+  return {training:"Practice",articles:"Article",reports:"Report",courses:"Course",tools:"Tool",repos:"Repo",code:"Code"}[r.s]||"Link"}
+
+/* ---------- Rendering ---------- */
+const fmt = iso => iso ? new Date(iso+"T00:00:00").toLocaleDateString("en-AU",{day:"numeric",month:"short",year:"numeric"}) : "";
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let active="all", COURSES=[], META=null, dbState="ready";
+try{ active = localStorage.getItem("fal-lib-filter") || "all"; }catch(e){}
+if(active!=="all"&&!SECTIONS.some(s=>s.id===active)) active="all";
+const allItems = () => R.concat(COURSES);
+
+function counts(){
+  const items=allItems(), subs=items.reduce((n,r)=>n+(r.sub?r.sub.length:0),0);
+  document.getElementById("stats").innerHTML=
+    `<div class="stat"><b>${items.length}</b><span>resources</span></div>`+
+    `<div class="stat"><b>${subs}</b><span>linked reads</span></div>`+
+    `<div class="stat"><b>${items.filter(r=>r.s==="repos").length}</b><span>repos</span></div>`+
+    `<div class="stat alert"><b>${new Set(items.map(r=>r.src.split(" · ")[0])).size}</b><span>sources</span></div>`;
+}
+function chips(){
+  const items=allItems();
+  const all=[{id:"all",name:"All",n:items.length},...SECTIONS.map(s=>({id:s.id,name:s.name,n:items.filter(r=>r.s===s.id).length}))];
+  const el=document.getElementById("chips");
+  el.innerHTML=all.map(s=>`<button class="chip" data-id="${s.id}" aria-pressed="${active===s.id}">${esc(s.name)}<span class="n">${s.n}</span></button>`).join("");
+}
+document.getElementById("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;active=b.dataset.id;try{localStorage.setItem("fal-lib-filter",active)}catch(err){}chips();render()});
+function matches(r,q){if(!q)return true;const hay=[r.t,r.src,r.note,(r.tags||[]).join(" "),r.flag||"",(r.sub||[]).map(x=>x.t).join(" ")].join(" ").toLowerCase();return q.split(/\s+/).every(w=>hay.includes(w))}
+function dateLabel(r){if(r.start){const s=fmt(r.start);return r.end&&r.end!==r.start?`${s} – ${fmt(r.end)}`:s}return fmt(r.d)}
+function card(r,opts={}){
+  const kind=kindFor(r), link=r.url||(r.mail?G(r.mail):"");
+  const links=[];if(r.url)links.push(`<a href="${esc(r.url)}" target="_blank" rel="noopener">Open</a>`);if(r.mail)links.push(`<a class="email" href="${G(r.mail)}" target="_blank" rel="noopener">Email</a>`);
+  const sub=r.sub?`<ul class="sub">${r.sub.map(x=>{const h=x.url||(x.mail?G(x.mail):"");return `<li>${h?`<a href="${esc(h)}" target="_blank" rel="noopener">${esc(x.t)}</a>`:esc(x.t)}${x.d?`<span class="d">${esc(x.d)}</span>`:""}</li>`}).join("")}</ul>`:"";
+  const meta=[r.hq||dateLabel(r),r.src].filter(Boolean).join(" · ");
+  return `<article class="card${r.sub&&!opts.feat?" wide":""}${opts.feat?" feat":""}">
+    <div class="thumb">${svg(kind,r.t,KLABEL[kind])}<span class="badge">${esc(badgeFor(r))}</span>${r.flag?`<span class="flag">${esc(r.flag)}</span>`:""}</div>
+    <div class="cbody">${opts.why?`<div class="why">${esc(opts.why)}</div>`:""}
+      <div class="cmeta">${esc(meta)}</div>
+      <h3 class="ctitle">${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(r.t)}</a>`:esc(r.t)}</h3>
+      ${r.note?`<p class="note">${esc(r.note)}</p>`:""}${sub}
+      <div class="cfoot"><div class="tags">${(r.tags||[]).map(t=>`<button class="tag" data-tag="${esc(t)}">${esc(t)}</button>`).join("")}</div><div class="links">${links.join("")}</div></div>
+    </div></article>`}
+function coursesNote(){
+  if(dbState==="off") return "Sign in to claude.ai to see the live list. It's kept outside the page so the weekly scan can update it.";
+  const base=SECTIONS.find(s=>s.id==="courses").note;
+  return META&&META.lastScan ? `${base} Last scan ${fmt(META.lastScan)}${META.summary?": "+META.summary:""}.` : base;
+}
+function render(){
+  const q=document.getElementById("q").value.trim().toLowerCase();
+  let html="";
+  if(active==="all"&&!q){
+    const pool=allItems();const feats=FEATURED.map(f=>({r:pool.find(x=>x.t===f.t),why:f.why})).filter(f=>f.r);
+    if(feats.length) html+=`<section><div class="sec-head"><div class="sec-icon">${svg("passnet","start-here","Passing network illustration")}</div><h2>Start here</h2></div><div class="feat-grid">${feats.map(f=>card(f.r,{feat:true,why:f.why})).join("")}</div></section>`;
+  }
+  SECTIONS.forEach(s=>{
+    if(active!=="all"&&active!==s.id)return;
+    const rows=allItems().filter(r=>r.s===s.id&&matches(r,q)).sort((a,b)=>(b.start||b.d||"").localeCompare(a.start||a.d||""));
+    const isCourses=s.id==="courses";
+    if(!rows.length&&!(isCourses&&!q))return;
+    let body;
+    if(rows.length) body=`<div class="grid">${rows.map(r=>card(r)).join("")}</div>`;
+    else body=`<p class="empty">${dbState==="loading"?"Loading the live list…":dbState==="off"?"The live list isn't available in this view.":"No courses or events yet. The Monday scan adds them here."}</p>`;
+    html+=`<section><div class="sec-head"><div class="sec-icon">${svg(s.icon,s.id,KLABEL[s.icon])}</div><h2>${esc(s.name)}</h2><span class="count">${String(rows.length).padStart(2,"0")}</span></div>${isCourses?`<p class="sec-note">${esc(coursesNote())}</p>`:s.note?`<p class="sec-note">${esc(s.note)}</p>`:""}${body}</section>`;
+  });
+  document.getElementById("list").innerHTML=html||`<p class="empty">Nothing matches "${esc(q)}". Try passing, xG or SQL.</p>`;
+}
+document.getElementById("list").addEventListener("click",e=>{const t=e.target.closest(".tag");if(!t)return;const q=document.getElementById("q");q.value=t.dataset.tag;active="all";chips();render();q.scrollIntoView({block:"nearest"})});
+document.getElementById("q").addEventListener("input",render);
+function refresh(){counts();chips();render()}
+refresh();
+
+/* ---------- Hero: a passing network that builds itself ---------- */
+(function hero(){
+  const cv=document.getElementById("hero");if(!cv||!cv.getContext)return;const ctx=cv.getContext("2d");
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const NUM=[1,2,5,4,3,6,8,10,7,9,11];
+  const nodes=F433.map(([u,v])=>({u,v,ph:Math.random()*6.28,touch:1}));
+  const E=new Map();const key=(a,b)=>a<b?a+"-"+b:b+"-"+a;
+  const nbr=nodes.map((n,i)=>nodes.map((m,j)=>j).filter(j=>j!==i&&Math.hypot(nodes[i].u-nodes[j].u,(nodes[i].v-nodes[j].v)*.66)<.32));
+  let W=0,H=0,col={},frame=0,from=0,to=6,t=0,shot=null,popup=null;const trail=[];
+  function readCols(){const cs=getComputedStyle(document.documentElement);["pitch","pline","turf","amber","surface","fg","muted"].forEach(k=>col[k]=cs.getPropertyValue("--"+k).trim())}
+  function size(){const dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;if(!W||!H)return;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
+  const M=()=>Math.max(10,W*.04);
+  function pos(i,time){const n=nodes[i],m=M(),j=reduce?0:1;return[m+n.u*(W-2*m)+Math.sin(time*.0011+n.ph)*2.5*j,m+n.v*(H-2*m)+Math.cos(time*.0009+n.ph)*2.5*j]}
+  function nextPass(){from=to;const opts=nbr[from];const fwd=opts.filter(j=>nodes[j].u>=nodes[from].u-.05);const pool=(Math.random()<.7&&fwd.length?fwd:opts);to=pool[Math.floor(Math.random()*pool.length)];t=0}
+  function arrive(){nodes[to].touch=Math.min(9,nodes[to].touch+1);const k=key(from,to);E.set(k,Math.min(10,(E.get(k)||0)+1))}
+  function pitch(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle=col.pitch;ctx.fillRect(0,0,W,H);ctx.strokeStyle=col.pline;ctx.lineWidth=1.2;ctx.strokeRect(m,m,w,h);ctx.beginPath();ctx.moveTo(W/2,m);ctx.lineTo(W/2,H-m);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H/2,h*.13,0,7);ctx.stroke();
+    const bd=w*.157,bh=h*.593,sd=w*.052,sh=h*.27;[[m,1],[W-m,-1]].forEach(([x,d])=>{ctx.strokeRect(d>0?x:x-bd,H/2-bh/2,bd,bh);ctx.strokeRect(d>0?x:x-sd,H/2-sh/2,sd,sh)})}
+  function draw(time){
+    if(frame++%30===0)readCols();
+    pitch();
+    E.forEach((c,k)=>{const [a,b]=k.split("-").map(Number);const p=pos(a,time),q=pos(b,time);ctx.strokeStyle=col.turf;ctx.globalAlpha=.25+c*.05;ctx.lineWidth=.8+c*.55;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke()});ctx.globalAlpha=1;
+    trail.forEach((p,i)=>{ctx.fillStyle=col.amber;ctx.globalAlpha=(i+1)/trail.length*.5;ctx.beginPath();ctx.arc(p[0],p[1],2,0,7);ctx.fill()});ctx.globalAlpha=1;
+    nodes.forEach((n,i)=>{const [x,y]=pos(i,time);const r=Math.max(7,Math.min(W,H)*.022)+n.touch*1.1;ctx.fillStyle=col.surface;ctx.strokeStyle=col.turf;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=col.fg;ctx.font=`500 ${Math.round(r*.9)}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(NUM[i],x,y+.5)});
+    let bx,by;
+    if(shot){const p=pos(shot.from,time);const e=Math.min(1,shot.t);bx=p[0]+(shot.gx-p[0])*e;by=p[1]+(shot.gy-p[1])*e}
+    else{const p=pos(from,time),q=pos(to,time);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;bx=p[0]+(q[0]-p[0])*e;by=p[1]+(q[1]-p[1])*e}
+    ctx.fillStyle=col.amber;ctx.beginPath();ctx.arc(bx,by,4.5,0,7);ctx.fill();
+    if(popup){ctx.globalAlpha=Math.min(1,popup.life);ctx.fillStyle=col.amber;ctx.font=`800 ${Math.round(H*.07)}px "Big Shoulders Display",Impact,sans-serif`;ctx.textAlign="right";ctx.fillText(popup.text,W-M()-8,M()+H*.07);ctx.globalAlpha=1}
+    return[bx,by]}
+  if(reduce){const run=()=>{size();if(!W)return;readCols();for(let k=0;k<45;k++){nextPass();arrive()}draw(0)};run();new ResizeObserver(run).observe(cv);return}
+  let last=performance.now();
+  function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!W){size();requestAnimationFrame(step);return}
+    if(shot){shot.t+=dt*1.6;if(shot.t>=1&&!popup){popup={text:`xG ${shot.xg.toFixed(2)}`,life:1.6};}if(popup){popup.life-=dt*.8;if(popup.life<=0){popup=null;shot=null;from=6;to=6;nextPass()}}}
+    else{t+=dt/0.75;if(t>=1){arrive();if(to>=8&&Math.random()<.35){const m=M();const gy=H/2+(Math.random()-.5)*(H-2*m)*.16;const d=1-nodes[to].u;shot={from:to,t:0,gx:W-m,gy,xg:Math.max(.03,Math.min(.6,.7*Math.exp(-d*6)+Math.random()*.08))}}else nextPass()}}
+    const b=draw(now);trail.push(b);if(trail.length>12)trail.shift();requestAnimationFrame(step)}
+  size();readCols();new ResizeObserver(size).observe(cv);requestAnimationFrame(step);
+})();
+</script>
+
+</body>
+</html>

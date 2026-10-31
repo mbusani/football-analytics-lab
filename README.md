@@ -15,6 +15,10 @@ The repos, notebooks and people I'm learning from, collected in one place and cr
 | **gunners-analysis** | [Muhammad Atef](https://github.com/Muhammadatef) | Automated football analytics for Arsenal: an Airflow pipeline, 18-panel tactical dashboards, a PostgreSQL warehouse and an AI analyst built so it can't invent a statistic. | [MIT](https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE) © 2026 Muhammad Atef | [Original](https://github.com/Muhammadatef/gunners-analysis) · [My fork](https://github.com/mbusani/gunners-analysis) · [Write-up on Medium](https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f) |
 | **human-agentic-data-analysis** | [David Sumpter](https://github.com/soccermatics) · [Vivid Insights](https://github.com/Vivid-Insights) | A template workspace for doing a data analysis with an AI agent (Claude Code in an Obsidian vault) one step at a time: a working contract, eight steps from import to export, report and appendix templates, and a sample report. | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Original](https://github.com/Vivid-Insights/human-agentic-data-analysis) · [My fork](https://github.com/mbusani/human-agentic-data-analysis) |
 
+## Library
+
+📚 **[Browse the library](https://mbusani.github.io/football-analytics-lab/library/)**: 28 football analytics resources (articles and newsletters, reports and webinars, tools, GitHub repos and papers), each credited to its author or publisher and linked to the original. The library links to other people's work and claims none of it.
+
 ## Credits and how I use these repos
 
 - All the work in the repositories above belongs to their authors. I link to the originals first, and keep forks only so I can study and experiment with the code.
@@ -26,7 +30,7 @@ The repos, notebooks and people I'm learning from, collected in one place and cr
 
 ## What's next
 
-This hub grows step by step. Next up: a curated library of articles, reports, courses and companies, and hands-on SQL, Python and R training on open football data.
+This hub grows step by step. Next up: hands-on SQL, Python and R training on open football data.
 
 ## Licence
 

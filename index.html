@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Football Analytics Lab</title>
+<meta name="description" content="A football analytics learning hub by Mark Busani: the repos, notebooks and people I'm learning from, credited to their authors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a matchday programme cover. Live passing-network hero, then one wide card per repo
+   with the author credited as prominently as the work itself. */
+:root{
+  --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
+  --turf:#1c6948; --turf-soft:#e0ede5; --amber:#c4740f; --amber-soft:#fbebd4;
+  --pitch:#e4eee6; --pline:#a3bfaf;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;padding-top:env(safe-area-inset-top,0px)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--turf)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+nav.top{border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:16px;padding-block:12px;font-family:var(--mono);font-size:12px}
+nav.top .brand{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.04em;text-transform:uppercase;color:var(--fg);text-decoration:none}
+nav.top .sp{flex:1}
+nav.top a.lnk{color:var(--muted);text-decoration:none}
+nav.top a.lnk:hover{color:var(--turf)}
+
+.hero{border-bottom:3px solid var(--fg)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:52px 44px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,8vw,104px);overflow-wrap:anywhere;line-height:.84;margin:14px 0 20px;text-transform:uppercase}
+h1 span{display:block;color:var(--turf)}
+.lede{max-width:50ch;color:var(--muted);margin:0;font-size:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chip{font-family:var(--mono);font-size:12px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;background:var(--surface)}
+.chip:hover{border-color:var(--turf)}
+.chip b{color:var(--amber);font-weight:500}
+figure.net{margin:0;min-width:0}
+figure.net canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:14px;background:var(--pitch);border:1px solid var(--line)}
+figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:8px}
+
+main .wrap{padding-block:16px 72px}
+section{margin-top:48px}
+.sec-head{display:flex;align-items:baseline;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--fg)}
+.sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.5vw,44px);line-height:1;text-transform:uppercase;margin:0}
+.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:800;font-size:44px;line-height:1;color:var(--line)}
+.sec-note{color:var(--muted);margin:12px 0 0;max-width:72ch}
+
+.repo{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.repo .art{position:relative;background:var(--pitch);border-right:1px solid var(--line);min-height:260px}
+.repo .art svg{position:absolute;inset:36px 12px 12px;width:calc(100% - 24px);height:calc(100% - 48px)}
+.repo .art .badge{position:absolute;left:12px;top:12px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;background:var(--surface);border:1px solid var(--line);padding:3px 8px;border-radius:4px}
+.repo .body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.repo h3{font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,40px);line-height:1;text-transform:uppercase;margin:0;overflow-wrap:anywhere}
+.by{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.by img{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--pitch)}
+.by .who{display:flex;flex-direction:column;line-height:1.25}
+.by .who b{font-size:17px}
+.by .who span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.repo p{margin:0;max-width:62ch}
+.facts{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:4px;background:var(--turf-soft);color:var(--turf)}
+.tag.lic{background:var(--amber-soft);color:var(--amber)}
+.inside{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 18px;font-size:14.5px;color:var(--muted)}
+.inside li::before{content:"→ ";color:var(--turf)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14.5px;padding:8px 14px;border-radius:8px;border:1px solid var(--line);text-decoration:none;color:var(--fg);background:var(--bg)}
+.btn:hover{border-color:var(--turf)}
+.btn.primary{background:var(--turf);border-color:var(--turf);color:var(--surface)}
+.credit-note{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin:0}
+
+.next{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
+.next div{border:1px dashed var(--line);border-radius:12px;padding:16px 18px}
+.next b{font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;display:block;margin-bottom:4px}
+.next span{color:var(--muted);font-size:15px}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .wrap{padding-block:24px 48px;display:flex;flex-direction:column;gap:8px}
+
+/* illustration classes */
+.pf{fill:var(--pitch)} .pl{fill:none;stroke:var(--pline);stroke-width:1}
+.mk{fill:var(--turf)} .hi{fill:var(--amber)} .sf{fill:var(--surface)} .cm{fill:var(--muted);fill-opacity:.4}
+.ed{fill:none;stroke:var(--turf);stroke-linecap:round} .eh{fill:none;stroke:var(--amber);stroke-linecap:round}
+.nd{fill:var(--surface);stroke:var(--turf);stroke-width:1.3} .tx{fill:var(--muted);font-family:var(--mono);font-size:6px}
+
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:26px;padding-block:34px 30px}.repo{grid-template-columns:1fr}.repo .art{min-height:200px;border-right:0;border-bottom:1px solid var(--line)}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <a class="brand" href="./">Football Analytics Lab</a><span class="sp"></span>
+  <a class="lnk" href="#repos">Repos</a>
+  <a class="lnk" href="#credits">Credits</a>
+  <a class="lnk" href="https://github.com/mbusani/football-analytics-lab">GitHub</a>
+</div></nav>
+
+<header class="hero"><div class="wrap hero-grid">
+  <div>
+    <div class="eyebrow">A football analytics learning hub · by Mark Busani</div>
+    <h1>Football Analytics <span>Lab</span></h1>
+    <p class="lede">The repos, notebooks and people I'm learning from on the way into football analytics, collected in one place and credited to the people who built them.</p>
+    <div class="chips">
+      <a class="chip" href="#repos"><b>3</b> repositories</a>
+      <a class="chip" href="#credits"><b>3</b> creators credited</a>
+      <a class="chip" href="https://github.com/mbusani">github.com/mbusani</a>
+    </div>
+  </div>
+  <figure class="net">
+    <canvas id="hero" role="img" aria-label="Animated illustration of a passing network building on a football pitch"></canvas>
+    <figcaption>Illustration: a passing network building live. Node size = touches · line weight = passes · amber = shot with its xG</figcaption>
+  </figure>
+</div></header>
+
+<main><div class="wrap">
+  <section id="repos">
+    <div class="sec-head"><h2>Repositories</h2><span class="count">03</span></div>
+    <p class="sec-note">Each card links to the author's original first. My forks are kept for study and experiments; all the work belongs to the people named here.</p>
+
+    <article class="repo">
+      <div class="art"><svg id="art-vf" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of a passing network"></svg><span class="badge">Jupyter notebooks</span></div>
+      <div class="body">
+        <h3>Football-analytics</h3>
+        <div class="by"><img src="https://avatars.githubusercontent.com/vickyfriss?size=80" alt="" loading="lazy" onerror="this.style.display='none'"><div class="who"><b>Victoria Friss de Kereki</b><span>@vickyfriss · Football data analyst</span></div></div>
+        <p>A growing collection of notebooks that explore football, and sometimes rugby, through data, using pandas, scikit-learn and matplotlib.</p>
+        <ul class="inside">
+          <li>xG and expected-pass models for women's football</li>
+          <li>Wage vs performance in English football</li>
+          <li>Pass clustering and passing networks (FC Barcelona)</li>
+          <li>League-position simulations from betting odds</li>
+          <li>Pizza charts and StatsBomb formation plots</li>
+          <li>Rugby Premiership forecasting</li>
+        </ul>
+        <div class="facts"><span class="tag">expected-goals</span><span class="tag">football-analytics</span><span class="tag">web-scraping</span><span class="tag lic">No licence file · all rights reserved</span></div>
+        <div class="links">
+          <a class="btn primary" href="https://github.com/vickyfriss/Football-analytics">Original repo</a>
+          <a class="btn" href="https://github.com/mbusani/Football-analytics">My fork</a>
+          <a class="btn" href="https://medium.com/@vickyfrissdekereki">Medium</a>
+          <a class="btn" href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a>
+          <a class="btn" href="https://football-league-simulator.streamlit.app/">Live app</a>
+        </div>
+        <p class="credit-note">All rights belong to Victoria Friss de Kereki. The repo has no licence file, so my fork is for personal learning only and nothing from it is reused here.</p>
+      </div>
+    </article>
+
+    <article class="repo">
+      <div class="art"><svg id="art-ga" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of a data pipeline feeding a shot map"></svg><span class="badge">Python pipeline</span></div>
+      <div class="body">
+        <h3>gunners-analysis</h3>
+        <div class="by"><img src="https://avatars.githubusercontent.com/Muhammadatef?size=80" alt="" loading="lazy" onerror="this.style.display='none'"><div class="who"><b>Muhammad Atef</b><span>@Muhammadatef</span></div></div>
+        <p>Automated football analytics for Arsenal: data is scraped, transformed and stored without manual steps, then turned into tactical dashboards and an AI analyst that answers only from the stored data.</p>
+        <ul class="inside">
+          <li>Apache Airflow orchestration</li>
+          <li>PostgreSQL warehouse with pgvector</li>
+          <li>18-panel tactical dashboards (mplsoccer)</li>
+          <li>LLM analyst built with DSPy</li>
+          <li>Scrapers, data-quality checks and tests</li>
+          <li>Docker setup and deployment notes</li>
+        </ul>
+        <div class="facts"><span class="tag">apache-airflow</span><span class="tag">mplsoccer</span><span class="tag">postgresql</span><span class="tag">llm</span><span class="tag lic">MIT licence · © 2026 Muhammad Atef</span></div>
+        <div class="links">
+          <a class="btn primary" href="https://github.com/Muhammadatef/gunners-analysis">Original repo</a>
+          <a class="btn" href="https://github.com/mbusani/gunners-analysis">My fork</a>
+          <a class="btn" href="https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f">Write-up on Medium</a>
+        </div>
+        <p class="credit-note">Built by Muhammad Atef and shared under the MIT licence. Anything I reuse from it keeps his copyright notice and licence text.</p>
+      </div>
+    </article>
+    <article class="repo">
+      <div class="art"><svg id="art-ha" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of an eight-step analysis path"></svg><span class="badge">Claude Code template</span></div>
+      <div class="body">
+        <h3>human-agentic-data-analysis</h3>
+        <div class="by"><img src="https://avatars.githubusercontent.com/soccermatics?size=80" alt="" loading="lazy" onerror="this.style.display='none'"><div class="who"><b>David Sumpter · Vivid Insights</b><span>@soccermatics · Vivid-Insights</span></div></div>
+        <p>A template workspace for doing a data analysis with an AI agent one step at a time, so the judgement calls stay with the analyst and the report can be defended.</p>
+        <ul class="inside">
+          <li>Obsidian vault with a working contract for the agent</li>
+          <li>Eight steps, from data import to export</li>
+          <li>Report and appendix templates that fill as you go</li>
+          <li>A sample report on World Happiness data</li>
+          <li>Python environment and figure style</li>
+          <li>Standing disclaimer on AI assistance</li>
+        </ul>
+        <div class="facts"><span class="tag">claude-code</span><span class="tag">obsidian</span><span class="tag">python</span><span class="tag">reproducible-analysis</span><span class="tag lic">CC BY 4.0</span></div>
+        <div class="links">
+          <a class="btn primary" href="https://github.com/Vivid-Insights/human-agentic-data-analysis">Original repo</a>
+          <a class="btn" href="https://github.com/mbusani/human-agentic-data-analysis">My fork</a>
+          <a class="btn" href="https://github.com/soccermatics">David's GitHub</a>
+          <a class="btn" href="https://creativecommons.org/licenses/by/4.0/">Licence</a>
+        </div>
+        <p class="credit-note">Created by Vivid Insights, with commits by David Sumpter (@soccermatics), and shared under Creative Commons Attribution 4.0. Anything I reuse from it will name the creators, link the original and the licence, and say what I changed.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="credits">
+    <div class="sec-head"><h2>Credits</h2></div>
+    <p class="sec-note">Football Analytics Lab curates and links to other people's work; it doesn't claim any of it. Forks keep their original commit history, author attribution and licence files. If you're one of the authors and want anything changed or removed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a> and I'll sort it out quickly.</p>
+    <div class="next">
+      <div><b>Victoria Friss de Kereki</b><span><a href="https://github.com/vickyfriss">GitHub</a> · <a href="https://medium.com/@vickyfrissdekereki">Medium</a> · <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a></span></div>
+      <div><b>Muhammad Atef</b><span><a href="https://github.com/Muhammadatef">GitHub</a> · <a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a></span></div>
+      <div><b>David Sumpter · Vivid Insights</b><span><a href="https://github.com/soccermatics">GitHub</a> · <a href="https://github.com/Vivid-Insights">Vivid Insights</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span></div>
+    </div>
+  </section>
+
+  <section id="next">
+    <div class="sec-head"><h2>Coming next</h2></div>
+    <div class="next">
+      <div><b>Library</b><span>Articles, reports, courses and the companies behind soccer and AFL analytics.</span></div>
+      <div><b>Training ground</b><span>Structured SQL, Python and R sessions on open football data.</span></div>
+      <div><b>My own work</b><span>Notebooks and write-ups as I build them.</span></div>
+    </div>
+  </section>
+</div></main>
+
+<footer><div class="wrap">
+  <span>Football Analytics Lab by <a href="https://github.com/mbusani">Mark Busani</a>. The home page and README are MIT-licensed; the repositories listed belong to their authors and keep their own licences.</span>
+  <span>Illustrations are original and drawn in the page; they don't show data from any of the repositories.</span>
+</div></footer>
+
+<script>
+/* ---------- card illustrations (original, schematic) ---------- */
+const r1=n=>Math.round(n*10)/10;
+function rng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const F433=[[.06,.5],[.22,.15],[.2,.38],[.2,.62],[.22,.85],[.44,.27],[.4,.5],[.44,.73],[.68,.18],[.72,.5],[.68,.82]];
+function pitch(W,H,m){const cx=W/2,cy=H/2,w=W-2*m,h=H-2*m,bd=w*.157,bh=h*.593;
+  return `<rect class="pf" width="${W}" height="${H}"/><g class="pl"><rect x="${m}" y="${m}" width="${w}" height="${h}"/><line x1="${cx}" y1="${m}" x2="${cx}" y2="${H-m}"/><circle cx="${cx}" cy="${cy}" r="${r1(h*.13)}"/><rect x="${m}" y="${r1(cy-bh/2)}" width="${r1(bd)}" height="${r1(bh)}"/><rect x="${r1(W-m-bd)}" y="${r1(cy-bh/2)}" width="${r1(bd)}" height="${r1(bh)}"/></g>`}
+(function vf(){const W=160,H=110,m=8,R=rng(7);const P=F433.map(([u,v])=>[r1(m+u*(W-2*m)),r1(m+v*(H-2*m))]);let s=pitch(W,H,m);
+  for(let i=0;i<11;i++)for(let j=i+1;j<11;j++){const d=Math.hypot(F433[i][0]-F433[j][0],(F433[i][1]-F433[j][1])*.66);if(d<.3&&R()<.8){const w=r1(.6+R()*2.8);s+=`<line class="${w>2.9?"eh":"ed"}" stroke-width="${w}" stroke-opacity="${w>2.9?1:.5}" x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`}}
+  s+=P.map(([x,y],i)=>`<circle class="${i===6?"mk":"nd"}" cx="${x}" cy="${y}" r="${r1(3+R()*3)}"/>`).join("");
+  document.getElementById("art-vf").innerHTML=s})();
+(function ga(){const W=160,H=110;let s=`<rect class="pf" width="${W}" height="${H}"/>`;
+  const boxes=[["scrape",14],["transform",46],["warehouse",78]];
+  boxes.forEach(([t,y],i)=>{s+=`<rect class="sf" x="10" y="${y}" width="52" height="20" rx="4" stroke="var(--line)"/><circle class="${i===2?"hi":"mk"}" cx="20" cy="${y+10}" r="3"/><text class="tx" x="27" y="${y+12}">${t}</text>`;if(i<2)s+=`<line class="ed" stroke-width="1.2" x1="36" y1="${y+20}" x2="36" y2="${y+32}"/>`});
+  s+=`<path class="eh" stroke-width="1.4" d="M62 88 C 80 88, 78 55, 92 55"/>`;
+  const gx=92,gy=14,gw=60,gh=82;s+=`<g class="pl"><rect x="${gx}" y="${gy}" width="${gw}" height="${gh}"/><rect x="${gx+12}" y="${gy}" width="${gw-24}" height="20"/><rect x="${gx+22}" y="${gy}" width="${gw-44}" height="7"/></g><rect class="mk" x="${gx+25}" y="${gy-2}" width="${gw-50}" height="2"/>`;
+  const R=rng(11);for(let i=0;i<16;i++){const x=gx+gw/2+(R()-.5)*40,y=gy+6+R()*40,goal=R()<.2,r=1.5+R()*4;s+=`<circle class="${goal?"hi":"mk"}" fill-opacity="${goal?1:.3}" cx="${r1(x)}" cy="${r1(y)}" r="${r1(r)}"/>`}
+  document.getElementById("art-ga").innerHTML=s})();
+
+(function ha(){const W=160,H=110;let s=`<rect class="pf" width="${W}" height="${H}"/>`;
+  const pts=[[22,24],[58,18],[94,26],[132,22],[128,62],[92,70],[56,62],[24,86]];
+  let d=`M${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<pts.length;i++){const [x0,y0]=pts[i-1],[x,y]=pts[i];d+=` Q${(x0+x)/2} ${(y0+y)/2+(i%2?-10:10)} ${x} ${y}`}
+  s+=`<path class="ed" stroke-width="1.6" stroke-dasharray="3 3" d="${d}"/>`;
+  pts.forEach(([x,y],i)=>{const done=i<5;s+=`<circle class="${i===4?"hi":done?"mk":"nd"}" cx="${x}" cy="${y}" r="7"/><text class="tx" x="${x}" y="${y+2}" text-anchor="middle" style="fill:${done||i===4?"var(--surface)":"var(--muted)"};font-size:7px">${i+1}</text>`});
+  s+=`<text class="tx" x="8" y="104">import → question → charts → tests → conclusions → background → read-through → export</text>`;
+  document.getElementById("art-ha").innerHTML=s})();
+
+/* ---------- hero: passing network that builds itself ---------- */
+(function hero(){
+  const cv=document.getElementById("hero");if(!cv||!cv.getContext)return;const ctx=cv.getContext("2d");
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const NUM=[1,2,5,4,3,6,8,10,7,9,11];
+  const nodes=F433.map(([u,v])=>({u,v,ph:Math.random()*6.28,touch:1}));
+  const E=new Map();const key=(a,b)=>a<b?a+"-"+b:b+"-"+a;
+  const nbr=nodes.map((n,i)=>nodes.map((m,j)=>j).filter(j=>j!==i&&Math.hypot(nodes[i].u-nodes[j].u,(nodes[i].v-nodes[j].v)*.66)<.32));
+  let W=0,H=0,col={},frame=0,from=0,to=6,t=0,shot=null,popup=null;const trail=[];
+  function readCols(){const cs=getComputedStyle(document.documentElement);["pitch","pline","turf","amber","surface","fg"].forEach(k=>col[k]=cs.getPropertyValue("--"+k).trim())}
+  function size(){const dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;if(!W||!H)return;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
+  const M=()=>Math.max(10,W*.04);
+  function pos(i,time){const n=nodes[i],m=M(),j=reduce?0:1;return[m+n.u*(W-2*m)+Math.sin(time*.0011+n.ph)*2.5*j,m+n.v*(H-2*m)+Math.cos(time*.0009+n.ph)*2.5*j]}
+  function nextPass(){from=to;const opts=nbr[from];const fwd=opts.filter(j=>nodes[j].u>=nodes[from].u-.05);const pool=(Math.random()<.7&&fwd.length?fwd:opts);to=pool[Math.floor(Math.random()*pool.length)];t=0}
+  function arrive(){nodes[to].touch=Math.min(9,nodes[to].touch+1);const k=key(from,to);E.set(k,Math.min(10,(E.get(k)||0)+1))}
+  function drawPitch(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle=col.pitch;ctx.fillRect(0,0,W,H);ctx.strokeStyle=col.pline;ctx.lineWidth=1.2;ctx.strokeRect(m,m,w,h);ctx.beginPath();ctx.moveTo(W/2,m);ctx.lineTo(W/2,H-m);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H/2,h*.13,0,7);ctx.stroke();
+    const bd=w*.157,bh=h*.593,sd=w*.052,sh=h*.27;[[m,1],[W-m,-1]].forEach(([x,d])=>{ctx.strokeRect(d>0?x:x-bd,H/2-bh/2,bd,bh);ctx.strokeRect(d>0?x:x-sd,H/2-sh/2,sd,sh)})}
+  function draw(time){
+    if(frame++%30===0)readCols();drawPitch();
+    E.forEach((c,k)=>{const [a,b]=k.split("-").map(Number);const p=pos(a,time),q=pos(b,time);ctx.strokeStyle=col.turf;ctx.globalAlpha=.25+c*.05;ctx.lineWidth=.8+c*.55;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke()});ctx.globalAlpha=1;
+    trail.forEach((p,i)=>{ctx.fillStyle=col.amber;ctx.globalAlpha=(i+1)/trail.length*.5;ctx.beginPath();ctx.arc(p[0],p[1],2,0,7);ctx.fill()});ctx.globalAlpha=1;
+    nodes.forEach((n,i)=>{const [x,y]=pos(i,time);const r=Math.max(7,Math.min(W,H)*.022)+n.touch*1.1;ctx.fillStyle=col.surface;ctx.strokeStyle=col.turf;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=col.fg;ctx.font=`500 ${Math.round(r*.9)}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(NUM[i],x,y+.5)});
+    let bx,by;
+    if(shot){const p=pos(shot.from,time);const e=Math.min(1,shot.t);bx=p[0]+(shot.gx-p[0])*e;by=p[1]+(shot.gy-p[1])*e}
+    else{const p=pos(from,time),q=pos(to,time);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;bx=p[0]+(q[0]-p[0])*e;by=p[1]+(q[1]-p[1])*e}
+    ctx.fillStyle=col.amber;ctx.beginPath();ctx.arc(bx,by,4.5,0,7);ctx.fill();
+    if(popup){ctx.globalAlpha=Math.min(1,popup.life);ctx.fillStyle=col.amber;ctx.font=`800 ${Math.round(H*.07)}px "Big Shoulders Display",Impact,sans-serif`;ctx.textAlign="right";ctx.fillText(popup.text,W-M()-8,M()+H*.07);ctx.globalAlpha=1}
+    return[bx,by]}
+  if(reduce){const run=()=>{size();if(!W)return;readCols();for(let k=0;k<45;k++){nextPass();arrive()}draw(0)};run();new ResizeObserver(run).observe(cv);return}
+  let last=performance.now();
+  function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!W){size();requestAnimationFrame(step);return}
+    if(shot){shot.t+=dt*1.6;if(shot.t>=1&&!popup){popup={text:`xG ${shot.xg.toFixed(2)}`,life:1.6}}if(popup){popup.life-=dt*.8;if(popup.life<=0){popup=null;shot=null;from=6;to=6;nextPass()}}}
+    else{t+=dt/0.75;if(t>=1){arrive();if(to>=8&&Math.random()<.35){const m=M();const gy=H/2+(Math.random()-.5)*(H-2*m)*.16;const d=1-nodes[to].u;shot={from:to,t:0,gx:W-m,gy,xg:Math.max(.03,Math.min(.6,.7*Math.exp(-d*6)+Math.random()*.08))}}else nextPass()}}
+    const b=draw(now);trail.push(b);if(trail.length>12)trail.shift();requestAnimationFrame(step)}
+  size();readCols();new ResizeObserver(size).observe(cv);requestAnimationFrame(step);
+})();
+</script>
+</body>
+</html>

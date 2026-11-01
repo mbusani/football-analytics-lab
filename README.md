@@ -34,9 +34,13 @@ The repos, notebooks and people I'm learning from, collected in one place and cr
 - **human-agentic-data-analysis** is shared under Creative Commons Attribution 4.0. Anything I reuse from it will name its creators (Vivid Insights and David Sumpter), link the original and the licence, and say what I changed.
 - If you're one of the authors and you'd like anything changed or removed, please [open an issue](https://github.com/mbusani/football-analytics-lab/issues) and I'll fix it promptly.
 
-## What's next
+## Training ground
 
-This hub grows step by step. Next up: hands-on SQL, Python and R training on open football data.
+Hands-on sessions on open football data that run in the browser, with nothing to install.
+
+- **[SQL session 01: First touches](https://mbusani.github.io/football-analytics-lab/training/sql-01/)**: eight drills on SELECT, WHERE, ORDER BY, GROUP BY and HAVING, using every shot from the 2022 World Cup. Each drill checks your answer.
+
+The database is a small extract of [StatsBomb Open Data](https://github.com/statsbomb/open-data) (FIFA World Cup 2022), used under the [StatsBomb Public Data User Agreement](https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf). [`training/data/build_wc2022.py`](training/data/build_wc2022.py) rebuilds it. Python and R sessions come next.
 
 ## Licence
 

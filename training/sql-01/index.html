@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="SQL session 01 of the Football Analytics Lab training ground: SELECT, WHERE, ORDER BY and GROUP BY on every shot from the 2022 World Cup, run in the browser.">
+<title>SQL Session 01 · Football Analytics Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a training session. Night hero (shared with the lab) whose figure is a real shot map drawn by a query,
+   then the squad sheet (the three tables), eight drills that each run and check SQL in the browser, and free play. */
+:root{
+  --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
+  --turf:#1c6948; --turf-soft:#e0ede5; --amber:#d47f17; --amber-soft:#fbebd4;
+  --pitch:#e4eee6; --pline:#a3bfaf; --bad:#b4372b; --bad-soft:#f8e1dd;
+  --night:#07110c; --night-2:#0d1d15; --chalk:#e9f2ec; --chalk-dim:#9fb6a8; --flood:#f2a541; --grass:#5bc391; --nline:#2c4a3b;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; --bad:#f08a7e; --bad-soft:#3a1d19; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; --bad:#f08a7e; --bad-soft:#3a1d19; color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+a{color:var(--turf)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+code,kbd{font-family:var(--mono);font-size:.88em;background:var(--turf-soft);color:var(--turf);padding:1px 5px;border-radius:4px}
+kbd{background:var(--surface);color:var(--fg);border:1px solid var(--line)}
+
+/* ---------- Night hero (same as the lab home page) ---------- */
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
+    radial-gradient(55% 50% at 100% -5%, rgba(233,242,236,.14), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(91,195,145,.035) 0 70px, transparent 70px 140px);}
+nav.top{position:relative;z-index:2}
+nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk);text-decoration:none}
+.brand i{width:26px;height:26px;border-radius:50%;border:2px solid var(--chalk);position:relative;display:inline-block}
+.brand i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flood)}
+nav.top .sp{flex:1}
+nav.top a.lnk{font-family:var(--mono);font-size:12px;color:var(--chalk-dim);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
+nav.top a.lnk:hover,nav.top a.lnk[aria-current]{color:var(--chalk)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center;padding-block:40px 64px}
+.hero .eyebrow{color:var(--flood)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
+h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
+h1 .l3{display:block;color:var(--grass)}
+.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
+.lede b{color:var(--chalk);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.cta a{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:214px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
+.cta .go{background:var(--flood);color:#1a1205}
+.cta .go:hover{filter:brightness(1.08)}
+.cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
+.cta .gh:hover{border-color:var(--chalk)}
+.scoreboard{display:flex;gap:0;margin-top:34px;border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
+.scoreboard div{padding:10px 18px;border-right:1px solid var(--nline);background:rgba(7,17,12,.6)}
+.scoreboard div:last-child{border-right:0}
+.scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
+.scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
+figure.net{margin:0;min-width:0;position:relative}
+figure.net canvas{display:block;width:100%;aspect-ratio:4/3;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
+figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px}
+figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--flood);margin-right:6px;vertical-align:middle}
+figure.net figcaption i.miss{background:var(--grass);opacity:.6}
+.touchline{height:6px;background:repeating-linear-gradient(90deg,var(--chalk) 0 22px,transparent 22px 34px);opacity:.25}
+
+/* ---------- Progress bar ---------- */
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:8px;padding-block:10px;overflow-x:auto;scrollbar-width:thin}
+.bar .lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);flex:none;margin-right:6px}
+.bar a{flex:none;width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--fg);text-decoration:none;font-family:var(--display);font-weight:800;font-size:17px}
+.bar a:hover{border-color:var(--turf)}
+.bar a.done{background:var(--turf);border-color:var(--turf);color:var(--surface)}
+.bar .status{margin-left:auto;flex:none;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-left:12px}
+.bar .status.err{color:var(--bad)}
+
+/* ---------- Sections ---------- */
+main .wrap{padding-block:12px 80px}
+section{margin-top:56px;scroll-margin-top:64px}
+.sec-head{display:flex;align-items:flex-end;gap:16px;padding-bottom:12px;border-bottom:3px solid var(--fg)}
+.sec-head h2{font-family:var(--display);font-weight:900;font-size:clamp(36px,5vw,56px);line-height:.9;text-transform:uppercase;margin:0}
+.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:900;font-size:56px;line-height:.85;color:var(--line)}
+.sec-note{color:var(--muted);margin:14px 0 0;max-width:74ch;font-size:16.5px}
+
+/* Squad sheet: the tables */
+.tables{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:24px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.tcard h3{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;margin:0;display:flex;align-items:baseline;gap:10px}
+.tcard h3 small{font-family:var(--mono);font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.tcard p{margin:8px 0 10px;font-size:15px;color:var(--muted)}
+.cols{margin:0;padding:0;list-style:none;font-family:var(--mono);font-size:12.5px;display:grid;gap:1px}
+.cols li{display:flex;gap:10px;padding:4px 0;border-top:1px dashed var(--line)}
+.cols li span{flex:1;min-width:0;overflow-wrap:anywhere}
+.cols li em{font-style:normal;color:var(--muted);flex:none}
+.gotchas{margin:22px 0 0;padding:16px 20px;border:1.5px dashed var(--amber);border-radius:14px;background:var(--amber-soft)}
+.gotchas b{font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+.gotchas ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px;font-size:15.5px}
+
+/* Drills */
+.drill{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;scroll-margin-top:64px}
+.drill.done{border-color:var(--turf)}
+.dhead{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;padding:22px 24px 0}
+.dnum{grid-row:span 3;font-family:var(--display);font-weight:900;font-size:64px;line-height:.8;color:var(--line)}
+.drill.done .dnum{color:var(--turf)}
+.dhead .concept{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--amber)}
+.dhead h3{font-family:var(--display);font-weight:800;font-size:clamp(26px,3vw,34px);line-height:1;text-transform:uppercase;margin:0}
+.dhead p{margin:4px 0 0;max-width:72ch;font-size:16px}
+.teach{margin:14px 24px 0;font-size:15px;color:var(--muted);max-width:80ch}
+.teach pre{margin:8px 0 0}
+pre{font-family:var(--mono);font-size:13px;background:var(--pitch);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;white-space:pre;color:var(--fg)}
+.editor{margin:16px 24px 0}
+.editor textarea{display:block;width:100%;min-height:96px;resize:vertical;font-family:var(--mono);font-size:14px;line-height:1.5;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);tab-size:2}
+.editor textarea:focus{border-color:var(--turf);outline:none;box-shadow:0 0 0 3px var(--turf-soft)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.actions button{font:inherit;font-weight:700;font-size:14px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.actions button:hover{border-color:var(--turf)}
+.actions button.run{background:var(--turf);border-color:var(--turf);color:var(--surface)}
+.actions button.run:hover{filter:brightness(1.08)}
+.actions button:disabled{opacity:.5;cursor:wait}
+.actions .kb{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto}
+.hint,.solution{margin:12px 24px 0;font-size:15px;padding:10px 14px;border-radius:10px;background:var(--turf-soft)}
+.solution pre{margin:6px 0 0;background:var(--surface)}
+.verdict{margin:12px 24px 0;padding:10px 14px;border-radius:10px;font-weight:600;font-size:15px}
+.verdict.ok{background:var(--turf);color:var(--surface)}
+.verdict.no{background:var(--bad-soft);color:var(--bad)}
+.verdict.info{background:var(--pitch);color:var(--muted);font-weight:500}
+.out{margin:12px 24px 0;overflow:auto;max-height:360px;border:1px solid var(--line);border-radius:10px}
+.out:empty{display:none}
+.out table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+.out th{position:sticky;top:0;background:var(--pitch);text-align:left;font-weight:500;color:var(--muted);padding:7px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.out td{padding:6px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.out td.n{text-align:right}
+.out td.null{color:var(--muted);font-style:italic}
+.out .meta{font-family:var(--mono);font-size:11px;color:var(--muted);padding:6px 12px;background:var(--pitch)}
+.out .err{padding:10px 14px;color:var(--bad);font-family:var(--mono);font-size:13px;background:var(--bad-soft)}
+.drill .pad{height:24px}
+
+/* Credits */
+.credits{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
+.credits div{padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);font-size:15px}
+.credits b{display:block;font-size:17px;margin-bottom:2px}
+.next{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:22px}
+.next div{border:1.5px dashed var(--line);border-radius:14px;padding:18px 20px}
+.next b{font-family:var(--display);font-weight:900;font-size:26px;text-transform:uppercase;display:block;margin-bottom:4px}
+.next span{color:var(--muted);font-size:15.5px}
+footer{background:var(--night);color:var(--chalk-dim);font-size:14px}
+footer .wrap{padding-block:28px calc(44px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}
+footer a{color:var(--chalk)}
+
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}}
+@media (max-width:560px){
+  .dhead{grid-template-columns:1fr;padding:18px 16px 0}.dnum{grid-row:auto;font-size:44px}
+  .teach,.editor,.hint,.solution,.verdict,.out{margin-left:16px;margin-right:16px}
+  .actions .kb{display:none}
+}
+@media (max-width:480px){.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="../../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="../../#repos">Repos</a>
+    <a class="lnk" href="../../library/">Library</a>
+    <a class="lnk" href="../../tasks/">Tasks</a>
+    <a class="lnk" href="./" aria-current="page">Training</a>
+    <a class="lnk" href="../../credits/">Credits</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Training ground · SQL · Session 01</div>
+      <h1>SQL<span class="l2">First</span><span class="l3">Touches</span></h1>
+      <p class="lede">SELECT, WHERE, ORDER BY and GROUP BY, practised on every shot from the 2022 World Cup. <b>Eight drills that run in your browser, with nothing to install.</b></p>
+      <div class="cta">
+        <a class="go" href="#drills">Start the drills ↓</a>
+        <a class="gh" href="../data/wc2022.sqlite" download>Download the database</a>
+      </div>
+      <div class="scoreboard" aria-label="Session at a glance">
+        <div><b id="n-matches">64</b><span>matches</span></div>
+        <div><b id="n-shots">–</b><span>shots</span></div>
+        <div><b id="n-done">0/8</b><span>drills done</span></div>
+      </div>
+    </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Shot map of every non-shootout shot at the 2022 World Cup, drawn from the session database"></canvas>
+      <figcaption><span>Every shot at Qatar 2022, drawn by a query on this page</span><span>size = xG</span><span><i></i>goal</span><span><i class="miss"></i>no goal</span></figcaption>
+    </figure>
+  </div>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
+
+<nav class="bar" aria-label="Drills"><div class="wrap" id="bar">
+  <span class="lbl">Drills</span>
+  <span class="status" id="status" role="status">Loading the database…</span>
+</div></nav>
+
+<main><div class="wrap">
+  <section id="data">
+    <div class="sec-head"><h2>The squad sheet</h2><span class="count">03</span></div>
+    <p class="sec-note">One small SQLite database built from <a href="https://github.com/statsbomb/open-data">StatsBomb's free event data</a> for the 2022 FIFA World Cup. It has three tables. Keep this sheet open while you work: every drill uses these column names.</p>
+    <div class="tables" id="tables"></div>
+    <div class="gotchas">
+      <b>Read before kick-off</b>
+      <ul>
+        <li><code>period = 5</code> is a penalty shootout. Shootout kicks are in <code>shots</code> but don't count as goals in the score, so most drills leave them out with <code>WHERE period &lt; 5</code>.</li>
+        <li>Own goals aren't shots, so goals counted from <code>shots</code> won't always match the scoreline.</li>
+        <li><code>xg</code> is StatsBomb's expected goals for the shot: the chance an average shot from that spot and situation goes in.</li>
+        <li><code>x</code> and <code>y</code> are on StatsBomb's 120 × 80 pitch, with every team attacking towards <code>x = 120</code>.</li>
+        <li>Text matches are exact and case-sensitive: <code>'Argentina'</code> works, <code>'argentina'</code> doesn't.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="drills">
+    <div class="sec-head"><h2>Drills</h2><span class="count">08</span></div>
+    <p class="sec-note">Write a query, press <b>Run</b> (or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>) to see what it returns, then <b>Check</b> it against the answer. The checker compares values, not column names, so call your columns whatever you like. Your queries and ticks are saved in this browser.</p>
+    <div id="drill-list"></div>
+  </section>
+
+  <section id="free">
+    <div class="sec-head"><h2>Free play</h2></div>
+    <p class="sec-note">A blank editor on the same database. Try your own questions: who shot most often from outside the box (<code>x &lt; 102</code>)? Which referee saw the most shots?</p>
+    <div class="drill" id="scratch"></div>
+  </section>
+
+  <section id="next">
+    <div class="sec-head"><h2>After the session</h2></div>
+    <div class="next">
+      <div><b>Take it home</b><span><a href="../data/wc2022.sqlite" download>Download wc2022.sqlite</a> and open it in <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a>, DuckDB or Python's <code>sqlite3</code>. The same queries work there.</span></div>
+      <div><b>Keep practising</b><span><a href="https://sqlsportsanalytics.com">SQL Sports Analytics</a> has graded SQL challenges on sports data. It's on the <a href="../../library/">library</a> shelf with other practice tools.</span></div>
+      <div><b>Next session</b><span>Joins: putting <code>matches</code>, <code>players</code> and <code>shots</code> together to ask who scored in which match.</span></div>
+    </div>
+  </section>
+
+  <section id="credits">
+    <div class="sec-head"><h2>Credits</h2></div>
+    <p class="sec-note">What this session is built on. Everyone else whose work appears in the lab is on the <a href="../../credits/">Credits page</a>.</p>
+    <div class="credits">
+      <div><b>Data: StatsBomb</b>Event data from <a href="https://github.com/statsbomb/open-data">StatsBomb Open Data</a> (FIFA World Cup 2022), used under the <a href="https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf">StatsBomb Public Data User Agreement</a>. The database here is a small extract: matches, lineups and shots. <a href="https://github.com/mbusani/football-analytics-lab/blob/main/training/data/build_wc2022.py">The script that builds it</a> is in the repo.</div>
+      <div><b>SQL engine: sql.js</b>SQLite compiled to WebAssembly, by <a href="https://github.com/sql-js/sql.js">the sql.js contributors</a> (MIT licence). Your queries run on your own device; nothing is sent anywhere.</div>
+    </div>
+  </section>
+</div></main>
+
+<footer><div class="wrap">
+  <span>Part of <a href="../../">Football Analytics Lab</a> by <a href="https://github.com/mbusani">Mark Busani</a>. The drills and page are MIT-licensed; the data belongs to StatsBomb and keeps its own terms.</span>
+  <span>If you spot a wrong answer or a confusing drill, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a>.</span>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+/* ---------- the squad sheet: what each table holds, with a short note per column ---------- */
+const TABLES = {
+  matches: {about:"One row per match: 48 group games and 16 knockout games.", cols:{
+    match_id:"id", match_date:"YYYY-MM-DD", kick_off:"local time", stage:"'Group Stage', 'Final'…", match_week:"1–7",
+    home_team:"", away_team:"", home_score:"after extra time", away_score:"after extra time", stadium:"", referee:""}},
+  players: {about:"One row per player in each squad's matchday lineups.", cols:{
+    player_id:"id", player_name:"full name", nickname:"short name, or NULL", team:"", jersey_number:"", country:""}},
+  shots: {about:"One row per shot, penalty shootouts included.", cols:{
+    shot_id:"id", match_id:"→ matches", team:"", player_id:"→ players", player:"full name", period:"1–4, 5 = shootout",
+    minute:"", second:"", x:"0–120", y:"0–80", xg:"0–1", outcome:"'Goal', 'Saved', 'Off T'…",
+    shot_type:"'Open Play', 'Penalty'…", body_part:"", technique:"", under_pressure:"1 or 0"}}
+};
+
+/* ---------- the drills ----------
+   title/concept/task  what the learner sees
+   teach, eg           a one-line lesson and an example query on a different question
+   start               what the editor holds before the learner types
+   hint, sol           revealed on request; sol is also run to produce the expected answer
+   ordered             true when rows must come back in exactly the solution's order
+   desc                for sorted drills with possible ties: a key the rows must never increase on */
+const DRILLS = [
+  {title:"The fixture list", concept:"SELECT", ordered:false,
+   task:"List every match with its date, home team, away team, home score and away score.",
+   teach:"<code>SELECT</code> picks the columns you want, in the order you want them. <code>*</code> means all of them.",
+   eg:"SELECT match_date, stadium\nFROM matches;",
+   start:"SELECT \nFROM matches;",
+   hint:"Five columns, separated by commas: <code>match_date</code>, <code>home_team</code>, <code>away_team</code>, <code>home_score</code>, <code>away_score</code>.",
+   sol:"SELECT match_date, home_team, away_team, home_score, away_score\nFROM matches;"},
+  {title:"Argentina's road", concept:"WHERE · OR", ordered:true,
+   task:"Show the date, stage, home team, away team and score of every Argentina match, in date order.",
+   teach:"<code>WHERE</code> keeps only the rows that pass a test. Combine tests with <code>AND</code> and <code>OR</code>. <code>ORDER BY</code> sorts the result.",
+   eg:"SELECT home_team, away_team\nFROM matches\nWHERE stage = 'Final';",
+   start:"SELECT match_date, stage, home_team, away_team, home_score, away_score\nFROM matches\nWHERE ",
+   hint:"Argentina could be the home or the away team: <code>WHERE home_team = 'Argentina' OR away_team = 'Argentina'</code>, then <code>ORDER BY match_date</code>.",
+   sol:"SELECT match_date, stage, home_team, away_team, home_score, away_score\nFROM matches\nWHERE home_team = 'Argentina' OR away_team = 'Argentina'\nORDER BY match_date;"},
+  {title:"Goal-fests", concept:"Expressions · ORDER BY DESC", ordered:false, desc: r => r[2],
+   task:"Find every match with six or more goals. Show the home team, away team and total goals, highest first.",
+   teach:"You can do arithmetic in <code>SELECT</code> and <code>WHERE</code>, and name the result with <code>AS</code>. <code>DESC</code> sorts biggest first.",
+   eg:"SELECT home_team, home_score - away_score AS margin\nFROM matches\nORDER BY margin DESC;",
+   start:"SELECT home_team, away_team, \nFROM matches\n",
+   hint:"Total goals is <code>home_score + away_score</code>. Filter on that same sum in <code>WHERE</code> (<code>&gt;= 6</code>), and sort with <code>ORDER BY goals DESC</code>.",
+   sol:"SELECT home_team, away_team, home_score + away_score AS goals\nFROM matches\nWHERE home_score + away_score >= 6\nORDER BY goals DESC;"},
+  {title:"How many shots?", concept:"COUNT", ordered:true,
+   task:"How many shots were taken at the tournament, not counting penalty shootouts? Return a single number.",
+   teach:"<code>COUNT(*)</code> counts rows. On its own it squashes the whole table into one row.",
+   eg:"SELECT COUNT(*)\nFROM matches\nWHERE stage = 'Group Stage';",
+   start:"SELECT \nFROM shots\n",
+   hint:"Shootouts are <code>period = 5</code>, so keep <code>period &lt; 5</code>.",
+   sol:"SELECT COUNT(*) AS shots\nFROM shots\nWHERE period < 5;"},
+  {title:"Who shot most?", concept:"GROUP BY", ordered:false, desc: r => r[1],
+   task:"Count each team's shots (no shootouts). Show team and shots, most first.",
+   teach:"<code>GROUP BY</code> splits the rows into one group per value, then <code>COUNT</code>, <code>SUM</code> and friends work on each group separately.",
+   eg:"SELECT stage, COUNT(*) AS matches\nFROM matches\nGROUP BY stage;",
+   start:"SELECT team, COUNT(*) AS shots\nFROM shots\n",
+   hint:"<code>WHERE</code> comes before <code>GROUP BY</code>, which comes before <code>ORDER BY</code>: <code>WHERE period &lt; 5 GROUP BY team ORDER BY shots DESC</code>.",
+   sol:"SELECT team, COUNT(*) AS shots\nFROM shots\nWHERE period < 5\nGROUP BY team\nORDER BY shots DESC;"},
+  {title:"Goals against xG", concept:"SUM · ROUND", ordered:false, desc: r => r[1] - r[2],
+   task:"For each team, show goals scored from shots and total xG rounded to 2 decimal places (no shootouts). Sort by goals minus xG, best finishers first.",
+   teach:"In SQLite a test like <code>outcome = 'Goal'</code> is 1 when true and 0 when false, so <code>SUM(outcome = 'Goal')</code> counts goals. <code>ROUND(value, 2)</code> rounds.",
+   eg:"SELECT team, SUM(under_pressure) AS pressured_shots\nFROM shots\nGROUP BY team;",
+   start:"SELECT team,\n       SUM(outcome = 'Goal') AS goals,\n       \nFROM shots\n",
+   hint:"Add <code>ROUND(SUM(xg), 2) AS total_xg</code>, filter <code>period &lt; 5</code>, <code>GROUP BY team</code>, then <code>ORDER BY goals - total_xg DESC</code>. Don't name the total <code>xg</code>: inside an expression SQLite would read that as the shot column, not your total.",
+   sol:"SELECT team,\n       SUM(outcome = 'Goal') AS goals,\n       ROUND(SUM(xg), 2) AS total_xg\nFROM shots\nWHERE period < 5\nGROUP BY team\nORDER BY goals - total_xg DESC;"},
+  {title:"Shootout nerve", concept:"Filter then group", ordered:false,
+   task:"Penalty shootouts only: for each team, show kicks taken and kicks scored.",
+   teach:"The same tools, a different filter. Here the shootout rows are the ones you want.",
+   eg:"SELECT team, COUNT(*) AS penalties\nFROM shots\nWHERE shot_type = 'Penalty' AND period < 5\nGROUP BY team;",
+   start:"SELECT team, \nFROM shots\nWHERE period = 5\n",
+   hint:"<code>COUNT(*) AS taken</code> and <code>SUM(outcome = 'Goal') AS scored</code>, grouped by team.",
+   sol:"SELECT team, COUNT(*) AS taken, SUM(outcome = 'Goal') AS scored\nFROM shots\nWHERE period = 5\nGROUP BY team\nORDER BY scored DESC;"},
+  {title:"The chance-getters", concept:"HAVING", ordered:false, desc: r => r[4],
+   task:"Players with at least 2.0 non-penalty xG (no penalties, no shootouts). Show player, team, shots, goals and npxG rounded to 2 places, highest npxG first.",
+   teach:"<code>WHERE</code> filters rows before grouping; <code>HAVING</code> filters groups after, so it can test a <code>SUM</code> or <code>COUNT</code>.",
+   eg:"SELECT team, COUNT(*) AS shots\nFROM shots\nGROUP BY team\nHAVING COUNT(*) > 100;",
+   start:"SELECT player, team, COUNT(*) AS shots,\n       SUM(outcome = 'Goal') AS goals,\n       ROUND(SUM(xg), 2) AS npxg\nFROM shots\nWHERE \n",
+   hint:"<code>WHERE period &lt; 5 AND shot_type &lt;&gt; 'Penalty'</code>, <code>GROUP BY player, team</code>, <code>HAVING SUM(xg) &gt;= 2</code>, <code>ORDER BY npxg DESC</code>.",
+   sol:"SELECT player, team, COUNT(*) AS shots,\n       SUM(outcome = 'Goal') AS goals,\n       ROUND(SUM(xg), 2) AS npxg\nFROM shots\nWHERE period < 5 AND shot_type <> 'Penalty'\nGROUP BY player, team\nHAVING SUM(xg) >= 2\nORDER BY npxg DESC;"}
+];
+
+/* ---------- storage (best effort) ----------
+   Ticks and editor drafts live in this browser only. Private windows or blocked storage
+   just mean nothing is remembered; the page still works. */
+const KEY = "fal-sql-01";
+let saved = {done:{}, drafts:{}};   // done: {d1: 1, …}; drafts: {d1: "SELECT …", free: "…"}
+try{ saved = Object.assign(saved, JSON.parse(localStorage.getItem(KEY)) || {}); }catch(e){}
+const persist = () => { try{ localStorage.setItem(KEY, JSON.stringify(saved)); }catch(e){} };
+
+// Escape text before it goes into innerHTML (query results and drafts are user-controlled)
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $ = id => document.getElementById(id);
+let db = null;   // the sql.js database, set once boot() has loaded it
+
+/* ---------- squad sheet: one card per table; row counts are filled in after boot ---------- */
+$("tables").innerHTML = Object.entries(TABLES).map(([t, d]) =>
+  `<div class="tcard"><h3>${t}<small data-rows="${t}"></small></h3><p>${d.about}</p><ul class="cols">${
+    Object.entries(d.cols).map(([c, n]) => `<li><span>${c}</span><em>${esc(n)}</em></li>`).join("")}</ul></div>`).join("");
+
+/* ---------- drills ---------- */
+// A textarea plus an empty actions row (buttons are added below). Restores a saved draft if there is one.
+function editorBlock(id, start){
+  return `<div class="editor"><label for="q-${id}" style="position:absolute;left:-9999px">SQL for ${id}</label>
+    <textarea id="q-${id}" spellcheck="false" autocapitalize="off" autocomplete="off">${esc(saved.drafts[id] ?? start)}</textarea>
+    <div class="actions" data-id="${id}"></div></div>`;
+}
+// One card per drill, ids d1…d8; hint, answer and verdict start hidden
+$("drill-list").innerHTML = DRILLS.map((d, i) => { const id = "d" + (i + 1); return `
+  <article class="drill${saved.done[id] ? " done" : ""}" id="${id}">
+    <div class="dhead"><div class="dnum">${String(i + 1).padStart(2, "0")}</div>
+      <div class="concept">${d.concept}</div><h3>${d.title}</h3><p>${d.task}</p></div>
+    <div class="teach">${d.teach}<pre>${esc(d.eg)}</pre></div>
+    ${editorBlock(id, d.start)}
+    <div class="hint" hidden>${d.hint}</div>
+    <div class="solution" hidden>One answer:<pre>${esc(d.sol)}</pre></div>
+    <div class="verdict" hidden></div>
+    <div class="out" id="out-${id}"></div><div class="pad"></div>
+  </article>`; }).join("");
+// Free play: the same editor with a starter query, but no checker
+$("scratch").innerHTML = editorBlock("free", "SELECT player, minute, xg\nFROM shots\nWHERE outcome = 'Goal'\nORDER BY xg\nLIMIT 10;") + `<div class="out" id="out-free"></div><div class="pad"></div>`;
+
+// Run and Check stay disabled until the database has loaded; free play gets Run only
+document.querySelectorAll(".actions").forEach(a => {
+  const id = a.dataset.id;
+  a.innerHTML = `<button class="run" data-act="run" disabled>Run</button>` +
+    (id === "free" ? "" : `<button data-act="check" disabled>Check</button><button data-act="hint">Hint</button><button data-act="sol">Show answer</button>`) +
+    `<span class="kb">Ctrl + Enter to run</span>`;
+});
+
+// Redraw the sticky drill bar and the "drills done" score, keeping the load-status text as it is
+function bar(){
+  const n = Object.keys(saved.done).length;
+  $("n-done").textContent = `${n}/${DRILLS.length}`;
+  const status = $("status").outerHTML;
+  $("bar").innerHTML = `<span class="lbl">Drills</span>` + DRILLS.map((d, i) =>
+    `<a href="#d${i + 1}" class="${saved.done["d" + (i + 1)] ? "done" : ""}" title="${esc(d.title)}">${i + 1}</a>`).join("") + status;
+}
+bar();
+
+/* ---------- running and checking ---------- */
+// Run SQL and return the last statement's result (so "SELECT 1; SELECT 2;" shows the second)
+function run(sql){
+  const res = db.exec(sql);
+  const last = res[res.length - 1];
+  return last ? {columns: last.columns, values: last.values} : {columns: [], values: []};
+}
+// Display a cell: NULL spelled out, decimals trimmed to at most 4 places
+const fmtCell = v => v === null ? "NULL" : typeof v === "number" && !Number.isInteger(v) ? String(+v.toFixed(4)) : String(v);
+// Render a result as an HTML table, capped at 200 rows so a careless SELECT * stays fast
+function table(r){
+  if(!r.columns.length) return `<div class="meta">The query ran but returned no table.</div>`;
+  const shown = r.values.slice(0, 200);
+  return `<div class="meta">${r.values.length} row${r.values.length === 1 ? "" : "s"}${r.values.length > 200 ? " · showing the first 200" : ""}</div>
+    <table><thead><tr>${r.columns.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${
+    shown.map(row => `<tr>${row.map(v => `<td class="${v === null ? "null" : typeof v === "number" ? "n" : ""}">${esc(fmtCell(v))}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+// For checking: numbers compared to 2 decimal places, so ROUND(…, 2) and unrounded sums both pass
+const norm = v => typeof v === "number" ? (Math.round(v * 100) / 100).toFixed(2) : v === null ? "∅" : String(v);
+const rowKey = row => row.map(norm).join("␟");   // one string per row, joined on a character SQL won't produce
+// Compare the learner's result with the solution's by value (column names ignored).
+// Returns "" on a match, or a message saying what's off: columns, row count, then values.
+function compare(got, want, ordered){
+  if(!got.columns.length) return "Your query didn't return a table.";
+  if(got.columns.length !== want.columns.length)
+    return `You returned ${got.columns.length} column${got.columns.length === 1 ? "" : "s"}; the answer has ${want.columns.length}.`;
+  if(got.values.length !== want.values.length)
+    return `You returned ${got.values.length} row${got.values.length === 1 ? "" : "s"}; the answer has ${want.values.length}.`;
+  let g = got.values.map(rowKey), w = want.values.map(rowKey);
+  if(!ordered){ g = g.slice().sort(); w = w.slice().sort(); }   // compare as multisets when order is free
+  for(let i = 0; i < w.length; i++) if(g[i] !== w[i])
+    return ordered ? `Row ${i + 1} doesn't match. Check the filter, the column order and the sort.` : "Right number of rows, but some values differ. Check the filter and the column order.";
+  return "";
+}
+// Ties can sit in any order, so a sorted drill checks that its sort key never goes the wrong way
+// (with a little slack for rounded values)
+function sortedBy(rows, key){
+  for(let i = 1; i < rows.length; i++) if(key(rows[i]) > key(rows[i - 1]) + .011) return false;
+  return true;
+}
+
+// Put a result table, or an SQL error, under the editor
+function show(id, r, err){
+  $("out-" + id).innerHTML = err ? `<div class="err">${esc(err)}</div>` : table(r);
+}
+// Show the checker's verdict: ok (green), no (red) or info (neutral)
+function verdict(art, cls, text){
+  const v = art.querySelector(".verdict"); v.hidden = false; v.className = "verdict " + cls; v.textContent = text;
+}
+// Handle a button: hint and sol just reveal text; run shows the result; check also marks the drill
+function act(id, what){
+  const art = $(id === "free" ? "scratch" : id), sql = $("q-" + id).value;
+  if(what === "hint"){ art.querySelector(".hint").hidden = false; return; }
+  if(what === "sol"){ art.querySelector(".solution").hidden = false; return; }
+  if(!db) return;
+  let r;
+  try{ r = run(sql); show(id, r); }
+  catch(e){ show(id, null, e.message); if(what === "check") verdict(art, "no", "The query has an error: fix it and check again."); return; }
+  if(what !== "check") return;
+  const d = DRILLS[+id.slice(1) - 1];
+  const msg = compare(r, run(d.sol), d.ordered);
+  if(msg) verdict(art, "no", msg);
+  else if(d.desc && !sortedBy(r.values, d.desc)) verdict(art, "info", "The right rows, but not in the order the drill asks for. Check your ORDER BY.");
+  else {
+    verdict(art, "ok", "Spot on. Drill " + id.slice(1) + " done.");
+    saved.done[id] = 1; persist(); art.classList.add("done"); bar();
+  }
+}
+// One delegated listener for every drill's buttons
+document.addEventListener("click", e => {
+  const b = e.target.closest(".actions button"); if(!b) return;
+  act(b.closest(".actions").dataset.id, b.dataset.act);
+});
+// In an editor: Ctrl/Cmd+Enter runs, Tab indents (Shift+Tab still moves focus out)
+document.addEventListener("keydown", e => {
+  const t = e.target; if(t.tagName !== "TEXTAREA" || !t.id.startsWith("q-")) return;
+  if(e.key === "Enter" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); act(t.id.slice(2), "run"); }
+  if(e.key === "Tab" && !e.shiftKey){ e.preventDefault(); t.setRangeText("  ", t.selectionStart, t.selectionEnd, "end"); }
+});
+// Save drafts as the learner types
+document.addEventListener("input", e => {
+  const t = e.target; if(!t.id || !t.id.startsWith("q-")) return;
+  saved.drafts[t.id.slice(2)] = t.value; persist();
+});
+
+/* ---------- hero: the shot map, drawn from the database ----------
+   shots: rows of [x, y, xg, isGoal] in match order. Dots appear over ~2.6s (all at once with reduced motion). */
+function heroMap(shots){
+  const cv = $("hero"); if(!cv.getContext) return;
+  const ctx = cv.getContext("2d"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W = 0, H = 0, start = null;
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();   // read a colour token
+  // Match the canvas to its CSS size, sharp on high-DPI screens
+  function size(){ const dpr = Math.min(2, devicePixelRatio || 1); W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  // half pitch, goal at the top: StatsBomb y (0–80) runs across, x (60–120) runs up the screen
+  // progress 0–1: the share of shots drawn so far
+  function draw(progress){
+    // fit a 80 × 60 half pitch inside the canvas with a margin, centred
+    const m =Math.max(14, W * .05), s = Math.min((W - 2 * m) / 80, (H - 2 * m) / 60), ox = (W - 80 * s) / 2, oy = (H - 60 * s) / 2;
+    const P = (x, y) => [ox + y * s, oy + (120 - x) * s];
+    ctx.fillStyle = css("--night-2"); ctx.fillRect(0, 0, W, H);
+    // pitch markings: half pitch, penalty box, six-yard box, penalty spot, centre circle, the D, the goal
+    ctx.strokeStyle = css("--nline"); ctx.lineWidth = 1.4;
+    const rect = (x1, y1, x2, y2) => { const [a, b] = P(x1, y1), [c, d] = P(x2, y2); ctx.strokeRect(Math.min(a, c), Math.min(b, d), Math.abs(c - a), Math.abs(d - b)); };
+    rect(60, 0, 120, 80); rect(102, 18, 120, 62); rect(114, 30, 120, 50);
+    const [px, py] = P(108, 40); ctx.fillStyle = css("--nline"); ctx.beginPath(); ctx.arc(px, py, 2, 0, 7); ctx.fill();
+    ctx.beginPath(); const [cx, cy] = P(60, 40); ctx.arc(cx, cy, 10 * s, Math.PI, 2 * Math.PI); ctx.stroke();
+    ctx.beginPath(); ctx.arc(px, py, 10 * s, .2 * Math.PI, .8 * Math.PI); ctx.stroke();
+    const [g1x, g1y] = P(120, 36), [g2x] = P(120, 44); ctx.strokeStyle = css("--chalk"); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(g1x, g1y); ctx.lineTo(g2x, g1y); ctx.stroke();
+    // shots: goals bright amber, the rest faint green; radius grows with √xG. Shots from inside
+    // the team's own half (x < 60) are clamped to halfway so they stay on the drawing.
+    const n = Math.floor(shots.length * progress), flood = css("--flood"), grass = css("--grass");
+    for(let i = 0; i < n; i++){
+      const [x, y, xg, goal] = shots[i]; const [sx, sy] = P(Math.max(60, x), y);
+      ctx.globalAlpha = goal ? .95 : .32; ctx.fillStyle = goal ? flood : grass;
+      ctx.beginPath(); ctx.arc(sx, sy, 1.2 + Math.sqrt(xg) * 9 * s / 6, 0, 7); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  // animation loop: redraw with a growing share of shots until all are on
+  function frame(t){ if(start === null) start = t; const p = Math.min(1, (t - start) / 2600); draw(p); if(p < 1) requestAnimationFrame(frame); }
+  size(); new ResizeObserver(() => { size(); draw(1); }).observe(cv);
+  if(reduce) draw(1); else requestAnimationFrame(frame);
+}
+
+/* ---------- boot ----------
+   Load the SQLite engine (WebAssembly, from cdnjs) and the database file in parallel, then fill in
+   the live numbers, enable the buttons and draw the hero shot map. */
+(async function boot(){
+  try{
+    const [SQL, buf] = await Promise.all([
+      initSqlJs({locateFile: f => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${f}`}),
+      fetch("../data/wc2022.sqlite").then(r => { if(!r.ok) throw new Error("HTTP " + r.status); return r.arrayBuffer(); })
+    ]);
+    db = new SQL.Database(new Uint8Array(buf));
+  }catch(e){
+    // fetch() can't read local files, so opening the page straight from disk needs a hint
+    const s = $("status"); s.classList.add("err");
+    s.textContent = location.protocol === "file:" ? "Can't load the database from a file. Serve the folder (python -m http.server) and reload." : "Couldn't load the database. Reload to try again.";
+    return;
+  }
+  // row counts on the squad sheet and the hero scoreboard come from the data, not hard-coded
+  for(const t of Object.keys(TABLES)){
+    const n =run(`SELECT COUNT(*) FROM ${t}`).values[0][0];
+    document.querySelector(`[data-rows="${t}"]`).textContent = n.toLocaleString("en-AU") + " rows";
+  }
+  $("n-matches").textContent = run("SELECT COUNT(*) FROM matches").values[0][0];
+  $("n-shots").textContent = run("SELECT COUNT(*) FROM shots WHERE period < 5").values[0][0].toLocaleString("en-AU");
+  $("status").textContent = "Database ready";
+  document.querySelectorAll(".actions button").forEach(b => b.disabled = false);
+  heroMap(run("SELECT x, y, xg, outcome = 'Goal' FROM shots WHERE period < 5 ORDER BY match_id, period, minute, second").values);
+})();
+</script>
+</body>
+</html>

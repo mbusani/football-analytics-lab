@@ -1,0 +1,830 @@
+player_id,player_name,nickname,team,jersey_number,country
+2941,Ismaïla Sarr,,Senegal,18,Senegal
+2954,Youri Tielemans,,Belgium,8,Belgium
+2972,Marcus Thuram,,France,26,France
+2988,Memphis Depay,,Netherlands,10,Netherlands
+2989,Alexander Djiku,,Ghana,23,Ghana
+2995,Ángel Fabián Di María Hernández,Ángel Di María,Argentina,11,Argentina
+3009,Kylian Mbappé Lottin,Kylian Mbappé,France,10,France
+3026,Adrien Rabiot,,France,14,France
+3034,Kamil Glik,,Poland,15,Poland
+3043,Christian Dannemann Eriksen,Christian Eriksen,Denmark,10,Denmark
+3053,Leroy Sané,,Germany,19,Germany
+3063,Danilo Luiz da Silva,Danilo,Brazil,2,Brazil
+3067,Ederson Santana de Moraes,Ederson Moraes,Brazil,23,Brazil
+3077,Jan Vertonghen,,Belgium,5,Belgium
+3083,Heung-Min Son,Son Heung-Min,South Korea,7,Korea (South)
+3086,Ben Davies,,Wales,4,Wales
+3089,Kevin De Bruyne,,Belgium,7,Belgium
+3090,Nicolás Hernán Otamendi,Nicolás Otamendi,Argentina,19,Argentina
+3099,Hugo Lloris,,France,1,France
+3135,Chang-Hoon Kwon,Kwon Chang-Hoon,South Korea,22,Korea (South)
+3141,André-Frank Zambo Anguissa,André Zambo Anguissa,Cameroon,8,Cameroon
+3167,Antonio Rüdiger,,Germany,2,Germany
+3175,Eiji Kawashima,,Japan,1,Japan
+3176,Thomas Meunier,,Belgium,15,Belgium
+3193,Bernardo Mota Veiga de Carvalho e Silva,Bernardo Silva,Portugal,10,Portugal
+3196,Wahbi Khazri,,Tunisia,10,Tunisia
+3202,Gabriel Fernando de Jesus,Gabriel Jesus,Brazil,18,Brazil
+3205,Kyle Walker,,England,2,England
+3233,Raheem Sterling,Raheem Sterling,England,10,England
+3240,Mathew Ryan,Mat Ryan,Australia,1,Australia
+3244,John Stones,,England,5,England
+3247,Fábio Henrique Tavares,Fabinho,Brazil,15,Brazil
+3264,Vincent Janssen,,Netherlands,18,Netherlands
+3280,Richarlison de Andrade,Richarlison,Brazil,9,Brazil
+3281,Aaron Mooy,,Australia,13,Australia
+3289,Romelu Lukaku Menama,Romelu Lukaku,Belgium,9,Belgium
+3295,Thiago Emiliano da Silva,Thiago Silva,Brazil,3,Brazil
+3300,Maya Yoshida,,Japan,22,Japan
+3306,Nathan Aké,,Netherlands,5,Netherlands
+3308,Kieran Trippier,,England,12,England
+3311,Daley Blind,,Netherlands,17,Netherlands
+3318,Marcus Rashford,,England,11,England
+3336,Harry Maguire,,England,6,England
+3347,André Ayew Pelé,André Ayew,Ghana,10,Ghana
+3377,Timothy Weah,,United States,21,United States of America
+3379,Alphonse Areola,,France,23,France
+3382,Luke Shaw,,England,3,England
+3404,Youssouf Sabaly,,Senegal,21,Senegal
+3436,Idrissa Gana Gueye,Idrissa Gueye,Senegal,5,Senegal
+3441,Nikola Vlašić,,Croatia,13,Croatia
+3450,Jordan Ayew,,Ghana,9,Ghana
+3457,Michy Batshuayi Tunga,Michy Batshuayi,Belgium,23,Belgium
+3468,Jordan Pickford,,England,1,England
+3471,Dejan Lovren,,Croatia,6,Croatia
+3474,Nick Pope,,England,13,England
+3477,Álvaro Borja Morata Martín,Álvaro Morata,Spain,7,Spain
+3488,Wayne Hennessey,,Wales,1,Wales
+3499,Jean-Eric Maxim Choupo-Moting,Eric Maxim Choupo-Moting,Cameroon,13,Cameroon
+3500,Granit Xhaka,,Switzerland,10,Switzerland
+3509,Thibaut Courtois,,Belgium,1,Belgium
+3512,Marko Grujić,,Serbia,26,Serbia
+3517,Aaron Ramsey,,Wales,10,Wales
+3530,Hiroki Sakai,,Japan,19,Japan
+3532,Jordan Brian Henderson,Jordan Henderson,England,8,England
+3533,Xherdan Shaqiri,,Switzerland,23,Switzerland
+3539,Simon Mignolet,,Belgium,12,Belgium
+3543,Steve Mandanda,,France,16,France
+3551,Karl Brillant Toko Ekambi,Karl Toko Ekambi,Cameroon,12,Cameroon
+3557,Naïm Sliti,,Tunisia,23,Tunisia
+3570,Pierre-Emile Højbjerg,,Denmark,23,Denmark
+3604,Olivier Giroud,,France,9,France
+3616,Callum Wilson,,England,24,England
+3621,Eden Hazard,,Belgium,10,Belgium
+3625,Sofiane Boufal,,Morocco,17,Morocco
+3634,Abdelhamid Sabiri,,Morocco,11,Morocco
+3637,Grzegorz Krychowiak,,Poland,10,Poland
+3639,Georges-Kévin Nkoudou Mbida,Georges-Kevin N'Koudou,Cameroon,7,Cameroon
+3658,DeAndre Yedlin,,United States,22,United States of America
+3664,Trent Alexander-Arnold,,England,18,England
+3669,Virgil van Dijk,,Netherlands,4,Netherlands
+3675,Fodé Ballo Touré,,Senegal,12,Senegal
+3684,Cheikhou Kouyaté,,Senegal,8,Senegal
+3709,Daniel Amartey,,Ghana,18,Ghana
+3767,Ellyes Joris Skhiri,,Tunisia,17,Tunisia
+3815,Kasper Schmeichel,,Denmark,1,Denmark
+3831,Dušan Tadić,,Serbia,10,Serbia
+3839,Tom Lockyer,,Wales,17,Wales
+3853,Kieffer Roberto Francisco Moore,Kieffer Moore,Wales,13,Wales
+3913,Edimilson Fernandes,,Switzerland,2,Switzerland
+3943,Declan Rice,,England,4,England
+3957,César Azpilicueta Tanco,César Azpilicueta,Spain,2,Spain
+3959,Andreas Christensen,,Denmark,6,Denmark
+4106,Ike Ugbo,,Canada,12,Canada
+4127,David Raya Martin,David Raya,Spain,13,Spain
+4269,Aleksandar Mitrović,,Serbia,9,Serbia
+4272,João Mário Naval da Costa Eduardo,João Mário,Portugal,17,Portugal
+4318,Davy Klaassen,,Netherlands,14,Netherlands
+4319,Edinson Roberto Cavani Gómez,Edinson Cavani,Uruguay,21,Uruguay
+4320,Neymar da Silva Santos Junior,Neymar,Brazil,10,Brazil
+4324,Daniel Alves da Silva,Dani Alves,Brazil,13,Brazil
+4353,Aymeric Laporte,,Spain,24,Spain
+4354,Philip Foden,,England,20,England
+4372,Marcos Aoás Corrêa,Marquinhos,Brazil,4,Brazil
+4440,Kevin Trapp,,Germany,12,Germany
+4445,Jules Koundé,,France,5,France
+4447,Martin Braithwaite Christensen,Martin Braithwaite,Denmark,9,Denmark
+4506,Nampalys Mendy,,Senegal,6,Senegal
+4584,Adam Davies,,Wales,21,Wales
+4614,Antonee Robinson,,United States,5,United States of America
+4626,Jan Bednarek,,Poland,5,Poland
+4664,Sebastian Szymański,,Poland,19,Poland
+4682,Robert Gumny,,Poland,25,Poland
+4685,Artur Jędrzejczyk,,Poland,3,Poland
+4706,Kalvin Phillips,,England,14,England
+4734,Matty Cash,,Poland,2,Poland
+4767,Chris Mepham,,Wales,5,Wales
+4774,Connor Roberts,,Wales,14,Wales
+4934,Ethan Ampadu,,Wales,15,Wales
+4935,Bryan Mbeumo,,Cameroon,20,Cameroon
+5173,Abdullah Ibrahim Otayf,Abdullah Otayf,Saudi Arabia,14,Saudi Arabia
+5178,Salman Mohammed Al Faraj,Salman Al Faraj,Saudi Arabia,7,Saudi Arabia
+5183,Yasir Gharsan Al Shahrani,Yasir Al Shahrani,Saudi Arabia,13,Saudi Arabia
+5187,Salem Mohammed Al Dawsari,Salem Al Dawsari,Saudi Arabia,10,Saudi Arabia
+5188,Hattan Babhir,,Saudi Arabia,19,Saudi Arabia
+5191,Mohammed Al Burayk,,Saudi Arabia,6,Saudi Arabia
+5199,Jorge Resurrección Merodio,Koke,Spain,8,Spain
+5203,Sergio Busquets i Burgos,Sergio Busquets,Spain,5,Spain
+5204,Bruno Miguel Borges Fernandes,Bruno Fernandes,Portugal,8,Portugal
+5205,Rui Pedro dos Santos Patrício,Rui Patrício,Portugal,1,Portugal
+5206,Rúben Santos Gato Alves Dias,Rúben Dias,Portugal,4,Portugal
+5207,Cristiano Ronaldo dos Santos Aveiro,Cristiano Ronaldo,Portugal,7,Portugal
+5209,Raphaël Adelino José Guerreiro,Raphaël Guerreiro,Portugal,5,Portugal
+5211,Jordi Alba Ramos,Jordi Alba,Spain,18,Spain
+5214,William Silva de Carvalho,William Carvalho,Portugal,14,Portugal
+5218,André Miguel Valente Silva,André Silva,Portugal,9,Portugal
+5219,Romain Saïss,,Morocco,6,Morocco
+5220,Morteza Pouraliganji,,Iran,8,"Iran, Islamic Republic of"
+5222,Roozbeh Cheshmi,,Iran,15,"Iran, Islamic Republic of"
+5224,Sardar Azmoun,,Iran,20,"Iran, Islamic Republic of"
+5226,Mehdi Taremi,,Iran,9,"Iran, Islamic Republic of"
+5227,Alireza Safar Beiranvand,Alireza Beiranvand,Iran,1,"Iran, Islamic Republic of"
+5228,Seyed Majid Hosseini,Majid Hosseini,Iran,19,"Iran, Islamic Republic of"
+5230,Ehsan Hajsafi,,Iran,3,"Iran, Islamic Republic of"
+5231,Karim Ansarifard,,Iran,10,"Iran, Islamic Republic of"
+5233,Munir Mohand Mohamedi,Munir,Morocco,12,Morocco
+5234,Sofyan Amrabat,,Morocco,4,Morocco
+5235,Ramin Rezaeian,,Iran,23,"Iran, Islamic Republic of"
+5237,Hakim Ziyech,,Morocco,7,Morocco
+5239,Alireza Jahanbakhsh,,Iran,7,"Iran, Islamic Republic of"
+5240,Saman Ghoddos,,Iran,14,"Iran, Islamic Republic of"
+5241,Vahid Amiri,,Iran,11,"Iran, Islamic Republic of"
+5245,Achraf Hakimi Mouh,Achraf Hakimi,Morocco,2,Morocco
+5246,Luis Alberto Suárez Díaz,Luis Suárez,Uruguay,9,Uruguay
+5248,José Martín Cáceres Silva,Martín Cáceres,Uruguay,22,Uruguay
+5249,Diego Roberto Godín Leal,Diego Godín,Uruguay,3,Uruguay
+5255,Matías Vecino Falero,Matías Vecino,Uruguay,5,Uruguay
+5258,Giorgian Daniel De Arrascaeta Benedetti,Giorgian De Arrascaeta,Uruguay,10,Uruguay
+5259,José María Giménez de Vargas,José Giménez,Uruguay,2,Uruguay
+5260,Rodrigo Bentancur Colmán,Rodrigo Bentancur,Uruguay,6,Uruguay
+5264,Guillermo Varela Olivera,Guillermo Varela,Uruguay,13,Uruguay
+5266,Lucas Torreira Di Pascua,Lucas Torreira,Uruguay,14,Uruguay
+5267,Néstor Fernando Muslera Micol,Fernando Muslera,Uruguay,1,Uruguay
+5456,Mateo Kovačić,,Croatia,8,Croatia
+5460,Andrej Kramarić,,Croatia,9,Croatia
+5463,Luka Modrić,,Croatia,10,Croatia
+5468,Domagoj Vida,,Croatia,21,Croatia
+5469,Marcelo Brozović,,Croatia,11,Croatia
+5474,Ivan Perišić,,Croatia,4,Croatia
+5476,Benjamin Pavard,,France,2,France
+5477,Ousmane Dembélé,,France,11,France
+5479,Aziz Eraltay Behich,Aziz Behich,Australia,16,Australia
+5481,Mathew Leckie,,Australia,7,Australia
+5484,Lucas Hernández Pi,Lucas Hernandez,France,21,France
+5485,Raphaël Varane,,France,4,France
+5487,Antoine Griezmann,,France,7,France
+5490,Jackson Irvine,,Australia,22,Australia
+5503,Lionel Andrés Messi Cuccittini,Lionel Messi,Argentina,10,Argentina
+5507,Nicolás Alejandro Tagliafico,Nicolás Tagliafico,Argentina,3,Argentina
+5524,Jens Stryger Larsen,,Denmark,17,Denmark
+5527,Thomas Delaney,,Denmark,8,Denmark
+5534,Simon Thorup Kjær,Simon Kjær,Denmark,4,Denmark
+5536,Yussuf Yurary Poulsen,Yussuf Poulsen,Denmark,20,Denmark
+5537,Fabian Lukas Schär,Fabian Schär,Switzerland,22,Switzerland
+5538,Denis Lemi Zakaria Lako Lado,Denis Zakaria,Switzerland,6,Switzerland
+5539,Carlos Henrique Casimiro,Casemiro,Brazil,5,Brazil
+5543,Haris Seferović,,Switzerland,9,Switzerland
+5544,Ricardo Iván Rodríguez Araya,Ricardo Rodríguez,Switzerland,13,Switzerland
+5545,Breel-Donald Embolo,Breel Embolo,Switzerland,7,Switzerland
+5547,Alisson Ramsés Becker,Alisson,Brazil,1,Brazil
+5549,Manuel Obafemi Akanji,Manuel Akanji,Switzerland,5,Switzerland
+5550,Yann Sommer,,Switzerland,1,Switzerland
+5555,Julian Brandt,,Germany,17,Germany
+5562,Thomas Müller,,Germany,13,Germany
+5563,José Andrés Guardado Hernández,Andrés Guardado,Mexico,18,Mexico
+5567,Edson Omar Álvarez Velázquez,Edson Álvarez,Mexico,4,Mexico
+5568,Raúl Alonso Jiménez Rodríguez,Raúl Jiménez,Mexico,9,Mexico
+5570,Manuel Neuer,,Germany,1,Germany
+5571,Hirving Rodrigo Lozano Bahena,Hirving Lozano,Mexico,22,Mexico
+5573,Héctor Alfredo Moreno Herrera,Héctor Moreno,Mexico,15,Mexico
+5575,Héctor Miguel Herrera López,Héctor Herrera,Mexico,16,Mexico
+5576,Jesús Daniel Gallardo Vasconcelos,Jesús Gallardo,Mexico,23,Mexico
+5577,Francisco Guillermo Ochoa Magaña,Guillermo Ochoa,Mexico,13,Mexico
+5579,Joshua Kimmich,,Germany,6,Germany
+5581,Joel Nathaniel Campbell Samuels,Joel Campbell,Costa Rica,12,Costa Rica
+5582,Celso Borges Mora,Celso Borges,Costa Rica,5,Costa Rica
+5589,Sergej Milinković-Savić,,Serbia,20,Serbia
+5591,Filip Kostić,,Serbia,17,Serbia
+5592,Bryan Ruiz González,Bryan Ruiz,Costa Rica,10,Costa Rica
+5595,Johan Alberto Venegas Ulloa,Johan Venegas,Costa Rica,11,Costa Rica
+5597,Keylor Navas Gamboa,Keylor Navas,Costa Rica,1,Costa Rica
+5598,Óscar Esau Duarte Gaitán,Óscar Duarte,Costa Rica,6,Costa Rica
+5600,Francisco Javier Calvo Quesada,Francisco Calvo,Costa Rica,15,Costa Rica
+5603,Nikola Milenković,,Serbia,4,Serbia
+5604,Young-Gwon Kim,Kim Young-Gwon,South Korea,19,Korea (South)
+5618,Woo-Young Jung,Jung Woo-Young,South Korea,5,Korea (South)
+5619,Hyeon-Woo Jo,,South Korea,21,Korea (South)
+5620,Hee-Chan Hwang,Hwang Hee-Chan,South Korea,11,Korea (South)
+5623,Jae-Sung Lee,Lee Jae-Sung,South Korea,10,Korea (South)
+5630,Dries Mertens,,Belgium,14,Belgium
+5632,Thorgan Hazard,,Belgium,16,Belgium
+5633,Yannick Ferreira Carrasco,Yannick Carrasco,Belgium,11,Belgium
+5642,Axel Witsel,,Belgium,6,Belgium
+5647,Ali Maâloul,,Tunisia,12,Tunisia
+5650,Ferjani Sassi,,Tunisia,13,Tunisia
+5651,Yassine Meriah,,Tunisia,4,Tunisia
+5653,Mouez Hassen,,Tunisia,26,Tunisia
+5655,Dylan Daniel Mahmoud Bronn,,Tunisia,6,Tunisia
+5660,Piotr Zieliński,,Poland,20,Poland
+5665,Arkadiusz Milik,,Poland,7,Poland
+5667,Kamil Grosicki,,Poland,11,Poland
+5668,Robert Lewandowski,,Poland,9,Poland
+5669,Wojciech Szczęsny,,Poland,1,Poland
+5673,Bartosz Bereszyński,,Poland,18,Poland
+5675,Kalidou Koulibaly,,Senegal,3,Senegal
+5690,Yuto Nagatomo,,Japan,5,Japan
+5693,Gaku Shibasaki,,Japan,7,Japan
+5713,Mohammed Kanoo,,Saudi Arabia,23,Saudi Arabia
+5714,Mohammed Khalil Al Owais,Mohammed Al Owais,Saudi Arabia,21,Saudi Arabia
+5715,Ali Albulayhi,,Saudi Arabia,5,Saudi Arabia
+5719,Marco Asensio Willemsen,,Spain,10,Spain
+5720,Milad Mohammadi,,Iran,5,"Iran, Islamic Republic of"
+5721,Daniel Carvajal Ramos,Daniel Carvajal,Spain,20,Spain
+5722,Saeid Ezatolahi Afagh,Saeid Ezatolahi,Iran,6,"Iran, Islamic Republic of"
+5732,Andreas Evald Cornelius,Andreas Cornelius,Denmark,21,Denmark
+5743,Paulo Bruno Exequiel Dybala,Paulo Dybala,Argentina,21,Argentina
+5833,Nemanja Radonjić,,Serbia,7,Serbia
+5836,Bryan Oviedo,,Costa Rica,8,Costa Rica
+5839,Yeltsin Ignacio Tejeda Valverde,Yeltsin Tejeda,Costa Rica,17,Costa Rica
+5986,Chul Hong,Hong Chul,South Korea,14,Korea (South)
+6297,Maximiliano Gómez González,Maxi Gómez,Uruguay,18,Uruguay
+6300,Sebastián Coates Nión,Sebastián Coates,Uruguay,19,Uruguay
+6301,Youssef En-Nesyri,,Morocco,19,Morocco
+6302,Kasper Dolberg,,Denmark,12,Denmark
+6312,Franco Armani,,Argentina,1,Argentina
+6318,Andrija Živković,,Serbia,14,Serbia
+6319,Luka Jović,,Serbia,11,Serbia
+6321,Milos Veljkovic,,Serbia,5,Serbia
+6322,Niklas Süle,,Germany,15,Germany
+6324,Leon Goretzka,,Germany,8,Germany
+6328,Kendall Jamaal Waston Manley,Kendall Waston,Costa Rica,19,Costa Rica
+6331,Leander Dendoncker,,Belgium,19,Belgium
+6342,Aymen Mathlouthi,Balbouli,Tunisia,1,Tunisia
+6347,Ghilane Chalali,,Tunisia,18,Tunisia
+6377,Ángel Martín Correa,Ángel Correa,Argentina,15,Argentina
+6383,Thomas Teye Partey,Thomas Partey,Ghana,5,Ghana
+6393,Iñaki Williams Arthuer,Iñaki Williams,Ghana,19,Ghana
+6399,Gareth Frank Bale,Gareth Bale,Wales,11,Wales
+6583,Carlos Soler Barragán,Carlos Soler,Spain,19,Spain
+6687,Saša Lukić,,Serbia,16,Serbia
+6694,Gerónimo Rulli,Gero Rulli,Argentina,12,Argentina
+6698,Marko Dmitrović,,Serbia,1,Serbia
+6704,Theo Bernard François Hernández,Theo Hernández,France,22,France
+6720,Pablo Sarabia García,Pablo Sarabia,Spain,22,Spain
+6748,Ferrán Torres García,Ferrán Torres,Spain,11,Spain
+6765,Rodrigo Hernández Cascante,Rodri,Spain,16,Spain
+6773,Federico Santiago Valverde Dipetta,Federico Valverde,Uruguay,15,Uruguay
+6785,Yassine Bounou,,Morocco,1,Morocco
+6797,Daniel Wass,,Denmark,18,Denmark
+6806,Shaquell Moore,Shaq Moore,United States,18,United States of America
+6840,Marcos Llorente Moreno,Marcos Llorente,Spain,6,Spain
+6892,Pau Francisco Torres,Pau Torres,Spain,4,Spain
+6901,Nemanja Maksimović,,Serbia,6,Serbia
+6909,Damián Emiliano Martínez,Emiliano Martínez,Argentina,23,Argentina
+6945,Alex Sandro Lobo Silva,Alex Sandro,Brazil,6,Brazil
+6983,Remo Freuler,,Switzerland,8,Switzerland
+6989,Timothy Castagne,,Belgium,21,Belgium
+6994,Marten de Roon,,Netherlands,15,Netherlands
+7005,João Pedro Cavaco Cancelo,João Cancelo,Portugal,20,Portugal
+7006,Alejandro Darío Gómez,Papu Gómez,Argentina,17,Argentina
+7097,Christian Nørgaard,,Denmark,15,Denmark
+7104,Mathías Olivera Miramontes,Mathías Olivera,Uruguay,16,Uruguay
+7117,Filip Đuričić,Filip Djuricic,Serbia,21,Serbia
+7145,Darko Lazović,,Serbia,22,Serbia
+7153,Jordan Veretout,,France,15,France
+7161,Germán Alejandro Pezzella,Germán Pezzella,Argentina,6,Argentina
+7345,Mattéo Guendouzi Olié,Mattéo Guendouzi,France,6,France
+7379,Edouard Mendy,,Senegal,16,Senegal
+7426,Jean-Charles Castelletto,,Cameroon,21,Cameroon
+7439,Axel Disasi,,France,3,France
+7459,Jawad El Yamiq,,Morocco,18,Morocco
+7472,Nicolas Alexis Julio N'Koulou Ndoubena,Nicolas N'Koulou,Cameroon,3,Cameroon
+7551,Enzo Ebosse,,Cameroon,24,Cameroon
+7693,Bruno Petković,,Croatia,16,Croatia
+7745,Steven Berghuis,,Netherlands,11,Netherlands
+7787,Stefan de Vrij,,Netherlands,6,Netherlands
+7796,Silvan Widmer,,Switzerland,3,Switzerland
+7797,Rodrigo Javier De Paul,Rodrigo De Paul,Argentina,7,Argentina
+7829,Wout Weghorst,,Netherlands,19,Netherlands
+7838,Remko Pasveer,,Netherlands,1,Netherlands
+7843,Mason Mount,,England,19,England
+7891,Teun Koopmeiners,,Netherlands,20,Netherlands
+7979,Przemysław Frankowski,,Poland,24,Poland
+7993,Filip Mladenović,,Serbia,25,Serbia
+8021,Szymon Żurkowski,,Poland,17,Poland
+8064,André Onana,,Cameroon,23,Cameroon
+8069,Matthijs de Ligt,,Netherlands,3,Netherlands
+8108,Lawrence Ati-Zigi,,Ghana,1,Ghana
+8118,Frenkie de Jong,,Netherlands,21,Netherlands
+8124,Tyrell Malacia,,Netherlands,16,Netherlands
+8125,Denzel Dumfries,,Netherlands,22,Netherlands
+8217,Kingsley Coman,,France,20,France
+8227,Mario Götze,,Germany,11,Germany
+8240,Koen Casteels,,Belgium,13,Belgium
+8246,Christian Pulisic,,United States,10,United States of America
+8247,Joachim Andersen,,Denmark,2,Denmark
+8259,Steven Bergwijn,,Netherlands,7,Netherlands
+8326,Andries Noppert,,Netherlands,23,Netherlands
+8346,Craig Goodwin,,Australia,23,Australia
+8361,Ritsu Doan,,Japan,8,Japan
+8400,Serge Gnabry,,Germany,10,Germany
+8507,Lukas Klostermann,,Germany,16,Germany
+8511,Thilo Kehrer,,Germany,5,Germany
+8519,Dayotchanculle Upamecano,,France,18,France
+8526,Weston McKennie,,United States,8,United States of America
+8546,Niclas Füllkrug,,Germany,9,Germany
+8553,Abdou Diallo,,Senegal,22,Senegal
+8561,Fabian Frei,,Switzerland,20,Switzerland
+8591,Samuel Yves Oum Gwet,Samuel Gouet,Cameroon,14,Cameroon
+8654,Ante Budimir,,Croatia,17,Croatia
+8704,Mateusz Wieteska,,Poland,4,Poland
+8714,Damian Szymański,,Poland,8,Poland
+8776,Takumi Minamino,,Japan,10,Japan
+8804,Jonas Hofmann,,Germany,18,Germany
+8808,Matthias Ginter,,Germany,4,Germany
+8814,Nico Elvedi,,Switzerland,4,Switzerland
+8836,Karol Świderski,,Poland,16,Poland
+8854,Wout Faes,,Belgium,4,Belgium
+8859,Ajdin Hrustic,,Australia,10,Australia
+8870,Alfred Benjamin Gomis,Alfred Gomis,Senegal,23,Senegal
+8945,Christian Günter,,Germany,20,Germany
+8949,Takuma Asano,,Japan,18,Japan
+8966,Kai Havertz,,Germany,7,Germany
+9036,David Wallace Wotherspoon,,Canada,24,Canada
+9236,Mohamed Dräger,,Tunisia,20,Tunisia
+9286,Antoine Semenyo,,Ghana,25,Ghana
+9411,Daichi Kamada,,Japan,15,Japan
+9430,Jason Cummings,,Australia,25,Australia
+9540,Harry Wilson,,Wales,8,Wales
+9638,Jack Grealish,,England,7,England
+9843,Robert Lynch Sanchez,Robert Sanchez,Spain,1,Spain
+9859,Elisha Owusu,,Ghana,6,Ghana
+9904,Frederico Rodrigues Santos,Fred,Brazil,8,Brazil
+9905,James Maddison,,England,25,England
+9914,Daniel Ward,,Wales,12,Wales
+9922,David Junior Hoilett,Junior Hoilett,Canada,10,Canada
+9927,Rúben Diogo Da Silva Neves,Rúben Neves,Portugal,18,Portugal
+9928,Conor Coady,,England,16,England
+9980,Jamie MacLaren,Jamie Maclaren,Australia,9,Australia
+10287,İlkay Gündoğan,,Germany,21,Germany
+10477,Stefan Mitrović,,Serbia,13,Serbia
+10481,Aurélien Djani Tchouaméni,Aurélien Tchouaméni,France,8,France
+10530,Jules Olivier Ntcham,Olivier Ntcham,Cameroon,22,Cameroon
+10595,Raphael Dias Belloli,Raphinha,Brazil,11,Brazil
+10603,Mamadou Loum N''Diaye,Mamadou N'Diaye,Senegal,25,Senegal
+10868,Ricardo Jorge Luz Horta,Ricardo Horta,Portugal,21,Portugal
+10928,Chris Gunter,,Wales,2,Wales
+10931,Joe Allen,,Wales,7,Wales
+10932,Jonathan Williams,,Wales,18,Wales
+10955,Harry Kane,,England,9,England
+10956,Eric Dier,,England,15,England
+11127,Borna Barišić,,Croatia,3,Croatia
+11135,Ibrahima Konaté,,France,24,France
+11174,Vincent Paté Aboubakar,Vincent Aboubakar,Cameroon,10,Cameroon
+11183,Alex Nicolao Telles,Alex Telles,Brazil,16,Brazil
+11184,Otávio Edmilson da Silva Monteiro,Otavinho,Portugal,25,Portugal
+11187,Stephen Antunes Eustáquio,,Canada,7,Canada
+11224,Amir Abedzadeh,,Iran,22,"Iran, Islamic Republic of"
+11250,Joe Rodon,,Wales,6,Wales
+11252,Daniel James,,Wales,20,Wales
+11388,Néstor Alejandro Araújo Razo,Néstor Araujo,Mexico,2,Mexico
+11456,Lautaro Javier Martínez,Lautaro Martínez,Argentina,22,Argentina
+11493,Gleison Bremer Silva Nascimento,Bremer,Brazil,24,Brazil
+11508,Łukasz Skorupski,,Poland,12,Poland
+11603,Mario Pašalić,,Croatia,15,Croatia
+11737,Krystian Bielik,,Poland,6,Poland
+11748,Unai Simón Mendibil,Unai Simón,Spain,23,Spain
+11846,Steven de Sousa Vitoria,Steven Vitória,Canada,5,Canada
+11990,Youssouf Fofana,,France,13,France
+12014,Mark Thomas Harris,Mark Harris,Wales,19,Wales
+12034,David Raum,,Germany,3,Germany
+12041,João Félix Sequeira,João Félix,Portugal,11,Portugal
+12149,Nayef Aguerd,,Morocco,5,Morocco
+12169,João Maria Lobo Alves Palhinha Gonçalves,João Palhinha,Portugal,6,Portugal
+12259,Denis Odoi,,Ghana,3,Ghana
+12325,Abdul Rahman Baba,Baba Rahman,Ghana,17,Ghana
+12326,Renato Steffen,,Switzerland,11,Switzerland
+12352,Matthew Charles Turner,,United States,1,United States of America
+12365,Alphonso Davies,,Canada,19,Canada
+12420,Frederik Rønnow,,Denmark,22,Denmark
+12493,Krzysztof Piątek,,Poland,23,Poland
+12524,Walker Zimmerman,,United States,3,United States of America
+12583,Carlos Armando Gruezo Arboleda,Carlos Gruezo,Ecuador,8,Ecuador
+12623,Pierre Kunde Malong,Pierre Kunde,Cameroon,15,Cameroon
+12625,Borna Sosa,,Croatia,19,Croatia
+12746,Sean Johnson,,United States,25,United States of America
+12751,Tyler Adams,,United States,4,United States of America
+12757,Aaron Long,,United States,15,United States of America
+12770,Jonathan Osorio,,Canada,21,Canada
+12779,Samuel Piette,,Canada,6,Canada
+12803,Romario Andrés Ibarra Mina,Romario Ibarra,Ecuador,10,Ecuador
+13035,Kellyn Kai Perry-Acosta,,United States,23,United States of America
+13314,Famara Diedhiou,Famara Diédhiou,Senegal,19,Senegal
+13442,Cristian Roldán León,,United States,17,United States of America
+13454,Nouhou Tolo,,Cameroon,25,Cameroon
+13620,Éder Gabriel Militão,Éder Militão,Brazil,14,Brazil
+13621,Danilo Luís Hélio Pereira,Danilo Pereira,Portugal,13,Portugal
+13885,Liam Fraser,,Canada,8,Canada
+15326,Devis Rogers Epassy Mboka,Devis Epassy,Cameroon,16,Cameroon
+15452,Carlos Uriel Antuna Romero,Uriel Antuna,Mexico,21,Mexico
+15477,Ronald Alberto Matarrita Ulate,Ronald Matarrita,Costa Rica,22,Costa Rica
+15486,Diego José Palacios Espinoza,Diego Palacios,Ecuador,18,Ecuador
+15731,Predrag Rajković,,Serbia,12,Serbia
+15872,Érick Gabriel Gutiérrez Galaviz,Erick Gutiérrez,Mexico,14,Mexico
+15890,Noussair Mazraoui,,Morocco,3,Morocco
+15957,Miloš Degenek,,Australia,2,Australia
+15958,Milan Borjan,,Canada,18,Canada
+15970,Pape Abou Cissé,,Senegal,4,Senegal
+15971,Cameron Carter-Vickers,,United States,20,United States of America
+16014,Jean Pierre Nsamé,,Cameroon,9,Cameroon
+16015,Nicolas Moumi Ngamaleu,Moumi Ngamaleu,Cameroon,6,Cameroon
+16016,Michel Aebischer,,Switzerland,14,Switzerland
+16022,Christian Fassnacht,,Switzerland,16,Switzerland
+16026,Djibril Sow,,Switzerland,15,Switzerland
+16028,José Diogo Dalot Teixeira,Diogo Dalot,Portugal,2,Portugal
+16120,Richie Laryea,,Canada,22,Canada
+16185,Justin Bijlow,,Netherlands,13,Netherlands
+16190,Rasmus Nissen Kristensen,Rasmus Kristensen,Denmark,13,Denmark
+16252,Mark Anthony Kaye,,Canada,14,Canada
+16275,Ikoma Loïs Openda,Loïs Openda,Belgium,24,Belgium
+16281,Hans Vanaken,,Belgium,20,Belgium
+16294,Robert Skov,,Denmark,24,Denmark
+16308,Leandro Daniel Paredes,Leandro Paredes,Argentina,5,Argentina
+16346,Ngoran Suiru Fai Collins,Collins Fai,Cameroon,19,Cameroon
+16352,Issam Jebali,,Tunisia,9,Tunisia
+16459,Cyle Larin,,Canada,17,Canada
+16489,Nemanja Gudelj,,Serbia,8,Serbia
+16527,Mislav Oršić,,Croatia,18,Croatia
+16531,Dominik Livaković,,Croatia,1,Croatia
+16532,Daniel Olmo Carvajal,Daniel Olmo,Spain,21,Spain
+16549,Danny Vuković,,Australia,18,Australia
+16554,Joakim Mæhle,Joakim Maehle,Denmark,5,Denmark
+16555,Joseph Aidoo,,Ghana,15,Ghana
+16559,Leandro Trossard,,Belgium,17,Belgium
+17033,Mohammed Kudus,,Ghana,20,Ghana
+17042,Andreas Skov Olsen,,Denmark,11,Denmark
+17043,Victor Nelsson,,Denmark,3,Denmark
+17456,Timothy Dieng,Seny Dieng,Senegal,1,Senegal
+17592,William Saliba,,France,17,France
+17974,Gregor Kobel,,Switzerland,21,Switzerland
+18015,Dušan Vlahović,,Serbia,18,Serbia
+18242,Tim Ream,,United States,13,United States of America
+18360,Rafael Alexandre Conceição Leão,Rafael Leão,Portugal,15,Portugal
+18395,Vinícius José Paixão de Oliveira Júnior,Vinícius Júnior,Brazil,20,Brazil
+18722,Mathias Jensen,,Denmark,7,Denmark
+18737,Srđan Babić,,Serbia,15,Serbia
+18866,José Pedro Malheiro de Sá,José Sá,Portugal,12,Portugal
+19597,Marcos Javier Acuña,Marcos Acuña,Argentina,8,Argentina
+20005,Toby Alderweireld,,Belgium,2,Belgium
+20016,Kléper Laveran Lima Ferreira,Pepe,Portugal,3,Portugal
+20033,Luuk de Jong,,Netherlands,9,Netherlands
+20055,Marc-André ter Stegen,Marc-André ter Stegen,Germany,22,Germany
+20572,Cristian Gabriel Romero,Cristian Romero,Argentina,13,Argentina
+20600,Vanja Milinković Savić,,Serbia,23,Serbia
+20611,Boulaye Dia,,Senegal,9,Senegal
+20750,Cody Mathès Gakpo,Cody Gakpo,Netherlands,8,Netherlands
+20758,Krépin Diatta,Krépin Diatta,Senegal,15,Senegal
+21026,Pape Gueye,,Senegal,26,Senegal
+21081,Juan Marcos Foyth,Juan Foyth,Argentina,2,Argentina
+21201,Ethan Horvath,,United States,12,United States of America
+21214,Ilias Chair,,Morocco,13,Morocco
+21261,Jonas Older Wind,Jonas Wind,Denmark,19,Denmark
+21446,Matthew Robert Smith,Matthew Smith,Wales,26,Wales
+21456,Olivier Mbaissidara Mbaizo,Olivier Mbaizo,Cameroon,17,Cameroon
+21547,Noa Lang,,Netherlands,12,Netherlands
+21736,Zakaria Aboukhlal,,Morocco,14,Morocco
+21809,Jurriën David Norman Timber,Jurriën Timber,Netherlands,2,Netherlands
+21879,Kenneth Taylor,,Netherlands,24,Netherlands
+21881,Sergino Dest,Sergiño Dest,United States,2,United States of America
+22008,Haji Wright,,United States,19,United States of America
+22041,Marko Livaja,,Croatia,14,Croatia
+22067,Woo-Yeong Jeong,Jeong Woo-Yeong,South Korea,25,Korea (South)
+22074,Joseff Morrell,,Wales,16,Wales
+22084,Bukayo Saka,,England,17,England
+22097,Randal Kolo Muani,Randal Kolo,France,12,France
+22168,Joshua Sargent,Josh Sargent,United States,24,United States of America
+22293,Harry Souttar,,Australia,19,Australia
+22371,Bailey Wright,,Australia,8,Australia
+22433,Jesus Ferreira,,United States,9,United States of America
+22600,Lucas Tolentino Coelho de Lima,Lucas Paquetá,Brazil,7,Brazil
+22740,Kang-In Lee,Lee Kang-In,South Korea,18,Korea (South)
+22783,Aaron Ramsdale,,England,23,England
+22809,Ben White,,England,21,England
+23264,Seung-Ho Paik,Paik Seung-Ho,South Korea,8,Korea (South)
+23363,Liam Millar,,Canada,23,Canada
+23527,Junya Ito,,Japan,14,Japan
+23538,Sadegh Moharrami,,Iran,2,"Iran, Islamic Republic of"
+23615,Gideon Mensah,,Ghana,14,Ghana
+23640,Jonathan David,,Canada,20,Canada
+23650,Jeremy Doku,Jérémy Doku,Belgium,25,Belgium
+23721,Wataru Endo,,Japan,6,Japan
+23730,Takehiro Tomiyasu,,Japan,16,Japan
+23760,Derek Cornelius,,Canada,25,Canada
+23763,In-Beom Hwang,Hwang In-Beom,South Korea,6,Korea (South)
+23774,Selim Amallah,,Morocco,15,Morocco
+23789,Jordan Morris,,United States,16,United States of America
+23828,Kamal Miller,,Canada,4,Canada
+23830,Jhegson Sebastián Méndez Carabalí,Jhegson Méndez,Ecuador,20,Ecuador
+23874,Ali Gholizadeh,,Iran,17,"Iran, Islamic Republic of"
+23910,Youssef Msakni,,Tunisia,7,Tunisia
+24024,Tajon Buchanan,,Canada,11,Canada
+24085,Pervis Josué Estupiñán Tenorio,Pervis Estupiñán,Ecuador,7,Ecuador
+24118,Nico Schlotterbeck,,Germany,23,Germany
+24243,Brenden Aaronson,,United States,11,United States of America
+24267,Uroš Račić,,Serbia,19,Serbia
+24413,Kamil Grabara,,Poland,22,Poland
+24443,Mikkel Damsgaard,,Denmark,14,Denmark
+24475,Awer Mabil,,Australia,11,Australia
+24547,Alexander Hartmann Bah,Alexander Bah,Denmark,26,Denmark
+24778,Eduardo Camavinga,,France,25,France
+24916,Armel Bella-Kotchap,,Germany,25,Germany
+25083,Xavier Ricardo Arreaga Bermello,Xavier Arreaga,Ecuador,14,Ecuador
+25101,Weverton Pereira da Silva,Wéverton,Brazil,12,Brazil
+25104,Rodrygo Silva de Goes,Rodrygo,Brazil,21,Brazil
+25142,Bruno Guimarães Rodriguez Moura,Bruno Guimarães,Brazil,17,Brazil
+25154,Éverton Augusto de Barros Ribeiro,Éverton Ribeiro,Brazil,22,Brazil
+25305,Pedro Guilherme Abreu dos Santos,Pedro,Brazil,25,Brazil
+25352,Robert Abel Arboleda Escobar,Robert Arboleda,Ecuador,4,Ecuador
+25363,Antony Matheus dos Santos,Antony,Brazil,19,Brazil
+25582,Nader Ghandri,,Tunisia,5,Tunisia
+25719,Shūichi Gonda,,Japan,12,Japan
+26280,Orbelín Pineda Alvarado,Orbelín Pineda,Mexico,17,Mexico
+26297,Carlos Alberto Rodríguez Gómez,Carlos Alberto Rodríguez,Mexico,8,Mexico
+26301,Ernesto Alexis Vega Rojas,Alexis Vega,Mexico,10,Mexico
+26318,Rogelio Gabriel Funes Mori,Rogelio Funes Mori,Mexico,11,Mexico
+26323,Carlos Sebastián Sosa Silva,Sebastián Sosa,Uruguay,12,Uruguay
+26336,Johan Felipe Vásquez Ibarra,Johan Vásquez,Mexico,5,Mexico
+26348,Lucas Daniel Cavallini,Lucas Cavallini,Canada,9,Canada
+26368,César Jasib Montes Castro,César Montes,Mexico,3,Mexico
+26375,Roberto Carlos Alvarado Hernández,Roberto Alvarado,Mexico,25,Mexico
+26386,Luis Francisco Romo Barrón,Luis Romo,Mexico,7,Mexico
+26389,Alfredo Talavera Díaz,Alfredo Talavera,Mexico,1,Mexico
+26400,Henry Josué Martín Mex,Henry Martín,Mexico,20,Mexico
+26404,Guido Rodríguez,,Argentina,18,Argentina
+26406,Jorge Eduardo Sánchez Ramos,Jorge Sánchez,Mexico,19,Mexico
+27038,Oliver Christensen,,Denmark,16,Denmark
+27163,Juan Pablo Vargas Campos,Juan Pablo Vargas,Costa Rica,3,Costa Rica
+27569,Jesper Lindstrøm,,Denmark,25,Denmark
+27719,Strahinja Pavlović,,Serbia,2,Serbia
+27768,Lisandro Martínez,,Argentina,25,Argentina
+27886,Alexis Mac Allister,Alexis MacAllister,Argentina,20,Argentina
+27896,Gerardo Daniel Arteaga Zamora,Gerardo Arteaga,Mexico,6,Mexico
+28263,Gonzalo Ariel Montiel,Gonzalo Montiel,Argentina,4,Argentina
+28268,Exequiel Alejandro Palacios,Exequiel Palacios,Argentina,14,Argentina
+28370,Fran Karačić,,Australia,5,Australia
+28453,Michał Skóraś,,Poland,26,Poland
+28511,Ángel Israel Mena Delgado,Ángel Mena,Ecuador,15,Ecuador
+28522,Rodolfo Cota Robles,Rodolfo Cota,Mexico,12,Mexico
+28559,Enner Remberto Valencia Lastra,Enner Valencia,Ecuador,13,Ecuador
+28616,Daniel-Kofi Kyereh,,Ghana,8,Ghana
+28637,Thiago Ezequiel Almada,Thiago Almada,Argentina,16,Argentina
+28729,Diego Nicolás De La Cruz Arcosa,Nicolás De La Cruz,Uruguay,7,Uruguay
+28825,Luis Gerardo Chávez Magallón,Luis Chávez,Mexico,24,Mexico
+28835,Ivica Ivušić,,Croatia,23,Croatia
+28914,Lovro Majer,,Croatia,7,Croatia
+28966,Gaël Ondoua,,Cameroon,5,Cameroon
+29003,Jonas Omlin,,Switzerland,12,Switzerland
+29006,Noah Okafor,,Switzerland,19,Switzerland
+29012,Eray Ervin Cömert,Eray Cömert,Switzerland,18,Switzerland
+29163,Josip Juranović,,Croatia,22,Croatia
+29201,Nahuel Molina Lucero,Nahuel Molina,Argentina,26,Argentina
+29342,Ivo Grbić,,Croatia,12,Croatia
+29366,Daniel Schmidt,,Japan,23,Japan
+29377,Brennan Johnson,,Wales,9,Wales
+29399,Conor Gallagher,,England,26,England
+29560,Julián Álvarez,,Argentina,9,Argentina
+29595,Ko Itakura,,Japan,4,Japan
+29758,Sam Adekugbe,,Canada,3,Canada
+29966,Ui-Jo Hwang,Hwang Ui-jo,South Korea,16,Korea (South)
+29976,Gabriel Teodoro Martinelli Silva,Gabriel Martinelli,Brazil,26,Brazil
+30016,Martin Hongla Yma II,,Cameroon,18,Cameroon
+30111,Felix Eduardo Torres Caicedo,Félix Torres,Ecuador,2,Ecuador
+30179,Ivan Ilić,,Serbia,24,Serbia
+30401,Ruben Vargas,,Switzerland,17,Switzerland
+30486,Pedro González López,Pedri,Spain,26,Spain
+30500,Kevin Nahin Álvarez Campos,Kevin Álvarez,Mexico,26,Mexico
+30519,Mohamed Salisu,,Ghana,4,Ghana
+30628,Daizen Maeda,,Japan,25,Japan
+30681,Ali Abdi,,Tunisia,24,Tunisia
+30714,Jude Bellingham,,England,22,England
+30756,Anssumane Fati,Ansu Fati,Spain,25,Spain
+31029,Salis Abdul Samed,,Ghana,21,Ghana
+31090,Takefusa Kubo,,Japan,11,Japan
+31152,Gonzalo Jordy Plata Jiménez,Gonzalo Plata,Ecuador,19,Ecuador
+31295,Yahia Attiyat allah,,Morocco,25,Morocco
+31684,Atiba Hutchinson,,Canada,13,Canada
+31751,Pathé Ismaël Ciss,,Senegal,11,Senegal
+31953,Eric García Martret,Eric García,Spain,3,Spain
+31955,Jakub Kamiński,,Poland,13,Poland
+32450,Montassar Omar Talbi,,Tunisia,3,Tunisia
+32478,Darwin Gabriel Núñez Ribeiro,Darwin Núñez,Uruguay,11,Uruguay
+32602,Kristijan Jakić,,Croatia,26,Croatia
+32677,Alexander Domínguez Carabalí,Alexander Domínguez,Ecuador,22,Ecuador
+32688,Charles De Ketelaere,,Belgium,22,Belgium
+32689,Martin Erlić,,Croatia,5,Croatia
+32712,Jeremie Frimpong,,Netherlands,26,Netherlands
+32915,Ismail Jakobs,,Senegal,14,Senegal
+32975,Diogo Meireles Costa,Diogo Costa,Portugal,22,Portugal
+33018,Joško Gvardiol,,Croatia,20,Croatia
+33099,José Luis Rodríguez Bebanz,José Luis Rodríguez,Uruguay,26,Uruguay
+33121,Benjamin Cabango,Ben Cabango,Wales,24,Wales
+33144,Dylan Levitt,,Wales,23,Wales
+33274,Luca de la Torre,,United States,14,United States of America
+33446,Thomas Deng,,Australia,20,Australia
+33465,Joel King,,Australia,24,Australia
+33477,Riley McGree,,Australia,14,Australia
+33488,Keanu Baccus,,Australia,26,Australia
+33492,Mitchell Thomas Duke,Mitchell Duke,Australia,15,Australia
+33495,Kye Rowles,,Australia,4,Australia
+33502,Cameron Peter Devlin,,Australia,17,Australia
+33564,Andrew Redmayne,,Australia,12,Australia
+33572,Nathaniel Atkinson,,Australia,3,Australia
+33602,Tariq Lamptey,,Ghana,2,Ghana
+33813,Jerome Ngom Mbekeli,Jerome Mbekeli,Cameroon,2,Cameroon
+34194,Eduar Ayrton Preciado García,Ayrton Preciado,Ecuador,9,Ecuador
+34339,Giovanni Reyna,,United States,7,United States of America
+34396,Michael Steveen Estrada Martínez,Michael Estrada,Ecuador,11,Ecuador
+34476,Matías Nicolás Viña Susperreguy,Matías Viña,Uruguay,17,Uruguay
+34639,Vitor Machado Ferreira,Vitinha,Portugal,16,Portugal
+34794,Neco Williams,,Wales,3,Wales
+34893,Moustapha Name,,Senegal,24,Senegal
+35592,Anis Ben Slimane,Anis Slimane,Tunisia,25,Tunisia
+35609,Karim-David Adeyemi,,Germany,24,Germany
+35641,Hugo Guillamón Sanmartín,Hugo Guillamón,Spain,15,Spain
+35658,Kamaldeen Sulemana,,Ghana,22,Ghana
+35707,Joel Waterman,,Canada,26,Canada
+36148,José Adoni Cifuentes Charcopa,José Cifuentes,Ecuador,5,Ecuador
+36158,Marco Tilio,,Australia,6,Australia
+36288,Facundo Pellistri Rebollo,Facundo Pellistri,Uruguay,8,Uruguay
+36659,Manuel Ugarte Ribeiro,Manuel Ugarte,Uruguay,25,Uruguay
+36666,Agustín Canobbio Graviz,Agustín Canobbio,Uruguay,24,Uruguay
+36710,Sergio Rochet Álvarez,Sergio Rochet,Uruguay,23,Uruguay
+36794,Dayne Tristan St. Clair,Dayne St. Clair,Canada,1,Canada
+36830,Joseph Scally,Joe Scally,United States,26,United States of America
+37122,Yuki Soma,,Japan,24,Japan
+37148,Josip Šutalo,,Croatia,24,Croatia
+37208,Ao Tanaka,,Japan,17,Japan
+37209,Miki Yamane,,Japan,2,Japan
+37211,Kaoru Mitoma,,Japan,9,Japan
+37215,Shogo Taniguchi,,Japan,3,Japan
+37221,Hidemasa Morita,,Japan,13,Japan
+37522,Hernán Ismael Galíndez,Hernán Galíndez,Ecuador,1,Ecuador
+37641,Seung-Gyu Kim,Kim Seung-Gyu,South Korea,1,Korea (South)
+37726,Moisés Isaac Caicedo Corozo,Moisés Caicedo,Ecuador,23,Ecuador
+37737,Angelo Smit Preciado Quiñónez,Angelo Preciado,Ecuador,17,Ecuador
+37742,Wellington Moisés Ramírez Preciado,Moisés Ramírez,Ecuador,12,Ecuador
+37945,Alan Steven Franco Palma,Alan Franco,Ecuador,21,Ecuador
+38004,Piero Martín Hincapié Reyna,Piero Hincapié,Ecuador,3,Ecuador
+38285,Ayase Ueda,,Japan,21,Japan
+38718,Enzo Fernandez,,Argentina,24,Argentina
+38792,Yunus Dimoara Musah,,United States,6,United States of America
+38803,Gonçalo Matias Ramos,Gonçalo Ramos,Portugal,26,Portugal
+38837,Youssoufa Moukoko,,Germany,26,Germany
+39161,Alejandro Balde Martínez,Alejandro Balde,Spain,14,Spain
+39167,Xavi Simons,,Netherlands,25,Netherlands
+39490,Luka Sučić,,Croatia,25,Croatia
+39565,Jamal Musiala,,Germany,14,Germany
+39595,Formose Mendy,,Senegal,2,Senegal
+40211,Jeremy Leonel Sarmiento Morante,Jeremy Sarmiento,Ecuador,16,Ecuador
+40538,Jin-Su Kim,Kim Jin-Su,South Korea,3,Korea (South)
+40542,Gue-Sung Cho,Cho Kyu-Sung,South Korea,9,Korea (South)
+40550,Bum-Keun Song,Song Bum-Keun,South Korea,12,Korea (South)
+40558,Jun-Ho Son,Son Jun-Ho,South Korea,13,Korea (South)
+40564,Kyung-Won Kwon,Kwon Kyung-Won,South Korea,20,Korea (South)
+40578,Tae-Hwan Kim,Kim Tae-Hwan,South Korea,23,Korea (South)
+40664,Min-Kyu Song,Song Min-Kyu,South Korea,26,Korea (South)
+40672,Moon-Hwan Kim,Kim Moon-Hwan,South Korea,15,Korea (South)
+40784,Akram Hassan Afif,Akram Afif,Qatar,11,Qatar
+40874,Matheus Luiz Nunes,Matheus Nunes,Portugal,23,Portugal
+41092,Nuno Mendes,,Portugal,19,Portugal
+41495,Jong-Gyu Yoon,Yoon Jong-Gyu,South Korea,2,Korea (South)
+41593,Willian Joel Pacho Tenorio,Willian Pacho,Ecuador,6,Ecuador
+41655,Ardon Jashari,,Switzerland,26,Switzerland
+41711,Sang-Ho Na,Na Sangho,South Korea,17,Korea (South)
+43565,Min Jae Kim,Min Jae Kim,South Korea,4,Korea (South)
+43666,Strahinja Eraković,,Serbia,3,Serbia
+43891,Kamal Sowah,,Ghana,24,Ghana
+43913,Arthur Theate,,Belgium,3,Belgium
+44166,Jakub Piotr Kiwior,,Poland,14,Poland
+44225,Osman Bukari,,Ghana,11,Ghana
+44649,Facundo Daniel Torres Pérez,Facundo Torres,Uruguay,20,Uruguay
+44703,Alistair Johnston,,Canada,2,Canada
+44842,Simon Brady Ngapandouetnbu,,Cameroon,1,Cameroon
+44955,Aïssa Bilal Laïdouni,Aïssa Laïdouni,Tunisia,14,Tunisia
+45047,Alidu Seidu,,Ghana,26,Ghana
+46258,Azzedine Ounahi,,Morocco,8,Morocco
+46313,Philipp Köhn,,Switzerland,24,Switzerland
+46903,Christian Mougang Bassogog,Christian Bassogog,Cameroon,11,Cameroon
+48347,Amadou Onana,,Belgium,18,Belgium
+49259,James Pantemis,,Canada,16,Canada
+49337,Josip Stanišić,,Croatia,2,Croatia
+50436,Fabian Rieder,,Switzerland,25,Switzerland
+50494,Yeremi Jesús Pino Santos,Yeremi Pino,Spain,17,Spain
+50497,Nicolas Jackson,,Senegal,7,Senegal
+50498,Pape Matar Sarr,Pape Sarr,Senegal,17,Senegal
+50502,Nicola Zalewski,,Poland,21,Poland
+50528,Sorba Thomas,,Wales,22,Wales
+50988,Hannibal Mejbri,,Tunisia,8,Tunisia
+51094,Abdulelah Al Amri,,Saudi Arabia,4,Saudi Arabia
+51096,Ali Al Hassan,Ali Al-Hassan,Saudi Arabia,15,Saudi Arabia
+51099,Firas Tariq Nasser Al Albirakan,Firas Albirakan,Saudi Arabia,9,Saudi Arabia
+51103,Abdullah Mohammed Madu,Abdullah Madu,Saudi Arabia,3,Saudi Arabia
+51469,Saleh Khalid Al Shehri,Saleh Al Shehri,Saudi Arabia,11,Saudi Arabia
+51470,Riyadh Sharahili,,Saudi Arabia,26,Saudi Arabia
+51546,Hassan Mohammed Al-Tambakti,Hassan Mohammed Al Tambakti,Saudi Arabia,17,Saudi Arabia
+51632,Sami Khalil Al Naji,Sami Al Naji,Saudi Arabia,16,Saudi Arabia
+51663,Mohammed Al Rubaie Al Yami,Mohammed Al Yami,Saudi Arabia,1,Saudi Arabia
+51705,Abdulrahman Al-Obood,Abdulrahman Al Obod,Saudi Arabia,20,Saudi Arabia
+51710,Saud Abdullah Abdul Hamid,Saud Abdul Hamid,Saudi Arabia,12,Saudi Arabia
+51969,Jackson Gabriel Porozo Vernaza,Jackson Porozo,Ecuador,25,Ecuador
+52091,Abdul Manaf Nurudeen,,Ghana,16,Ghana
+54144,Nawaf Shaker Al Abid,Nawaf Al Abid,Saudi Arabia,18,Saudi Arabia
+54149,Nawaf Alaqidi,,Saudi Arabia,22,Saudi Arabia
+56755,Abdulelah Saad Hameed Al-Malki,Abdulelah Al Malki,Saudi Arabia,8,Saudi Arabia
+57620,Sultan Abdullah Salim Al Ghannam,Sultan Al Ghanam,Saudi Arabia,2,Saudi Arabia
+59493,Abderrazak Hamdallah,,Morocco,9,Morocco
+67700,Badr Banoun,,Morocco,24,Morocco
+68574,Nicholas Williams Arthuer,Nico Williams,Spain,12,Spain
+68749,Seifeddine Jaziri,,Tunisia,19,Tunisia
+74588,Christopher Wooh,,Cameroon,4,Cameroon
+74623,Nasser Al Dawsari,,Saudi Arabia,24,Saudi Arabia
+80484,Iliman Ndiaye,,Senegal,13,Senegal
+82257,Rubin Colwill,,Wales,25,Wales
+88123,Cheikh Ahmadou Bamba Mbacke Dieng,Bamba Dieng,Senegal,20,Senegal
+91090,Djorkaeff Neicer Reasco González,,Ecuador,24,Ecuador
+95272,Hiroki Ito,,Japan,26,Japan
+97291,Patrick Gilmar Sequeira Mejías,,Costa Rica,23,Costa Rica
+99479,Yu-Min Cho,Cho Yu-Min,South Korea,24,Korea (South)
+100436,Shuto Machino,,Japan,20,Japan
+102668,Yahya Jabrane,,Morocco,26,Morocco
+102816,Mohamed Ali Ben Romdhane,,Tunisia,15,Tunisia
+105943,Aymen Dahmen,,Tunisia,16,Tunisia
+105944,Wajdi Kechrida,,Tunisia,21,Tunisia
+108340,Brandon Aguilera Zamora,Brandon Aguilera,Costa Rica,20,Costa Rica
+114832,Zeno Debast,,Belgium,26,Belgium
+121539,Haitham Mohammed Asiri,Haitham Asiri,Saudi Arabia,25,Saudi Arabia
+124161,Mehdi Torabi,,Iran,16,"Iran, Islamic Republic of"
+124167,Ahmad Nourollahi,,Iran,21,"Iran, Islamic Republic of"
+124175,Mohammad Hossein Kanani Zadegan,,Iran,13,"Iran, Islamic Republic of"
+124177,Shoja Khalilzadeh,,Iran,4,"Iran, Islamic Republic of"
+124183,Payam Niazmand,,Iran,12,"Iran, Islamic Republic of"
+124488,Hassan Khalid Al Heidos,Hassan Al Heidos,Qatar,10,Qatar
+124490,Ahmed Alaa Eldin Abdelmotaal,Ahmed Alaa Eldin,Qatar,7,Qatar
+124492,Karim Boudiaf,,Qatar,12,Qatar
+124493,Boualem Khoukhi,,Qatar,16,Qatar
+124494,Abdelkarim Hassan Al Haj Fadlalla,Abdelkarim Hassan,Qatar,3,Qatar
+124495,Almoez Ali Zainalabiddin Abdulla,Almoez Ali,Qatar,19,Qatar
+124496,Saad Abdullah Al Sheeb,Saad Al Sheeb,Qatar,1,Qatar
+124500,Assim Omer Al Haj Madibo,Assim Madibo,Qatar,23,Qatar
+124503,Bassam Hisham Al Rawi,Bassam Hisham,Qatar,15,Qatar
+124504,Tarek Salman Salman,Tarek Salman,Qatar,5,Qatar
+124506,Pedro Miguel Correia,,Qatar,2,Qatar
+124510,Meshaal Aissa Barsham,Meshaal Barsham,Qatar,22,Qatar
+124512,Mosaab Khoder Jibril,Mosaab Khoder,Qatar,13,Qatar
+124514,Abdulaziz Hatem Mohammed Abdullah,Abdulaziz Hatem,Qatar,6,Qatar
+124526,Salem Ali Al Hajri,Salem Al Hajri,Qatar,20,Qatar
+124899,Ismaeel Mohammad Mohammad,Ismaeel Mohammad,Qatar,17,Qatar
+124900,Homam Alamin Ahmed,Homam Ahmed,Qatar,14,Qatar
+124901,Mohammed Muntari,,Qatar,9,Qatar
+124909,Mohammed Waed Abdulwahhab Al Bayati,Mohammed Al Bayati,Qatar,4,Qatar
+125818,Ali Karimi,,Iran,18,"Iran, Islamic Republic of"
+125823,Seyed Hossein Hosseini,,Iran,24,"Iran, Islamic Republic of"
+126962,Jassem Gaber Abdulsallam,Jassem Abdulsallam,Qatar,25,Qatar
+128793,Taha Yassine Khenissi,,Tunisia,11,Tunisia
+130185,Keysher Fuller Spence,,Costa Rica,4,Costa Rica
+130194,Esteban Alvarado Brown,,Costa Rica,18,Costa Rica
+130272,Yousef Hassan Mohamed Ali,Yousef Hassan,Qatar,21,Qatar
+131037,Anass Zaroury,,Morocco,10,Belgium
+132271,Carlos Manuel Martínez Castro,Carlos Martínez,Costa Rica,16,Costa Rica
+132296,Anthony Daniel Contreras Enríquez,,Costa Rica,7,Costa Rica
+132497,Gerson Torres Barrantes,,Costa Rica,13,Costa Rica
+132728,Jewison Bennette,,Costa Rica,9,Costa Rica
+132743,Douglas Andrey López Araya,,Costa Rica,21,Costa Rica
+132756,Youstin Delfin Salas Gómez,,Costa Rica,14,Costa Rica
+132772,Daniel Alonso Chacón Salas,,Costa Rica,2,Costa Rica
+133229,Ismael Koné,,Canada,15,Canada
+133353,Pablo Martín Páez Gavira,Gavi,Spain,9,Spain
+135271,Roan Roberto Wilson Gordon,,Costa Rica,24,Costa Rica
+136296,Bechir Ben Said,,Tunisia,22,Tunisia
+136305,Daniel Afriyie Barnieh,,Ghana,13,Ghana
+136306,Abdul Fatawu Issahaku,Abdul Fatawu,Ghana,7,Ghana
+139011,Ahmed Reda Tagnaouti,,Morocco,22,Morocco
+139016,Achraf Dari,,Morocco,20,Morocco
+143854,António João Pereira Albuquerque Tavares Silva,António Silva,Portugal,24,Portugal
+146267,Khalid Muneer Mazeed,,Qatar,18,Qatar
+147563,Ibrahim Danlad,,Ghana,12,Ghana
+149463,Ali Assadalla Thaimn Qambar,Ali Assadalla,Qatar,8,Qatar
+149714,Abdessamad Ezzalzouli,Abde Ezzalzouli,Morocco,16,Morocco
+150429,Mostafa Taerk Mashaal,Mostafa Mashaal,Qatar,26,Qatar
+156734,Bilal El Khannous,,Morocco,23,Morocco
+157455,Naif Abdulraheem Al Hadhrami,Naif Al Hadhrami,Qatar,24,Qatar
+163049,Bilel Ifa,,Tunisia,2,Tunisia
+184468,Álvaro José Zamora Mata,,Costa Rica,26,Costa Rica
+227697,Garang Kuol,,Australia,21,Australia
+283799,Anthony William Hernández González,,Costa Rica,25,Costa Rica
+296254,Walid Cheddira,,Morocco,21,Morocco
+312414,Moussa N''Diaye,,Senegal,10,Senegal
+326758,Abolfazl Jalali,,Iran,25,"Iran, Islamic Republic of"
+348757,Kevin José Rodríguez Cortez,Kevin Rodríguez,Ecuador,26,Ecuador
+349913,Souaibou Marou,,Cameroon,26,Cameroon

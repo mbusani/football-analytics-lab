@@ -1,0 +1,65 @@
+match_id,match_date,kick_off,stage,match_week,home_team,away_team,home_score,away_score,stadium,referee
+3857254,2022-11-22,13:00,Group Stage,1,Denmark,Tunisia,0,0,Education City Stadium ,César Arturo Ramos Palazuelos
+3857255,2022-12-01,19:00,Group Stage,3,Japan,Spain,2,1,Sheikh Khalifa International Stadium,Victor Miguel de Freitas Gomes
+3857256,2022-12-02,19:00,Group Stage,3,Serbia,Switzerland,2,3,Stadium 974,Fernando Andrés Rapallini
+3857257,2022-11-30,15:00,Group Stage,3,Australia,Denmark,1,0,Al Janoub Stadium   ,Mustapha Ghorbal
+3857258,2022-11-24,19:00,Group Stage,1,Brazil,Serbia,2,0,Lusail Stadium,Alireza Faghani
+3857259,2022-11-28,10:00,Group Stage,2,Cameroon,Serbia,3,3,Al Janoub Stadium   ,Mohamed Abdulla Hassan Mohd
+3857260,2022-11-30,19:00,Group Stage,3,Saudi Arabia,Mexico,1,2,Lusail Stadium,Michael Oliver
+3857261,2022-11-29,19:00,Group Stage,3,Wales,England,0,3,Ahmad bin Ali Stadium,Slavko Vinčić
+3857262,2022-12-02,15:00,Group Stage,3,South Korea,Portugal,2,1,Education City Stadium ,Facundo Tello Figueroa
+3857263,2022-11-27,19:00,Group Stage,2,Spain,Germany,1,1,Al Bayt Stadium,Danny Desmond Makkelie
+3857264,2022-11-30,19:00,Group Stage,3,Poland,Argentina,0,2,Stadium 974,Danny Desmond Makkelie
+3857265,2022-11-22,16:00,Group Stage,1,Mexico,Poland,0,0,Stadium 974,Chris Beath
+3857266,2022-11-26,16:00,Group Stage,2,France,Denmark,2,1,Stadium 974,Szymon Marciniak
+3857267,2022-11-29,15:00,Group Stage,3,Ecuador,Senegal,1,2,Sheikh Khalifa International Stadium,Clément Turpin
+3857268,2022-11-23,19:00,Group Stage,1,Belgium,Canada,1,0,Ahmad bin Ali Stadium,Janny Sikazwe
+3857269,2022-11-28,16:00,Group Stage,2,Brazil,Switzerland,1,0,Stadium 974,Ivan Arcides Barton Cisneros
+3857270,2022-11-28,19:00,Group Stage,2,Portugal,Uruguay,2,0,Lusail Stadium,Alireza Faghani
+3857271,2022-11-21,13:00,Group Stage,1,England,Iran,6,2,Sheikh Khalifa International Stadium,Raphael Claus
+3857272,2022-11-25,19:00,Group Stage,2,England,United States,0,0,Al Bayt Stadium,Jesús Valenzuela Sáez
+3857273,2022-11-25,10:00,Group Stage,2,Wales,Iran,0,2,Ahmad bin Ali Stadium,Mario Alberto Escobar Toca
+3857274,2022-11-25,16:00,Group Stage,2,Netherlands,Ecuador,1,1,Sheikh Khalifa International Stadium,Mustapha Ghorbal
+3857275,2022-11-30,15:00,Group Stage,3,Tunisia,France,1,0,Education City Stadium ,Matthew Conger
+3857276,2022-12-01,15:00,Group Stage,3,Canada,Morocco,1,2,Al Thumama Stadium,Raphael Claus
+3857277,2022-11-23,10:00,Group Stage,1,Morocco,Croatia,0,0,Al Bayt Stadium,Fernando Andrés Rapallini
+3857278,2022-11-29,19:00,Group Stage,3,Iran,United States,0,1,Al Thumama Stadium,Antonio Miguel Mateu Lahoz
+3857279,2022-11-22,19:00,Group Stage,1,France,Australia,4,1,Al Janoub Stadium   ,Victor Miguel de Freitas Gomes
+3857280,2022-12-02,19:00,Group Stage,3,Cameroon,Brazil,1,0,Lusail Stadium,Ismail Elfath
+3857281,2022-11-27,16:00,Group Stage,2,Croatia,Canada,4,1,Sheikh Khalifa International Stadium,Andrés Matonte
+3857282,2022-11-21,19:00,Group Stage,1,United States,Wales,1,1,Ahmad bin Ali Stadium,Abdulrahman Ibrahim Al Jassim
+3857283,2022-11-27,13:00,Group Stage,2,Belgium,Morocco,0,2,Al Thumama Stadium,César Arturo Ramos Palazuelos
+3857284,2022-11-23,13:00,Group Stage,1,Germany,Japan,1,2,Sheikh Khalifa International Stadium,Ivan Arcides Barton Cisneros
+3857285,2022-11-21,16:00,Group Stage,1,Senegal,Netherlands,0,2,Al Thumama Stadium,Wilton Pereira Sampaio
+3857286,2022-11-20,16:00,Group Stage,1,Qatar,Ecuador,0,2,Al Bayt Stadium,Daniele Orsato
+3857287,2022-11-24,13:00,Group Stage,1,Uruguay,South Korea,0,0,Education City Stadium ,Clément Turpin
+3857288,2022-11-26,10:00,Group Stage,2,Tunisia,Australia,0,1,Al Janoub Stadium   ,Daniel Siebert
+3857289,2022-11-26,19:00,Group Stage,2,Argentina,Mexico,2,0,Lusail Stadium,Daniele Orsato
+3857290,2022-11-24,10:00,Group Stage,1,Switzerland,Cameroon,1,0,Al Janoub Stadium   ,Facundo Tello Figueroa
+3857291,2022-11-23,16:00,Group Stage,1,Spain,Costa Rica,7,0,Al Thumama Stadium,
+3857292,2022-12-01,19:00,Group Stage,3,Costa Rica,Germany,2,4,Al Bayt Stadium,Stéphanie Frappart
+3857293,2022-12-02,15:00,Group Stage,3,Ghana,Uruguay,0,2,Al Janoub Stadium   ,Daniel Siebert
+3857294,2022-11-29,15:00,Group Stage,3,Netherlands,Qatar,2,0,Al Bayt Stadium,Bakary Papa Gassama
+3857295,2022-11-27,10:00,Group Stage,2,Japan,Costa Rica,0,1,Ahmad bin Ali Stadium,Michael Oliver
+3857296,2022-12-01,15:00,Group Stage,3,Croatia,Belgium,0,0,Ahmad bin Ali Stadium,Anthony Taylor
+3857297,2022-11-26,13:00,Group Stage,2,Poland,Saudi Arabia,2,0,Education City Stadium ,Wilton Pereira Sampaio
+3857298,2022-11-24,16:00,Group Stage,1,Portugal,Ghana,3,2,Stadium 974,Ismail Elfath
+3857299,2022-11-28,13:00,Group Stage,2,South Korea,Ghana,2,3,Education City Stadium ,Anthony Taylor
+3857300,2022-11-22,10:00,Group Stage,1,Argentina,Saudi Arabia,1,2,Lusail Stadium,Slavko Vinčić
+3857301,2022-11-25,13:00,Group Stage,2,Qatar,Senegal,1,3,Al Thumama Stadium,Antonio Miguel Mateu Lahoz
+3869117,2022-12-03,17:00,Round of 16,4,Netherlands,United States,3,1,Sheikh Khalifa International Stadium,Wilton Pereira Sampaio
+3869118,2022-12-04,21:00,Round of 16,4,England,Senegal,3,0,Al Bayt Stadium,Ivan Arcides Barton Cisneros
+3869151,2022-12-03,21:00,Round of 16,4,Argentina,Australia,2,1,Ahmad bin Ali Stadium,Szymon Marciniak
+3869152,2022-12-04,17:00,Round of 16,4,France,Poland,3,1,Al Thumama Stadium,Jesús Valenzuela Sáez
+3869219,2022-12-05,17:00,Round of 16,4,Japan,Croatia,1,1,Al Janoub Stadium   ,Ismail Elfath
+3869220,2022-12-06,17:00,Round of 16,4,Morocco,Spain,0,0,Education City Stadium ,Fernando Andrés Rapallini
+3869253,2022-12-05,21:00,Round of 16,4,Brazil,South Korea,4,1,Stadium 974,Clément Turpin
+3869254,2022-12-06,21:00,Round of 16,4,Portugal,Switzerland,6,1,Lusail Stadium,César Arturo Ramos Palazuelos
+3869321,2022-12-09,19:00,Quarter-finals,5,Netherlands,Argentina,2,2,Lusail Stadium,Antonio Miguel Mateu Lahoz
+3869354,2022-12-10,21:00,Quarter-finals,5,England,France,1,2,Al Bayt Stadium,Wilton Pereira Sampaio
+3869420,2022-12-09,17:00,Quarter-finals,5,Croatia,Brazil,1,1,Education City Stadium ,Michael Oliver
+3869486,2022-12-10,17:00,Quarter-finals,5,Morocco,Portugal,1,0,Al Thumama Stadium,Facundo Tello Figueroa
+3869519,2022-12-13,21:00,Semi-finals,6,Argentina,Croatia,3,0,Lusail Stadium,Daniele Orsato
+3869552,2022-12-14,21:00,Semi-finals,6,France,Morocco,2,0,Al Bayt Stadium,César Arturo Ramos Palazuelos
+3869684,2022-12-17,17:00,3rd Place Final,7,Croatia,Morocco,2,1,Sheikh Khalifa International Stadium,Abdulrahman Ibrahim Al Jassim
+3869685,2022-12-18,17:00,Final,7,Argentina,France,3,3,Lusail Stadium,Szymon Marciniak

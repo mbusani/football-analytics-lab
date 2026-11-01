@@ -7,13 +7,17 @@ Downloads the match list, lineups and events from https://github.com/statsbomb/o
   players  one row per player per team (from the lineups)
   shots    one row per shot, penalty shootouts included (period = 5)
 
-Usage:  python training/data/build_wc2022.py
-Output: training/data/wc2022.sqlite next to this script.
+Usage:  python training/data/build_wc2022.py            download everything and rebuild
+        python training/data/build_wc2022.py --csv      only re-export the CSVs from an existing database
+Output: training/data/wc2022.sqlite next to this script, plus matches.csv, players.csv and shots.csv
+        (the Python and R sessions load the CSVs; the SQL sessions load the database).
 
 Data: StatsBomb open data, used under the StatsBomb Public Data User Agreement.
 """
+import csv
 import json
 import sqlite3
+import sys
 import time
 import urllib.request
 from pathlib import Path
@@ -141,7 +145,23 @@ def main():
     db.execute("VACUUM")
     db.close()
     print(f"Wrote {OUT} ({OUT.stat().st_size // 1024} KB)")
+    export_csv()
+
+
+def export_csv():
+    """Write each table to <table>.csv beside the database: UTF-8, header row, NULL as an empty field."""
+    db = sqlite3.connect(OUT)
+    for table in ("matches", "players", "shots"):
+        cur = db.execute(f"SELECT * FROM {table} ORDER BY rowid")   # rowid keeps insertion (kick-off) order
+        path = OUT.with_name(f"{table}.csv")
+        # newline="" lets the csv module write plain \n line endings on every platform
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f, lineterminator="\n")
+            w.writerow(c[0] for c in cur.description)
+            w.writerows(cur)
+        print(f"Wrote {path} ({path.stat().st_size // 1024} KB)")
+    db.close()
 
 
 if __name__ == "__main__":
-    main()
+    export_csv() if "--csv" in sys.argv else main()

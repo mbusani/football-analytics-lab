@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="R session 01 of the Football Analytics Lab training ground: selecting, filtering, sorting and grouping 2022 World Cup shots with dplyr, run in the browser.">
+<title>R Session 01 · Football Analytics Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/session.css">
+</head>
+<body>
+
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="../../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="../../#repos">Repos</a>
+    <a class="lnk" href="../../library/">Library</a>
+    <a class="lnk" href="../../tasks/">Tasks</a>
+    <a class="lnk" href="../sql-01/" aria-current="page">Training</a>
+    <a class="lnk" href="../../credits/">Credits</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Training ground · R · Session 01</div>
+      <h1>R<span class="l2">First</span><span class="l3">Touches</span></h1>
+      <p class="lede">select, filter, arrange, group_by and summarise with dplyr, on every shot from the 2022 World Cup. <b>The same eight questions as SQL session 01, so you can compare the two.</b></p>
+      <div class="cta">
+        <a class="go" href="#drills">Start the drills ↓</a>
+        <a class="gh" href="../data/shots.csv" download>Download shots.csv</a>
+      </div>
+      <div class="scoreboard" aria-label="Session at a glance">
+        <div><b id="n-matches">64</b><span>matches</span></div>
+        <div><b id="n-shots">–</b><span>shots</span></div>
+        <div><b id="n-done">0/8</b><span>drills done</span></div>
+      </div>
+    </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Shot map of every non-shootout shot at the 2022 World Cup, drawn from shots.csv"></canvas>
+      <figcaption><span>Every shot at Qatar 2022, drawn from shots.csv</span><span>size = xG</span><span><i></i>goal</span><span><i class="miss"></i>no goal</span></figcaption>
+    </figure>
+  </div>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
+
+<nav class="bar" aria-label="Drills"><div class="wrap" id="bar">
+  <span class="lbl">Drills</span>
+  <span class="status" id="status" role="status">Loading…</span>
+</div></nav>
+
+<main><div class="wrap">
+  <section id="data">
+    <div class="sec-head"><h2>The squad sheet</h2><span class="count">03</span></div>
+    <p class="sec-note">Three data frames built from <a href="https://github.com/statsbomb/open-data">StatsBomb's free event data</a> for the 2022 FIFA World Cup: <code>matches</code>, <code>players</code> and <code>shots</code>, with dplyr already loaded. Each was read with <code>read.csv("shots.csv")</code>, and you can <a href="../data/shots.csv" download>download</a> the same files to work offline.</p>
+    <div class="tables" id="tables"></div>
+    <div class="gotchas">
+      <b>Read before kick-off</b>
+      <ul>
+        <li>End a drill with the table or number you want as the last line, or store it in a variable called <code>answer</code>.</li>
+        <li><code>|&gt;</code> is R's pipe: <code>shots |&gt; filter(period &lt; 5)</code> means <code>filter(shots, period &lt; 5)</code>. Read it as "and then".</li>
+        <li><code>period == 5</code> is a penalty shootout. Shootout kicks are in <code>shots</code> but don't count as goals in the score, so most drills leave them out with <code>filter(period &lt; 5)</code>.</li>
+        <li><code>xg</code> is StatsBomb's expected goals for the shot: the chance an average shot from that spot and situation goes in.</li>
+        <li>Text matches are exact and case-sensitive: <code>"Argentina"</code> works, <code>"argentina"</code> doesn't.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="drills">
+    <div class="sec-head"><h2>Drills</h2><span class="count">08</span></div>
+    <p class="sec-note">Write some R, press <b>Run</b> (or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>) to see what it returns, then <b>Check</b> it against the answer. The checker compares values, not column names. The first visit starts R in your browser and installs dplyr, which takes a little while. Your code and ticks are saved in this browser.</p>
+    <div id="drill-list"></div>
+  </section>
+
+  <section id="free">
+    <div class="sec-head"><h2>Free play</h2></div>
+    <p class="sec-note">A blank editor with the same data frames. Try your own: who shot most often from outside the box (<code>x &lt; 102</code>)? Use <code>print()</code> to show more than one thing.</p>
+    <div class="drill" id="scratch"></div>
+  </section>
+
+  <section id="next">
+    <div class="sec-head"><h2>After the session</h2></div>
+    <div class="next">
+      <div><b>Take it home</b><span>Download <a href="../data/matches.csv" download>matches.csv</a>, <a href="../data/players.csv" download>players.csv</a> and <a href="../data/shots.csv" download>shots.csv</a>, then run the same code in RStudio after <code>read.csv</code> and <code>library(dplyr)</code>.</span></div>
+      <div><b>Go further</b><span><a href="https://jimmyday12.github.io/fitzRoy/">fitzRoy</a>, on the <a href="../../library/">library</a> shelf, pulls AFL data straight into R, and the same dplyr verbs work on it.</span></div>
+    </div>
+    <div class="sessions" id="sessions"></div>
+  </section>
+
+  <section id="credits">
+    <div class="sec-head"><h2>Credits</h2></div>
+    <p class="sec-note">What this session is built on. Everyone else whose work appears in the lab is on the <a href="../../credits/">Credits page</a>.</p>
+    <div class="credits">
+      <div><b>Data: StatsBomb</b>Event data from <a href="https://github.com/statsbomb/open-data">StatsBomb Open Data</a> (FIFA World Cup 2022), used under the <a href="https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf">StatsBomb Public Data User Agreement</a>. The CSVs here are a small extract: matches, lineups and shots. <a href="https://github.com/mbusani/football-analytics-lab/blob/main/training/data/build_wc2022.py">The script that builds them</a> is in the repo.</div>
+      <div><b>R engine: webR</b>R compiled to WebAssembly, by <a href="https://github.com/r-wasm/webr">George Stagg and the webR contributors</a> (MIT licence), running <a href="https://dplyr.tidyverse.org/">dplyr</a> by Posit (MIT licence). Your code runs on your own device; nothing is sent anywhere.</div>
+    </div>
+  </section>
+</div></main>
+
+<footer><div class="wrap">
+  <span>Part of <a href="../../">Football Analytics Lab</a> by <a href="https://github.com/mbusani">Mark Busani</a>. The drills and page are MIT-licensed; the data belongs to StatsBomb and keeps its own terms.</span>
+  <span>If you spot a wrong answer or a confusing drill, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a>.</span>
+</div></footer>
+
+<script src="../assets/session.js"></script>
+<script src="../assets/r-engine.js"></script>
+<script>
+/* ---------- the drills (fields are described in ../assets/session.js) ----------
+   Same questions as SQL session 01, answered with dplyr. */
+const DRILLS = [
+  {title:"The fixture list", concept:"select", ordered:false,
+   task:"List every match with its date, home team, away team, home score and away score.",
+   teach:"<code>select</code> keeps the columns you name, in that order. Column names go in without quotes.",
+   eg:"matches |> select(match_date, stadium)",
+   start:"matches |> select()",
+   hint:"<code>select(match_date, home_team, away_team, home_score, away_score)</code>",
+   sol:"matches |> select(match_date, home_team, away_team, home_score, away_score)"},
+  {title:"Argentina's road", concept:"filter · |", ordered:true,
+   task:"Show the date, stage, home team, away team and score of every Argentina match, in date order.",
+   teach:"<code>filter</code> keeps the rows where a test is TRUE; <code>|</code> means or. <code>arrange</code> sorts.",
+   eg:'matches |> filter(stage == "Final")',
+   start:"matches |>\n  filter() |>\n  arrange(match_date) |>\n  select(match_date, stage, home_team, away_team, home_score, away_score)",
+   hint:'Argentina could be home or away: <code>filter(home_team == "Argentina" | away_team == "Argentina")</code>.',
+   sol:'matches |>\n  filter(home_team == "Argentina" | away_team == "Argentina") |>\n  arrange(match_date) |>\n  select(match_date, stage, home_team, away_team, home_score, away_score)'},
+  {title:"Goal-fests", concept:"mutate · desc", ordered:false, desc: r => r[2],
+   task:"Find every match with six or more goals. Show the home team, away team and total goals, highest first.",
+   teach:"<code>mutate</code> adds a column worked out from the others. <code>arrange(desc(x))</code> sorts biggest first.",
+   eg:"matches |>\n  mutate(margin = home_score - away_score) |>\n  arrange(desc(margin))",
+   start:"matches |>\n  mutate(goals = ) |>\n",
+   hint:"<code>goals = home_score + away_score</code>, then <code>filter(goals &gt;= 6)</code>, <code>arrange(desc(goals))</code> and <code>select(home_team, away_team, goals)</code>.",
+   sol:"matches |>\n  mutate(goals = home_score + away_score) |>\n  filter(goals >= 6) |>\n  arrange(desc(goals)) |>\n  select(home_team, away_team, goals)"},
+  {title:"How many shots?", concept:"nrow", ordered:true,
+   task:"How many shots were taken at the tournament, not counting penalty shootouts? Return a single number.",
+   teach:"<code>nrow()</code> counts the rows of a data frame. It works at the end of a pipe too.",
+   eg:'matches |> filter(stage == "Group Stage") |> nrow()',
+   start:"shots |>\n",
+   hint:"Shootouts are <code>period == 5</code>, so <code>filter(period &lt; 5) |&gt; nrow()</code>.",
+   sol:"shots |> filter(period < 5) |> nrow()"},
+  {title:"Who shot most?", concept:"count", ordered:false, desc: r => r[1],
+   task:"Count each team's shots (no shootouts). Show team and shots, most first.",
+   teach:"<code>count(x)</code> gives one row per value of <code>x</code> with how many rows it has; <code>sort = TRUE</code> puts the biggest first.",
+   eg:"matches |> count(stage)",
+   start:"shots |>\n  filter(period < 5) |>\n",
+   hint:"<code>count(team, sort = TRUE)</code>",
+   sol:"shots |>\n  filter(period < 5) |>\n  count(team, sort = TRUE)"},
+  {title:"Goals against xG", concept:"group_by · summarise", ordered:false, desc: r => r[1] - r[2],
+   task:"For each team, show goals scored from shots and total xG rounded to 2 decimal places (no shootouts). Sort by goals minus xG, best finishers first.",
+   teach:"<code>group_by</code> then <code>summarise</code> makes one row per group. <code>sum(outcome == \"Goal\")</code> counts the TRUEs.",
+   eg:"shots |>\n  group_by(team) |>\n  summarise(shots = n(), pressured = sum(under_pressure))",
+   start:'shots |>\n  filter(period < 5) |>\n  group_by(team) |>\n  summarise(goals = sum(outcome == "Goal"), xg = ) |>\n',
+   hint:"<code>xg = round(sum(xg), 2)</code>, then <code>arrange(desc(goals - xg))</code>.",
+   sol:'shots |>\n  filter(period < 5) |>\n  group_by(team) |>\n  summarise(goals = sum(outcome == "Goal"), xg = round(sum(xg), 2)) |>\n  arrange(desc(goals - xg))'},
+  {title:"Shootout nerve", concept:"Filter then group", ordered:false,
+   task:"Penalty shootouts only: for each team, show kicks taken and kicks scored.",
+   teach:"The same tools, a different filter. Here the shootout rows are the ones you want. <code>n()</code> counts rows in each group.",
+   eg:'shots |>\n  filter(shot_type == "Penalty", period < 5) |>\n  count(team)',
+   start:"shots |>\n  filter(period == 5) |>\n",
+   hint:'<code>group_by(team) |&gt; summarise(taken = n(), scored = sum(outcome == "Goal"))</code>',
+   sol:'shots |>\n  filter(period == 5) |>\n  group_by(team) |>\n  summarise(taken = n(), scored = sum(outcome == "Goal"))'},
+  {title:"The chance-getters", concept:"Filter after summarise", ordered:false, desc: r => r[4],
+   task:"Players with at least 2.0 non-penalty xG (no penalties, no shootouts). Show player, team, shots, goals and npxG rounded to 2 places, highest npxG first.",
+   teach:"Group by two columns at once. After <code>summarise</code> the result is an ordinary data frame, so <code>filter</code> works on the totals.",
+   eg:"shots |>\n  count(team) |>\n  filter(n > 100)",
+   start:'shots |>\n  filter(period < 5, shot_type != "Penalty") |>\n  group_by(player, team) |>\n  summarise(shots = n(), goals = sum(outcome == "Goal"), npxg = sum(xg), .groups = "drop") |>\n',
+   hint:"<code>filter(npxg &gt;= 2) |&gt; mutate(npxg = round(npxg, 2)) |&gt; arrange(desc(npxg))</code>",
+   sol:'shots |>\n  filter(period < 5, shot_type != "Penalty") |>\n  group_by(player, team) |>\n  summarise(shots = n(), goals = sum(outcome == "Goal"), npxg = sum(xg), .groups = "drop") |>\n  filter(npxg >= 2) |>\n  mutate(npxg = round(npxg, 2)) |>\n  arrange(desc(npxg))'}
+];
+
+FAL.TABLES.players.cols.nickname = "short name, or NA";   // read.csv reads a missing nickname as NA
+FAL.squadSheet();
+FAL.sessions("r-01");
+FAL.session({
+  key: "fal-r-01", drills: DRILLS, engine: FAL.rEngine(), missing: "NA",
+  free: 'shots |>\n  filter(outcome == "Goal") |>\n  arrange(xg) |>\n  select(player, minute, xg) |>\n  head(10)',
+  orderTip: "The right rows, but not in the order the drill asks for. Check your arrange."
+});
+</script>
+</body>
+</html>

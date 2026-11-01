@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Python session 01 of the Football Analytics Lab training ground: selecting, filtering, sorting and grouping 2022 World Cup shots with pandas, run in the browser.">
+<title>Python Session 01 · Football Analytics Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/session.css">
+</head>
+<body>
+
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="../../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="../../#repos">Repos</a>
+    <a class="lnk" href="../../library/">Library</a>
+    <a class="lnk" href="../../tasks/">Tasks</a>
+    <a class="lnk" href="../sql-01/" aria-current="page">Training</a>
+    <a class="lnk" href="../../credits/">Credits</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Training ground · Python · Session 01</div>
+      <h1>Python<span class="l2">First</span><span class="l3">Touches</span></h1>
+      <p class="lede">Selecting, filtering, sorting and grouping with pandas, on every shot from the 2022 World Cup. <b>The same eight questions as SQL session 01, so you can compare the two.</b></p>
+      <div class="cta">
+        <a class="go" href="#drills">Start the drills ↓</a>
+        <a class="gh" href="../data/shots.csv" download>Download shots.csv</a>
+      </div>
+      <div class="scoreboard" aria-label="Session at a glance">
+        <div><b id="n-matches">64</b><span>matches</span></div>
+        <div><b id="n-shots">–</b><span>shots</span></div>
+        <div><b id="n-done">0/8</b><span>drills done</span></div>
+      </div>
+    </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Shot map of every non-shootout shot at the 2022 World Cup, drawn from shots.csv"></canvas>
+      <figcaption><span>Every shot at Qatar 2022, drawn from shots.csv</span><span>size = xG</span><span><i></i>goal</span><span><i class="miss"></i>no goal</span></figcaption>
+    </figure>
+  </div>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
+
+<nav class="bar" aria-label="Drills"><div class="wrap" id="bar">
+  <span class="lbl">Drills</span>
+  <span class="status" id="status" role="status">Loading…</span>
+</div></nav>
+
+<main><div class="wrap">
+  <section id="data">
+    <div class="sec-head"><h2>The squad sheet</h2><span class="count">03</span></div>
+    <p class="sec-note">Three pandas DataFrames built from <a href="https://github.com/statsbomb/open-data">StatsBomb's free event data</a> for the 2022 FIFA World Cup: <code>matches</code>, <code>players</code> and <code>shots</code>. They're ready in every editor, along with <code>pd</code> and <code>np</code>. Each was loaded with <code>pd.read_csv("shots.csv")</code>, and you can <a href="../data/shots.csv" download>download</a> the same files to work offline.</p>
+    <div class="tables" id="tables"></div>
+    <div class="gotchas">
+      <b>Read before kick-off</b>
+      <ul>
+        <li>End a drill with the table or number you want on its own line, like the last line of a notebook cell, or store it in a variable called <code>answer</code>.</li>
+        <li><code>period == 5</code> is a penalty shootout. Shootout kicks are in <code>shots</code> but don't count as goals in the score, so most drills leave them out with <code>shots[shots["period"] &lt; 5]</code>.</li>
+        <li>Combine conditions with <code>&amp;</code> (and) and <code>|</code> (or), and wrap each one in brackets: <code>(a == 1) &amp; (b &gt; 2)</code>. Python's <code>and</code> and <code>or</code> don't work on columns.</li>
+        <li><code>xg</code> is StatsBomb's expected goals for the shot: the chance an average shot from that spot and situation goes in.</li>
+        <li>Text matches are exact and case-sensitive: <code>"Argentina"</code> works, <code>"argentina"</code> doesn't.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="drills">
+    <div class="sec-head"><h2>Drills</h2><span class="count">08</span></div>
+    <p class="sec-note">Write some pandas, press <b>Run</b> (or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>) to see what it returns, then <b>Check</b> it against the answer. The checker compares values, not column names, and accepts a group key left in the index. The first run starts Python in your browser, which takes a few seconds. Your code and ticks are saved in this browser.</p>
+    <div id="drill-list"></div>
+  </section>
+
+  <section id="free">
+    <div class="sec-head"><h2>Free play</h2></div>
+    <p class="sec-note">A blank editor with the same DataFrames. Try your own: who shot most often from outside the box (<code>x &lt; 102</code>)? Use <code>print()</code> to show more than one thing.</p>
+    <div class="drill" id="scratch"></div>
+  </section>
+
+  <section id="next">
+    <div class="sec-head"><h2>After the session</h2></div>
+    <div class="next">
+      <div><b>Take it home</b><span>Download <a href="../data/matches.csv" download>matches.csv</a>, <a href="../data/players.csv" download>players.csv</a> and <a href="../data/shots.csv" download>shots.csv</a>, then run the same code in Jupyter or VS Code after <code>pd.read_csv</code>.</span></div>
+      <div><b>Go further</b><span>The <a href="https://soccermatics.readthedocs.io/">Soccermatics for Python</a> course notes and the Kaggle notebooks on the <a href="../../library/">library</a> shelf build shot maps and xG models from data like this.</span></div>
+    </div>
+    <div class="sessions" id="sessions"></div>
+  </section>
+
+  <section id="credits">
+    <div class="sec-head"><h2>Credits</h2></div>
+    <p class="sec-note">What this session is built on. Everyone else whose work appears in the lab is on the <a href="../../credits/">Credits page</a>.</p>
+    <div class="credits">
+      <div><b>Data: StatsBomb</b>Event data from <a href="https://github.com/statsbomb/open-data">StatsBomb Open Data</a> (FIFA World Cup 2022), used under the <a href="https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf">StatsBomb Public Data User Agreement</a>. The CSVs here are a small extract: matches, lineups and shots. <a href="https://github.com/mbusani/football-analytics-lab/blob/main/training/data/build_wc2022.py">The script that builds them</a> is in the repo.</div>
+      <div><b>Python engine: Pyodide</b>CPython compiled to WebAssembly, by <a href="https://github.com/pyodide/pyodide">the Pyodide contributors</a> (MPL 2.0), running <a href="https://pandas.pydata.org/">pandas</a> (BSD 3-Clause). Your code runs on your own device; nothing is sent anywhere.</div>
+    </div>
+  </section>
+</div></main>
+
+<footer><div class="wrap">
+  <span>Part of <a href="../../">Football Analytics Lab</a> by <a href="https://github.com/mbusani">Mark Busani</a>. The drills and page are MIT-licensed; the data belongs to StatsBomb and keeps its own terms.</span>
+  <span>If you spot a wrong answer or a confusing drill, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a>.</span>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script src="../assets/session.js"></script>
+<script src="../assets/python-engine.js"></script>
+<script>
+/* ---------- the drills (fields are described in ../assets/session.js) ----------
+   Same questions as SQL session 01, answered with pandas. */
+const DRILLS = [
+  {title:"The fixture list", concept:"Selecting columns", ordered:false,
+   task:"List every match with its date, home team, away team, home score and away score.",
+   teach:"Put a list of column names in double square brackets to keep just those columns, in that order.",
+   eg:'matches[["match_date", "stadium"]]',
+   start:'matches[[]]',
+   hint:'The list is <code>["match_date", "home_team", "away_team", "home_score", "away_score"]</code>.',
+   sol:'matches[["match_date", "home_team", "away_team", "home_score", "away_score"]]'},
+  {title:"Argentina's road", concept:"Filtering · |", ordered:true,
+   task:"Show the date, stage, home team, away team and score of every Argentina match, in date order.",
+   teach:"A test on a column gives True or False for every row; put it in square brackets to keep the True rows. <code>sort_values</code> sorts.",
+   eg:'matches[matches["stage"] == "Final"]',
+   start:'argentina = matches[]\nargentina.sort_values("match_date")[["match_date", "stage", "home_team", "away_team", "home_score", "away_score"]]',
+   hint:'Argentina could be home or away: <code>(matches["home_team"] == "Argentina") | (matches["away_team"] == "Argentina")</code>.',
+   sol:'argentina = matches[(matches["home_team"] == "Argentina") | (matches["away_team"] == "Argentina")]\nargentina.sort_values("match_date")[["match_date", "stage", "home_team", "away_team", "home_score", "away_score"]]'},
+  {title:"Goal-fests", concept:"New columns · descending sort", ordered:false, desc: r => r[2],
+   task:"Find every match with six or more goals. Show the home team, away team and total goals, highest first.",
+   teach:"Arithmetic on columns works row by row. <code>assign</code> adds the result as a new column; <code>ascending=False</code> sorts biggest first.",
+   eg:'matches.assign(margin=matches["home_score"] - matches["away_score"]).sort_values("margin", ascending=False)',
+   start:'m = matches.assign(goals=)\n',
+   hint:'<code>goals=matches["home_score"] + matches["away_score"]</code>, then <code>m[m["goals"] &gt;= 6]</code>, sorted with <code>ascending=False</code>, keeping three columns.',
+   sol:'m = matches.assign(goals=matches["home_score"] + matches["away_score"])\nm[m["goals"] >= 6].sort_values("goals", ascending=False)[["home_team", "away_team", "goals"]]'},
+  {title:"How many shots?", concept:"len", ordered:true,
+   task:"How many shots were taken at the tournament, not counting penalty shootouts? Return a single number.",
+   teach:"<code>len(df)</code> is the number of rows in a DataFrame.",
+   eg:'len(matches[matches["stage"] == "Group Stage"])',
+   start:'len()',
+   hint:'Shootouts are <code>period == 5</code>, so keep <code>shots["period"] &lt; 5</code>.',
+   sol:'len(shots[shots["period"] < 5])'},
+  {title:"Who shot most?", concept:"groupby · size", ordered:false, desc: r => r[1],
+   task:"Count each team's shots (no shootouts). Show team and shots, most first.",
+   teach:"<code>groupby</code> splits the rows into one group per value; <code>.size()</code> counts each group's rows. The team names end up in the index, which the checker accepts.",
+   eg:'matches.groupby("stage").size()',
+   start:'open_play = shots[shots["period"] < 5]\n',
+   hint:'<code>open_play.groupby("team").size().sort_values(ascending=False)</code>',
+   sol:'open_play = shots[shots["period"] < 5]\nopen_play.groupby("team").size().sort_values(ascending=False)'},
+  {title:"Goals against xG", concept:"agg · round", ordered:false, desc: r => r[1] - r[2],
+   task:"For each team, show goals scored from shots and total xG rounded to 2 decimal places (no shootouts). Sort by goals minus xG, best finishers first.",
+   teach:"Add a True/False <code>goal</code> column first: summing it counts the Trues. <code>agg</code> makes several named totals at once.",
+   eg:'shots.groupby("team").agg(shots=("xg", "size"), pressured=("under_pressure", "sum"))',
+   start:'open_play = shots[shots["period"] < 5].assign(goal=shots["outcome"] == "Goal")\ntable = open_play.groupby("team").agg(goals=("goal", "sum"), xg=)\n',
+   hint:'<code>xg=("xg", "sum")</code>, then <code>.round(2)</code>. To sort by goals minus xG, add it as a column, sort, and drop it again: <code>table.assign(diff=table["goals"] - table["xg"]).sort_values("diff", ascending=False).drop(columns="diff")</code>.',
+   sol:'open_play = shots[shots["period"] < 5].assign(goal=shots["outcome"] == "Goal")\ntable = open_play.groupby("team").agg(goals=("goal", "sum"), xg=("xg", "sum")).round(2)\ntable.assign(diff=table["goals"] - table["xg"]).sort_values("diff", ascending=False).drop(columns="diff")'},
+  {title:"Shootout nerve", concept:"Filter then group", ordered:false,
+   task:"Penalty shootouts only: for each team, show kicks taken and kicks scored.",
+   teach:"The same tools, a different filter. Here the shootout rows are the ones you want.",
+   eg:'pens = shots[(shots["shot_type"] == "Penalty") & (shots["period"] < 5)]\npens.groupby("team").size()',
+   start:'shootout = shots[shots["period"] == 5].assign(goal=shots["outcome"] == "Goal")\n',
+   hint:'<code>shootout.groupby("team").agg(taken=("goal", "size"), scored=("goal", "sum"))</code>',
+   sol:'shootout = shots[shots["period"] == 5].assign(goal=shots["outcome"] == "Goal")\nshootout.groupby("team").agg(taken=("goal", "size"), scored=("goal", "sum"))'},
+  {title:"The chance-getters", concept:"Filter after grouping", ordered:false, desc: r => r[4],
+   task:"Players with at least 2.0 non-penalty xG (no penalties, no shootouts). Show player, team, shots, goals and npxG rounded to 2 places, highest npxG first.",
+   teach:"Group by two columns with a list. A grouped result is just another DataFrame, so you can filter it the same way as before.",
+   eg:'by_team = shots.groupby("team").agg(shots=("xg", "size"))\nby_team[by_team["shots"] > 100]',
+   start:'np_shots = shots[(shots["period"] < 5) & (shots["shot_type"] != "Penalty")].assign(goal=shots["outcome"] == "Goal")\nby_player = np_shots.groupby(["player", "team"]).agg(shots=("goal", "size"), goals=("goal", "sum"), npxg=("xg", "sum"))\n',
+   hint:'<code>by_player[by_player["npxg"] &gt;= 2].round(2).sort_values("npxg", ascending=False)</code>',
+   sol:'np_shots = shots[(shots["period"] < 5) & (shots["shot_type"] != "Penalty")].assign(goal=shots["outcome"] == "Goal")\nby_player = np_shots.groupby(["player", "team"]).agg(shots=("goal", "size"), goals=("goal", "sum"), npxg=("xg", "sum"))\nby_player[by_player["npxg"] >= 2].round(2).sort_values("npxg", ascending=False)'}
+];
+
+FAL.TABLES.players.cols.nickname = "short name, or NaN";   // pandas reads a missing nickname as NaN
+FAL.squadSheet();
+FAL.sessions("python-01");
+FAL.session({
+  key: "fal-python-01", drills: DRILLS, engine: FAL.pythonEngine(), indent: "    ", missing: "NaN",
+  free: 'goals = shots[shots["outcome"] == "Goal"]\ngoals.sort_values("xg")[["player", "minute", "xg"]].head(10)',
+  orderTip: "The right rows, but not in the order the drill asks for. Check your sort_values."
+});
+</script>
+</body>
+</html>

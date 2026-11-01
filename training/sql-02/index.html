@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="SQL session 02 of the Football Analytics Lab training ground: joins across matches, players and shots from the 2022 World Cup, run in the browser.">
+<title>SQL Session 02 · Football Analytics Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/session.css">
+</head>
+<body>
+
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="../../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="../../#repos">Repos</a>
+    <a class="lnk" href="../../library/">Library</a>
+    <a class="lnk" href="../../tasks/">Tasks</a>
+    <a class="lnk" href="../sql-01/" aria-current="page">Training</a>
+    <a class="lnk" href="../../credits/">Credits</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Training ground · SQL · Session 02</div>
+      <h1>SQL<span class="l2">Link-up</span><span class="l3">Play</span></h1>
+      <p class="lede">JOIN, LEFT JOIN, CASE and COUNT(DISTINCT), linking matches, players and shots from the 2022 World Cup. <b>Eight more drills in your browser, on the same database as session 01.</b></p>
+      <div class="cta">
+        <a class="go" href="#drills">Start the drills ↓</a>
+        <a class="gh" href="../sql-01/">← Session 01</a>
+      </div>
+      <div class="scoreboard" aria-label="Session at a glance">
+        <div><b id="n-matches">64</b><span>matches</span></div>
+        <div><b id="n-shots">–</b><span>shots</span></div>
+        <div><b id="n-done">0/8</b><span>drills done</span></div>
+      </div>
+    </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Shot map of every non-shootout shot at the 2022 World Cup, drawn from the session database"></canvas>
+      <figcaption><span>Every shot at Qatar 2022, drawn by a query on this page</span><span>size = xG</span><span><i></i>goal</span><span><i class="miss"></i>no goal</span></figcaption>
+    </figure>
+  </div>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
+
+<nav class="bar" aria-label="Drills"><div class="wrap" id="bar">
+  <span class="lbl">Drills</span>
+  <span class="status" id="status" role="status">Loading the database…</span>
+</div></nav>
+
+<main><div class="wrap">
+  <section id="data">
+    <div class="sec-head"><h2>The squad sheet</h2><span class="count">03</span></div>
+    <p class="sec-note">The same three tables as session 01. The arrows show how they link: every shot has a <code>match_id</code> that points at one row in <code>matches</code>, and a <code>player_id</code> and <code>team</code> that point at one row in <code>players</code>.</p>
+    <div class="tables" id="tables"></div>
+    <div class="gotchas">
+      <b>Read before kick-off</b>
+      <ul>
+        <li>Give each table a short alias (<code>FROM shots AS s JOIN matches AS m</code>) and prefix columns with it (<code>s.team</code>, <code>m.stage</code>). <code>team</code> on its own is ambiguous once two tables are joined.</li>
+        <li>A player is one row per team in <code>players</code>, so join on both columns: <code>p.player_id = s.player_id AND p.team = s.team</code>.</li>
+        <li><code>minute</code> counts from 0, as on a match clock: <code>22</code> means the 23rd minute.</li>
+        <li>As in session 01, <code>period = 5</code> is a penalty shootout, and most drills leave it out with <code>s.period &lt; 5</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="drills">
+    <div class="sec-head"><h2>Drills</h2><span class="count">08</span></div>
+    <p class="sec-note">Write a query, press <b>Run</b> (or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>) to see what it returns, then <b>Check</b> it against the answer. The checker compares values, not column names, so call your columns whatever you like. Your queries and ticks are saved in this browser.</p>
+    <div id="drill-list"></div>
+  </section>
+
+  <section id="free">
+    <div class="sec-head"><h2>Free play</h2></div>
+    <p class="sec-note">A blank editor on the same database. Try your own: which stadium saw the most goals? Which players scored for a team other than their <code>country</code>?</p>
+    <div class="drill" id="scratch"></div>
+  </section>
+
+  <section id="next">
+    <div class="sec-head"><h2>After the session</h2></div>
+    <div class="next">
+      <div><b>Take it home</b><span><a href="../data/wc2022.sqlite" download>Download wc2022.sqlite</a> and open it in <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a> or DuckDB. The joins work the same there.</span></div>
+      <div><b>Same questions, new language</b><span>Session 01's questions are also set in <a href="../python-01/">Python with pandas</a> and <a href="../r-01/">R with dplyr</a>, so you can compare the three side by side.</span></div>
+    </div>
+    <div class="sessions" id="sessions"></div>
+  </section>
+
+  <section id="credits">
+    <div class="sec-head"><h2>Credits</h2></div>
+    <p class="sec-note">What this session is built on. Everyone else whose work appears in the lab is on the <a href="../../credits/">Credits page</a>.</p>
+    <div class="credits">
+      <div><b>Data: StatsBomb</b>Event data from <a href="https://github.com/statsbomb/open-data">StatsBomb Open Data</a> (FIFA World Cup 2022), used under the <a href="https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf">StatsBomb Public Data User Agreement</a>. The database here is a small extract: matches, lineups and shots. <a href="https://github.com/mbusani/football-analytics-lab/blob/main/training/data/build_wc2022.py">The script that builds it</a> is in the repo.</div>
+      <div><b>SQL engine: sql.js</b>SQLite compiled to WebAssembly, by <a href="https://github.com/sql-js/sql.js">the sql.js contributors</a> (MIT licence). Your queries run on your own device; nothing is sent anywhere.</div>
+    </div>
+  </section>
+</div></main>
+
+<footer><div class="wrap">
+  <span>Part of <a href="../../">Football Analytics Lab</a> by <a href="https://github.com/mbusani">Mark Busani</a>. The drills and page are MIT-licensed; the data belongs to StatsBomb and keeps its own terms.</span>
+  <span>If you spot a wrong answer or a confusing drill, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a>.</span>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script src="../assets/session.js"></script>
+<script src="../assets/sql-engine.js"></script>
+<script>
+/* ---------- the drills (fields are described in ../assets/session.js) ---------- */
+const DRILLS = [
+  {title:"Final-day scorers", concept:"JOIN … ON", ordered:true,
+   task:"List every goal scored in the Final (not the shootout): minute, player and team, in the order they went in.",
+   teach:"<code>JOIN</code> lines up rows from two tables wherever the <code>ON</code> condition is true. Here that's a shot and the match it was taken in.",
+   eg:"SELECT s.player, m.stadium\nFROM shots AS s\nJOIN matches AS m ON s.match_id = m.match_id\nWHERE s.outcome = 'Goal';",
+   start:"SELECT s.minute, s.player, s.team\nFROM shots AS s\nJOIN matches AS m ON \nWHERE ",
+   hint:"Join on <code>s.match_id = m.match_id</code>, then filter <code>m.stage = 'Final' AND s.outcome = 'Goal' AND s.period &lt; 5</code> and <code>ORDER BY s.minute</code>.",
+   sol:"SELECT s.minute, s.player, s.team\nFROM shots AS s\nJOIN matches AS m ON s.match_id = m.match_id\nWHERE m.stage = 'Final' AND s.outcome = 'Goal' AND s.period < 5\nORDER BY s.minute;"},
+  {title:"Shots by stage", concept:"JOIN then GROUP BY", ordered:false,
+   task:"Count the shots taken at each stage of the tournament (no shootouts). Show stage and shots.",
+   teach:"Once the tables are joined, every column from both is available to <code>WHERE</code>, <code>GROUP BY</code> and <code>SELECT</code>.",
+   eg:"SELECT m.referee, COUNT(*) AS shots\nFROM shots AS s\nJOIN matches AS m ON s.match_id = m.match_id\nGROUP BY m.referee;",
+   start:"SELECT m.stage, COUNT(*) AS shots\nFROM shots AS s\nJOIN matches AS m ON s.match_id = m.match_id\n",
+   hint:"Add <code>WHERE s.period &lt; 5</code> and <code>GROUP BY m.stage</code>.",
+   sol:"SELECT m.stage, COUNT(*) AS shots\nFROM shots AS s\nJOIN matches AS m ON s.match_id = m.match_id\nWHERE s.period < 5\nGROUP BY m.stage;"},
+  {title:"Names on the back", concept:"Two-column join · COALESCE", ordered:false, desc: r => r[2],
+   task:"Everyone with three or more goals (no shootouts), shown by the name fans know them by: their nickname, or their full name if they don't have one. Show name, team and goals, most first.",
+   teach:"Join on two columns with <code>AND</code>. <code>COALESCE(a, b)</code> gives <code>a</code>, or <code>b</code> when <code>a</code> is NULL.",
+   eg:"SELECT COALESCE(p.nickname, p.player_name) AS name, p.jersey_number\nFROM players AS p\nWHERE p.team = 'Morocco';",
+   start:"SELECT COALESCE(p.nickname, p.player_name) AS name, s.team,\n       SUM(s.outcome = 'Goal') AS goals\nFROM shots AS s\nJOIN players AS p ON \n",
+   hint:"<code>ON p.player_id = s.player_id AND p.team = s.team</code>, <code>WHERE s.period &lt; 5</code>, <code>GROUP BY s.player_id, s.team</code>, <code>HAVING SUM(s.outcome = 'Goal') &gt;= 3</code>.",
+   sol:"SELECT COALESCE(p.nickname, p.player_name) AS name, s.team,\n       SUM(s.outcome = 'Goal') AS goals\nFROM shots AS s\nJOIN players AS p ON p.player_id = s.player_id AND p.team = s.team\nWHERE s.period < 5\nGROUP BY s.player_id, s.team\nHAVING SUM(s.outcome = 'Goal') >= 3\nORDER BY goals DESC;"},
+  {title:"Never had a shot", concept:"LEFT JOIN · IS NULL", ordered:false, desc: r => r[1],
+   task:"For each team, count the squad players who never took a shot all tournament (shootouts included). Show team and players, most first.",
+   teach:"<code>LEFT JOIN</code> keeps every row from the left table. Where nothing on the right matches, the right-hand columns are NULL, so <code>WHERE right.id IS NULL</code> finds the rows with no match.",
+   eg:"SELECT m.home_team, m.away_team\nFROM matches AS m\nLEFT JOIN shots AS s ON s.match_id = m.match_id AND s.period = 5\nWHERE s.shot_id IS NULL AND m.stage = 'Round of 16';",
+   start:"SELECT p.team, COUNT(*) AS players\nFROM players AS p\nLEFT JOIN shots AS s ON \n",
+   hint:"<code>ON s.player_id = p.player_id AND s.team = p.team</code>, then <code>WHERE s.shot_id IS NULL</code>, <code>GROUP BY p.team</code>, <code>ORDER BY players DESC</code>.",
+   sol:"SELECT p.team, COUNT(*) AS players\nFROM players AS p\nLEFT JOIN shots AS s ON s.player_id = p.player_id AND s.team = p.team\nWHERE s.shot_id IS NULL\nGROUP BY p.team\nORDER BY players DESC;"},
+  {title:"The meanest defences", concept:"CASE WHEN", ordered:false, desc: r => -r[1],
+   task:"xG conceded by each team (no shootouts), rounded to 2 places, lowest first. The defending team is whichever side of the match didn't take the shot.",
+   teach:"<code>CASE WHEN … THEN … ELSE … END</code> picks a value row by row. You can group by the result like any other column.",
+   eg:"SELECT s.player,\n       CASE WHEN s.x >= 102 THEN 'in the box' ELSE 'outside' END AS zone\nFROM shots AS s;",
+   start:"SELECT CASE WHEN s.team = m.home_team THEN  ELSE  END AS defending,\n       ROUND(SUM(s.xg), 2) AS xg_against\nFROM shots AS s\nJOIN matches AS m ON s.match_id = m.match_id\n",
+   hint:"If the shooter is the home team, the defender is <code>m.away_team</code>, otherwise <code>m.home_team</code>. Then <code>WHERE s.period &lt; 5 GROUP BY defending ORDER BY xg_against</code>.",
+   sol:"SELECT CASE WHEN s.team = m.home_team THEN m.away_team ELSE m.home_team END AS defending,\n       ROUND(SUM(s.xg), 2) AS xg_against\nFROM shots AS s\nJOIN matches AS m ON s.match_id = m.match_id\nWHERE s.period < 5\nGROUP BY defending\nORDER BY xg_against;"},
+  {title:"Knockout xG", concept:"Conditional SUM", ordered:false,
+   task:"For every knockout match: stage, home team, away team, home xG and away xG, each rounded to 2 places (no shootouts).",
+   teach:"Put a <code>CASE</code> inside <code>SUM</code> to total only some rows, so one grouped row can hold a figure for each side.",
+   eg:"SELECT m.home_team, m.away_team,\n       SUM(CASE WHEN s.team = m.home_team THEN 1 ELSE 0 END) AS home_shots\nFROM matches AS m\nJOIN shots AS s ON s.match_id = m.match_id\nGROUP BY m.match_id;",
+   start:"SELECT m.stage, m.home_team, m.away_team,\n       ROUND(SUM(CASE WHEN s.team = m.home_team THEN s.xg ELSE 0 END), 2) AS home_xg,\n       \nFROM matches AS m\nJOIN shots AS s ON s.match_id = m.match_id\n",
+   hint:"Add the away version of the <code>CASE</code>, then <code>WHERE m.stage &lt;&gt; 'Group Stage' AND s.period &lt; 5 GROUP BY m.match_id</code>.",
+   sol:"SELECT m.stage, m.home_team, m.away_team,\n       ROUND(SUM(CASE WHEN s.team = m.home_team THEN s.xg ELSE 0 END), 2) AS home_xg,\n       ROUND(SUM(CASE WHEN s.team = m.away_team THEN s.xg ELSE 0 END), 2) AS away_xg\nFROM matches AS m\nJOIN shots AS s ON s.match_id = m.match_id\nWHERE m.stage <> 'Group Stage' AND s.period < 5\nGROUP BY m.match_id;"},
+  {title:"The referee's whistle", concept:"COUNT(DISTINCT)", ordered:false, desc: r => r[2],
+   task:"Referees who took charge of three or more matches: referee, matches, and shots per match rounded to 1 place (no shootouts), busiest first.",
+   teach:"After a join each match appears once per shot, so <code>COUNT(*)</code> counts shots. <code>COUNT(DISTINCT m.match_id)</code> counts matches.",
+   eg:"SELECT m.stadium, COUNT(DISTINCT m.match_id) AS matches, COUNT(*) AS shots\nFROM matches AS m\nJOIN shots AS s ON s.match_id = m.match_id\nGROUP BY m.stadium;",
+   start:"SELECT m.referee, COUNT(DISTINCT m.match_id) AS matches,\n       \nFROM matches AS m\nJOIN shots AS s ON s.match_id = m.match_id\n",
+   hint:"Shots per match is <code>ROUND(COUNT(*) * 1.0 / COUNT(DISTINCT m.match_id), 1)</code>; the <code>* 1.0</code> stops SQLite rounding the division down to a whole number. Then <code>HAVING COUNT(DISTINCT m.match_id) &gt;= 3</code>.",
+   sol:"SELECT m.referee, COUNT(DISTINCT m.match_id) AS matches,\n       ROUND(COUNT(*) * 1.0 / COUNT(DISTINCT m.match_id), 1) AS shots_per_match\nFROM matches AS m\nJOIN shots AS s ON s.match_id = m.match_id\nWHERE s.period < 5\nGROUP BY m.referee\nHAVING COUNT(DISTINCT m.match_id) >= 3\nORDER BY shots_per_match DESC;"},
+  {title:"Is the No. 9 still king?", concept:"Join, group, HAVING", ordered:false, desc: r => r[1],
+   task:"Goals by shirt number (no shootouts), for numbers that scored eight or more. Show jersey number and goals, most first.",
+   teach:"Everything together: join to get a column the shots table doesn't have, group by it, filter the groups.",
+   eg:"SELECT p.country, COUNT(*) AS shots\nFROM shots AS s\nJOIN players AS p ON p.player_id = s.player_id AND p.team = s.team\nGROUP BY p.country;",
+   start:"SELECT p.jersey_number, SUM(s.outcome = 'Goal') AS goals\nFROM shots AS s\nJOIN players AS p ON p.player_id = s.player_id AND p.team = s.team\n",
+   hint:"<code>WHERE s.period &lt; 5 GROUP BY p.jersey_number HAVING SUM(s.outcome = 'Goal') &gt;= 8 ORDER BY goals DESC</code>.",
+   sol:"SELECT p.jersey_number, SUM(s.outcome = 'Goal') AS goals\nFROM shots AS s\nJOIN players AS p ON p.player_id = s.player_id AND p.team = s.team\nWHERE s.period < 5\nGROUP BY p.jersey_number\nHAVING SUM(s.outcome = 'Goal') >= 8\nORDER BY goals DESC;"}
+];
+
+FAL.TABLES.players.cols.nickname = "short name, or NULL";   // SQLite stores a missing nickname as NULL
+FAL.squadSheet();
+FAL.sessions("sql-02");
+const engine = FAL.sqlEngine();
+FAL.session({
+  key: "fal-sql-02", drills: DRILLS, engine,
+  free: "SELECT m.stadium, SUM(s.outcome = 'Goal') AS goals\nFROM shots AS s\nJOIN matches AS m ON s.match_id = m.match_id\nWHERE s.period < 5\nGROUP BY m.stadium\nORDER BY goals DESC;",
+  orderTip: "The right rows, but not in the order the drill asks for. Check your ORDER BY.",
+  onReady: engine.ready
+});
+</script>
+</body>
+</html>

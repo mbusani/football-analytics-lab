@@ -38,9 +38,12 @@ The repos, notebooks and people I'm learning from, collected in one place and cr
 
 Hands-on sessions on open football data that run in the browser, with nothing to install.
 
-- **[SQL session 01: First touches](https://mbusani.github.io/football-analytics-lab/training/sql-01/)**: eight drills on SELECT, WHERE, ORDER BY, GROUP BY and HAVING, using every shot from the 2022 World Cup. Each drill checks your answer.
+- **[SQL session 01: First touches](https://mbusani.github.io/football-analytics-lab/training/sql-01/)**: eight drills on SELECT, WHERE, ORDER BY, GROUP BY and HAVING, using every shot from the 2022 World Cup.
+- **[SQL session 02: Link-up play](https://mbusani.github.io/football-analytics-lab/training/sql-02/)**: eight drills on JOIN, LEFT JOIN, CASE and COUNT(DISTINCT) across matches, players and shots.
+- **[Python session 01: First touches](https://mbusani.github.io/football-analytics-lab/training/python-01/)**: SQL session 01's questions, answered with pandas (Python runs in the browser via Pyodide).
+- **[R session 01: First touches](https://mbusani.github.io/football-analytics-lab/training/r-01/)**: the same questions, answered with dplyr (R runs in the browser via webR).
 
-The database is a small extract of [StatsBomb Open Data](https://github.com/statsbomb/open-data) (FIFA World Cup 2022), used under the [StatsBomb Public Data User Agreement](https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf). [`training/data/build_wc2022.py`](training/data/build_wc2022.py) rebuilds it. Python and R sessions come next.
+Each drill checks your answer. The data is a small extract of [StatsBomb Open Data](https://github.com/statsbomb/open-data) (FIFA World Cup 2022), used under the [StatsBomb Public Data User Agreement](https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf): a SQLite database for the SQL sessions and three CSV files for Python and R. [`training/data/build_wc2022.py`](training/data/build_wc2022.py) rebuilds them. The pages share their styles and drill checker in [`training/assets/`](training/assets/).
 
 ## Licence
 

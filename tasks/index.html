@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="What Mark is working on in his football analytics lab: tasks tracked with Beads and read live from GitHub.">
+<title>Tasks · Football Analytics Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the lab's night hero, shared with the home and library pages, over a task board read live from the repo's
+   Beads export: epics with progress bars, then four columns (blocked, ready, in progress, done). */
+:root{
+  --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
+  --turf:#1c6948; --turf-soft:#e0ede5; --amber:#d47f17; --amber-soft:#fbebd4;
+  --pitch:#e4eee6; --pline:#a3bfaf;
+  --night:#07110c; --night-2:#0d1d15; --chalk:#e9f2ec; --chalk-dim:#9fb6a8; --flood:#f2a541; --grass:#5bc391; --nline:#2c4a3b;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+a{color:var(--turf)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* ---------- Night hero (same as the lab home page) ---------- */
+html{scroll-behavior:smooth}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
+    radial-gradient(55% 50% at 100% -5%, rgba(233,242,236,.14), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(91,195,145,.035) 0 70px, transparent 70px 140px);}
+nav.top{position:relative;z-index:2}
+nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk);text-decoration:none}
+.brand i{width:26px;height:26px;border-radius:50%;border:2px solid var(--chalk);position:relative;display:inline-block}
+.brand i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flood)}
+nav.top .sp{flex:1}
+nav.top a.lnk{font-family:var(--mono);font-size:12px;color:var(--chalk-dim);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
+nav.top a.lnk:hover,nav.top a.lnk[aria-current]{color:var(--chalk)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:44px;align-items:center;padding-block:40px 64px}
+.hero .eyebrow{color:var(--flood)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
+h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
+h1 .l3{display:block;color:var(--grass)}
+.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
+.lede b{color:var(--chalk);font-weight:600}
+.lede{display:grid}.lede>span{grid-area:1/1}.lede .sizer{visibility:hidden}
+.cta a{width:214px;justify-content:center}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.cta a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
+.cta .go{background:var(--flood);color:#1a1205}
+.cta .go:hover{filter:brightness(1.08)}
+.cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
+.cta .gh:hover{border-color:var(--chalk)}
+.scoreboard{display:flex;gap:0;margin-top:34px;border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
+.scoreboard div{padding:10px 18px;border-right:1px solid var(--nline);background:rgba(7,17,12,.6)}
+.scoreboard div:last-child{border-right:0}
+.scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
+.scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
+figure.net{margin:0;min-width:0;position:relative}
+figure.net canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
+figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px}
+figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--flood);margin-right:6px;vertical-align:middle}
+.touchline{height:6px;background:repeating-linear-gradient(90deg,var(--chalk) 0 22px,transparent 22px 34px);opacity:.25}
+#list{scroll-margin-top:72px}
+
+/* ---------- Tasks page ---------- */
+.srcbar{border-bottom:1px solid var(--line);background:var(--bg)}
+.srcbar .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding-block:12px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.srcbar .dot{width:8px;height:8px;border-radius:50%;background:var(--line);display:inline-block;margin-right:6px;vertical-align:middle}
+.srcbar .dot.ok{background:var(--turf)} .srcbar .dot.err{background:var(--amber)}
+.srcbar .sp{flex:1}
+.srcbar button{font:inherit;font-size:12px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);cursor:pointer}
+.srcbar button:hover{border-color:var(--turf)}
+main .wrap{padding-block:12px 72px}
+section{margin-top:44px}
+.sec-head{display:flex;align-items:center;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--fg)}
+.sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,38px);line-height:1;text-transform:uppercase;margin:0;letter-spacing:.01em}
+.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:800;font-size:38px;line-height:1;color:var(--line)}
+.sec-note{color:var(--muted);font-size:15px;margin:10px 0 0;max-width:70ch}
+.epics{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:18px}
+.epic{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.epic h3{font-family:var(--display);font-weight:800;font-size:26px;line-height:1;text-transform:uppercase;margin:0}
+.epic .meta{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.bar{height:10px;border-radius:999px;background:var(--turf-soft);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--turf);border-radius:999px}
+.epic .nums{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-family:var(--mono);font-size:10.5px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--bg)}
+.pill.ready{color:var(--turf);border-color:var(--turf)} .pill.blocked{color:var(--amber);border-color:var(--amber)}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:18px;align-items:start}
+.col{background:var(--pitch);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.col-head{display:flex;align-items:center;gap:8px;padding:2px 4px 10px}
+.col-head b{font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+.col-head .n{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.col-head .sw{width:10px;height:10px;border-radius:3px;flex:none}
+.col .empty{font-size:14px;color:var(--muted);padding:10px 6px 4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 12px 10px;margin-top:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card:first-of-type{margin-top:0}
+.card .top{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.card .id{color:var(--fg)}
+.card .pr{margin-left:auto;padding:1px 7px;border-radius:4px;background:var(--turf-soft);color:var(--turf)}
+.card .pr.p0,.card .pr.p1{background:var(--amber-soft);color:var(--amber)}
+.card h4{margin:0;font-size:16px;line-height:1.3;font-weight:600;overflow-wrap:anywhere}
+.card .ep{font-size:13px;color:var(--muted)}
+.card .why{font-size:13px;line-height:1.4;border-top:1px dashed var(--line);padding-top:6px;margin:0;color:var(--fg)}
+.card .why span{font-family:var(--mono);font-size:11px;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.card .why .ok{color:var(--turf)} .card .why .no{color:var(--amber)}
+.card .when{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.card.done h4{text-decoration:line-through;text-decoration-color:var(--line);color:var(--muted)}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:18px}
+.how div{border:1.5px dashed var(--line);border-radius:14px;padding:16px 18px;font-size:15px}
+.how b{font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;display:block;margin-bottom:4px}
+.how code{font-family:var(--mono);font-size:13px;background:var(--turf-soft);color:var(--turf);padding:1px 6px;border-radius:4px}
+.notice{margin-top:18px;padding:16px 18px;border:1px solid var(--amber);background:var(--amber-soft);border-radius:12px;font-size:15px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer .wrap{padding-block:22px 44px}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}.board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.board{grid-template-columns:1fr}}
+@media (max-width:480px){.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<style>html,body{margin:0}</style>
+</head>
+<body>
+
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="../#repos">Repos</a>
+    <a class="lnk" href="../library/">Library</a>
+    <a class="lnk" href="./" aria-current="page">Tasks</a>
+    <a class="lnk" href="../#credits">Credits</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Mark Busani · Perth, Western Australia</div>
+      <h1>Football<span class="l2">Analytics</span><span class="l3">Tasks</span></h1>
+      <p class="lede"><span>The jobs I'm working through on the way into football analytics. <b>Tracked with Beads, and read live from my lab on GitHub.</b></span><span class="sizer" aria-hidden="true">The repos, notebooks and people I'm learning from on the way into football analytics. <b>Forked into my lab, and credited to the people who built them.</b></span><span class="sizer" aria-hidden="true">The reports, papers and tools I'm learning from on the way into football analytics. <b>Shelved in one place, and credited to the people who made them.</b></span></p>
+      <div class="cta">
+        <a class="go" href="#board">See what's ready ↓</a>
+        <a class="gh" href="../">← Back to the lab</a>
+      </div>
+      <div class="scoreboard" id="stats" aria-label="Tasks at a glance"><div><b>–</b><span>on the board</span></div><div><b>–</b><span>ready to work now</span></div><div><b>–</b><span>closed and shipped</span></div></div>
+    </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Animated illustration of the lab's tasks on a night pitch, arranged by status, with dashed lines for blockers"></canvas>
+      <figcaption><span>Illustration: your Beads tasks, live from Git</span><span>columns = status · dashed line = a blocker</span><span><i></i>ball = next ready</span></figcaption>
+    </figure>
+  </div>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
+
+<div class="srcbar"><div class="wrap">
+  <span id="srcstate"><span class="dot"></span>Loading tasks from GitHub…</span>
+  <span class="sp"></span>
+  <a href="https://github.com/mbusani/football-analytics-lab/blob/main/.beads/issues.jsonl">View the raw file</a>
+  <button id="refresh" type="button">Refresh</button>
+</div></div>
+
+<main><div class="wrap">
+  <section id="epics-sec">
+    <div class="sec-head"><h2>Epics</h2><span class="count" id="epic-count">00</span></div>
+    <p class="sec-note">The big pieces of work. Each bar fills as the tasks underneath it close.</p>
+    <div class="epics" id="epics"></div>
+  </section>
+
+  <section id="board">
+    <div class="sec-head"><h2>Board</h2><span class="count" id="task-count">00</span></div>
+    <p class="sec-note">A task is <b>ready</b> when nothing is blocking it. When a blocker closes, the tasks waiting on it move across to Ready on their own.</p>
+    <div class="board" id="cols"></div>
+  </section>
+
+  <section id="how">
+    <div class="sec-head"><h2>How this works</h2></div>
+    <div class="how">
+      <div><b>Tracked with Beads</b>Tasks live in <a href="https://github.com/steveyegge/beads">Beads</a>, the open-source, MIT-licensed task tracker for coding agents by Steve Yegge. I run it on my own computer with Claude Code.</div>
+      <div><b>Read from GitHub</b>Beads keeps a plain-text copy in <code>.beads/issues.jsonl</code>. When I push my lab to GitHub, this page reads that file and redraws the board.</div>
+      <div><b>On my computer</b><code>bd ready</code> lists what I can start, <code>bd close</code> finishes a task, and <a href="https://github.com/Dicklesworthstone/beads_viewer">Beads Viewer</a> by Jeffrey Emanuel shows the same board in the terminal.</div>
+    </div>
+  </section>
+</div></main>
+
+<footer><div class="wrap">Part of <a href="../">Football Analytics Lab</a> by <a href="https://github.com/mbusani">Mark Busani</a>. Task tracking by <a href="https://github.com/steveyegge/beads">Beads</a> (Steve Yegge, MIT licence). The illustration is original and drawn in the page from the live task list.</div></footer>
+
+<script>
+const REPO="mbusani/football-analytics-lab", FILE=".beads/issues.jsonl";
+const COLS=[
+  {id:"blocked",name:"Blocked",sw:"var(--amber)"},
+  {id:"ready",name:"Ready",sw:"var(--turf)"},
+  {id:"doing",name:"In progress",sw:"#e0b14a"},
+  {id:"done",name:"Done",sw:"var(--line)"}
+];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=iso=>iso?new Date(iso).toLocaleDateString("en-AU",{day:"numeric",month:"short",year:"numeric"}):"";
+let STATE={tasks:[],epics:[],byId:{}};
+
+async function fetchText(){
+  try{
+    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}?ref=main`,{headers:{Accept:"application/vnd.github.raw+json"},cache:"no-store"});
+    if(r.ok) return await r.text();
+  }catch(e){}
+  const r=await fetch(`https://raw.githubusercontent.com/${REPO}/main/${FILE}?t=${Date.now()}`,{cache:"no-store"});
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  return await r.text();
+}
+function parse(text){
+  const all=text.split(/\r?\n/).filter(l=>l.trim()).map(l=>{try{return JSON.parse(l)}catch(e){return null}}).filter(Boolean)
+    .filter(d=>(!d._type||d._type==="issue")&&d.id&&d.status!=="tombstone");
+  const byId=Object.fromEntries(all.map(d=>[d.id,d]));
+  all.forEach(d=>{d.parent=null;d.blockers=[];d.unblocks=[];d.children=[]});
+  all.forEach(d=>(d.dependencies||[]).forEach(x=>{
+    const other=byId[x.depends_on_id];
+    if(x.type==="parent-child"){d.parent=x.depends_on_id;if(other)other.children.push(d.id)}
+    else if(x.type==="blocks"){d.blockers.push(x.depends_on_id);if(other)other.unblocks.push(d.id)}
+  }));
+  const open=id=>byId[id]&&byId[id].status!=="closed";
+  all.forEach(d=>{
+    d.col=d.status==="closed"?"done":d.status==="in_progress"?"doing":(d.status==="blocked"||d.status==="deferred"||d.blockers.some(open))?"blocked":"ready";
+  });
+  const epics=all.filter(d=>d.issue_type==="epic"), tasks=all.filter(d=>d.issue_type!=="epic");
+  const sort=(a,b)=>(a.priority??2)-(b.priority??2)||String(a.created_at).localeCompare(String(b.created_at));
+  epics.sort(sort);tasks.sort(sort);
+  return {all,byId,epics,tasks};
+}
+function card(d){
+  const S=STATE.byId, ep=d.parent&&S[d.parent]?S[d.parent].title:"";
+  let why="";
+  if(d.col==="blocked"&&d.blockers.length){
+    why=`<p class="why"><span>Waiting on</span>${d.blockers.map(b=>`<span class="${S[b]&&S[b].status==="closed"?"ok":"no"}" style="display:inline;text-transform:none;letter-spacing:0">${esc(b)}</span> ${esc(S[b]?S[b].title:"")}`).join("<br>")}</p>`;
+  }else if(d.col==="blocked"){
+    why=`<p class="why"><span>Status</span>${esc(d.status==="deferred"?"Deferred for now":"Marked blocked")}</p>`;
+  }
+  if(d.col==="done"&&d.close_reason) why+=`<p class="why"><span>Closed because</span>${esc(d.close_reason)}</p>`;
+  if(d.col!=="done"&&d.unblocks.length) why+=`<p class="why"><span>Unlocks</span>${d.unblocks.map(u=>esc(S[u]?S[u].title:u)).join("<br>")}</p>`;
+  const when=d.col==="done"?`closed ${fmt(d.closed_at||d.updated_at)}`:d.col==="doing"?`started ${fmt(d.started_at||d.updated_at)}`:`added ${fmt(d.created_at)}`;
+  return `<article class="card${d.col==="done"?" done":""}">
+    <div class="top"><span class="id">${esc(d.id)}</span><span>${esc(d.issue_type||"task")}</span><span class="pr p${d.priority??2}">P${d.priority??2}</span></div>
+    <h4>${esc(d.title)}</h4>${ep?`<div class="ep">Part of ${esc(ep)}</div>`:""}${why}<div class="when">${when}</div></article>`;
+}
+function render(){
+  const {epics,tasks,byId}=STATE;
+  const n=c=>tasks.filter(t=>t.col===c).length;
+  const vals=[tasks.filter(t=>t.col!=="done").length,n("ready"),n("done")];
+  document.querySelectorAll("#stats b").forEach((b,i)=>b.textContent=vals[i]);
+  document.getElementById("epic-count").textContent=String(epics.length).padStart(2,"0");
+  document.getElementById("task-count").textContent=String(tasks.length).padStart(2,"0");
+  document.getElementById("epics-sec").style.display=epics.length?"":"none";
+  document.getElementById("epics").innerHTML=epics.map(e=>{
+    const kids=e.children.map(id=>byId[id]).filter(Boolean), done=kids.filter(k=>k.status==="closed").length;
+    const pct=kids.length?Math.round(done/kids.length*100):(e.status==="closed"?100:0);
+    const r=kids.filter(k=>k.col==="ready").length, bl=kids.filter(k=>k.col==="blocked").length, dg=kids.filter(k=>k.col==="doing").length;
+    return `<article class="epic"><div class="meta">${esc(e.id)} · epic · P${e.priority??2}${e.status==="closed"?" · closed":""}</div><h3>${esc(e.title)}</h3>
+      <div class="bar" role="img" aria-label="${pct}% complete"><i style="width:${pct}%"></i></div>
+      <div class="nums"><span class="pill">${done} of ${kids.length} done · ${pct}%</span>${r?`<span class="pill ready">${r} ready</span>`:""}${dg?`<span class="pill">${dg} in progress</span>`:""}${bl?`<span class="pill blocked">${bl} blocked</span>`:""}</div></article>`}).join("");
+  document.getElementById("cols").innerHTML=COLS.map(c=>{
+    const list=tasks.filter(t=>t.col===c.id);
+    return `<div class="col"><div class="col-head"><span class="sw" style="background:${c.sw}"></span><b>${c.name}</b><span class="n">${list.length}</span></div>${list.length?list.map(card).join(""):`<p class="empty">${c.id==="ready"?"Nothing ready right now.":c.id==="blocked"?"Nothing blocked.":c.id==="doing"?"Nothing in progress.":"Nothing closed yet."}</p>`}</div>`}).join("");
+}
+async function load(){
+  const st=document.getElementById("srcstate");
+  st.innerHTML='<span class="dot"></span>Loading tasks from GitHub…';
+  try{
+    const p=parse(await fetchText());
+    STATE={tasks:p.tasks,epics:p.epics,byId:p.byId};
+    const last=p.all.map(d=>d.updated_at||d.created_at).sort().pop();
+    st.innerHTML=`<span class="dot ok"></span>${p.all.length} items from <b>.beads/issues.jsonl</b> on GitHub · last change ${fmt(last)}`;
+    render(); if(window.__heroData) window.__heroData(STATE.tasks);
+  }catch(e){
+    st.innerHTML='<span class="dot err"></span>Couldn’t load the task list from GitHub just now.';
+    document.getElementById("cols").innerHTML=`<div class="notice" style="grid-column:1/-1">The board reads <code>.beads/issues.jsonl</code> from the lab's GitHub repo. It couldn't be loaded (${esc(e.message)}). Try <b>Refresh</b> in a minute, or open the raw file.</div>`;
+  }
+}
+document.getElementById("refresh").addEventListener("click",load);
+load();
+
+/* ---------- Hero: the task list on a night pitch, one column per status ---------- */
+(function hero(){
+  const cv=document.getElementById("hero");if(!cv||!cv.getContext)return;const ctx=cv.getContext("2d");
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ZONES=[["blocked","BLOCKED"],["ready","READY"],["doing","IN PLAY"],["done","DONE"]];
+  let W=0,H=0,nodes=[],edges=[],from=-1,to=-1,t=1,hold=0,popup=null;const trail=[];
+  let tasks=[];
+  const M=()=>Math.max(12,W*.045);
+  function layout(){nodes=[];edges=[];if(!W)return;const m=M(),zw=(W-2*m)/4,top=m+H*.24,bottom=H-m-H*.17;
+    ZONES.forEach(([z],zi)=>{const list=tasks.filter(d=>d.col===z);const n=list.length;
+      list.forEach((d,i)=>{const y=n===1?(top+bottom)/2:top+(bottom-top)*(i/(Math.max(1,n-1)));const x=m+zw*(zi+.5)+(n>3?((i%2)?zw*.18:-zw*.18):0);nodes.push({d,x,y,z})})});
+    const idx=Object.fromEntries(nodes.map((n,i)=>[n.d.id,i]));
+    nodes.forEach((n,i)=>n.d.blockers.forEach(b=>{if(idx[b]!=null)edges.push([idx[b],i])}));
+  }
+  function size(){const dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;if(!W||!H)return;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);layout()}
+  window.__heroData=list=>{tasks=list;layout();from=-1;to=-1;t=1;hold=.5;popup=null};
+  function back(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle="#0d1d15";ctx.fillRect(0,0,W,H);
+    for(let s=0;s<10;s++){if(s%2){ctx.fillStyle="rgba(91,195,145,.035)";ctx.fillRect(m+s*w/10,m,w/10,h)}}
+    const g=ctx.createRadialGradient(W*.15,-H*.2,0,W*.15,-H*.2,W*.9);g.addColorStop(0,"rgba(242,165,65,.12)");g.addColorStop(1,"rgba(242,165,65,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle="rgba(44,74,59,.75)";ctx.lineWidth=1.2;ctx.strokeRect(m,m,w,h);
+    ctx.setLineDash([4,6]);for(let k=1;k<4;k++){ctx.beginPath();ctx.moveTo(m+w*k/4,m);ctx.lineTo(m+w*k/4,H-m);ctx.stroke()}ctx.setLineDash([]);
+    ctx.font=`500 ${Math.max(9,Math.round(H*.03))}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="alphabetic";
+    ZONES.forEach(([z,l],k)=>{const c=tasks.filter(d=>d.col===z).length;ctx.fillStyle=z==="ready"?"#5bc391":z==="blocked"?"#f2a541":"#9fb6a8";ctx.globalAlpha=.85;ctx.fillText(`${l} · ${c}`,m+w*(k+.5)/4*1,H-m-H*.035);ctx.globalAlpha=1})}
+  function rad(){return Math.max(9,Math.min(W,H)*.04)}
+  function pick(){const pool=nodes.map((n,i)=>i).filter(i=>nodes[i].z==="ready"||nodes[i].z==="doing");const all=pool.length?pool:nodes.map((n,i)=>i);if(!all.length)return;
+    let n=all[Math.floor(Math.random()*all.length)];if(all.length>1)while(n===to)n=all[Math.floor(Math.random()*all.length)];from=to<0?n:to;to=n;t=0}
+  function draw(){back();const r=rad();
+    edges.forEach(([a,b])=>{const A=nodes[a],B=nodes[b];ctx.strokeStyle=A.z==="done"?"rgba(91,195,145,.55)":"#f2a541";ctx.lineWidth=1.6;ctx.setLineDash([5,5]);ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();ctx.setLineDash([]);
+      const an=Math.atan2(B.y-A.y,B.x-A.x),tx=B.x-Math.cos(an)*(r+3),ty=B.y-Math.sin(an)*(r+3);ctx.fillStyle=ctx.strokeStyle;ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-Math.cos(an-.5)*7,ty-Math.sin(an-.5)*7);ctx.lineTo(tx-Math.cos(an+.5)*7,ty-Math.sin(an+.5)*7);ctx.fill()});
+    nodes.forEach((n,i)=>{const lift=(i===to&&t>=1&&hold>0)?1:0;const col=n.z==="ready"?"#5bc391":n.z==="blocked"?"#f2a541":n.z==="doing"?"#e0b14a":"#4b6b5a";
+      if(lift){ctx.shadowColor="#f2a541";ctx.shadowBlur=16}
+      ctx.fillStyle=n.z==="done"?"#16301f":"#07110c";ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(n.x,n.y,r,0,7);ctx.fill();ctx.stroke();ctx.shadowBlur=0;
+      ctx.fillStyle=n.z==="done"?"#9fb6a8":"#e9f2ec";ctx.font=`500 ${Math.round(r*.62)}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="middle";
+      const lab=n.z==="done"?"✓":n.d.id.split("-").slice(1).join("-");ctx.fillText(lab.length>6?lab.slice(-6):lab,n.x,n.y+.5)});
+    trail.forEach((p,i)=>{ctx.fillStyle="#f2a541";ctx.globalAlpha=(i+1)/trail.length*.5;ctx.beginPath();ctx.arc(p[0],p[1],2.2,0,7);ctx.fill()});ctx.globalAlpha=1;
+    let bx=W/2,by=H/2;
+    if(to>=0&&nodes[to]){const A=nodes[from]||nodes[to],B=nodes[to];const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;const arc=Math.max(H*.1,Math.abs(B.x-A.x)*.2);
+      bx=A.x+(B.x-A.x)*e;by=A.y+(B.y-A.y)*e-Math.sin(Math.PI*Math.min(1,t))*arc-(r+6)*(t>=1?1:Math.min(1,t*2));}
+    else{const m=M();bx=W/2;by=H/2-(H-2*m)*.02}
+    ctx.shadowColor="#f2a541";ctx.shadowBlur=12;ctx.fillStyle="#f2a541";ctx.beginPath();ctx.arc(bx,by,5,0,7);ctx.fill();ctx.shadowBlur=0;
+    if(popup){const m=M();ctx.globalAlpha=Math.min(1,popup.life);ctx.textAlign="right";ctx.textBaseline="alphabetic";
+      ctx.fillStyle="#f2a541";ctx.font=`900 ${Math.round(H*.075)}px "Big Shoulders Display",Impact,sans-serif`;ctx.fillText(popup.head,W-m-6,m+H*.075);
+      ctx.fillStyle="#9fb6a8";ctx.font=`500 ${Math.max(9,Math.round(H*.032))}px "JetBrains Mono",monospace`;let s=popup.title;const max=W*.62;while(s.length>8&&ctx.measureText(s).width>max)s=s.slice(0,-2);if(s!==popup.title)s=s.replace(/\s*\S*$/,"")+"…";ctx.fillText(s,W-m-6,m+H*.125);ctx.globalAlpha=1}
+    return[bx,by]}
+  function land(){const n=nodes[to];if(!n)return;popup={head:(n.z==="doing"?"IN PLAY":n.z.toUpperCase())+" · "+n.d.id,title:n.d.title,life:1};hold=2.2}
+  if(reduce){const run=()=>{size();if(!W)return;pick();t=1;land();draw()};run();new ResizeObserver(run).observe(cv);const prev=window.__heroData;window.__heroData=l=>{prev(l);run()};return}
+  let last=performance.now();
+  function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!W){size();requestAnimationFrame(step);return}
+    if(to>=0&&t<1){t=Math.min(1,t+dt/0.9);if(t>=1)land()}
+    else if(hold>0){hold-=dt;if(popup)popup.life=Math.min(1,hold*1.2);if(hold<=0){popup=null;pick()}}
+    else if(nodes.length)pick();
+    const b=draw();trail.push(b);if(trail.length>14)trail.shift();requestAnimationFrame(step)}
+  size();new ResizeObserver(size).observe(cv);requestAnimationFrame(step);
+})();
+</script>
+
+</body>
+</html>

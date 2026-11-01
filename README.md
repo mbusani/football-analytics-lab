@@ -19,6 +19,10 @@ The repos, notebooks and people I'm learning from, collected in one place and cr
 
 📚 **[Browse the library](https://mbusani.github.io/football-analytics-lab/library/)**: 35 football analytics resources (articles and newsletters, reports and webinars, tools including the fitzRoy AFL package, GitHub repos, Kaggle datasets and notebooks, and papers), each credited to its author or publisher and linked to the original. The library links to other people's work and claims none of it.
 
+## Tasks
+
+📋 **[See what I'm working on](https://mbusani.github.io/football-analytics-lab/tasks/)**: the lab's to-do list, tracked with [Beads](https://github.com/steveyegge/beads) (Steve Yegge, MIT licence) and read live from [`.beads/issues.jsonl`](.beads/issues.jsonl) in this repo.
+
 ## Credits and how I use these repos
 
 - All the work in the repositories above belongs to their authors. I link to the originals first, and keep forks only so I can study and experiment with the code.

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Everyone whose work appears in Mark Busani's football analytics lab, and which section of the lab it appears in.">
+<title>Credits · Football Analytics Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the lab's night hero, shared with the home, library and tasks pages, over one credits list: person cards for
+   repo authors and task tools, then a compact list of library creators, each tagged with the section it belongs to. */
+:root{
+  --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
+  --turf:#1c6948; --turf-soft:#e0ede5; --amber:#d47f17; --amber-soft:#fbebd4;
+  --pitch:#e4eee6; --pline:#a3bfaf;
+  --night:#07110c; --night-2:#0d1d15; --chalk:#e9f2ec; --chalk-dim:#9fb6a8; --flood:#f2a541; --grass:#5bc391; --nline:#2c4a3b;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
+  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
+  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+a{color:var(--turf)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* ---------- Night hero (same as the lab home page) ---------- */
+html{scroll-behavior:smooth}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
+    radial-gradient(55% 50% at 100% -5%, rgba(233,242,236,.14), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(91,195,145,.035) 0 70px, transparent 70px 140px);}
+nav.top{position:relative;z-index:2}
+nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk);text-decoration:none}
+.brand i{width:26px;height:26px;border-radius:50%;border:2px solid var(--chalk);position:relative;display:inline-block}
+.brand i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flood)}
+nav.top .sp{flex:1}
+nav.top a.lnk{font-family:var(--mono);font-size:12px;color:var(--chalk-dim);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
+nav.top a.lnk:hover,nav.top a.lnk[aria-current]{color:var(--chalk)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:44px;align-items:center;padding-block:40px 64px}
+.hero .eyebrow{color:var(--flood)}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
+h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
+h1 .l3{display:block;color:var(--grass)}
+.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
+.lede b{color:var(--chalk);font-weight:600}
+.lede{display:grid}.lede>span{grid-area:1/1}.lede .sizer{visibility:hidden}
+.cta a{width:214px;justify-content:center}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.cta a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
+.cta .go{background:var(--flood);color:#1a1205}
+.cta .go:hover{filter:brightness(1.08)}
+.cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
+.cta .gh:hover{border-color:var(--chalk)}
+.scoreboard{display:flex;gap:0;margin-top:34px;border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
+.scoreboard div{padding:10px 18px;border-right:1px solid var(--nline);background:rgba(7,17,12,.6)}
+.scoreboard div:last-child{border-right:0}
+.scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
+.scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
+figure.net{margin:0;min-width:0;position:relative}
+figure.net canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
+figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px}
+figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--flood);margin-right:6px;vertical-align:middle}
+.touchline{height:6px;background:repeating-linear-gradient(90deg,var(--chalk) 0 22px,transparent 22px 34px);opacity:.25}
+#list{scroll-margin-top:72px}
+
+/* ---------- Credits page ---------- */
+main .wrap{padding-block:12px 72px}
+section{margin-top:44px}
+.sec-head{display:flex;align-items:center;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--fg)}
+.sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,38px);line-height:1;text-transform:uppercase;margin:0;letter-spacing:.01em}
+.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:800;font-size:38px;line-height:1;color:var(--line)}
+.sec-note{color:var(--muted);font-size:15px;margin:10px 0 0;max-width:74ch}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
+.person{display:flex;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.person img{width:52px;height:52px;border-radius:50%;background:var(--pitch);flex:none}
+.person b{display:block;font-size:17px}
+.person span{font-size:14px;color:var(--muted)}
+.stags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.stag{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:999px;border:1px solid var(--turf);color:var(--turf);text-decoration:none;background:var(--turf-soft)}
+.stag.lib{border-color:var(--amber);color:var(--amber);background:var(--amber-soft)}
+.stag.tsk{border-color:var(--muted);color:var(--muted);background:transparent}
+.stag:hover{filter:brightness(1.1)}
+.sub-h{font-family:var(--display);font-weight:900;font-size:26px;text-transform:uppercase;margin:36px 0 4px}
+.clist{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:0 28px}
+.clist li{display:flex;align-items:baseline;gap:10px;padding:10px 0;border-top:1px dashed var(--line);min-width:0}
+.clist .who{flex:1;min-width:0}
+.clist b{display:block;font-size:15.5px}
+.clist span{font-size:14px;color:var(--muted)}
+.clist .stag{flex:none}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer .wrap{padding-block:22px 44px}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}}
+@media (max-width:480px){.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<style>html,body{margin:0}</style>
+</head>
+<body>
+
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="../#repos">Repos</a>
+    <a class="lnk" href="../library/">Library</a>
+    <a class="lnk" href="../tasks/">Tasks</a>
+    <a class="lnk" href="./" aria-current="page">Credits</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Mark Busani · Perth, Western Australia</div>
+      <h1>Football<span class="l2">Analytics</span><span class="l3">Credits</span></h1>
+      <p class="lede"><span>The people and tools behind this lab. <b>Everyone credited, with where their work appears.</b></span><span class="sizer" aria-hidden="true">The repos, notebooks and people I'm learning from on the way into football analytics. <b>Forked into my lab, and credited to the people who built them.</b></span><span class="sizer" aria-hidden="true">The reports, papers and tools I'm learning from on the way into football analytics. <b>Shelved in one place, and credited to the people who made them.</b></span><span class="sizer" aria-hidden="true">The jobs I'm working through on the way into football analytics. <b>Tracked with Beads, and read live from my lab on GitHub.</b></span></p>
+      <div class="cta">
+        <a class="go" href="#people">See who's credited ↓</a>
+        <a class="gh" href="../">← Back to the lab</a>
+      </div>
+      <div class="scoreboard" id="stats" aria-label="Credits at a glance"><div><b>–</b><span>in the repos</span></div><div><b>–</b><span>makers in library</span></div><div><b>–</b><span>tools for my tasks</span></div></div>
+    </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Animated illustration of everyone credited, laid out as a team sheet on a night pitch, coloured by the section of the lab they appear in"></canvas>
+      <figcaption><span>Illustration: every credit, as one team sheet</span><span>colour = section · bench = more in library</span><span><i></i>ball = who's next</span></figcaption>
+    </figure>
+  </div>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
+
+<main><div class="wrap">
+  <section id="people">
+    <div class="sec-head"><h2>Credits</h2></div>
+    <p class="sec-note">Everyone whose work appears anywhere in this lab, in one place. The tags show where you'll find them: the <b>Repos</b> on the home page, the <b>Library</b>, or the <b>Tasks</b> board. This lab curates and links to other people's work; it doesn't claim any of it. Forks keep their original commit history, author attribution and licence files. If you're one of the creators and want anything changed or removed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a> and I'll sort it out quickly.</p>
+    <div class="people">
+      <div class="person"><img src="https://avatars.githubusercontent.com/vickyfriss?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Victoria Friss de Kereki</b><span><a href="https://github.com/vickyfriss">GitHub</a> · <a href="https://medium.com/@vickyfrissdekereki">Medium</a> · <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a></span><div class="stags"><a class="stag" href="../#repos">Repos</a><a class="stag lib" href="../library/">Library</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/Muhammadatef?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Muhammad Atef</b><span><a href="https://github.com/Muhammadatef">GitHub</a> · <a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a> · <a href="https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f">Write-up</a></span><div class="stags"><a class="stag" href="../#repos">Repos</a><a class="stag lib" href="../library/">Library</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/soccermatics?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>David Sumpter · Vivid Insights</b><span><a href="https://github.com/soccermatics">GitHub</a> · <a href="https://github.com/Vivid-Insights">Vivid Insights</a> · <a href="https://www.youtube.com/playlist?list=PL1l4FWuN4OlHwrnVJDoKutg6VCcPhdJiq">Soccermatics videos</a></span><div class="stags"><a class="stag" href="../#repos">Repos</a><a class="stag lib" href="../library/">Library</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/steveyegge?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Steve Yegge · Beads</b><span><a href="https://github.com/steveyegge/beads">GitHub</a> · <a href="https://github.com/steveyegge/beads/blob/main/LICENSE">MIT licence</a> · the task tracker behind my Tasks board</span><div class="stags"><a class="stag tsk" href="../tasks/">Tasks</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/Dicklesworthstone?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Jeffrey Emanuel · Beads Viewer</b><span><a href="https://github.com/Dicklesworthstone/beads_viewer">GitHub</a> · <a href="https://github.com/Dicklesworthstone/beads_viewer/blob/main/LICENSE">Licence</a> · the terminal task board</span><div class="stags"><a class="stag tsk" href="../tasks/">Tasks</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/dolthub?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>DoltHub · Dolt</b><span><a href="https://github.com/dolthub/dolt">GitHub</a> · <a href="https://github.com/dolthub/dolt/blob/main/LICENSE">Apache 2.0 licence</a> · the database Beads stores tasks in</span><div class="stags"><a class="stag tsk" href="../tasks/">Tasks</a></div></div></div>
+    </div>
+    <h3 class="sub-h">Also credited in the library</h3>
+    <ul class="clist">
+      <li><div class="who"><b>Alex Marin Felices</b><span><a href="https://thexgfootballclub.substack.com">The xG Football Club newsletter</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Marc Lamberts</b><span><a href="https://medium.com/@marclamberts">Articles on passing patterns</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Bryan McGuire</b><span><a href="https://www.footballdatascience.co.uk">Football Data Science newsletter and interactive models</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Roberto López del Campo</b><span><a href="https://footballinnovationhub.com">Football Innovation Hub</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Jesse Davis & Pieter Robberechts</b><span><a href="https://arxiv.org/abs/2401.09940">Paper on biases in expected goals models</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>James Day, Robert Nguyen, Oscar Lane and contributors</b><span><a href="https://jimmyday12.github.io/fitzRoy/">fitzRoy, the AFL data package for R</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Luca Pappalardo et al.</b><span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6817871">The public Wyscout match event dataset (CC BY 4.0)</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>StatsBomb</b><span><a href="https://www.hudl.com/en_gb/products/statsbomb">Free event data, including the 2018 World Cup</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Metrica Sports</b><span><a href="https://www.kaggle.com/datasets/ekrembayar/metrica-sports-football-tracking-data">Sample tracking data</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>FIFA Training Centre and Technical Study Group</b><span><a href="https://www.fifatrainingcentre.com/en/">World Cup 2026 report, game analysis and newsletter</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Otto Addo, Gilberto Silva, Pablo Zabaleta and Aron Winter</b><span><a href="https://www.fifatrainingcentre.com/en/fwc26-silva-addo-webinar.php">FIFA World Cup 2026 webinars</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>CIES Football Observatory</b><span><a href="https://www.fifatrainingcentre.com/en/environment/resources/high-performance/the-development-paths-of-players-at-the-fifa-world-cup-2026.php">Player development paths at the 2026 World Cup, with FIFA</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Twelve</b><span><a href="https://twelve.football/webinar/starting-or-advancing-your-career-in-football-data">Webinar on careers in football analytics</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Microsoft Reactor</b><span><a href="https://www.youtube.com/watch?v=EQ187ohgCbo">Session on AI-powered soccer insight apps</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Kaggle contributors: aleespinosa, ekrembayar, ollibolli, andrewyyip, uzdavinys, usamawaheed and slehkyi</b><span><a href="https://www.kaggle.com/datasets?search=football">Datasets and notebooks shared on Kaggle</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+      <li><div class="who"><b>Axon Perform, Vision AI, SQL Sports Analytics and MyGamePlan</b><span><a href="../library/">Tools and practice platforms</a></span></div><a class="stag lib" href="../library/">Library</a></li>
+    </ul>
+  </section>
+</div></main>
+
+<footer><div class="wrap">Part of <a href="../">Football Analytics Lab</a> by <a href="https://github.com/mbusani">Mark Busani</a>. Every piece of work named here belongs to the person or organisation credited. The illustration is original and drawn in the page from this list.</div></footer>
+
+<script>
+/* ---------- read the credits list once, for the counts and the illustration ---------- */
+const ENTRIES=[...document.querySelectorAll("#people .person, #people .clist li")].map(el=>{
+  const tags=[...el.querySelectorAll(".stag")].map(a=>a.classList.contains("lib")?"library":a.classList.contains("tsk")?"tasks":"repos");
+  const what=(el.querySelector(".clist span")||el.querySelector("span")||{}).textContent||"";
+  return {name:el.querySelector("b").textContent.trim(),tags,what:what.replace(/\s+/g," ").trim(),card:el.classList.contains("person")};
+});
+const count=k=>ENTRIES.filter(e=>e.tags.includes(k)).length;
+document.querySelectorAll("#stats b").forEach((b,i)=>b.textContent=[count("repos"),count("library"),count("tasks")][i]);
+
+/* ---------- hero: everyone credited as a team sheet, with a ball passed between them ---------- */
+(function hero(){
+  const cv=document.getElementById("hero");if(!cv||!cv.getContext)return;const ctx=cv.getContext("2d");
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const COL={repos:"#5bc391",library:"#f2a541",tasks:"#e9f2ec"};
+  const NAME={repos:"REPOS",library:"LIBRARY",tasks:"TASKS"};
+  const F433=[[.06,.5],[.22,.15],[.2,.38],[.2,.62],[.22,.85],[.44,.27],[.4,.5],[.44,.73],[.68,.18],[.72,.5],[.68,.82]];
+  const order=ENTRIES.slice().sort((a,b)=>(b.card-a.card));
+  const XI=order.slice(0,11), BENCH=order.slice(11);
+  const initials=n=>n.replace(/\(.*?\)/g,"").split(/[\s·,:&]+/).filter(w=>/^[A-Za-zÀ-ž]/.test(w)&&!/^(and|et|al\.?|the|of)$/i.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join("");
+  let W=0,H=0,nodes=[],from=0,to=0,t=1,hold=0,popup=null;const trail=[];
+  const M=()=>Math.max(12,W*.045);
+  function layout(){nodes=[];if(!W)return;const m=M(),w=W-2*m,top=m+H*.2,bh=H*.13,ph=H-m-top-bh-H*.03;
+    XI.forEach((e,i)=>{const [u,v]=F433[i];nodes.push({e,x:m+u*w,y:top+v*ph,bench:false})});
+    const n=BENCH.length,bx0=m+w*.06,bw=w*.88;BENCH.forEach((e,i)=>nodes.push({e,x:bx0+bw*(n===1?.5:i/(n-1)),y:H-m-bh*.45,bench:true}));}
+  function size(){const dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;if(!W||!H)return;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);layout()}
+  function back(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle="#0d1d15";ctx.fillRect(0,0,W,H);
+    for(let s=0;s<10;s++){if(s%2){ctx.fillStyle="rgba(91,195,145,.035)";ctx.fillRect(m+s*w/10,m,w/10,h)}}
+    const g=ctx.createRadialGradient(W*.15,-H*.2,0,W*.15,-H*.2,W*.9);g.addColorStop(0,"rgba(242,165,65,.12)");g.addColorStop(1,"rgba(242,165,65,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    const bh=H*.13,pitchBottom=H-m-bh-H*.01;
+    ctx.strokeStyle="rgba(44,74,59,.85)";ctx.lineWidth=1.2;ctx.strokeRect(m,m,w,pitchBottom-m);ctx.beginPath();ctx.moveTo(W/2,m);ctx.lineTo(W/2,pitchBottom);ctx.stroke();ctx.beginPath();ctx.arc(W/2,(m+pitchBottom)/2,(pitchBottom-m)*.13,0,7);ctx.stroke();
+    ctx.setLineDash([4,6]);ctx.strokeRect(m,pitchBottom+H*.012,w,H-m-pitchBottom-H*.012);ctx.setLineDash([]);
+    ctx.fillStyle="#9fb6a8";ctx.globalAlpha=.8;ctx.font=`500 ${Math.max(8,Math.round(H*.026))}px "JetBrains Mono",monospace`;ctx.textAlign="left";ctx.textBaseline="alphabetic";ctx.fillText("BENCH",m+6,pitchBottom+H*.012+Math.max(10,H*.034));ctx.globalAlpha=1}
+  function rad(b){return b?Math.max(7,Math.min(W,H)*.028):Math.max(10,Math.min(W,H)*.042)}
+  function draw(){back();
+    trail.forEach((p,i)=>{ctx.fillStyle="#f2a541";ctx.globalAlpha=(i+1)/trail.length*.5;ctx.beginPath();ctx.arc(p[0],p[1],2.2,0,7);ctx.fill()});ctx.globalAlpha=1;
+    nodes.forEach((n,i)=>{const r=rad(n.bench),tags=n.e.tags,lift=(i===to&&t>=1&&hold>0);
+      if(lift){ctx.shadowColor="#f2a541";ctx.shadowBlur=16}
+      ctx.fillStyle="#07110c";ctx.beginPath();ctx.arc(n.x,n.y,r,0,7);ctx.fill();ctx.shadowBlur=0;
+      tags.forEach((k,j)=>{ctx.strokeStyle=COL[k];ctx.lineWidth=2;ctx.beginPath();ctx.arc(n.x,n.y,r,-Math.PI/2+j*2*Math.PI/tags.length,-Math.PI/2+(j+1)*2*Math.PI/tags.length);ctx.stroke()});
+      ctx.fillStyle="#e9f2ec";ctx.font=`500 ${Math.round(r*.72)}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(initials(n.e.name)||"·",n.x,n.y+.5)});
+    let bx=W/2,by=H/2;
+    if(nodes.length){const A=nodes[from],B=nodes[to];const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;const arc=Math.max(H*.08,Math.hypot(B.x-A.x,B.y-A.y)*.18);
+      bx=A.x+(B.x-A.x)*e;by=A.y+(B.y-A.y)*e-Math.sin(Math.PI*Math.min(1,t))*arc-(rad(B.bench)+6)*(t>=1?1:Math.min(1,t*2));}
+    ctx.shadowColor="#f2a541";ctx.shadowBlur=12;ctx.fillStyle="#f2a541";ctx.beginPath();ctx.arc(bx,by,5,0,7);ctx.fill();ctx.shadowBlur=0;
+    if(popup){const m=M();ctx.globalAlpha=Math.min(1,popup.life);ctx.textAlign="right";ctx.textBaseline="alphabetic";
+      ctx.fillStyle="#f2a541";ctx.font=`900 ${Math.round(H*.075)}px "Big Shoulders Display",Impact,sans-serif`;let hd=popup.head;const mx=W*.7;while(hd.length>8&&ctx.measureText(hd).width>mx)hd=hd.slice(0,-2);if(hd!==popup.head)hd=hd.replace(/\s*\S*$/,"")+"…";ctx.fillText(hd,W-m-6,m+H*.075);
+      ctx.fillStyle="#9fb6a8";ctx.font=`500 ${Math.max(9,Math.round(H*.032))}px "JetBrains Mono",monospace`;let s=popup.title;const max=W*.62;while(s.length>8&&ctx.measureText(s).width>max)s=s.slice(0,-2);if(s!==popup.title)s=s.replace(/\s*\S*$/,"")+"…";ctx.fillText(s,W-m-6,m+H*.125);ctx.globalAlpha=1}
+    return[bx,by]}
+  function pick(){if(nodes.length<2)return;from=to;let n;do{n=Math.floor(Math.random()*nodes.length)}while(n===from);to=n;t=0}
+  function land(){const n=nodes[to];if(!n)return;popup={head:n.e.name.toUpperCase(),title:n.e.tags.map(k=>NAME[k]).join(" + ")+" · "+n.e.what,life:1};hold=2.2}
+  if(reduce){const run=()=>{size();if(!W||!nodes.length)return;to=1;from=1;t=1;land();draw()};run();new ResizeObserver(run).observe(cv);return}
+  let last=performance.now();
+  function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!W){size();requestAnimationFrame(step);return}
+    if(t<1){t=Math.min(1,t+dt/0.9);if(t>=1)land()}
+    else if(hold>0){hold-=dt;if(popup)popup.life=Math.min(1,hold*1.2);if(hold<=0){popup=null;pick()}}
+    else pick();
+    const b=draw();trail.push(b);if(trail.length>14)trail.shift();requestAnimationFrame(step)}
+  size();new ResizeObserver(size).observe(cv);to=6;from=6;requestAnimationFrame(step);
+})();
+</script>
+
+</body>
+</html>

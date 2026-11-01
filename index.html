@@ -138,6 +138,18 @@ section{margin-top:56px}
 .person img{width:52px;height:52px;border-radius:50%;background:var(--pitch);flex:none}
 .person b{display:block;font-size:17px}
 .person span{font-size:14px;color:var(--muted)}
+.stags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.stag{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:999px;border:1px solid var(--turf);color:var(--turf);text-decoration:none;background:var(--turf-soft)}
+.stag.lib{border-color:var(--amber);color:var(--amber);background:var(--amber-soft)}
+.stag.tsk{border-color:var(--muted);color:var(--muted);background:transparent}
+.stag:hover{filter:brightness(1.1)}
+.sub-h{font-family:var(--display);font-weight:900;font-size:26px;text-transform:uppercase;margin:36px 0 4px}
+.clist{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:0 28px}
+.clist li{display:flex;align-items:baseline;gap:10px;padding:10px 0;border-top:1px dashed var(--line);min-width:0}
+.clist .who{flex:1;min-width:0}
+.clist b{display:block;font-size:15.5px}
+.clist span{font-size:14px;color:var(--muted)}
+.clist .stag{flex:none}
 .next{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:22px}
 .next div{border:1.5px dashed var(--line);border-radius:14px;padding:18px 20px}
 .next b{font-family:var(--display);font-weight:900;font-size:26px;text-transform:uppercase;display:block;margin-bottom:4px}
@@ -292,12 +304,34 @@ footer a{color:var(--chalk)}
 
   <section id="credits">
     <div class="sec-head"><h2>Credits</h2></div>
-    <p class="sec-note">This lab curates and links to other people's work; it doesn't claim any of it. Forks keep their original commit history, author attribution and licence files. If you're one of the creators and want anything changed or removed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a> and I'll sort it out quickly.</p>
+    <p class="sec-note">Everyone whose work appears anywhere in this lab, in one place. The tags show where you'll find them: <b>Repos</b> on this page, the <b>Library</b>, or the <b>Tasks</b> board. This lab curates and links to other people's work; it doesn't claim any of it. Forks keep their original commit history, author attribution and licence files. If you're one of the creators and want anything changed or removed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a> and I'll sort it out quickly.</p>
     <div class="people">
-      <div class="person"><img src="https://avatars.githubusercontent.com/vickyfriss?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Victoria Friss de Kereki</b><span><a href="https://github.com/vickyfriss">GitHub</a> · <a href="https://medium.com/@vickyfrissdekereki">Medium</a> · <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a></span></div></div>
-      <div class="person"><img src="https://avatars.githubusercontent.com/Muhammadatef?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Muhammad Atef</b><span><a href="https://github.com/Muhammadatef">GitHub</a> · <a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a></span></div></div>
-      <div class="person"><img src="https://avatars.githubusercontent.com/soccermatics?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>David Sumpter · Vivid Insights</b><span><a href="https://github.com/soccermatics">GitHub</a> · <a href="https://github.com/Vivid-Insights">Vivid Insights</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/vickyfriss?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Victoria Friss de Kereki</b><span><a href="https://github.com/vickyfriss">GitHub</a> · <a href="https://medium.com/@vickyfrissdekereki">Medium</a> · <a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a></span><div class="stags"><a class="stag" href="#repos">Repos</a><a class="stag lib" href="library/">Library</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/Muhammadatef?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Muhammad Atef</b><span><a href="https://github.com/Muhammadatef">GitHub</a> · <a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a> · <a href="https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f">Write-up</a></span><div class="stags"><a class="stag" href="#repos">Repos</a><a class="stag lib" href="library/">Library</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/soccermatics?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>David Sumpter · Vivid Insights</b><span><a href="https://github.com/soccermatics">GitHub</a> · <a href="https://github.com/Vivid-Insights">Vivid Insights</a> · <a href="https://www.youtube.com/playlist?list=PL1l4FWuN4OlHwrnVJDoKutg6VCcPhdJiq">Soccermatics videos</a></span><div class="stags"><a class="stag" href="#repos">Repos</a><a class="stag lib" href="library/">Library</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/steveyegge?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Steve Yegge · Beads</b><span><a href="https://github.com/steveyegge/beads">GitHub</a> · <a href="https://github.com/steveyegge/beads/blob/main/LICENSE">MIT licence</a> · the task tracker behind my Tasks board</span><div class="stags"><a class="stag tsk" href="tasks/">Tasks</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/Dicklesworthstone?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Jeffrey Emanuel · Beads Viewer</b><span><a href="https://github.com/Dicklesworthstone/beads_viewer">GitHub</a> · <a href="https://github.com/Dicklesworthstone/beads_viewer/blob/main/LICENSE">Licence</a> · the terminal task board</span><div class="stags"><a class="stag tsk" href="tasks/">Tasks</a></div></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/dolthub?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>DoltHub · Dolt</b><span><a href="https://github.com/dolthub/dolt">GitHub</a> · <a href="https://github.com/dolthub/dolt/blob/main/LICENSE">Apache 2.0 licence</a> · the database Beads stores tasks in</span><div class="stags"><a class="stag tsk" href="tasks/">Tasks</a></div></div></div>
     </div>
+    <h3 class="sub-h">Also credited in the library</h3>
+    <ul class="clist">
+      <li><div class="who"><b>Alex Marin Felices</b><span><a href="https://thexgfootballclub.substack.com">The xG Football Club newsletter</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Marc Lamberts</b><span><a href="https://medium.com/@marclamberts">Articles on passing patterns</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Bryan McGuire</b><span><a href="https://www.footballdatascience.co.uk">Football Data Science newsletter and interactive models</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Roberto López del Campo</b><span><a href="https://footballinnovationhub.com">Football Innovation Hub</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Jesse Davis & Pieter Robberechts</b><span><a href="https://arxiv.org/abs/2401.09940">Paper on biases in expected goals models</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>James Day, Robert Nguyen, Oscar Lane and contributors</b><span><a href="https://jimmyday12.github.io/fitzRoy/">fitzRoy, the AFL data package for R</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Luca Pappalardo et al.</b><span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6817871">The public Wyscout match event dataset (CC BY 4.0)</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>StatsBomb</b><span><a href="https://www.hudl.com/en_gb/products/statsbomb">Free event data, including the 2018 World Cup</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Metrica Sports</b><span><a href="https://www.kaggle.com/datasets/ekrembayar/metrica-sports-football-tracking-data">Sample tracking data</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>FIFA Training Centre and Technical Study Group</b><span><a href="https://www.fifatrainingcentre.com/en/">World Cup 2026 report, game analysis and newsletter</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Otto Addo, Gilberto Silva, Pablo Zabaleta and Aron Winter</b><span><a href="https://www.fifatrainingcentre.com/en/fwc26-silva-addo-webinar.php">FIFA World Cup 2026 webinars</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>CIES Football Observatory</b><span><a href="https://www.fifatrainingcentre.com/en/environment/resources/high-performance/the-development-paths-of-players-at-the-fifa-world-cup-2026.php">Player development paths at the 2026 World Cup, with FIFA</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Twelve</b><span><a href="https://twelve.football/webinar/starting-or-advancing-your-career-in-football-data">Webinar on careers in football analytics</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Microsoft Reactor</b><span><a href="https://www.youtube.com/watch?v=EQ187ohgCbo">Session on AI-powered soccer insight apps</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Kaggle contributors: aleespinosa, ekrembayar, ollibolli, andrewyyip, uzdavinys, usamawaheed and slehkyi</b><span><a href="https://www.kaggle.com/datasets?search=football">Datasets and notebooks shared on Kaggle</a></span></div><a class="stag lib" href="library/">Library</a></li>
+      <li><div class="who"><b>Axon Perform, Vision AI, SQL Sports Analytics and MyGamePlan</b><span><a href="library/">Tools and practice platforms</a></span></div><a class="stag lib" href="library/">Library</a></li>
+    </ul>
   </section>
 </div></main>
 

@@ -126,6 +126,11 @@ section{margin-top:44px}
 .how div{border:1.5px dashed var(--line);border-radius:14px;padding:16px 18px;font-size:15px}
 .how b{font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;display:block;margin-bottom:4px}
 .how code{font-family:var(--mono);font-size:13px;background:var(--turf-soft);color:var(--turf);padding:1px 6px;border-radius:4px}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
+.person{display:flex;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.person img{width:52px;height:52px;border-radius:50%;background:var(--pitch);flex:none}
+.person b{display:block;font-size:17px}
+.person span{font-size:14px;color:var(--muted)}
 .notice{margin-top:18px;padding:16px 18px;border:1px solid var(--amber);background:var(--amber-soft);border-radius:12px;font-size:15px}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 footer .wrap{padding-block:22px 44px}
@@ -144,7 +149,7 @@ footer .wrap{padding-block:22px 44px}
     <a class="lnk" href="../#repos">Repos</a>
     <a class="lnk" href="../library/">Library</a>
     <a class="lnk" href="./" aria-current="page">Tasks</a>
-    <a class="lnk" href="../#credits">Credits</a>
+    <a class="lnk" href="#credits">Credits</a>
   </div></nav>
   <div class="wrap hero-grid">
     <div>
@@ -191,6 +196,16 @@ footer .wrap{padding-block:22px 44px}
       <div><b>Tracked with Beads</b>Tasks live in <a href="https://github.com/steveyegge/beads">Beads</a>, the open-source, MIT-licensed task tracker for coding agents by Steve Yegge. I run it on my own computer with Claude Code.</div>
       <div><b>Read from GitHub</b>Beads keeps a plain-text copy in <code>.beads/issues.jsonl</code>. When I push my lab to GitHub, this page reads that file and redraws the board.</div>
       <div><b>On my computer</b><code>bd ready</code> lists what I can start, <code>bd close</code> finishes a task, and <a href="https://github.com/Dicklesworthstone/beads_viewer">Beads Viewer</a> by Jeffrey Emanuel shows the same board in the terminal.</div>
+    </div>
+  </section>
+
+  <section id="credits">
+    <div class="sec-head"><h2>Credits</h2></div>
+    <p class="sec-note">This page is built on other people's open-source tools; it doesn't claim any of them. If you're one of the creators and want anything changed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a> and I'll sort it out quickly.</p>
+    <div class="people">
+      <div class="person"><img src="https://avatars.githubusercontent.com/steveyegge?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Steve Yegge · Beads</b><span><a href="https://github.com/steveyegge/beads">GitHub</a> · <a href="https://github.com/steveyegge/beads/blob/main/LICENSE">MIT licence</a> · the task tracker behind this board</span></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/Dicklesworthstone?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>Jeffrey Emanuel · Beads Viewer</b><span><a href="https://github.com/Dicklesworthstone/beads_viewer">GitHub</a> · <a href="https://github.com/Dicklesworthstone/beads_viewer/blob/main/LICENSE">Licence</a> · the terminal board I use on my computer</span></div></div>
+      <div class="person"><img src="https://avatars.githubusercontent.com/dolthub?size=104" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>DoltHub · Dolt</b><span><a href="https://github.com/dolthub/dolt">GitHub</a> · <a href="https://github.com/dolthub/dolt/blob/main/LICENSE">Apache 2.0 licence</a> · the version-controlled database Beads stores tasks in</span></div></div>
     </div>
   </section>
 </div></main>

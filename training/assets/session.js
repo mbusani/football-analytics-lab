@@ -54,12 +54,17 @@ FAL.SESSIONS = [
   {id:"python-01", lang:"Python", n:"01", title:"First touches",  what:"Session 01's questions, answered with pandas"},
   {id:"r-01",      lang:"R",      n:"01", title:"First touches",  what:"Session 01's questions, answered with dplyr"}
 ];
-// current: this page's id, marked rather than linked
-FAL.sessions = current => {
+// How many drills this browser has ticked in a session (each session saves under "fal-<id>")
+FAL.progress = id => {
+  try{ return Object.keys((JSON.parse(localStorage.getItem("fal-" + id)) || {}).done || {}).length; }catch(e){ return 0; }
+};
+// current: this page's id, marked rather than linked. base: path from this page to the training folder.
+FAL.sessions = (current, base = "../") => {
   $("sessions").innerHTML = FAL.SESSIONS.map(s => {
+    const n = FAL.progress(s.id), note = n ? `<em>${n}/8 drills done</em>` : "";
     const inner = `<small>${s.lang} · Session ${s.n}</small><b>${s.title}</b><span>${s.what}</span>`;
     return s.id === current ? `<div class="sess here" aria-current="page">${inner}<em>You're here</em></div>`
-                            : `<a class="sess" href="../${s.id}/">${inner}</a>`;
+                            : `<a class="sess" href="${base}${s.id}/">${inner}${note}</a>`;
   }).join("");
 };
 

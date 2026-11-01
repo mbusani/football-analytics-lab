@@ -36,7 +36,7 @@ The repos, notebooks and people I'm learning from, collected in one place and cr
 
 ## Training ground
 
-Hands-on sessions on open football data that run in the browser, with nothing to install.
+Hands-on sessions on open football data that run in the browser, with nothing to install. **[Open the training ground](https://mbusani.github.io/football-analytics-lab/training/)** to pick one.
 
 - **[SQL session 01: First touches](https://mbusani.github.io/football-analytics-lab/training/sql-01/)**: eight drills on SELECT, WHERE, ORDER BY, GROUP BY and HAVING, using every shot from the 2022 World Cup.
 - **[SQL session 02: Link-up play](https://mbusani.github.io/football-analytics-lab/training/sql-02/)**: eight drills on JOIN, LEFT JOIN, CASE and COUNT(DISTINCT) across matches, players and shots.

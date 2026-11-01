@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="The Football Analytics Lab training ground: hands-on SQL, Python and R sessions on 2022 World Cup data, run in the browser.">
+<title>Training Ground · Football Analytics Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/session.css">
+<style>
+/* Landing page only: the session cards are the page's main content, so they get more room than the strip at the foot of a session */
+#sessions{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+#sessions .sess{padding:22px 22px 20px;gap:4px}
+#sessions .sess b{font-size:32px}
+#sessions .sess span{font-size:15.5px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <nav class="top"><div class="wrap">
+    <a class="brand" href="../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
+    <a class="lnk" href="../">Repos</a>
+    <a class="lnk" href="../library/">Library</a>
+    <a class="lnk" href="../tasks/">Tasks</a>
+    <a class="lnk" href="./" aria-current="page">Training</a>
+    <a class="lnk" href="../credits/">Credits</a>
+  </div></nav>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Mark Busani · Perth, Western Australia</div>
+      <h1>Training<span class="l2">Ground</span><span class="l3">Sessions</span></h1>
+      <p class="lede">Hands-on SQL, Python and R on every shot from the 2022 World Cup. <b>Each session runs in your browser and checks your answers as you go.</b></p>
+      <div class="cta">
+        <a class="go" href="#sessions-list">Pick a session ↓</a>
+        <a class="gh" href="sql-01/">Start with SQL 01 →</a>
+      </div>
+      <div class="scoreboard" aria-label="Training ground at a glance">
+        <div><b id="n-sessions">4</b><span>sessions</span></div>
+        <div><b id="n-drills">32</b><span>drills</span></div>
+        <div><b id="n-mine">0</b><span>drills done</span></div>
+      </div>
+    </div>
+    <figure class="net">
+      <canvas id="hero" role="img" aria-label="Shot map of every non-shootout shot at the 2022 World Cup, drawn from shots.csv"></canvas>
+      <figcaption><span>Every shot at Qatar 2022, the data behind every session</span><span>size = xG</span><span><i></i>goal</span><span><i class="miss"></i>no goal</span></figcaption>
+    </figure>
+  </div>
+  <div class="touchline" aria-hidden="true"></div>
+</header>
+
+<main><div class="wrap">
+  <section id="sessions-list">
+    <div class="sec-head"><h2>Sessions</h2><span class="count">04</span></div>
+    <p class="sec-note">Start with SQL 01, then take the joins in SQL 02. The Python and R sessions ask SQL 01's questions again, so you can compare how each language answers them. Your progress is saved in this browser.</p>
+    <div class="sessions" id="sessions"></div>
+  </section>
+
+  <section id="data">
+    <div class="sec-head"><h2>The data</h2></div>
+    <p class="sec-note">Every session uses the same small extract of <a href="https://github.com/statsbomb/open-data">StatsBomb's free event data</a> for the 2022 FIFA World Cup: 64 matches, 829 players and every shot. Download it to keep practising offline.</p>
+    <div class="next">
+      <div><b>For SQL</b><span><a href="data/wc2022.sqlite" download>wc2022.sqlite</a>: one SQLite database with all three tables. Open it in <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a> or DuckDB.</span></div>
+      <div><b>For Python and R</b><span><a href="data/matches.csv" download>matches.csv</a>, <a href="data/players.csv" download>players.csv</a> and <a href="data/shots.csv" download>shots.csv</a>: load them with <code>pd.read_csv</code> or <code>read.csv</code>.</span></div>
+      <div><b>Rebuild it</b><span><a href="https://github.com/mbusani/football-analytics-lab/blob/main/training/data/build_wc2022.py">build_wc2022.py</a> downloads the data from StatsBomb and builds all four files.</span></div>
+    </div>
+  </section>
+
+  <section id="credits">
+    <div class="sec-head"><h2>Credits</h2></div>
+    <p class="sec-note">The data is StatsBomb's, used under the <a href="https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf">StatsBomb Public Data User Agreement</a>. The sessions run on sql.js, Pyodide with pandas, and webR with dplyr. Everyone is credited on the <a href="../credits/">Credits page</a>.</p>
+  </section>
+</div></main>
+
+<footer><div class="wrap">
+  <span>Part of <a href="../">Football Analytics Lab</a> by <a href="https://github.com/mbusani">Mark Busani</a>. The drills and pages are MIT-licensed; the data belongs to StatsBomb and keeps its own terms.</span>
+  <span>If you spot a wrong answer or a confusing drill, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a>.</span>
+</div></footer>
+
+<script src="assets/session.js"></script>
+<script>
+/* Landing page: the session cards (with this browser's progress), the totals, and the hero shot map */
+FAL.sessions(null, "");
+document.getElementById("n-sessions").textContent = FAL.SESSIONS.length;
+document.getElementById("n-drills").textContent = FAL.SESSIONS.length * 8;
+document.getElementById("n-mine").textContent = FAL.SESSIONS.reduce((n, s) => n + FAL.progress(s.id), 0);
+// the shot map comes from the CSVs; if they can't load, the hero keeps its dark panel and the page still works
+FAL.loadCSVs("data/").then(d => FAL.heroMap(d.heroShots)).catch(() => {});
+</script>
+</body>
+</html>

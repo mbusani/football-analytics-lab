@@ -81,11 +81,12 @@ figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:
 
 /* ---------- Dugout: quick links to my forks ---------- */
 .dugout{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-.dugout .wrap{display:flex;align-items:center;gap:10px;padding-block:12px;overflow-x:auto;scrollbar-width:thin}
+.dugout .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;padding-block:12px}
 .dugout .lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);flex:none;margin-right:4px}
 .dugout a{flex:none;display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);text-decoration:none;font-weight:600;font-size:14px}
 .dugout a:hover{border-color:var(--turf)}
 .dugout a svg{width:14px;height:14px;fill:currentColor;opacity:.7}
+@media (max-width:700px){.dugout{position:static}}   /* wrapped onto several rows, a pinned bar would cover too much of a phone screen */
 
 /* ---------- Sections ---------- */
 main .wrap{padding-block:12px 80px}
@@ -106,7 +107,7 @@ section{margin-top:56px}
 .art .live span{font-family:var(--mono);font-size:11.5px;background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-variant-numeric:tabular-nums}
 .art .live b{color:var(--amber);font-weight:500}
 .copy{padding:28px 30px 28px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.copy h3{font-family:var(--display);font-weight:900;font-size:clamp(34px,4.4vw,52px);line-height:.92;text-transform:uppercase;margin:0;overflow-wrap:anywhere}
+.copy h3{font-family:var(--display);font-weight:900;font-size:clamp(34px,4.4vw,52px);line-height:.92;text-transform:uppercase;margin:0;white-space:nowrap}   /* one line; fitNames() shrinks long names */
 .credit{display:flex;align-items:center;gap:12px}
 .credit img{width:46px;height:46px;border-radius:50%;border:2px solid var(--turf);background:var(--pitch);flex:none}
 .credit .who{line-height:1.25;min-width:0}
@@ -124,6 +125,7 @@ section{margin-top:56px}
 .door{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);text-decoration:none;color:var(--fg);background:var(--bg);min-width:0}
 .door small{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 .door b{font-size:15px;overflow-wrap:anywhere}
+.door b span{white-space:nowrap}   /* owner/ and repo each stay whole, so a long label breaks only after the slash */
 .door:hover{border-color:var(--turf)}
 .door.mine{background:var(--turf);border-color:var(--turf);color:var(--surface)}
 .door.mine small{color:var(--surface);opacity:.8}
@@ -231,8 +233,8 @@ footer a{color:var(--chalk)}
         </ul>
         <div class="tags"><span class="tag">expected-goals</span><span class="tag">football-analytics</span><span class="tag">web-scraping</span><span class="tag lic">No licence · all rights reserved</span></div>
         <div class="doors">
-          <a class="door" href="https://github.com/vickyfriss/Football-analytics"><small>Original</small><b>vickyfriss/Football-analytics</b></a>
-          <a class="door mine" href="https://github.com/mbusani/Football-analytics"><small>My fork</small><b>mbusani/Football-analytics</b></a>
+          <a class="door" href="https://github.com/vickyfriss/Football-analytics"><small>Original</small><b><span>vickyfriss/</span><wbr><span>Football-analytics</span></b></a>
+          <a class="door mine" href="https://github.com/mbusani/Football-analytics"><small>My fork</small><b><span>mbusani/</span><wbr><span>Football-analytics</span></b></a>
         </div>
         <div class="more"><a href="https://medium.com/@vickyfrissdekereki">Victoria on Medium</a><a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a><a href="https://football-league-simulator.streamlit.app/">Live app</a></div>
         <p class="fine">All rights belong to Victoria Friss de Kereki. The repo has no licence file, so my fork is for personal learning only and nothing from it is reused here.</p>
@@ -258,8 +260,8 @@ footer a{color:var(--chalk)}
         </ul>
         <div class="tags"><span class="tag">apache-airflow</span><span class="tag">mplsoccer</span><span class="tag">postgresql</span><span class="tag">llm</span><span class="tag lic">MIT · © 2026 Muhammad Atef</span></div>
         <div class="doors">
-          <a class="door" href="https://github.com/Muhammadatef/gunners-analysis"><small>Original</small><b>Muhammadatef/gunners-analysis</b></a>
-          <a class="door mine" href="https://github.com/mbusani/gunners-analysis"><small>My fork</small><b>mbusani/gunners-analysis</b></a>
+          <a class="door" href="https://github.com/Muhammadatef/gunners-analysis"><small>Original</small><b><span>Muhammadatef/</span><wbr><span>gunners-analysis</span></b></a>
+          <a class="door mine" href="https://github.com/mbusani/gunners-analysis"><small>My fork</small><b><span>mbusani/</span><wbr><span>gunners-analysis</span></b></a>
         </div>
         <div class="more"><a href="https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f">Write-up on Medium</a><a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a></div>
         <p class="fine">Built by Muhammad Atef and shared under the MIT licence. Anything I reuse from it keeps his copyright notice and licence text.</p>
@@ -285,8 +287,8 @@ footer a{color:var(--chalk)}
         </ul>
         <div class="tags"><span class="tag">claude-code</span><span class="tag">obsidian</span><span class="tag">python</span><span class="tag">reproducible-analysis</span><span class="tag lic">CC BY 4.0</span></div>
         <div class="doors">
-          <a class="door" href="https://github.com/Vivid-Insights/human-agentic-data-analysis"><small>Original</small><b>Vivid-Insights/human-agentic-data-analysis</b></a>
-          <a class="door mine" href="https://github.com/mbusani/human-agentic-data-analysis"><small>My fork</small><b>mbusani/human-agentic-data-analysis</b></a>
+          <a class="door" href="https://github.com/Vivid-Insights/human-agentic-data-analysis"><small>Original</small><b><span>Vivid-Insights/</span><wbr><span>human-agentic-data-analysis</span></b></a>
+          <a class="door mine" href="https://github.com/mbusani/human-agentic-data-analysis"><small>My fork</small><b><span>mbusani/</span><wbr><span>human-agentic-data-analysis</span></b></a>
         </div>
         <div class="more"><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 licence</a></div>
         <p class="fine">Created by Vivid Insights, with commits by David Sumpter (@soccermatics), and shared under Creative Commons Attribution 4.0. Anything I reuse from it will name the creators, link the original and the licence, and say what I changed.</p>
@@ -312,8 +314,8 @@ footer a{color:var(--chalk)}
         </ul>
         <div class="tags"><span class="tag">tracking-data</span><span class="tag">positional-scouting</span><span class="tag">skillcorner</span><span class="tag lic">MIT · © 2025 PySport</span></div>
         <div class="doors">
-          <a class="door" href="https://github.com/hadisotudeh/analytics_cup_research"><small>Original</small><b>hadisotudeh/analytics_cup_research</b></a>
-          <a class="door mine" href="https://github.com/mbusani/analytics_cup_research"><small>My fork</small><b>mbusani/analytics_cup_research</b></a>
+          <a class="door" href="https://github.com/hadisotudeh/analytics_cup_research"><small>Original</small><b><span>hadisotudeh/</span><wbr><span>analytics_cup_research</span></b></a>
+          <a class="door mine" href="https://github.com/mbusani/analytics_cup_research"><small>My fork</small><b><span>mbusani/</span><wbr><span>analytics_cup_research</span></b></a>
         </div>
         <div class="more"><a href="https://www.linkedin.com/in/hadisotudeh">Hadi on LinkedIn</a><a href="https://skillcorner.com/event-2026/analytics-cup-2026-presentations">Final presentation</a><a href="https://github.com/hadisotudeh/analytics_cup_research/blob/main/LICENSE">MIT licence</a></div>
         <p class="fine">Built by Hadi Sotudeh for the Analytics Cup, on PySport's MIT-licensed submission template (© 2025 PySport). Anything I reuse from it keeps the copyright notice and licence text.</p>
@@ -339,8 +341,8 @@ footer a{color:var(--chalk)}
         </ul>
         <div class="tags"><span class="tag">r-shiny</span><span class="tag">delta-lake</span><span class="tag">dynamic-events</span><span class="tag">skillcorner</span><span class="tag lic">MIT · © 2025 PySport</span></div>
         <div class="doors">
-          <a class="door" href="https://github.com/Data-Kicks/Dynamic-Skills-Finder"><small>Original</small><b>Data-Kicks/Dynamic-Skills-Finder</b></a>
-          <a class="door mine" href="https://github.com/mbusani/Dynamic-Skills-Finder"><small>My fork</small><b>mbusani/Dynamic-Skills-Finder</b></a>
+          <a class="door" href="https://github.com/Data-Kicks/Dynamic-Skills-Finder"><small>Original</small><b><span>Data-Kicks/</span><wbr><span>Dynamic-Skills-Finder</span></b></a>
+          <a class="door mine" href="https://github.com/mbusani/Dynamic-Skills-Finder"><small>My fork</small><b><span>mbusani/</span><wbr><span>Dynamic-Skills-Finder</span></b></a>
         </div>
         <div class="more"><a href="https://ob-projects-dynamicskillsfinder.share.connect.posit.cloud/">Live app</a><a href="https://youtu.be/RDQAqNRKvuE">Video walkthrough</a><a href="https://www.data-kicks.com/">Data Kicks blog</a><a href="https://skillcorner.com/event-2026/analytics-cup-2026-presentations">Final presentation</a></div>
         <p class="fine">Built by Óscar Bartolomé Pato (Data Kicks) for the Analytics Cup, on PySport's MIT-licensed submission template (© 2025 PySport). Anything I reuse from it keeps the copyright notice and licence text.</p>
@@ -366,8 +368,8 @@ footer a{color:var(--chalk)}
         </ul>
         <div class="tags"><span class="tag">sveltekit</span><span class="tag">typescript</span><span class="tag">tracking-data</span><span class="tag">skillcorner</span><span class="tag lic">MIT · © 2025 PySport</span></div>
         <div class="doors">
-          <a class="door" href="https://github.com/2nzi/skillcorner-analytics"><small>Original</small><b>2nzi/skillcorner-analytics</b></a>
-          <a class="door mine" href="https://github.com/mbusani/skillcorner-analytics"><small>My fork</small><b>mbusani/skillcorner-analytics</b></a>
+          <a class="door" href="https://github.com/2nzi/skillcorner-analytics"><small>Original</small><b><span>2nzi/</span><wbr><span>skillcorner-analytics</span></b></a>
+          <a class="door mine" href="https://github.com/mbusani/skillcorner-analytics"><small>My fork</small><b><span>mbusani/</span><wbr><span>skillcorner-analytics</span></b></a>
         </div>
         <div class="more"><a href="https://skillcorner.com/event-2026/analytics-cup-2026-presentations">Final presentation</a><a href="https://github.com/2nzi/skillcorner-analytics/blob/main/LICENSE">MIT licence</a></div>
         <p class="fine">Built by Antoine Verdon for the Analytics Cup, on PySport's MIT-licensed submission template (© 2025 PySport). Anything I reuse from it keeps the copyright notice and licence text.</p>
@@ -399,6 +401,13 @@ footer a{color:var(--chalk)}
     }catch(e){}
   }
   if(ok===document.querySelectorAll(".spread").length) document.getElementById("stars-total").textContent=total;   // only when every repo answered
+})();
+
+/* ---------- repo names stay on one line: a name too long for its column gets a smaller font ---------- */
+(function fitNames(){
+  const fit=()=>document.querySelectorAll(".copy h3").forEach(h=>{h.style.fontSize="";
+    const w=h.clientWidth,full=h.scrollWidth;if(full>w)h.style.fontSize=Math.max(14,Math.floor(parseFloat(getComputedStyle(h).fontSize)*w/full))+"px"});
+  fit();addEventListener("resize",fit);if(document.fonts)document.fonts.ready.then(fit);   // refit once the display font has loaded
 })();
 
 /* ---------- spread illustrations (original, schematic) ---------- */

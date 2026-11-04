@@ -31,7 +31,7 @@ analytics_cup_research, Dynamic-Skills-Finder and skillcorner-analytics were pre
 
 ## Credits and how I use these repos
 
-👏 **[See the full credits](https://mbusani.github.io/football-analytics-lab/credits/)**: everyone whose work appears in the lab, tagged with the section it's in (Repos, Library or Tasks).
+👏 **[See the full credits](https://mbusani.github.io/football-analytics-lab/credits/)**: everyone whose work appears in the lab, tagged with the section it's in (Repos, Library, Tasks or Training).
 
 - All the work in the repositories above belongs to their authors. I link to the originals first, and keep forks only so I can study and experiment with the code.
 - Forks keep their original commit history, author attribution and licence files.

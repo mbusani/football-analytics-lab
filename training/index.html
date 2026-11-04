@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/session.css">
+<script src="../assets/site.js"></script>
 <style>
 /* Landing page only: the session cards are the page's main content, so they get more room than the strip at the foot of a session */
 #sessions{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
@@ -20,14 +21,7 @@
 <body>
 
 <header class="hero">
-  <nav class="top"><div class="wrap">
-    <a class="brand" href="../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
-    <a class="lnk" href="../">Repos</a>
-    <a class="lnk" href="../library/">Library</a>
-    <a class="lnk" href="../tasks/">Tasks</a>
-    <a class="lnk" href="./" aria-current="page">Training</a>
-    <a class="lnk" href="../credits/">Credits</a>
-  </div></nav>
+  <nav class="top" data-root="../" data-current="training"></nav>
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">Mark Busani · Perth, Western Australia</div>

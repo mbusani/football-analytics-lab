@@ -1,0 +1,10 @@
+/* The bigger section headings and night footer, for pages that load them after site.css */
+main .wrap{padding-block:12px 80px}
+section{margin-top:56px}
+.sec-head{display:flex;align-items:flex-end;gap:16px;padding-bottom:12px;border-bottom:3px solid var(--fg)}
+.sec-head h2{letter-spacing:normal;font-family:var(--display);font-weight:900;font-size:clamp(36px,5vw,56px);line-height:.9;text-transform:uppercase;margin:0}
+.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:900;font-size:56px;line-height:.85;color:var(--line)}
+.sec-note{color:var(--muted);margin:14px 0 0;max-width:74ch;font-size:16.5px}
+footer{border-top:0;background:var(--night);color:var(--chalk-dim);font-size:14px}
+footer .wrap{padding-block:28px calc(44px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}
+footer a{color:var(--chalk)}

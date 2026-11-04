@@ -1,77 +1,21 @@
+@import "../../assets/site.css";
+@import "../../assets/site-big.css";
 /* Shared styles for every training-ground session page (training/<session>/index.html).
    Layout: a training session. Night hero (shared with the lab) whose figure is a real shot map drawn from the data,
    then the squad sheet (the three tables), eight drills that each run and check code in the browser, and free play. */
-:root{
-  --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
-  --turf:#1c6948; --turf-soft:#e0ede5; --amber:#d47f17; --amber-soft:#fbebd4;
-  --pitch:#e4eee6; --pline:#a3bfaf; --bad:#b4372b; --bad-soft:#f8e1dd;
-  --night:#07110c; --night-2:#0d1d15; --chalk:#e9f2ec; --chalk-dim:#9fb6a8; --flood:#f2a541; --grass:#5bc391; --nline:#2c4a3b;
-  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
-  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
-  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
-  --pitch:#11201a; --pline:#2f4b3d; --bad:#f08a7e; --bad-soft:#3a1d19; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
-  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
-  --pitch:#11201a; --pline:#2f4b3d; --bad:#f08a7e; --bad-soft:#3a1d19; color-scheme:dark}
-
-*{box-sizing:border-box}
-html,body{margin:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
-a{color:var(--turf)}
+/* Red for wrong answers: the one colour only the training sessions need */
+:root{--bad:#b4372b;--bad-soft:#f8e1dd}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bad:#f08a7e;--bad-soft:#3a1d19}}
+:root[data-theme="dark"]{--bad:#f08a7e;--bad-soft:#3a1d19}
 :focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 code,kbd{font-family:var(--mono);font-size:.88em;background:var(--turf-soft);color:var(--turf);padding:1px 5px;border-radius:4px}
 kbd{background:var(--surface);color:var(--fg);border:1px solid var(--line)}
-
-/* ---------- Night hero (same as the lab home page) ---------- */
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
-    radial-gradient(55% 50% at 100% -5%, rgba(233,242,236,.14), transparent 60%),
-    repeating-linear-gradient(90deg, rgba(91,195,145,.035) 0 70px, transparent 70px 140px);}
-nav.top{position:relative;z-index:2}
-nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:16px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk);text-decoration:none}
-.brand i{width:26px;height:26px;border-radius:50%;border:2px solid var(--chalk);position:relative;display:inline-block}
-.brand i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flood)}
-nav.top .sp{flex:1}
-nav.top a.lnk{font-family:var(--mono);font-size:12px;color:var(--chalk-dim);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
-nav.top a.lnk:hover,nav.top a.lnk[aria-current]{color:var(--chalk)}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:center;padding-block:40px 64px}
-.hero .eyebrow{color:var(--flood)}
-h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
-h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
-h1 .l3{display:block;color:var(--grass)}
-.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
-.lede b{color:var(--chalk);font-weight:600}
-.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+/* Sessions give the hero's two columns equal width; on narrow screens site.css stacks them */
+@media (min-width:901px){.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.lede{display:block}
 .cta a{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:214px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
-.cta .go{background:var(--flood);color:#1a1205}
-.cta .go:hover{filter:brightness(1.08)}
-.cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
-.cta .gh:hover{border-color:var(--chalk)}
-.scoreboard{display:flex;gap:0;margin-top:34px;border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
-.scoreboard div{padding:10px 18px;border-right:1px solid var(--nline);background:rgba(7,17,12,.6)}
-.scoreboard div:last-child{border-right:0}
-.scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
-.scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
-figure.net{margin:0;min-width:0;position:relative}
 figure.net canvas{display:block;width:100%;aspect-ratio:4/3;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
-figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px}
-figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--flood);margin-right:6px;vertical-align:middle}
 figure.net figcaption i.miss{background:var(--grass);opacity:.6}
-.touchline{height:6px;background:repeating-linear-gradient(90deg,var(--chalk) 0 22px,transparent 22px 34px);opacity:.25}
-
-/* ---------- Progress bar ---------- */
-.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 .bar .wrap{display:flex;align-items:center;gap:8px;padding-block:10px;overflow-x:auto;scrollbar-width:thin}
 .bar .lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);flex:none;margin-right:6px}
 .bar a{flex:none;width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--fg);text-decoration:none;font-family:var(--display);font-weight:800;font-size:17px}
@@ -79,15 +23,7 @@ figure.net figcaption i.miss{background:var(--grass);opacity:.6}
 .bar a.done{background:var(--turf);border-color:var(--turf);color:var(--surface)}
 .bar .status{margin-left:auto;flex:none;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-left:12px}
 .bar .status.err{color:var(--bad)}
-
-/* ---------- Sections ---------- */
-main .wrap{padding-block:12px 80px}
 section{margin-top:56px;scroll-margin-top:64px}
-.sec-head{display:flex;align-items:flex-end;gap:16px;padding-bottom:12px;border-bottom:3px solid var(--fg)}
-.sec-head h2{font-family:var(--display);font-weight:900;font-size:clamp(36px,5vw,56px);line-height:.9;text-transform:uppercase;margin:0}
-.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:900;font-size:56px;line-height:.85;color:var(--line)}
-.sec-note{color:var(--muted);margin:14px 0 0;max-width:74ch;font-size:16.5px}
-
 /* Squad sheet: the tables */
 .tables{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:24px}
 .tcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
@@ -101,7 +37,6 @@ section{margin-top:56px;scroll-margin-top:64px}
 .gotchas{margin:22px 0 0;padding:16px 20px;border:1.5px dashed var(--amber);border-radius:14px;background:var(--amber-soft)}
 .gotchas b{font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em}
 .gotchas ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px;font-size:15.5px}
-
 /* Drills */
 .drill{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;scroll-margin-top:64px}
 .drill.done{border-color:var(--turf)}
@@ -140,7 +75,6 @@ pre{font-family:var(--mono);font-size:13px;background:var(--pitch);border:1px so
 .out .meta{font-family:var(--mono);font-size:11px;color:var(--muted);padding:6px 12px;background:var(--pitch)}
 .out .err{padding:10px 14px;color:var(--bad);font-family:var(--mono);font-size:13px;background:var(--bad-soft)}
 .drill .pad{height:24px}
-
 /* Credits */
 .credits{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
 .credits div{padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);font-size:15px}
@@ -149,22 +83,13 @@ pre{font-family:var(--mono);font-size:13px;background:var(--pitch);border:1px so
 .next div{border:1.5px dashed var(--line);border-radius:14px;padding:18px 20px}
 .next b{font-family:var(--display);font-weight:900;font-size:26px;text-transform:uppercase;display:block;margin-bottom:4px}
 .next span{color:var(--muted);font-size:15.5px}
-footer{background:var(--night);color:var(--chalk-dim);font-size:14px}
-footer .wrap{padding-block:28px calc(44px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}
-footer a{color:var(--chalk)}
-
-@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}}
 @media (max-width:560px){
   .dhead{grid-template-columns:1fr;padding:18px 16px 0}.dnum{grid-row:auto;font-size:44px}
   .teach,.editor,.hint,.solution,.verdict,.out{margin-left:16px;margin-right:16px}
   .actions .kb{display:none}
 }
-@media (max-width:480px){.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-
 /* Printed output (print() in Python, cat() in R) shown above a result table */
 .out pre.stdout{margin:0;border:0;border-radius:0;border-bottom:1px solid var(--line);background:var(--surface);white-space:pre-wrap}
-
 /* All sessions strip */
 .sessions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px}
 .sess{display:flex;flex-direction:column;gap:2px;padding:16px 18px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);color:var(--fg);text-decoration:none}

@@ -4,557 +4,90 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Football Analytics Lab</title>
-<meta name="description" content="Mark Busani's football analytics lab: the repos, notebooks and people I'm learning from, forked into my lab and credited to their authors.">
+<meta name="description" content="Mark Busani's football analytics lab: the projects, reading and hands-on practice from the way into football analytics, all in one place and credited to the people who made them.">
 <meta property="og:title" content="Football Analytics Lab">
-<meta property="og:description" content="The repos, notebooks and people I'm learning from on the way into football analytics, credited to their authors.">
+<meta property="og:description" content="The projects, reading and hands-on practice from one person's way into football analytics, credited to the people who made them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site-big.css">
 <style>
-/* Layout: a night match. A floodlit hero band holds the live passing network; below it,
-   the match programme: a quick-link "dugout" bar to my forks, then one feature spread per repo
-   with the creator credited beside two equal doors (original / my fork), live GitHub numbers on each. */
-:root{
-  --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
-  --turf:#1c6948; --turf-soft:#e0ede5; --amber:#c4740f; --amber-soft:#fbebd4;
-  --pitch:#e4eee6; --pline:#a3bfaf;
-  /* hero band is always a night match, in both themes */
-  --night:#07110c; --night-2:#0d1d15; --chalk:#e9f2ec; --chalk-dim:#9fb6a8; --flood:#f2a541; --grass:#5bc391; --nline:#2c4a3b;
-  --display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
-  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
-  color-scheme:light;
-}
-@media (prefers-color-scheme: dark){:root{
-  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
-  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
-  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}}
-*{box-sizing:border-box}
-html,body{margin:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
-a{color:var(--turf)}
-:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-
-/* ---------- Night hero ---------- */
-.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
-    radial-gradient(55% 50% at 100% -5%, rgba(233,242,236,.14), transparent 60%),
-    repeating-linear-gradient(90deg, rgba(91,195,145,.035) 0 70px, transparent 70px 140px);}
-nav.top{position:relative;z-index:2}
-nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:16px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk);text-decoration:none}
-.brand i{width:26px;height:26px;border-radius:50%;border:2px solid var(--chalk);position:relative;display:inline-block}
-.brand i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flood)}
-nav.top .sp{flex:1}
-nav.top a.lnk{font-family:var(--mono);font-size:12px;color:var(--chalk-dim);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
-nav.top a.lnk:hover{color:var(--chalk)}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:44px;align-items:center;padding-block:40px 64px}
-.hero .eyebrow{color:var(--flood)}
-h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
-h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
-h1 .l3{display:block;color:var(--grass)}
-.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
-.lede b{color:var(--chalk);font-weight:600}
-.lede{display:grid}.lede>span{grid-area:1/1}.lede .sizer{visibility:hidden}
-.cta a{width:214px;justify-content:center}
-.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.cta a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
-.cta .go{background:var(--flood);color:#1a1205}
-.cta .go:hover{filter:brightness(1.08)}
-.cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
-.cta .gh:hover{border-color:var(--chalk)}
-.scoreboard{display:flex;gap:0;margin-top:34px;border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
-.scoreboard div{padding:10px 18px;border-right:1px solid var(--nline);background:rgba(7,17,12,.6)}
-.scoreboard div:last-child{border-right:0}
-.scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
-.scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
-figure.net{margin:0;min-width:0;position:relative}
-figure.net canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
-figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px}
-figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--flood);margin-right:6px;vertical-align:middle}
-.touchline{height:6px;background:repeating-linear-gradient(90deg,var(--chalk) 0 22px,transparent 22px 34px);opacity:.25}
-
-/* ---------- Dugout: quick links to my forks ---------- */
-.dugout{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-.dugout .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;padding-block:12px}
-.dugout .lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);flex:none;margin-right:4px}
-.dugout a{flex:none;display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);text-decoration:none;font-weight:600;font-size:14px}
-.dugout a:hover{border-color:var(--turf)}
-.dugout a svg{width:14px;height:14px;fill:currentColor;opacity:.7}
-@media (max-width:700px){.dugout{position:static}}   /* wrapped onto several rows, a pinned bar would cover too much of a phone screen */
-
-/* ---------- Sections ---------- */
-main .wrap{padding-block:12px 80px}
-section{margin-top:56px}
-.sec-head{display:flex;align-items:flex-end;gap:16px;padding-bottom:12px;border-bottom:3px solid var(--fg)}
-.sec-head h2{font-family:var(--display);font-weight:900;font-size:clamp(36px,5vw,56px);line-height:.9;text-transform:uppercase;margin:0}
-.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:900;font-size:56px;line-height:.85;color:var(--line)}
-.sec-note{color:var(--muted);margin:14px 0 0;max-width:74ch;font-size:16.5px}
-
-/* ---------- Repo spreads ---------- */
-.spread{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .3s ease, box-shadow .3s ease}
-.spread:hover{transform:translateY(-3px);box-shadow:0 24px 50px -30px rgba(20,32,26,.45)}
-.spread.flip .art{order:2;border-right:0;border-left:1px solid var(--line)}
-.art{position:relative;background:var(--pitch);border-right:1px solid var(--line);min-height:380px;overflow:hidden}
-.art svg{position:absolute;left:0;right:0;top:44px;bottom:52px;width:100%;height:calc(100% - 96px)}
-.art .kicker{position:absolute;left:16px;top:16px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
-.art .live{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:6px}
-.art .live span{font-family:var(--mono);font-size:11.5px;background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-variant-numeric:tabular-nums}
-.art .live b{color:var(--amber);font-weight:500}
-.copy{padding:28px 30px 28px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.copy h3{font-family:var(--display);font-weight:900;font-size:clamp(34px,4.4vw,52px);line-height:.92;text-transform:uppercase;margin:0;white-space:nowrap}   /* one line; fitNames() shrinks long names */
-.credit{display:flex;align-items:center;gap:12px}
-.credit img{width:46px;height:46px;border-radius:50%;border:2px solid var(--turf);background:var(--pitch);flex:none}
-.credit .who{line-height:1.25;min-width:0}
-.credit .who small{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.credit .who b{font-size:18px}
-.credit .who a{color:var(--fg);text-decoration:none;border-bottom:1.5px solid var(--turf)}
-.copy p{margin:0;max-width:60ch;font-size:16.5px}
-.inside{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px 18px;font-size:15px;color:var(--muted)}
-.inside li{padding-left:16px;position:relative}
-.inside li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--turf)}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:5px;background:var(--turf-soft);color:var(--turf)}
-.tag.lic{background:var(--amber-soft);color:var(--amber)}
-.doors{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
-.door{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);text-decoration:none;color:var(--fg);background:var(--bg);min-width:0}
-.door small{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.door b{font-size:15px;overflow-wrap:anywhere}
-.door b span{white-space:nowrap}   /* owner/ and repo each stay whole, so a long label breaks only after the slash */
-.door:hover{border-color:var(--turf)}
-.door.mine{background:var(--turf);border-color:var(--turf);color:var(--surface)}
-.door.mine small{color:var(--surface);opacity:.8}
-.door.mine:hover{filter:brightness(1.07)}
-.more{display:flex;flex-wrap:wrap;gap:14px;font-size:14.5px;font-weight:600}
-.more a{text-decoration:none;border-bottom:1.5px solid currentColor}
-.fine{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px;margin:0}
-
-/* ---------- Credits + next ---------- */
-.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
-.person{display:flex;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
-.person img{width:52px;height:52px;border-radius:50%;background:var(--pitch);flex:none}
-.person b{display:block;font-size:17px}
-.person span{font-size:14px;color:var(--muted)}
-.next{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:22px}
-.next div{border:1.5px dashed var(--line);border-radius:14px;padding:18px 20px}
-.next b{font-family:var(--display);font-weight:900;font-size:26px;text-transform:uppercase;display:block;margin-bottom:4px}
-.next span{color:var(--muted);font-size:15.5px}
-footer{background:var(--night);color:var(--chalk-dim);font-size:14px}
-footer .wrap{padding-block:28px calc(44px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}
-footer a{color:var(--chalk)}
-
-/* ---------- illustration classes ---------- */
-.pf{fill:var(--pitch)} .pl{fill:none;stroke:var(--pline);stroke-width:1}
-.mk{fill:var(--turf)} .hi{fill:var(--amber)} .sf{fill:var(--surface)} .ln{fill:none;stroke:var(--line)}
-.ed{fill:none;stroke:var(--turf);stroke-linecap:round} .eh{fill:none;stroke:var(--amber);stroke-linecap:round}
-.nd{fill:var(--surface);stroke:var(--turf);stroke-width:1.4} .tx{fill:var(--muted);font-family:var(--mono);font-size:5.5px}
-
-@media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}
-  .spread,.spread.flip{grid-template-columns:1fr}
-  .spread.flip .art{order:0;border-left:0}
-  .art{min-height:250px;border-right:0;border-bottom:1px solid var(--line)}
-  .spread.flip .art{border-bottom:1px solid var(--line)}
-}
-@media (max-width:480px){.doors{grid-template-columns:1fr}.copy{padding:22px 18px}.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.spread{transition:none}.spread:hover{transform:none}}
+/* Layout: the front door. A night hero whose figure is a map of the site, then one card per section saying what's there.
+   Both are drawn from LAB.SECTIONS in assets/site.js, so a new section appears here and in the menu with one edit. */
+figure.net svg{display:block;width:100%;aspect-ratio:105/68;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
+.map-line{fill:none;stroke:var(--nline);stroke-width:.7}
+.map-pass{fill:none;stroke:var(--grass);stroke-width:.8;stroke-opacity:.45}
+.map-node circle{fill:var(--night);stroke:var(--grass);stroke-width:1.1;transition:stroke .2s,fill .2s}
+.map-node text{fill:var(--chalk);font-family:var(--display);font-weight:800;font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;text-anchor:middle}
+.map-node:hover circle,.map-node:focus-visible circle{stroke:var(--flood);fill:var(--night-2)}
+.map-ball{fill:var(--flood)}
+.guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:24px}
+.stop{display:flex;flex-direction:column;gap:8px;padding:22px 24px;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;color:var(--fg);text-decoration:none;transition:border-color .2s,transform .25s}
+.stop:hover{border-color:var(--turf);transform:translateY(-2px)}
+.stop small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--amber)}
+.stop b{font-family:var(--display);font-weight:900;font-size:40px;line-height:1;text-transform:uppercase}
+.stop span{color:var(--muted);font-size:16px}
+.stop em{margin-top:auto;padding-top:6px;font-style:normal;font-weight:700;font-size:14.5px;color:var(--turf)}
+@media (prefers-reduced-motion:reduce){.stop{transition:none}.stop:hover{transform:none}}
 </style>
+<script src="assets/site.js"></script>
 </head>
 <body>
 
 <header class="hero">
-  <nav class="top"><div class="wrap">
-    <a class="brand" href="./"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
-    <a class="lnk" href="./" aria-current="page">Repos</a>
-    <a class="lnk" href="library/">Library</a>
-    <a class="lnk" href="tasks/">Tasks</a>
-    <a class="lnk" href="training/">Training</a>
-    <a class="lnk" href="credits/">Credits</a>
-  </div></nav>
+  <nav class="top" data-root=""></nav>
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">Mark Busani · Perth, Western Australia</div>
       <h1>Football<span class="l2">Analytics</span><span class="l3">Lab</span></h1>
-      <p class="lede"><span>The repos, notebooks and people I'm learning from on the way into football analytics. <b>Forked into my lab, and credited to the people who built them.</b></span><span class="sizer" aria-hidden="true">The reports, papers and tools I'm learning from on the way into football analytics. <b>Shelved in one place, and credited to the people who made them.</b></span><span class="sizer" aria-hidden="true">The jobs I'm working through on the way into football analytics. <b>Tracked with Beads, and read live from my lab on GitHub.</b></span></p>
+      <p class="lede"><span>What I'm studying and practising on the way into football analytics. <b>All in one place, and credited to the people who made it.</b></span><span class="sizer" aria-hidden="true">The reports, papers and tools I'm learning from on the way into football analytics. <b>Shelved in one place, and credited to the people who made them.</b></span><span class="sizer" aria-hidden="true">The jobs I'm working through on the way into football analytics. <b>Tracked with Beads, and read live from my lab on GitHub.</b></span><span class="sizer" aria-hidden="true">The repos, notebooks and people I'm learning from on the way into football analytics. <b>Forked into my lab, and credited to the people who built them.</b></span></p>
       <div class="cta">
-        <a class="go" href="#repos">Explore the repos ↓</a>
-        <a class="gh" href="library/">Browse the library →</a>
-      </div>
-      <div class="scoreboard" aria-label="Lab at a glance">
-        <div><b>7</b><span>repos forked</span></div>
-        <div><b>7</b><span>creators credited</span></div>
-        <div><b id="stars-total">380</b><span>stars on originals</span></div>
+        <a class="go" href="#guide">See what's here ↓</a>
+        <a class="gh" href="training/">Start training →</a>
       </div>
     </div>
     <figure class="net">
-      <canvas id="hero" role="img" aria-label="Animated illustration of a passing network building on a football pitch at night"></canvas>
-      <figcaption><span>Illustration: a passing network building live</span><span>node size = touches · line weight = passes</span><span><i></i>shot, with its xG</span></figcaption>
+      <svg id="map" viewBox="0 0 210 136" role="group" aria-label="A map of the site, drawn as players on a pitch: each player links to a section"></svg>
+      <figcaption><span>The lab as a team: pick a player to open that section</span><span><i></i>ball = the next stop</span></figcaption>
     </figure>
   </div>
   <div class="touchline" aria-hidden="true"></div>
 </header>
 
-<nav class="dugout" aria-label="My forks"><div class="wrap">
-  <span class="lbl">My lab</span>
-  <a href="https://github.com/mbusani/Football-analytics"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>Football-analytics</a>
-  <a href="https://github.com/mbusani/gunners-analysis"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>gunners-analysis</a>
-  <a href="https://github.com/mbusani/human-agentic-data-analysis"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>human-agentic-data-analysis</a>
-  <a href="https://github.com/mbusani/analytics_cup_research"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>analytics_cup_research</a>
-  <a href="https://github.com/mbusani/Dynamic-Skills-Finder"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>Dynamic-Skills-Finder</a>
-  <a href="https://github.com/mbusani/skillcorner-analytics"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>skillcorner-analytics</a>
-  <a href="https://github.com/mbusani/football-docs"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm3-8.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg>football-docs</a>
-</div></nav>
-
 <main><div class="wrap">
-  <section id="repos">
-    <div class="sec-head"><h2>Repositories</h2><span class="count">07</span></div>
-    <p class="sec-note">Each spread has two doors: the creator's original, and my fork where I study and experiment. analytics_cup_research, Dynamic-Skills-Finder and skillcorner-analytics are finalists from the SkillCorner X PySport Analytics Cup 2026, whose presentations are in the <a href="library/">library</a>. Live numbers come from GitHub when the page loads.</p>
-
-    <article class="spread" data-orig="vickyfriss/Football-analytics" data-fork="mbusani/Football-analytics">
-      <div class="art"><svg id="art-vf" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a passing network with clustered passes"></svg>
-        <span class="kicker">Jupyter notebooks</span>
-        <div class="live"><span>★ <b data-k="stars">47</b> stars</span><span>⑂ <b data-k="forks">5</b> forks</span><span>updated <b data-k="updated">Oct 2026</b></span></div>
-      </div>
-      <div class="copy">
-        <h3>Football-analytics</h3>
-        <div class="credit"><img src="https://avatars.githubusercontent.com/vickyfriss?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/vickyfriss">Victoria Friss de Kereki</a></b></div></div>
-        <p>A growing collection of notebooks that explore football, and sometimes rugby, through data, built with pandas, scikit-learn and matplotlib.</p>
-        <ul class="inside">
-          <li>xG and expected-pass models for women's football</li>
-          <li>Wage vs performance in English football</li>
-          <li>Pass clustering and passing networks</li>
-          <li>League simulations from betting odds</li>
-          <li>Pizza charts and formation plots</li>
-          <li>Rugby Premiership forecasting</li>
-        </ul>
-        <div class="tags"><span class="tag">expected-goals</span><span class="tag">football-analytics</span><span class="tag">web-scraping</span><span class="tag lic">No licence · all rights reserved</span></div>
-        <div class="doors">
-          <a class="door" href="https://github.com/vickyfriss/Football-analytics"><small>Original</small><b><span>vickyfriss/</span><wbr><span>Football-analytics</span></b></a>
-          <a class="door mine" href="https://github.com/mbusani/Football-analytics"><small>My fork</small><b><span>mbusani/</span><wbr><span>Football-analytics</span></b></a>
-        </div>
-        <div class="more"><a href="https://medium.com/@vickyfrissdekereki">Victoria on Medium</a><a href="https://www.linkedin.com/in/victoria-friss-de-kereki/">LinkedIn</a><a href="https://football-league-simulator.streamlit.app/">Live app</a></div>
-        <p class="fine">All rights belong to Victoria Friss de Kereki. The repo has no licence file, so my fork is for personal learning only and nothing from it is reused here.</p>
-      </div>
-    </article>
-
-    <article class="spread flip" data-orig="Muhammadatef/gunners-analysis" data-fork="mbusani/gunners-analysis">
-      <div class="art"><svg id="art-ga" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of a pipeline feeding an 18-panel dashboard"></svg>
-        <span class="kicker">Python pipeline</span>
-        <div class="live"><span>★ <b data-k="stars">10</b> stars</span><span>⑂ <b data-k="forks">2</b> forks</span><span>updated <b data-k="updated">Oct 2026</b></span></div>
-      </div>
-      <div class="copy">
-        <h3>gunners-analysis</h3>
-        <div class="credit"><img src="https://avatars.githubusercontent.com/Muhammadatef?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/Muhammadatef">Muhammad Atef</a></b></div></div>
-        <p>Automated football analytics for Arsenal: data is scraped, transformed and stored with no manual steps, then turned into tactical dashboards and an AI analyst that answers only from the stored data.</p>
-        <ul class="inside">
-          <li>Apache Airflow orchestration</li>
-          <li>PostgreSQL warehouse with pgvector</li>
-          <li>18-panel tactical dashboards (mplsoccer)</li>
-          <li>LLM analyst built with DSPy</li>
-          <li>Scrapers, quality checks and tests</li>
-          <li>Docker setup and deployment notes</li>
-        </ul>
-        <div class="tags"><span class="tag">apache-airflow</span><span class="tag">mplsoccer</span><span class="tag">postgresql</span><span class="tag">llm</span><span class="tag lic">MIT · © 2026 Muhammad Atef</span></div>
-        <div class="doors">
-          <a class="door" href="https://github.com/Muhammadatef/gunners-analysis"><small>Original</small><b><span>Muhammadatef/</span><wbr><span>gunners-analysis</span></b></a>
-          <a class="door mine" href="https://github.com/mbusani/gunners-analysis"><small>My fork</small><b><span>mbusani/</span><wbr><span>gunners-analysis</span></b></a>
-        </div>
-        <div class="more"><a href="https://medium.com/@muhamedfahmy7474/how-i-built-a-football-analytics-platform-that-runs-itself-and-an-ai-analyst-that-cannot-make-up-5a26fa00b93f">Write-up on Medium</a><a href="https://github.com/Muhammadatef/gunners-analysis/blob/main/LICENSE">MIT licence</a></div>
-        <p class="fine">Built by Muhammad Atef and shared under the MIT licence. Anything I reuse from it keeps his copyright notice and licence text.</p>
-      </div>
-    </article>
-
-    <article class="spread" data-orig="Vivid-Insights/human-agentic-data-analysis" data-fork="mbusani/human-agentic-data-analysis">
-      <div class="art"><svg id="art-ha" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of an eight-step analysis path"></svg>
-        <span class="kicker">Claude Code template</span>
-        <div class="live"><span>★ <b data-k="stars">89</b> stars</span><span>⑂ <b data-k="forks">14</b> forks</span><span>updated <b data-k="updated">Oct 2026</b></span></div>
-      </div>
-      <div class="copy">
-        <h3>human-agentic-data-analysis</h3>
-        <div class="credit"><img src="https://avatars.githubusercontent.com/soccermatics?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/soccermatics">David Sumpter</a> · <a href="https://github.com/Vivid-Insights">Vivid Insights</a></b></div></div>
-        <p>A template workspace for doing a data analysis with an AI agent one step at a time, so the judgement calls stay with the analyst and the report can be defended.</p>
-        <ul class="inside">
-          <li>Obsidian vault with a working contract</li>
-          <li>Eight steps, from import to export</li>
-          <li>Report and appendix that fill as you go</li>
-          <li>Sample report on World Happiness data</li>
-          <li>Python environment and figure style</li>
-          <li>Standing disclaimer on AI assistance</li>
-        </ul>
-        <div class="tags"><span class="tag">claude-code</span><span class="tag">obsidian</span><span class="tag">python</span><span class="tag">reproducible-analysis</span><span class="tag lic">CC BY 4.0</span></div>
-        <div class="doors">
-          <a class="door" href="https://github.com/Vivid-Insights/human-agentic-data-analysis"><small>Original</small><b><span>Vivid-Insights/</span><wbr><span>human-agentic-data-analysis</span></b></a>
-          <a class="door mine" href="https://github.com/mbusani/human-agentic-data-analysis"><small>My fork</small><b><span>mbusani/</span><wbr><span>human-agentic-data-analysis</span></b></a>
-        </div>
-        <div class="more"><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 licence</a></div>
-        <p class="fine">Created by Vivid Insights, with commits by David Sumpter (@soccermatics), and shared under Creative Commons Attribution 4.0. Anything I reuse from it will name the creators, link the original and the licence, and say what I changed.</p>
-      </div>
-    </article>
-
-    <article class="spread flip" data-orig="hadisotudeh/analytics_cup_research" data-fork="mbusani/analytics_cup_research">
-      <div class="art"><svg id="art-hs" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of a five-by-five position map shading where a player spends match time"></svg>
-        <span class="kicker">Analytics Cup · Research finalist</span>
-        <div class="live"><span>★ <b data-k="stars">12</b> stars</span><span>⑂ <b data-k="forks">2</b> forks</span><span>updated <b data-k="updated">Nov 2025</b></span></div>
-      </div>
-      <div class="copy">
-        <h3>analytics_cup_research</h3>
-        <div class="credit"><img src="https://avatars.githubusercontent.com/hadisotudeh?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/hadisotudeh">Hadi Sotudeh</a></b></div></div>
-        <p>Positional player scouting with tracking data: working out which position a player actually plays, phase by phase, so scouts can find the matches where a versatile player filled the role they're recruiting for. A finalist in the Research Track of the SkillCorner X PySport Analytics Cup 2026.</p>
-        <ul class="inside">
-          <li>5×5 grid around a team's outfield players</li>
-          <li>Position maps: share of match time per cell</li>
-          <li>Split by in and out of possession</li>
-          <li>Broken down by SkillCorner sub-phases</li>
-          <li>Position templates from 267 players</li>
-          <li>Submission notebook and player maps</li>
-        </ul>
-        <div class="tags"><span class="tag">tracking-data</span><span class="tag">positional-scouting</span><span class="tag">skillcorner</span><span class="tag lic">MIT · © 2025 PySport</span></div>
-        <div class="doors">
-          <a class="door" href="https://github.com/hadisotudeh/analytics_cup_research"><small>Original</small><b><span>hadisotudeh/</span><wbr><span>analytics_cup_research</span></b></a>
-          <a class="door mine" href="https://github.com/mbusani/analytics_cup_research"><small>My fork</small><b><span>mbusani/</span><wbr><span>analytics_cup_research</span></b></a>
-        </div>
-        <div class="more"><a href="https://www.linkedin.com/in/hadisotudeh">Hadi on LinkedIn</a><a href="https://skillcorner.com/event-2026/analytics-cup-2026-presentations">Final presentation</a><a href="https://github.com/hadisotudeh/analytics_cup_research/blob/main/LICENSE">MIT licence</a></div>
-        <p class="fine">Built by Hadi Sotudeh for the Analytics Cup, on PySport's MIT-licensed submission template (© 2025 PySport). Anything I reuse from it keeps the copyright notice and licence text.</p>
-      </div>
-    </article>
-
-    <article class="spread" data-orig="Data-Kicks/Dynamic-Skills-Finder" data-fork="mbusani/Dynamic-Skills-Finder">
-      <div class="art"><svg id="art-dk" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of bronze, silver and gold data layers feeding a scouting app"></svg>
-        <span class="kicker">Analytics Cup · Analyst finalist</span>
-        <div class="live"><span>★ <b data-k="stars">3</b> stars</span><span>⑂ <b data-k="forks">3</b> forks</span><span>updated <b data-k="updated">Jan 2026</b></span></div>
-      </div>
-      <div class="copy">
-        <h3>Dynamic-Skills-Finder</h3>
-        <div class="credit"><img src="https://avatars.githubusercontent.com/Data-Kicks?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/Data-Kicks">Óscar Bartolomé Pato</a> · <a href="https://www.data-kicks.com/">Data Kicks</a></b></div></div>
-        <p>An end-to-end project on SkillCorner's open data: a Python pipeline builds a lakehouse, and an R Shiny app on top of it searches for off-ball team patterns and scouts players, with video for every event. A finalist in the Analyst Track of the SkillCorner X PySport Analytics Cup 2026.</p>
-        <ul class="inside">
-          <li>ELT from SkillCorner's open data</li>
-          <li>Delta Lake: bronze, silver and gold layers</li>
-          <li>Star schema of facts and dimensions</li>
-          <li>R Shiny app for tactics and scouting</li>
-          <li>130+ player metrics from dynamic events</li>
-          <li>Video clip for each dynamic event</li>
-        </ul>
-        <div class="tags"><span class="tag">r-shiny</span><span class="tag">delta-lake</span><span class="tag">dynamic-events</span><span class="tag">skillcorner</span><span class="tag lic">MIT · © 2025 PySport</span></div>
-        <div class="doors">
-          <a class="door" href="https://github.com/Data-Kicks/Dynamic-Skills-Finder"><small>Original</small><b><span>Data-Kicks/</span><wbr><span>Dynamic-Skills-Finder</span></b></a>
-          <a class="door mine" href="https://github.com/mbusani/Dynamic-Skills-Finder"><small>My fork</small><b><span>mbusani/</span><wbr><span>Dynamic-Skills-Finder</span></b></a>
-        </div>
-        <div class="more"><a href="https://ob-projects-dynamicskillsfinder.share.connect.posit.cloud/">Live app</a><a href="https://youtu.be/RDQAqNRKvuE">Video walkthrough</a><a href="https://www.data-kicks.com/">Data Kicks blog</a><a href="https://skillcorner.com/event-2026/analytics-cup-2026-presentations">Final presentation</a></div>
-        <p class="fine">Built by Óscar Bartolomé Pato (Data Kicks) for the Analytics Cup, on PySport's MIT-licensed submission template (© 2025 PySport). Anything I reuse from it keeps the copyright notice and licence text.</p>
-      </div>
-    </article>
-
-    <article class="spread flip" data-orig="2nzi/skillcorner-analytics" data-fork="mbusani/skillcorner-analytics">
-      <div class="art"><svg id="art-an" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of a match replay with player positions, a pass network and a timeline"></svg>
-        <span class="kicker">Analytics Cup · Analyst finalist</span>
-        <div class="live"><span>★ <b data-k="stars">3</b> stars</span><span>⑂ <b data-k="forks">2</b> forks</span><span>updated <b data-k="updated">Dec 2025</b></span></div>
-      </div>
-      <div class="copy">
-        <h3>skillcorner-analytics</h3>
-        <div class="credit"><img src="https://avatars.githubusercontent.com/2nzi?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/2nzi">Antoine Verdon</a></b></div></div>
-        <p>The SkPy Analytics Platform: an interactive web app that replays matches frame by frame from SkillCorner tracking and event data, with every view kept in sync. A finalist in the Analyst Track of the SkillCorner X PySport Analytics Cup 2026.</p>
-        <ul class="inside">
-          <li>Frame-by-frame match replay</li>
-          <li>Phases of play and pass networks</li>
-          <li>Events list synced to the timeline</li>
-          <li>Cumulative xThreat and xPass charts</li>
-          <li>Team comparison scatter plots</li>
-          <li>Player metrics for scouting</li>
-        </ul>
-        <div class="tags"><span class="tag">sveltekit</span><span class="tag">typescript</span><span class="tag">tracking-data</span><span class="tag">skillcorner</span><span class="tag lic">MIT · © 2025 PySport</span></div>
-        <div class="doors">
-          <a class="door" href="https://github.com/2nzi/skillcorner-analytics"><small>Original</small><b><span>2nzi/</span><wbr><span>skillcorner-analytics</span></b></a>
-          <a class="door mine" href="https://github.com/mbusani/skillcorner-analytics"><small>My fork</small><b><span>mbusani/</span><wbr><span>skillcorner-analytics</span></b></a>
-        </div>
-        <div class="more"><a href="https://skillcorner.com/event-2026/analytics-cup-2026-presentations">Final presentation</a><a href="https://github.com/2nzi/skillcorner-analytics/blob/main/LICENSE">MIT licence</a></div>
-        <p class="fine">Built by Antoine Verdon for the Analytics Cup, on PySport's MIT-licensed submission template (© 2025 PySport). Anything I reuse from it keeps the copyright notice and licence text.</p>
-      </div>
-    </article>
-
-    <article class="spread" data-orig="withqwerty/football-docs" data-fork="mbusani/football-docs">
-      <div class="art"><svg id="art-fd" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of an AI agent looking up football data provider documentation through a search index"></svg>
-        <span class="kicker">MCP server for AI agents</span>
-        <div class="live"><span>★ <b data-k="stars">216</b> stars</span><span>⑂ <b data-k="forks">26</b> forks</span><span>updated <b data-k="updated">Nov 2026</b></span></div>
-      </div>
-      <div class="copy">
-        <h3>football-docs</h3>
-        <div class="credit"><img src="https://avatars.githubusercontent.com/withqwerty?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/withqwerty">withqwerty</a> · <a href="https://github.com/rahulkeerthi">Rahul Keerthi</a></b></div></div>
-        <p>Like Context7 for football data: searchable documentation that AI coding agents can look up, so they use the real event types, coordinates and API details instead of guessing from training data.</p>
-        <ul class="inside">
-          <li>Docs for 32 data providers and tools</li>
-          <li>StatsBomb, Opta, SkillCorner, Wyscout and more</li>
-          <li>kloppy, mplsoccer, socceraction and other libraries</li>
-          <li>Compares how providers handle a concept</li>
-          <li>Matches players and teams across provider IDs</li>
-          <li>Checked metric definitions and source papers</li>
-        </ul>
-        <div class="tags"><span class="tag">mcp-server</span><span class="tag">claude-code</span><span class="tag">football-data</span><span class="tag">typescript</span><span class="tag lic">MIT · withqwerty</span></div>
-        <div class="doors">
-          <a class="door" href="https://github.com/withqwerty/football-docs"><small>Original</small><b><span>withqwerty/</span><wbr><span>football-docs</span></b></a>
-          <a class="door mine" href="https://github.com/mbusani/football-docs"><small>My fork</small><b><span>mbusani/</span><wbr><span>football-docs</span></b></a>
-        </div>
-        <div class="more"><a href="https://nutmeg.withqwerty.com/football-docs/">Project site and install guide</a><a href="https://github.com/withqwerty/football-docs/blob/main/STRATEGY.md">Strategy</a></div>
-        <p class="fine">Built by withqwerty, with most commits by Rahul Keerthi. The README and package file state the MIT licence; the repo has no separate licence file. Anything I reuse from it will name the creators and keep that licence.</p>
-      </div>
-    </article>
+  <section id="guide">
+    <div class="sec-head"><h2>What's here</h2></div>
+    <p class="sec-note">This is my working notebook. The work I link to belongs to its creators, and every page says who they are.</p>
+    <div class="guide" id="stops"></div>
   </section>
-
 </div></main>
 
 <footer><div class="wrap">
-  <span>Football Analytics Lab by <a href="https://github.com/mbusani">Mark Busani</a>. The home page and README are MIT-licensed; the repositories featured belong to their creators and keep their own licences.</span>
-  <span>Illustrations are original and drawn in the page; they don't show data from any of the repositories. Live star and fork counts come from the GitHub API.</span>
+  <span>Football Analytics Lab by <a href="https://github.com/mbusani">Mark Busani</a>. The site and README are MIT-licensed; everything it links to belongs to its creators and keeps its own licence.</span>
+  <span>If you're one of the creators and want anything changed or removed, please <a href="https://github.com/mbusani/football-analytics-lab/issues">open an issue</a>.</span>
 </div></footer>
 
 <script>
-/* ---------- live GitHub numbers (falls back to the values in the page) ---------- */
-(async function live(){
-  const fmt=d=>new Date(d).toLocaleDateString("en-AU",{month:"short",year:"numeric"});
-  let total=0, ok=0;
-  for(const el of document.querySelectorAll(".spread")){
-    try{
-      const r=await fetch("https://api.github.com/repos/"+el.dataset.orig,{headers:{Accept:"application/vnd.github+json"}});
-      if(!r.ok) continue;
-      const j=await r.json();
-      el.querySelector('[data-k="stars"]').textContent=j.stargazers_count;
-      el.querySelector('[data-k="forks"]').textContent=j.forks_count;
-      el.querySelector('[data-k="updated"]').textContent=fmt(j.pushed_at);
-      total+=j.stargazers_count; ok++;
-    }catch(e){}
-  }
-  if(ok===document.querySelectorAll(".spread").length) document.getElementById("stars-total").textContent=total;   // only when every repo answered
-})();
+/* ---------- old links: the repos and credits used to be sections of this page ---------- */
+if(location.hash==="#repos") location.replace("repos/");
+if(location.hash==="#credits") location.replace("credits/");
 
-/* ---------- repo names stay on one line: a name too long for its column gets a smaller font ---------- */
-(function fitNames(){
-  const fit=()=>document.querySelectorAll(".copy h3").forEach(h=>{h.style.fontSize="";
-    const w=h.clientWidth,full=h.scrollWidth;if(full>w)h.style.fontSize=Math.max(14,Math.floor(parseFloat(getComputedStyle(h).fontSize)*w/full))+"px"});
-  fit();addEventListener("resize",fit);if(document.fonts)document.fonts.ready.then(fit);   // refit once the display font has loaded
-})();
+/* ---------- one card per section ---------- */
+document.getElementById("stops").innerHTML=LAB.SECTIONS.map((s,i)=>`<a class="stop" href="${s.path}"><small>${String(i+1).padStart(2,"0")}</small><b>${s.name}</b><span>${s.what}</span><em>Open ${s.name} →</em></a>`).join("");
 
-/* ---------- spread illustrations (original, schematic) ---------- */
-const r1=n=>Math.round(n*10)/10;
-function rng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-const F433=[[.06,.5],[.22,.15],[.2,.38],[.2,.62],[.22,.85],[.44,.27],[.4,.5],[.44,.73],[.68,.18],[.72,.5],[.68,.82]];
-function pitch(W,H,m){const cx=W/2,cy=H/2,w=W-2*m,h=H-2*m,bd=w*.157,bh=h*.593,sd=w*.052,sh=h*.27;
-  return `<rect class="pf" width="${W}" height="${H}"/><g class="pl"><rect x="${m}" y="${m}" width="${w}" height="${h}"/><line x1="${cx}" y1="${m}" x2="${cx}" y2="${H-m}"/><circle cx="${cx}" cy="${cy}" r="${r1(h*.13)}"/><rect x="${m}" y="${r1(cy-bh/2)}" width="${r1(bd)}" height="${r1(bh)}"/><rect x="${r1(W-m-bd)}" y="${r1(cy-bh/2)}" width="${r1(bd)}" height="${r1(bh)}"/><rect x="${m}" y="${r1(cy-sh/2)}" width="${r1(sd)}" height="${r1(sh)}"/><rect x="${r1(W-m-sd)}" y="${r1(cy-sh/2)}" width="${r1(sd)}" height="${r1(sh)}"/></g>`}
-function arrow(x1,y1,qx,qy,x2,y2,cls,w){const a=Math.atan2(y2-qy,x2-qx),s=3.6;const p1=[x2-s*Math.cos(a-.5),y2-s*Math.sin(a-.5)],p2=[x2-s*Math.cos(a+.5),y2-s*Math.sin(a+.5)];
-  return `<path class="${cls}" stroke-width="${w}" d="M${r1(x1)} ${r1(y1)} Q${r1(qx)} ${r1(qy)} ${r1(x2)} ${r1(y2)}"/><polygon class="${cls==="eh"?"hi":"mk"}" points="${r1(x2)},${r1(y2)} ${r1(p1[0])},${r1(p1[1])} ${r1(p2[0])},${r1(p2[1])}"/>`}
-(function vf(){const W=200,H=150,m=12,R=rng(7);const P=F433.map(([u,v])=>[r1(m+u*(W-2*m)),r1(m+v*(H-2*m))]);let s=pitch(W,H,m);
-  // pass clusters as fanned arrows
-  [[6,9,"eh"],[5,8,"ed"],[7,10,"ed"],[2,6,"ed"],[3,6,"ed"]].forEach(([a,b,c],i)=>{for(let k=0;k<3;k++){const ox=(R()-.5)*8,oy=(R()-.5)*8;const [x1,y1]=P[a],[x2,y2]=P[b];s+=arrow(x1+ox,y1+oy,(x1+x2)/2+ox*2,(y1+y2)/2-10+oy,x2+ox*.5,y2+oy*.5,c,c==="eh"?1.6:.9)}});
-  for(let i=0;i<11;i++)for(let j=i+1;j<11;j++){const d=Math.hypot(F433[i][0]-F433[j][0],(F433[i][1]-F433[j][1])*.66);if(d<.3&&R()<.7){const w=r1(.6+R()*2.4);s+=`<line class="ed" stroke-width="${w}" stroke-opacity=".35" x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`}}
-  s+=P.map(([x,y],i)=>`<circle class="${i===6?"mk":"nd"}" cx="${x}" cy="${y}" r="${r1(3.6+R()*3.4)}"/>`).join("");
-  document.getElementById("art-vf").innerHTML=s})();
-(function ga(){const W=200,H=150;let s=`<rect class="pf" width="${W}" height="${H}"/>`;const R=rng(11);
-  const stages=[["scrape",22],["transform",52],["warehouse",82],["analyst",112]];
-  stages.forEach(([t,y],i)=>{s+=`<rect class="sf" x="12" y="${y}" width="52" height="20" rx="5" stroke="var(--pline)"/><circle class="${i===3?"hi":"mk"}" cx="22" cy="${y+10}" r="3.2"/><text class="tx" x="29" y="${y+12}">${t}</text>`;if(i<3)s+=`<line class="ed" stroke-width="1.4" x1="38" y1="${y+20}" x2="38" y2="${y+30}"/>`});
-  s+=`<path class="eh" stroke-width="1.6" d="M64 92 C 74 92, 72 75, 80 75"/>`;
-  // 18-panel dashboard: 6 x 3 mini panels
-  const gx=80,gy=18,cw=18.5,ch=37,gap=1.6;
-  for(let r=0;r<3;r++)for(let c=0;c<6;c++){const x=gx+c*(cw+gap),y=gy+r*(ch+gap);s+=`<rect class="sf" x="${r1(x)}" y="${r1(y)}" width="${cw}" height="${ch}" rx="2" stroke="var(--pline)" stroke-width=".6"/>`;
-    const k=(r*6+c)%4;
-    if(k===0){for(let b=0;b<4;b++){const h=4+R()*20;s+=`<rect class="${b===2?"hi":"mk"}" fill-opacity=".8" x="${r1(x+2.5+b*3.6)}" y="${r1(y+ch-3-h)}" width="2.6" height="${r1(h)}"/>`}}
-    else if(k===1){let d=`M${r1(x+2)} ${r1(y+ch*.7)}`;for(let p=1;p<=6;p++)d+=` L${r1(x+2+p*2.4)} ${r1(y+6+R()*(ch-12))}`;s+=`<path class="ed" stroke-width=".9" d="${d}"/>`}
-    else if(k===2){s+=`<rect class="ln" x="${r1(x+2)}" y="${r1(y+4)}" width="${cw-4}" height="${ch-8}" stroke-width=".5"/>`;for(let p=0;p<5;p++)s+=`<circle class="${R()<.25?"hi":"mk"}" fill-opacity=".7" cx="${r1(x+4+R()*(cw-8))}" cy="${r1(y+6+R()*(ch-12))}" r="${r1(.8+R()*1.6)}"/>`}
-    else{const cx=x+cw/2,cy=y+ch/2,rr=6;s+=`<circle class="ln" cx="${r1(cx)}" cy="${r1(cy)}" r="${rr}" stroke-width=".5"/>`;let pts=[];for(let p=0;p<6;p++){const a=p/6*6.283-1.57,v=.35+R()*.65;pts.push(`${r1(cx+Math.cos(a)*rr*v)},${r1(cy+Math.sin(a)*rr*v)}`)}s+=`<polygon class="mk" fill-opacity=".35" stroke="var(--turf)" stroke-width=".6" points="${pts.join(" ")}"/>`}}
-  s+=`<text class="tx" x="${gx}" y="140">18-panel tactical dashboard</text>`;
-  document.getElementById("art-ga").innerHTML=s})();
-(function ha(){const W=200,H=150;let s=`<rect class="pf" width="${W}" height="${H}"/>`;
-  const labels=["import","question","charts","tests","conclude","background","read","export"];
-  const pts=[[28,34],[72,26],[118,36],[164,28],[160,82],[114,92],[68,84],[30,116]];
-  let d=`M${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<pts.length;i++){const [x0,y0]=pts[i-1],[x,y]=pts[i];d+=` Q${(x0+x)/2} ${(y0+y)/2+(i%2?-14:14)} ${x} ${y}`}
-  s+=`<path class="ed" stroke-width="2" stroke-dasharray="4 4" d="${d}"/>`;
-  pts.forEach(([x,y],i)=>{const done=i<4,cur=i===4;s+=`<circle class="${cur?"hi":done?"mk":"nd"}" cx="${x}" cy="${y}" r="9"/><text x="${x}" y="${y+3}" text-anchor="middle" style="font-family:var(--mono);font-size:8px;fill:${done||cur?"var(--surface)":"var(--muted)"}">${i+1}</text><text class="tx" x="${x}" y="${y+18}" text-anchor="middle">${labels[i]}</text>`});
-  s+=`<text class="tx" x="12" y="142">one step per request · judgement stays with the analyst</text>`;
-  document.getElementById("art-ha").innerHTML=s})();
-(function hs(){const W=200,H=150,m=12;let s=pitch(W,H,m);
-  // 5x5 grid around the team's outfield players: length split 0.5,1,1,1,0.5, width split evenly; shade = share of match time
-  const x0=52,x1=176,y0=22,y1=128,wts=[.5,1,1,1,.5],cw=(x1-x0)/4,rh=(y1-y0)/5;
-  const occ=[[0,1,2,3,1],[1,3,6,9,4],[2,6,12,22,9],[1,4,9,30,14],[0,1,3,8,5]];   // rows top to bottom, columns own goal to attack: a right-sided player
-  let x=x0;wts.forEach((w,c)=>{for(let r=0;r<5;r++){const v=occ[r][c],top=v===30;s+=`<rect class="${top?"hi":"mk"}" fill-opacity="${top?.9:r1(Math.min(.75,v/22))}" x="${r1(x)}" y="${r1(y0+r*rh)}" width="${r1(w*cw)}" height="${r1(rh)}" stroke="var(--surface)" stroke-width=".8"/>`;
-    if(v>=9)s+=`<text class="tx" x="${r1(x+w*cw/2)}" y="${r1(y0+r*rh+rh/2+2)}" text-anchor="middle" style="fill:var(--surface)">${v}%</text>`}x+=w*cw});
-  s+=`<rect class="ln" x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" stroke-dasharray="3 2"/><text class="tx" x="${m+2}" y="${H-3}">position map · % of match time per cell</text>`;
-  document.getElementById("art-hs").innerHTML=s})();
-(function dk(){const W=200,H=150;let s=`<rect class="pf" width="${W}" height="${H}"/>`;
-  // medallion lakehouse on the left feeding the scouting app on the right
-  [["bronze","raw data",22],["silver","star schema",58],["gold","player views",94]].forEach(([t,sub,y],i)=>{
-    s+=`<rect class="sf" x="10" y="${y}" width="62" height="26" rx="5" stroke="var(--pline)"/><circle class="${i===2?"hi":"mk"}" cx="21" cy="${y+13}" r="4" fill-opacity="${[.45,.7,1][i]}"/><text class="tx" x="29" y="${y+11}">${t}</text><text class="tx" x="29" y="${y+19}" style="fill-opacity:.7">${sub}</text>`;
-    if(i<2)s+=`<line class="ed" stroke-width="1.4" x1="41" y1="${y+26}" x2="41" y2="${y+36}"/>`});
-  s+=`<path class="eh" stroke-width="1.6" d="M72 107 C 82 107, 80 75, 90 75"/>`;
-  // the app: filter chips, a pitch with an off-ball run, and a video button
-  s+=`<rect class="sf" x="90" y="16" width="100" height="118" rx="6" stroke="var(--pline)"/>`;
-  [0,1,2].forEach(i=>s+=`<rect class="${i===1?"hi":"mk"}" fill-opacity="${i===1?.9:.35}" x="${97+i*30}" y="24" width="25" height="8" rx="4"/>`);
-  s+=`<rect class="pf" x="97" y="40" width="86" height="58"/><g class="pl"><rect x="97" y="40" width="86" height="58"/><line x1="140" y1="40" x2="140" y2="98"/><circle cx="140" cy="69" r="8"/></g>`;
-  [[118,52],[124,80],[150,60],[160,86],[112,66]].forEach(([x,y])=>s+=`<circle class="nd" cx="${x}" cy="${y}" r="3"/>`);
-  s+=arrow(150,60,166,48,176,66,"eh",1.6);
-  s+=`<circle class="hi" cx="104" cy="114" r="7"/><polygon class="sf" points="101.5,110 101.5,118 108,114"/><text class="tx" x="116" y="116">clip of each event</text>`;
-  document.getElementById("art-dk").innerHTML=s})();
-(function an(){const W=200,H=150,R=rng(23);let s=pitch(W,112,10);s=`<rect class="pf" width="${W}" height="${H}"/>`+s.replace(/^<rect class="pf"[^>]*>/,"");
-  // one frame of a replay: both teams, a faint pass network for the team in possession, the ball, then the timeline
-  const P=F433.map(([u,v])=>[r1(10+u*180),r1(10+v*92)]),Q=F433.map(([u,v])=>[r1(190-u*180+(R()-.5)*14),r1(10+v*92+(R()-.5)*10)]);
-  for(let i=1;i<11;i++)for(let j=i+1;j<11;j++)if(Math.hypot(F433[i][0]-F433[j][0],F433[i][1]-F433[j][1])<.3&&R()<.6)s+=`<line class="ed" stroke-width="${r1(.5+R()*1.6)}" stroke-opacity=".35" x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`;
-  s+=Q.map(([x,y])=>`<circle class="nd" cx="${x}" cy="${y}" r="3.2"/>`).join("")+P.map(([x,y])=>`<circle class="mk" cx="${x}" cy="${y}" r="3.2"/>`).join("");
-  s+=`<circle class="hi" cx="${r1(P[9][0]+5)}" cy="${r1(P[9][1]-4)}" r="2.6"/>`;
-  s+=`<rect class="ln" x="10" y="124" width="180" height="4" rx="2"/><rect class="mk" x="10" y="124" width="112" height="4" rx="2"/><circle class="hi" cx="122" cy="126" r="4.5"/>`;
-  [30,58,74,101,140,166].forEach(x=>s+=`<rect class="ln" x="${x}" y="131" width="1" height="4"/>`);
-  s+=`<text class="tx" x="10" y="145">63:12 · phase: create</text><text class="tx" x="190" y="145" text-anchor="end">×2 ▶</text>`;
-  document.getElementById("art-an").innerHTML=s})();
-(function fd(){const W=200,H=150;let s=`<rect class="pf" width="${W}" height="${H}"/>`;
-  // an agent's question goes through the search index and comes back with the provider's real docs
-  s+=`<rect class="sf" x="10" y="20" width="180" height="24" rx="6" stroke="var(--pline)"/><circle class="hi" cx="22" cy="32" r="4"/><text class="tx" x="31" y="34">agent: what does this qualifier ID mean?</text>`;
-  s+=`<line class="eh" stroke-width="1.6" x1="100" y1="44" x2="100" y2="56"/>`;
-  [["StatsBomb",0,0],["Opta",1,0],["SkillCorner",2,0],["Wyscout",0,1],["kloppy",1,1],["mplsoccer",2,1]].forEach(([t,c,r],i)=>{const x=10+c*61,y=58+r*18;
-    s+=`<rect class="${i===1?"hi":"mk"}" fill-opacity="${i===1?.9:.18}" x="${x}" y="${y}" width="58" height="14" rx="7"/><text class="tx" x="${x+29}" y="${y+9.5}" text-anchor="middle"${i===1?' style="fill:var(--surface)"':""}>${t}</text>`});
-  s+=`<line class="eh" stroke-width="1.6" x1="100" y1="90" x2="100" y2="102"/>`;
-  s+=`<rect class="sf" x="10" y="102" width="180" height="36" rx="6" stroke="var(--pline)"/><text class="tx" x="18" y="113">real docs, quoted with their source</text>`;
-  [[18,120,110],[18,127,142]].forEach(([x,y,w])=>s+=`<rect class="mk" fill-opacity=".4" x="${x}" y="${y}" width="${w}" height="3.2" rx="1.6"/>`);
-  document.getElementById("art-fd").innerHTML=s})();
-
-/* ---------- hero: passing network that builds itself, at night ---------- */
-(function hero(){
-  const cv=document.getElementById("hero");if(!cv||!cv.getContext)return;const ctx=cv.getContext("2d");
-  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const NUM=[1,2,5,4,3,6,8,10,7,9,11];
-  const nodes=F433.map(([u,v])=>({u,v,ph:Math.random()*6.28,touch:1}));
-  const E=new Map();const key=(a,b)=>a<b?a+"-"+b:b+"-"+a;
-  const nbr=nodes.map((n,i)=>nodes.map((m,j)=>j).filter(j=>j!==i&&Math.hypot(nodes[i].u-nodes[j].u,(nodes[i].v-nodes[j].v)*.66)<.32));
-  let W=0,H=0,col={},frame=0,from=0,to=6,t=0,shot=null,popup=null;const trail=[];
-  function readCols(){const cs=getComputedStyle(document.documentElement);col={bg:cs.getPropertyValue("--night-2").trim(),line:cs.getPropertyValue("--nline").trim(),grass:cs.getPropertyValue("--grass").trim(),flood:cs.getPropertyValue("--flood").trim(),chalk:cs.getPropertyValue("--chalk").trim(),night:cs.getPropertyValue("--night").trim()}}
-  function size(){const dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;if(!W||!H)return;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
-  const M=()=>Math.max(12,W*.045);
-  function pos(i,time){const n=nodes[i],m=M(),j=reduce?0:1;return[m+n.u*(W-2*m)+Math.sin(time*.0011+n.ph)*2.5*j,m+n.v*(H-2*m)+Math.cos(time*.0009+n.ph)*2.5*j]}
-  function nextPass(){from=to;const opts=nbr[from];const fwd=opts.filter(j=>nodes[j].u>=nodes[from].u-.05);const pool=(Math.random()<.7&&fwd.length?fwd:opts);to=pool[Math.floor(Math.random()*pool.length)];t=0}
-  function arrive(){nodes[to].touch=Math.min(9,nodes[to].touch+1);const k=key(from,to);E.set(k,Math.min(10,(E.get(k)||0)+1))}
-  function drawPitch(){const m=M(),w=W-2*m,h=H-2*m;ctx.fillStyle=col.bg;ctx.fillRect(0,0,W,H);
-    for(let s=0;s<10;s++){if(s%2){ctx.fillStyle="rgba(91,195,145,.035)";ctx.fillRect(m+s*w/10,m,w/10,h)}}
-    const g=ctx.createRadialGradient(W*.15,-H*.2,0,W*.15,-H*.2,W*.9);g.addColorStop(0,"rgba(242,165,65,.10)");g.addColorStop(1,"rgba(242,165,65,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle=col.line;ctx.lineWidth=1.4;ctx.strokeRect(m,m,w,h);ctx.beginPath();ctx.moveTo(W/2,m);ctx.lineTo(W/2,H-m);ctx.stroke();ctx.beginPath();ctx.arc(W/2,H/2,h*.13,0,7);ctx.stroke();
-    const bd=w*.157,bh=h*.593,sd=w*.052,sh=h*.27;[[m,1],[W-m,-1]].forEach(([x,d])=>{ctx.strokeRect(d>0?x:x-bd,H/2-bh/2,bd,bh);ctx.strokeRect(d>0?x:x-sd,H/2-sh/2,sd,sh)})}
-  function draw(time){
-    if(frame++%60===0)readCols();drawPitch();
-    E.forEach((c,k)=>{const [a,b]=k.split("-").map(Number);const p=pos(a,time),q=pos(b,time);ctx.strokeStyle=col.grass;ctx.globalAlpha=.18+c*.06;ctx.lineWidth=.8+c*.6;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke()});ctx.globalAlpha=1;
-    trail.forEach((p,i)=>{ctx.fillStyle=col.flood;ctx.globalAlpha=(i+1)/trail.length*.55;ctx.beginPath();ctx.arc(p[0],p[1],2.2,0,7);ctx.fill()});ctx.globalAlpha=1;
-    nodes.forEach((n,i)=>{const [x,y]=pos(i,time);const r=Math.max(8,Math.min(W,H)*.024)+n.touch*1.15;ctx.fillStyle=col.night;ctx.strokeStyle=col.grass;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.stroke();ctx.fillStyle=col.chalk;ctx.font=`500 ${Math.round(r*.9)}px "JetBrains Mono",monospace`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(NUM[i],x,y+.5)});
-    let bx,by;
-    if(shot){const p=pos(shot.from,time);const e=Math.min(1,shot.t);bx=p[0]+(shot.gx-p[0])*e;by=p[1]+(shot.gy-p[1])*e}
-    else{const p=pos(from,time),q=pos(to,time);const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;bx=p[0]+(q[0]-p[0])*e;by=p[1]+(q[1]-p[1])*e}
-    ctx.shadowColor=col.flood;ctx.shadowBlur=12;ctx.fillStyle=col.flood;ctx.beginPath();ctx.arc(bx,by,5,0,7);ctx.fill();ctx.shadowBlur=0;
-    if(popup){ctx.globalAlpha=Math.min(1,popup.life);ctx.fillStyle=col.flood;ctx.font=`900 ${Math.round(H*.085)}px "Big Shoulders Display",Impact,sans-serif`;ctx.textAlign="right";ctx.fillText(popup.text,W-M()-8,M()+H*.08);ctx.globalAlpha=1}
-    return[bx,by]}
-  if(reduce){const run=()=>{size();if(!W)return;readCols();for(let k=0;k<45;k++){nextPass();arrive()}draw(0)};run();new ResizeObserver(run).observe(cv);return}
-  let last=performance.now();
-  function step(now){const dt=Math.min(.05,(now-last)/1000);last=now;if(!W){size();requestAnimationFrame(step);return}
-    if(shot){shot.t+=dt*1.6;if(shot.t>=1&&!popup){popup={text:`xG ${shot.xg.toFixed(2)}`,life:1.6}}if(popup){popup.life-=dt*.8;if(popup.life<=0){popup=null;shot=null;from=6;to=6;nextPass()}}}
-    else{t+=dt/0.75;if(t>=1){arrive();if(to>=8&&Math.random()<.35){const m=M();const gy=H/2+(Math.random()-.5)*(H-2*m)*.16;const d=1-nodes[to].u;shot={from:to,t:0,gx:W-m,gy,xg:Math.max(.03,Math.min(.6,.7*Math.exp(-d*6)+Math.random()*.08))}}else nextPass()}}
-    const b=draw(now);trail.push(b);if(trail.length>14)trail.shift();requestAnimationFrame(step)}
-  size();readCols();new ResizeObserver(size).observe(cv);requestAnimationFrame(step);
+/* ---------- the site map: each section is a player on a night pitch, with the ball passed between them ---------- */
+(function map(){
+  const W=210,H=136,m=8,cx=W/2,cy=H/2,reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const spots=[[.2,.5],[.42,.2],[.42,.8],[.68,.34],[.68,.72]];   // spread across the pitch, one per section
+  const P=LAB.SECTIONS.map((s,i)=>{const [u,v]=spots[i%spots.length];return {s,x:m+u*(W-2*m),y:m+v*(H-2*m)}});
+  const line=P.map(p=>`${p.x} ${p.y}`).join(" L"),route=`M${line} Z`;
+  let svg=`<g class="map-line"><rect x="${m}" y="${m}" width="${W-2*m}" height="${H-2*m}"/><line x1="${cx}" y1="${m}" x2="${cx}" y2="${H-m}"/><circle cx="${cx}" cy="${cy}" r="15"/><rect x="${m}" y="${cy-30}" width="30" height="60"/><rect x="${W-m-30}" y="${cy-30}" width="30" height="60"/></g>`;
+  svg+=`<path class="map-pass" d="${route}"/>`;
+  svg+=P.map(p=>`<a class="map-node" href="${p.s.path}" aria-label="${p.s.name}"><circle cx="${p.x}" cy="${p.y}" r="19"/><text x="${p.x}" y="${p.y+2.6}">${p.s.name}</text></a>`).join("");
+  // the ball travels the same route; it sits still for anyone who prefers reduced motion
+  svg+=`<circle class="map-ball" r="2.6" cx="${reduce?P[0].x:0}" cy="${reduce?P[0].y-19:0}">${reduce?"":`<animateMotion dur="14s" repeatCount="indefinite" path="${route}"/>`}</circle>`;
+  document.getElementById("map").innerHTML=svg;
 })();
 </script>
 </body>

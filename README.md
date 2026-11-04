@@ -9,6 +9,8 @@ The repos, notebooks and people I'm learning from, collected in one place and cr
 
 ## Repositories
 
+🗂️ **[Browse the repos](https://mbusani.github.io/football-analytics-lab/repos/)**, grouped into analytics projects, Analytics Cup 2026 finalists, and tools for working with AI agents.
+
 | Repository | Author | What it is | Licence | Links |
 |---|---|---|---|---|
 | **Football-analytics** | [Victoria Friss de Kereki](https://github.com/vickyfriss) | Notebooks exploring football (and rugby) through data: xG and expected-pass models for women's football, wage-performance analysis, pass clustering and passing networks, league-position simulations. | No licence file: all rights reserved by the author | [Original](https://github.com/vickyfriss/Football-analytics) · [My fork](https://github.com/mbusani/Football-analytics) · [Medium](https://medium.com/@vickyfrissdekereki) · [LinkedIn](https://www.linkedin.com/in/victoria-friss-de-kereki/) · [Live app](https://football-league-simulator.streamlit.app/) |
@@ -53,6 +55,10 @@ Hands-on sessions on open football data that run in the browser, with nothing to
 
 Each drill checks your answer. The data is a small extract of [StatsBomb Open Data](https://github.com/statsbomb/open-data) (FIFA World Cup 2022), used under the [StatsBomb Public Data User Agreement](https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf): a SQLite database for the SQL sessions and three CSV files for Python and R. [`training/data/build_wc2022.py`](training/data/build_wc2022.py) rebuilds them. The pages share their styles and drill checker in [`training/assets/`](training/assets/).
 
+## How the site is built
+
+It's a static site with no build step. Every page loads [`assets/site.css`](assets/site.css) for the shared look and [`assets/site.js`](assets/site.js) for the top menu; to add or rename a section, edit `LAB.SECTIONS` in `site.js` and both the menu and the home page guide update.
+
 ## Licence
 
-The original files in this repository (the home page and this README) are MIT-licensed. See [LICENSE](LICENSE). That licence does not extend to the repositories listed above.
+The original files in this repository (the website's pages and this README) are MIT-licensed. See [LICENSE](LICENSE). That licence does not extend to the repositories listed above.

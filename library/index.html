@@ -8,79 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
 <style>
 /* Layout: a matchday analysis programme. Night hero (shared with the lab home page) with floodlit shelves, three "start here" picks,
    then sections of cards, each fronted by an original pitch-data illustration drawn from its topic. */
-:root{
-  --bg:#f1f3ed; --surface:#fbfcf8; --fg:#14201a; --muted:#59695f; --line:#d2dad3;
-  --turf:#1c6948; --turf-soft:#e0ede5; --amber:#d47f17; --amber-soft:#fbebd4;
-  --pitch:#e4eee6; --pline:#a3bfaf;
-  --night:#07110c; --night-2:#0d1d15; --chalk:#e9f2ec; --chalk-dim:#9fb6a8; --flood:#f2a541; --grass:#5bc391; --nline:#2c4a3b;
-  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
-  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
-  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
-  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0c130f; --surface:#131c17; --fg:#e2eae4; --muted:#93a399; --line:#25312a;
-  --turf:#5bc391; --turf-soft:#17281e; --amber:#f2a541; --amber-soft:#30251a;
-  --pitch:#11201a; --pline:#2f4b3d; color-scheme:dark}
-
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
-.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
-a{color:var(--turf)}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-
-/* ---------- Night hero (same as the lab home page) ---------- */
-html{scroll-behavior:smooth}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-.hero{position:relative;background:var(--night);color:var(--chalk);overflow:hidden;padding-top:env(safe-area-inset-top,0px)}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(60% 55% at 8% -10%, rgba(242,165,65,.22), transparent 60%),
-    radial-gradient(55% 50% at 100% -5%, rgba(233,242,236,.14), transparent 60%),
-    repeating-linear-gradient(90deg, rgba(91,195,145,.035) 0 70px, transparent 70px 140px);}
-nav.top{position:relative;z-index:2}
-nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:16px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:.05em;text-transform:uppercase;color:var(--chalk);text-decoration:none}
-.brand i{width:26px;height:26px;border-radius:50%;border:2px solid var(--chalk);position:relative;display:inline-block}
-.brand i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--flood)}
-nav.top .sp{flex:1}
-nav.top a.lnk{font-family:var(--mono);font-size:12px;color:var(--chalk-dim);text-decoration:none;text-transform:uppercase;letter-spacing:.08em}
-nav.top a.lnk:hover,nav.top a.lnk[aria-current]{color:var(--chalk)}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:44px;align-items:center;padding-block:40px 64px}
-.hero .eyebrow{color:var(--flood)}
-h1{font-family:var(--display);font-weight:900;font-size:clamp(48px,6.4vw,96px);line-height:.82;margin:16px 0 22px;text-transform:uppercase;letter-spacing:-.005em}
-h1 .l2{display:block;-webkit-text-stroke:2px var(--chalk);color:transparent}
-h1 .l3{display:block;color:var(--grass)}
-.lede{max-width:46ch;color:var(--chalk-dim);margin:0;font-size:18.5px}
-.lede b{color:var(--chalk);font-weight:600}
-.lede{display:grid}.lede>span{grid-area:1/1}.lede .sizer{visibility:hidden}
-.cta a{width:214px;justify-content:center}
-.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.cta a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:11px 18px;border-radius:999px;text-decoration:none}
-.cta .go{background:var(--flood);color:#1a1205}
-.cta .go:hover{filter:brightness(1.08)}
-.cta .gh{border:1.5px solid var(--nline);color:var(--chalk)}
-.cta .gh:hover{border-color:var(--chalk)}
-.scoreboard{display:flex;gap:0;margin-top:34px;border:1px solid var(--nline);border-radius:12px;overflow:hidden;width:fit-content;max-width:100%}
-.scoreboard div{padding:10px 18px;border-right:1px solid var(--nline);background:rgba(7,17,12,.6)}
-.scoreboard div:last-child{border-right:0}
-.scoreboard b{display:block;font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
-.scoreboard span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--chalk-dim)}
-figure.net{margin:0;min-width:0;position:relative}
-figure.net canvas{display:block;width:100%;aspect-ratio:105/68;border-radius:16px;background:var(--night-2);box-shadow:0 0 0 1px var(--nline),0 30px 80px -30px rgba(242,165,65,.35)}
-figure.net figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 16px}
-figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--flood);margin-right:6px;vertical-align:middle}
-.touchline{height:6px;background:repeating-linear-gradient(90deg,var(--chalk) 0 22px,transparent 22px 34px);opacity:.25}
-#list{scroll-margin-top:72px}
-
-/* Filter bar */
-.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 .bar .wrap{padding-block:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .bar input{flex:1 1 260px;min-width:0;font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -88,21 +19,12 @@ figure.net figcaption i{display:inline-block;width:8px;height:8px;border-radius:
 .chip:hover{border-color:var(--turf)}
 .chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .chip .n{font-family:var(--mono);font-size:11px;opacity:.7;margin-left:5px}
-
-main .wrap{padding-block:12px 72px}
-section{margin-top:44px}
-.sec-head{display:flex;align-items:center;gap:16px;padding-bottom:12px;border-bottom:2px solid var(--fg)}
 .sec-icon{width:88px;height:50px;flex:none;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--pitch)}
 .sec-icon svg{display:block;width:100%;height:100%}
-.sec-head h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,38px);line-height:1;text-transform:uppercase;margin:0;letter-spacing:.01em}
-.sec-head .count{margin-left:auto;font-family:var(--display);font-weight:800;font-size:38px;line-height:1;color:var(--line)}
-.sec-note{color:var(--muted);font-size:15px;margin:10px 0 0;max-width:70ch}
-
 /* Featured */
 .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:18px}
 .feat .ctitle{font-family:var(--display);font-weight:800;font-size:28px;line-height:1;text-transform:uppercase;letter-spacing:.01em}
 .feat .why{font-family:var(--mono);font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:.06em}
-
 /* Cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:18px;margin-top:18px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:border-color .2s,transform .25s}
@@ -135,10 +57,12 @@ section{margin-top:44px}
   .card.wide .thumb{flex:0 0 40%;aspect-ratio:auto;border-bottom:0;border-right:1px solid var(--line)}
 }
 .empty{padding:40px 0;color:var(--muted);font-size:17px}
-
 /* SVG illustration classes (every shape gets an explicit fill) */
-.pf{fill:var(--pitch)} .pl{fill:none;stroke:var(--pline);stroke-width:1}
-.mk{fill:var(--turf)} .hi{fill:var(--amber)} .sf{fill:var(--surface)}
+.pf{fill:var(--pitch)}
+.pl{fill:none;stroke:var(--pline);stroke-width:1}
+.mk{fill:var(--turf)}
+.hi{fill:var(--amber)}
+.sf{fill:var(--surface)}
 .mo{fill:var(--turf);fill-opacity:.16;stroke:var(--turf);stroke-width:.9}
 .ed{fill:none;stroke:var(--turf);stroke-linecap:round}
 .eh{fill:none;stroke:var(--amber);stroke-linecap:round}
@@ -150,28 +74,15 @@ section{margin-top:44px}
 .rg{fill:none;stroke:var(--pline);stroke-width:.8}
 .ra{fill:none;stroke:var(--amber);stroke-width:1.2;stroke-dasharray:3 2}
 .ax{fill:none;stroke:var(--muted);stroke-width:.8}
-
-footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
-footer .wrap{padding-block:22px 44px}
-
-@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:24px 44px}}
 @media (max-width:520px){.sec-icon{width:64px;height:36px}.sec-head .count{font-size:28px}}
-@media (max-width:480px){.scoreboard div{padding:8px 12px}.scoreboard b{font-size:28px}h1 .l2{-webkit-text-stroke:1.5px var(--chalk)}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.thumb svg{transition:none}.card:hover{transform:none}.card:hover .thumb svg{transform:none}}
 </style>
-<style>html,body{margin:0}</style>
+<script src="../assets/site.js"></script>
 </head>
 <body>
 
 <header class="hero">
-  <nav class="top"><div class="wrap">
-    <a class="brand" href="../"><i aria-hidden="true"></i>Football Analytics Lab</a><span class="sp"></span>
-    <a class="lnk" href="../">Repos</a>
-    <a class="lnk" href="./" aria-current="page">Library</a>
-    <a class="lnk" href="../tasks/">Tasks</a>
-    <a class="lnk" href="../training/">Training</a>
-    <a class="lnk" href="../credits/">Credits</a>
-  </div></nav>
+  <nav class="top" data-root="../" data-current="library"></nav>
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">Mark Busani · Perth, Western Australia</div>
@@ -207,7 +118,7 @@ const SECTIONS = [
   {id:"articles", name:"Articles & newsletters", icon:"shotmap"},
   {id:"reports",  name:"Reports & webinars",    icon:"heatmap"},
   {id:"tools",    name:"Tools & practice",      icon:"radar", menu:false},
-  {id:"repos",    name:"GitHub repos",          icon:"code", menu:false, note:"Forked into the lab with full credit. See the lab home page for licences and my forks."},
+  {id:"repos",    name:"GitHub repos",          icon:"code", menu:false, note:"Forked into the lab with full credit. See the Repos page for licences and my forks."},
   {id:"kaggle",   name:"Kaggle datasets & notebooks", icon:"heatmap", note:"Hosted on Kaggle and linked, not copied. Each card names the Kaggle user who shared it and, where different, who made the underlying data."},
   {id:"code",     name:"Papers",                icon:"curve"}
 ];
@@ -316,7 +227,6 @@ const bgRect = '<rect class="pf" x="0" y="0" width="160" height="90"/>';
 function pitchLines(){const cx=PX+PW/2,cy=PY+PH/2,bd=21,bh=44,sd=7,sh=20;
   return `<g class="pl"><rect x="${PX}" y="${PY}" width="${PW}" height="${PH}"/><line x1="${cx}" y1="${PY}" x2="${cx}" y2="${PY+PH}"/><circle cx="${cx}" cy="${cy}" r="9"/><rect x="${PX}" y="${cy-bh/2}" width="${bd}" height="${bh}"/><rect x="${PX+PW-bd}" y="${cy-bh/2}" width="${bd}" height="${bh}"/><rect x="${PX}" y="${cy-sh/2}" width="${sd}" height="${sh}"/><rect x="${PX+PW-sd}" y="${cy-sh/2}" width="${sd}" height="${sh}"/></g>`}
 function gauss(R){return Math.sqrt(-2*Math.log(R()||1e-6))*Math.cos(6.283*R())}
-const F433=[[.06,.5],[.22,.15],[.2,.38],[.2,.62],[.22,.85],[.44,.27],[.4,.5],[.44,.73],[.68,.18],[.72,.5],[.68,.82]];
 function arrow(x1,y1,qx,qy,x2,y2,cls){const a=Math.atan2(y2-qy,x2-qx),s=3.4;
   const p1=[x2-s*Math.cos(a-.5),y2-s*Math.sin(a-.5)],p2=[x2-s*Math.cos(a+.5),y2-s*Math.sin(a+.5)];
   return `<path class="${cls}" stroke-width="1.4" d="M${r1(x1)} ${r1(y1)} Q${r1(qx)} ${r1(qy)} ${r1(x2)} ${r1(y2)}"/><polygon class="hi" points="${r1(x2)},${r1(y2)} ${r1(p1[0])},${r1(p1[1])} ${r1(p2[0])},${r1(p2[1])}"/>`}

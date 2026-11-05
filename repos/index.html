@@ -169,6 +169,33 @@ section{scroll-margin-top:96px}
         <p class="fine">Built by Muhammad Atef and shared under the MIT licence. Anything I reuse from it keeps his copyright notice and licence text.</p>
       </div>
     </article>
+
+    <article class="spread" data-orig="mguti97/TTA-Quantile" data-fork="mbusani/football-analytics-TTA-Quantile">
+      <div class="art"><svg id="art-tq" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustration of arrival-time contours stretching out ahead of a running player"></svg>
+        <span class="kicker">Python research code</span>
+        <div class="live"><span>★ <b data-k="stars">2</b> stars</span><span>⑂ <b data-k="forks">1</b> fork</span><span>updated <b data-k="updated">Nov 2026</b></span></div>
+      </div>
+      <div class="copy">
+        <h3>TTA-Quantile</h3>
+        <div class="credit"><img src="https://avatars.githubusercontent.com/mguti97?size=96" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div class="who"><small>Created by</small><b><a href="https://github.com/mguti97">Marc Gutiérrez-Pérez</a></b></div></div>
+        <p>The official code for the ACCV 2026 paper by Marc Gutiérrez-Pérez and Antonio Agudo: a small neural network that predicts the fastest realistic time for a player to reach any point on the pitch, given how they're moving right now.</p>
+        <ul class="inside">
+          <li>Quantile regression (τ = 0.01) with a small MLP</li>
+          <li>Developed on PFF FC tracking from the 2022 World Cup</li>
+          <li>Cross-sport tests on NFL and NBA tracking</li>
+          <li>Six fitted physics motion models as benchmarks</li>
+          <li>Pre-trained checkpoints in the repo</li>
+          <li>Arrival-time surfaces from your own tracking data</li>
+        </ul>
+        <div class="tags"><span class="tag">time-to-arrival</span><span class="tag">tracking-data</span><span class="tag">quantile-regression</span><span class="tag">pytorch</span><span class="tag lic">No licence · all rights reserved</span></div>
+        <div class="doors">
+          <a class="door" href="https://github.com/mguti97/TTA-Quantile"><small>Original</small><b><span>mguti97/</span><wbr><span>TTA-Quantile</span></b></a>
+          <a class="door mine" href="https://github.com/mbusani/football-analytics-TTA-Quantile"><small>My fork</small><b><span>mbusani/</span><wbr><span>football-analytics-TTA-Quantile</span></b></a>
+        </div>
+        <div class="more"><a href="https://arxiv.org/abs/2610.36183">The paper on arXiv</a></div>
+        <p class="fine">All rights belong to the authors. The repo has no licence file, so my fork is for personal learning only and nothing from it is reused here. The tracking data isn't in the repo and stays under each provider's licence.</p>
+      </div>
+    </article>
   </section>
   <section id="analytics-cup" class="group">
     <div class="sec-head"><h2>Analytics Cup 2026</h2><span class="count"></span></div>
@@ -341,8 +368,8 @@ section{scroll-margin-top:96px}
       const r=await fetch("https://api.github.com/repos/"+el.dataset.orig,{headers:{Accept:"application/vnd.github+json"}});
       if(!r.ok) continue;
       const j=await r.json();
-      el.querySelector('[data-k="stars"]').textContent=j.stargazers_count;
-      el.querySelector('[data-k="forks"]').textContent=j.forks_count;
+      el.querySelector('[data-k="stars"]').textContent=j.stargazers_count;el.querySelector('[data-k="stars"]').nextSibling.textContent=j.stargazers_count===1?" star":" stars";
+      el.querySelector('[data-k="forks"]').textContent=j.forks_count;el.querySelector('[data-k="forks"]').nextSibling.textContent=j.forks_count===1?" fork":" forks";
       el.querySelector('[data-k="updated"]').textContent=fmt(j.pushed_at);
       total+=j.stargazers_count; ok++;
     }catch(e){}
@@ -434,6 +461,16 @@ function arrow(x1,y1,qx,qy,x2,y2,cls,w){const a=Math.atan2(y2-qy,x2-qx),s=3.6;co
   s+=`<rect class="sf" x="10" y="102" width="180" height="36" rx="6" stroke="var(--pline)"/><text class="tx" x="18" y="113">real docs, quoted with their source</text>`;
   [[18,120,110],[18,127,142]].forEach(([x,y,w])=>s+=`<rect class="mk" fill-opacity=".4" x="${x}" y="${y}" width="${w}" height="3.2" rx="1.6"/>`);
   document.getElementById("art-fd").innerHTML=s})();
+(function tq(){const W=200,H=150,m=12;let s=pitch(W,H,m);
+  // a player running right: the area they can reach in time stretches out ahead of them. Schematic, not model output.
+  const px=62,py=78;
+  [[3,70,28,47,.16],[2,44,14,30,.26],[1,20,5,14,.42]].forEach(([t,ahead,behind,wide,o])=>{const rx=(ahead+behind)/2,cx=px+(ahead-behind)/2;
+    s+=`<ellipse class="mk" fill-opacity="${o}" cx="${cx}" cy="${py}" rx="${rx}" ry="${wide}"/><ellipse class="ed" stroke-width=".9" cx="${cx}" cy="${py}" rx="${rx}" ry="${wide}"/>`;
+    s+=`<text class="tx" x="${cx}" y="${py-wide+7}" text-anchor="middle">${t} s</text>`});
+  s+=`<line class="eh" stroke-width="1.8" x1="${px}" y1="${py}" x2="${px+20}" y2="${py}"/><polygon class="hi" points="${px+24},${py} ${px+19},${py-3} ${px+19},${py+3}"/>`;
+  s+=`<circle class="hi" cx="${px}" cy="${py}" r="4.5"/>`;
+  s+=`<text class="tx" x="${m+2}" y="${H-3}">fastest realistic arrival · schematic</text>`;
+  document.getElementById("art-tq").innerHTML=s})();
 
 /* ---------- hero: passing network that builds itself, at night ---------- */
 (function hero(){

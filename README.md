@@ -25,7 +25,7 @@ analytics_cup_research, Dynamic-Skills-Finder and skillcorner-analytics were pre
 
 ## Library
 
-📚 **[Browse the library](https://mbusani.github.io/football-analytics-lab/library/)**: 42 football analytics resources (articles and newsletters, reports and webinars including the Analytics Cup 2026 final presentations, tools including the fitzRoy AFL package, GitHub repos, Kaggle datasets and notebooks, and papers), each credited to its author or publisher and linked to the original. The library links to other people's work and claims none of it.
+📚 **[Browse the library](https://mbusani.github.io/football-analytics-lab/library/)**: 44 football analytics resources (articles and newsletters, reports and webinars including the Analytics Cup 2026 final presentations, tools including the fitzRoy AFL package, GitHub repos, Kaggle datasets and notebooks, and papers), each credited to its author or publisher and linked to the original. The library links to other people's work and claims none of it.
 
 ## Tasks
 

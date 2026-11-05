@@ -184,6 +184,8 @@ const R = [
     sub:[{t:"Source code on GitHub (withqwerty/football-docs)", d:"", url:"https://github.com/withqwerty/football-docs"}]},
   {s:"tools", d:"2026-11-04", t:"SkillCorner Body Pose Visualizer", src:"GitHub · @MattLowrieDS", note:"A Python script that animates SkillCorner's open body pose data in 3D: 29 joints on a 3D pitch with the ball, saved as MP4 or GIF. The repo has no licence file, so all rights stay with the author.", tags:["tool","tracking data","Python"], url:"https://github.com/MattLowrieDS/skillcorner_pose_viz",
     sub:[{t:"SkillCorner's open body pose data", d:"", url:"https://github.com/SkillCorner/opendata/tree/master/data/bodypose"}]},
+  {s:"tools", d:"2026-11-05", t:"TTA-Quantile", src:"GitHub · Marc Gutiérrez-Pérez (@mguti97)", note:"The official Python code for the time-to-arrival paper under Papers: scripts to build the dataset, train and evaluate, pre-trained checkpoints, and a script that computes arrival-time surfaces from your own tracking data. The tracking data isn't included, so you bring your own. The repo has no licence file, so all rights stay with the authors.", tags:["tool","tracking data","Python"], url:"https://github.com/mguti97/TTA-Quantile",
+    sub:[{t:"The paper: Learning Human Sports Motion Feasibility via Quantile Regression on Tracking Data", d:"2026", url:"https://arxiv.org/abs/2610.36183"}]},
   {s:"tools", d:"2026-10-19", t:"MyGamePlan (MGPT)", src:"mygameplan.ai", note:"Ask questions about a team, opponent or player and get answers with video clips; templates build opponent reports.", tags:["video","AI","scouting"], url:"https://www.mygameplan.ai/"},
 
   // GitHub repos (forked into the lab)
@@ -210,7 +212,9 @@ const R = [
   {s:"kaggle", d:"2026-10-31", t:"Football Data: Expected Goals and Other Metrics", src:"Kaggle · slehkyi", note:"Team xG and related metrics for the top European leagues, small enough to practise SQL and pandas on.", tags:["dataset","xG","SQL"], url:"https://www.kaggle.com/datasets/slehkyi/extended-football-stats-for-european-leagues-xg"},
 
   // Papers
-  {s:"code", d:"2026-10-27", t:"Biases in Expected Goals Models Confound Finishing Ability", src:"Jesse Davis & Pieter Robberechts (2024) · arXiv 2401.09940", note:"xG can absorb elite finishers' skill when they dominate the training data; the paper proposes multi-calibrated baselines.", tags:["paper","xG"], url:"https://arxiv.org/abs/2401.09940"}
+  {s:"code", d:"2026-10-27", t:"Biases in Expected Goals Models Confound Finishing Ability", src:"Jesse Davis & Pieter Robberechts (2024) · arXiv 2401.09940", note:"xG can absorb elite finishers' skill when they dominate the training data; the paper proposes multi-calibrated baselines.", tags:["paper","xG"], url:"https://arxiv.org/abs/2401.09940"},
+  {s:"code", d:"2026-11-05", t:"Learning Human Sports Motion Feasibility via Quantile Regression on Tracking Data", src:"Marc Gutiérrez-Pérez & Antonio Agudo (2026) · ACCV 2026 · arXiv 2610.36183", note:"How fast can a player realistically reach a point on the pitch? A small neural network, trained on tracking data from all 64 matches of the 2022 World Cup, estimates that time from the player's current movement. The authors report it beats six physics-based motion models, and also test it on basketball and NFL tracking data.", tags:["paper","tracking data"], url:"https://arxiv.org/abs/2610.36183",
+    sub:[{t:"The code: TTA-Quantile on GitHub", d:"", url:"https://github.com/mguti97/TTA-Quantile"}]}
 ];
 const FEATURED = [
   {t:"FIFA World Cup 2026 post-tournament report", why:"The big read"},

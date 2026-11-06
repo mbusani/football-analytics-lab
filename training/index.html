@@ -16,6 +16,10 @@
 #sessions .sess{padding:22px 22px 20px;gap:4px}
 #sessions .sess b{font-size:32px}
 #sessions .sess span{font-size:15.5px}
+/* The SQL games: one short list per stage, in the order the post gives them */
+.games ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:5px}
+.games li{font-size:15.5px;color:var(--muted)}
+.games small{font-size:13px}
 </style>
 </head>
 <body>
@@ -50,6 +54,17 @@
     <div class="sec-head"><h2>Sessions</h2><span class="count">04</span></div>
     <p class="sec-note">Start with SQL 01, then take the joins in SQL 02. The Python and R sessions ask SQL 01's questions again, so you can compare how each language answers them. Your progress is saved in this browser.</p>
     <div class="sessions" id="sessions"></div>
+  </section>
+
+  <section id="sql-games">
+    <div class="sec-head"><h2>More SQL practice</h2><span class="count">12</span></div>
+    <p class="sec-note">Twelve free SQL games for when you've finished the sessions, picked and put in order by Anthonette Ochieze Adanyin, a lead data scientist, in <a href="https://www.linkedin.com/posts/anthonette-ochieze-adanyin_im-a-lead-data-scientist-and-i-use-sql-share-7523850039606202368--P0e/">her LinkedIn post</a>. Her advice: choose one, work through it, and try each problem before you look at the answer. The games belong to their makers; the lab only links to them.</p>
+    <div class="next games">
+      <div><b>Start here</b><ul><li><a href="https://sql-island.informatik.uni-kl.de/?lang=en">SQL Island</a></li><li><a href="https://sqlbolt.com/">SQLBolt</a></li><li><a href="https://lost-at-sql.therobinlord.com/">Lost at SQL</a></li><li><a href="https://sqlpd.com/">SQL Police Department</a></li></ul></div>
+      <div><b>Get the basics down</b><ul><li><a href="https://mystery.knightlab.com/">SQL Murder Mystery</a></li><li><a href="https://www.sqlnoir.com/">SQL Noir</a></li><li><a href="https://datalemur.com/sql-game">SQL Squid Game</a></li></ul></div>
+      <div><b>Interview prep</b><ul><li><a href="https://sqlcasefiles.com/">SQL Case Files</a></li><li>SQL Protocol <small>(sqlprotocol.com was down when I checked on 6 Nov 2026)</small></li><li><a href="https://selectstarsql.com/">Select Star SQL</a></li></ul></div>
+      <div><b>Keep practising</b><ul><li><a href="https://sqlzoo.net/">SQLZoo</a></li><li><a href="https://www.codewars.com/">Codewars</a></li></ul></div>
+    </div>
   </section>
 
   <section id="data">
